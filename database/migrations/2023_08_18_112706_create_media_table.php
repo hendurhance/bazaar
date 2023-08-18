@@ -1,0 +1,37 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('media', function (Blueprint $table) {
+            $table->id();
+            $table->foreignUuid('user_id')->on('users')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignUuid('ad_id')->on('ads')->nullable()->constrained()->onDelete('cascade');
+            $table->string('name')->nullable();
+            $table->smallInteger('type')->nullable();
+            $table->string('path')->nullable();
+            $table->string('url')->nullable();
+            $table->string('extension')->nullable();
+            $table->string('mime_type')->nullable();
+            $table->smallInteger('storage')->nullable(); // 1: local, 2: s3 bucket
+            $table->boolean('is_featured')->default(false);
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('media');
+    }
+};
