@@ -25,8 +25,8 @@ return new class extends Migration
             $table->string('card_id')->nullable();
             $table->string('client_ip')->nullable();
             $table->string('payer_email')->nullable();
-            $table->string('gateway')->nullable();
-            $table->string('description')->nullable();
+            $table->smallInteger('gateway')->nullable();
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

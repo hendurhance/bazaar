@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->on('users')->nullable()->constrained()->onDelete('cascade');
             $table->foreignUuid('ad_id')->on('ads')->nullable()->constrained()->onDelete('cascade');
             $table->text('comment')->nullable();
-            $table->smallInteger('status')->default(1);
+            $table->smallInteger('status')->default(0);
             $table->timestamps();
         });
     }
