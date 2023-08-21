@@ -18,3 +18,4 @@ Route::view('/about', 'pages.about')->name('about');
 Route::view('/contact', 'pages.contact')->name('contact');
 Route::view('/how-it-works', 'pages.how-it-works')->name('how-it-works');
 Route::view('/live-auction', 'pages.live-auction')->name('live-auction');
+Route::view('/blog', 'pages.blog')->name('blog');
