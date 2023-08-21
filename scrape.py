@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
 # URL of the page to scrape
-url = "https://demo.egenslab.com/html/bidout/preview/blog.html"
+url = "https://demo.egenslab.com/html/bidout/preview/blog-details.html"
 
 # Path to the base directory where images will be saved
 base_save_folder = "public/assets/images"
