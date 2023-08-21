@@ -12,16 +12,8 @@
             </div>
         </div>
         <ul class="menu-list">
-            <li class="menu-item-has-children">
-                <a href="#" class="drop-down">Home</a><i class="bx bx-plus dropdown-icon"></i>
-                <ul class="submenu">
-                    <li><a href="index.html">Home 1</a></li>
-                    <li><a href="index2.html">Home 2</a></li>
-                    <li><a href="index3.html">Home 3</a></li>
-                </ul>
-            </li>
             <li>
-                <a href="about.html">About Us</a>
+                <a href="/">Home</a>
             </li>
             <li>
                 <a href="how-works.html">How It Works</a>
@@ -30,24 +22,15 @@
                 <a href="live-auction.html">Browse Product</a>
             </li>
             <li class="menu-item-has-children">
-                <a href="#">News</a><i class="bx bx-plus dropdown-icon"></i>
+                <a href="#">Company</a><i class="bx bx-plus dropdown-icon"></i>
                 <ul class="submenu">
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="blog-details.html">Blog details</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </li>
-            <li class="menu-item-has-children">
-                <a href="#" class="drop-down">Pages</a><i class="bx bx-plus dropdown-icon"></i>
-                <ul class="submenu">
-                    <li><a href="auction-details.html">Auction Details</a></li>
-                    <li><a href="faq.html">Faq</a></li>
-                    <li><a href="dashboard.html">Dashboard</a></li>
-                    <li><a href="login.html">Login</a></li>
-                    <li><a href="signup.html">Sign Up</a></li>
-                    <li><a href="404.html">404</a></li>
-                </ul>
+            <li>
+                <a href="about.html">Blog</a>
             </li>
-            <li><a href="contact.html">Contact</a></li>
         </ul>
 
         <div class="d-lg-none d-block">
@@ -69,7 +52,7 @@
         <div class="search-btn">
             <i class="bi bi-search"></i>
         </div>
-        <a href="join-merchant.html" class="join-btn">Join Merchant</a>
+        <a href="join-merchant.html" class="join-btn">Add Listing</a>
         <div class="eg-btn btn--primary2 header-btn">
             <a href="dashboard.html">My Account</a>
         </div>
