@@ -19,7 +19,7 @@
                 <a href="how-works.html">How It Works</a>
             </li>
             <li>
-                <a href="live-auction.html">Browse Product</a>
+                <a href="live-auction.html">Live Auction</a>
             </li>
             <li class="menu-item-has-children">
                 <a href="#">Company</a><i class="bx bx-plus dropdown-icon"></i>
