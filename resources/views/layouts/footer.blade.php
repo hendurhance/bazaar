@@ -64,8 +64,7 @@
         <div class="container">
             <div class="row d-flex align-items-center g-4">
                 <div class="col-lg-6 d-flex justify-content-lg-start justify-content-center">
-                    <p>Copyright 2022 <a href="#">Bid Out</a> | Design By <a href="https://www.egenslab.com/"
-                            class="egns-lab">Egens Lab</a></p>
+                    <p>Built with <i class="bi bi-heart-fill"></i> by <a href="https://github.com/hendurhance">Endurance</a></p>
                 </div>
                 <div
                     class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center flex-sm-nowrap flex-wrap">
