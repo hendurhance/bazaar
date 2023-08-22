@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('bids', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('ad_id')->on('ads')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignUuid('user_id')->on('users')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->unsignedDecimal('amount', 12, 4)->nullable();
             $table->boolean('is_accepted')->default(false);
             $table->timestamps();
