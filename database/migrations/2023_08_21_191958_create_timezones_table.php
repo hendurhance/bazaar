@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('timezones', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('country_id')->constrained('countries')->onDelete('cascade');
             $table->string('name', 191)->index();
             $table->string('abbr', 191)->index();
             $table->string('offset', 191)->index();
