@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('favorites', function (Blueprint $table) {
+        Schema::create('report_ads', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->on('users')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignUuid('ad_id')->on('ads')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignUuid('ad_id')->nullable()->constrained('ads')->onDelete('cascade');
+            $table->string('reason');
+            $table->text('description')->nullable();
+            $table->string('email')->nullable();
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('favorites');
+        Schema::dropIfExists('report_ads');
     }
 };
