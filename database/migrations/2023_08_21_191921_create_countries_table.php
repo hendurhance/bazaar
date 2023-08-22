@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('iso2', 2)->index();
             $table->string('iso3', 3)->index();
             $table->string('name', 191)->index();
+            $table->string('phone_code', 191)->nullable();
             $table->string('capital', 191)->nullable();
             $table->string('currency', 191)->nullable();
             $table->string('currency_symbol', 191)->nullable();
