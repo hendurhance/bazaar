@@ -27,19 +27,19 @@
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInDown;">
                     <li class="nav-item">
                         <div id="details-img1" data-bs-toggle="pill" data-bs-target="#gallery-img1"
-                            aria-controls="gallery-img1">
+                            aria-controls="gallery-img1" class="">
                             <img alt="image" src="assets/images/bg/prod-gallery1.png" class="img-fluid">
                         </div>
                     </li>
                     <li class="nav-item">
                         <div id="details-img2" data-bs-toggle="pill" data-bs-target="#gallery-img2"
-                            aria-controls="gallery-img2">
+                            aria-controls="gallery-img2" class="active">
                             <img alt="image" src="assets/images/bg/prod-gallery2.png" class="img-fluid">
                         </div>
                     </li>
                     <li class="nav-item">
                         <div id="details-img3" data-bs-toggle="pill" data-bs-target="#gallery-img3"
-                            aria-controls="gallery-img3">
+                            aria-controls="gallery-img3" class="">
                             <img alt="image" src="assets/images/bg/prod-gallery3.png" class="img-fluid">
                         </div>
                     </li>
@@ -47,21 +47,21 @@
                 <div class="tab-content mb-4 d-flex justify-content-lg-start justify-content-center  wow fadeInUp"
                     data-wow-duration="1.5s" data-wow-delay=".4s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInUp;">
-                    <div class="tab-pane big-image fade show active" id="gallery-img1">
+                    <div class="tab-pane big-image fade" id="gallery-img1">
                         <div class="auction-gallery-timer d-flex align-items-center justify-content-center flex-wrap">
-                            <h3 id="countdown-timer-1">0-440D : 0-15H : 0-12M : 0-36S </h3>
+                            <h3 id="countdown-timer-1">0-440D : 0-16H : 0-59M : 0-42S </h3>
                         </div>
                         <img alt="image" src="assets/images/bg/prod-gallery1.png" class="img-fluid">
                     </div>
-                    <div class="tab-pane big-image fade" id="gallery-img2">
+                    <div class="tab-pane big-image fade active show" id="gallery-img2">
                         <div class="auction-gallery-timer d-flex align-items-center justify-content-center">
-                            <h3 id="countdown-timer-2">0-233D : 0-21H : 0-12M : 0-35S </h3>
+                            <h3 id="countdown-timer-2">0-233D : 0-22H : 0-59M : 0-41S </h3>
                         </div>
                         <img alt="image" src="assets/images/bg/prod-gallery2.png" class="img-fluid">
                     </div>
                     <div class="tab-pane big-image fade" id="gallery-img3">
                         <div class="auction-gallery-timer d-flex align-items-center justify-content-center">
-                            <h3 id="countdown-timer-3">0-233D : 0-21H : 0-12M : 0-35S </h3>
+                            <h3 id="countdown-timer-3">0-233D : 0-22H : 0-59M : 0-41S </h3>
                         </div>
                         <img alt="image" src="assets/images/bg/prod-gallery3.png" class="img-fluid">
                     </div>
@@ -257,8 +257,8 @@
                                         <img alt="image" src="assets/images/bg/live-auc1.png">
                                         <div class="auction-timer">
                                             <div class="countdown" id="timer1">
-                                                <h4><span id="hours1">03</span>H : <span id="minutes1">48</span>M :
-                                                    <span id="seconds1">25</span>S</h4>
+                                                <h4><span id="hours1">02</span>H : <span id="minutes1">01</span>M :
+                                                    <span id="seconds1">19</span>S</h4>
                                             </div>
                                         </div>
                                         <div class="author-area">
@@ -303,8 +303,8 @@
                                         <img alt="image" src="assets/images/bg/live-auc2.png">
                                         <div class="auction-timer">
                                             <div class="countdown" id="timer2">
-                                                <h4><span id="hours2">03</span>H : <span id="minutes2">48</span>M :
-                                                    <span id="seconds2">25</span>S</h4>
+                                                <h4><span id="hours2">02</span>H : <span id="minutes2">01</span>M :
+                                                    <span id="seconds2">19</span>S</h4>
                                             </div>
                                         </div>
                                         <div class="author-area">
@@ -362,6 +362,6 @@
     </div>
 </div>
 
-@include('layouts.metrics')
+@include('layouts.metrics', ['class' => 'pt-120'])
 
 @endsection

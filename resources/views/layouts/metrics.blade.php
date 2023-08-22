@@ -1,4 +1,4 @@
-<div class="about-us-counter pb-120">
+<div class="about-us-counter pb-120 {{ $class ?? '' }}">
     <div class="container">
         <div class="row g-4 d-flex justify-content-center">
             <div class="col-xl-3 col-lg-4 col-md-6 col-sm-10 col-10">

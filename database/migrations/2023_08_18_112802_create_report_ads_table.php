@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('report_ads', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('ad_id')->on('ads')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
             $table->string('reason');
             $table->text('description')->nullable();
             $table->string('email')->nullable();

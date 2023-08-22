@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->on('users')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignUuid('ad_id')->on('ads')->nullable()->constrained()->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
             $table->unsignedDecimal('price', 12, 4)->nullable();
             $table->string('method')->nullable();
             $table->string('txn_id')->index()->nullable();

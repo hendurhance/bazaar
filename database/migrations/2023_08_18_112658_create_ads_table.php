@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ads', function (Blueprint $table) {
-            $table->uuid()->primary();
-            $table->foreignUuid('user_id')->on('users')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('category_id')->on('categories')->nullable()->constrained()->onDelete('cascade');
-            $table->foreignId('sub_category_id')->on('categories')->nullable()->constrained()->onDelete('cascade');
+            $table->uuid('id')->primary();
+            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('cascade');
+            $table->foreignId('category_id')->nullable()->constrained('categories')->onDelete('cascade');
+            $table->foreignId('sub_category_id')->nullable()->constrained('categories')->onDelete('cascade');
 
             $table->string('title');
             $table->string('slug')->unique()->index();
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->unsignedDecimal('price', 12, 4)->nullable();
             $table->boolean('is_negotiable')->default(false);
             $table->string('video_url')->nullable();
-            
+
             $table->string('seller_name')->nullable();
             $table->string('seller_email')->nullable();
             $table->string('seller_mobile', 15)->nullable();
