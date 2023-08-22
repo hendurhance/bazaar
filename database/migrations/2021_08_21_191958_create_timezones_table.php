@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('offset', 191)->index();
             $table->string('offset_name', 191)->index();
             $table->string('tz_name', 191)->nullable();
-
             $table->timestamps();
         });
     }

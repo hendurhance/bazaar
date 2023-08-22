@@ -11,12 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('bids', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignUuid('ad_id')->nullable()->constrained('ads')->onDelete('cascade');
-            $table->text('comment')->nullable();
-            $table->smallInteger('status')->default(0);
+            $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
+            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+            $table->unsignedDecimal('amount', 12, 4)->nullable();
+            $table->boolean('is_accepted')->default(false);
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('bids');
     }
 };
