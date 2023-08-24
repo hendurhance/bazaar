@@ -14,7 +14,7 @@
                         <h3>Sign Up</h3>
                         <p>Do you already have an account? <a href="login.html">Log in here</a></p>
                     </div>
-                    <form class="w-100" action="{{ route('user.register') }}" method="POST">
+                    <form class="w-100" action="{{ route('user.register.handle') }}" method="POST">
                         @csrf
                         <div class="row">
                             <div class="col-md-6">

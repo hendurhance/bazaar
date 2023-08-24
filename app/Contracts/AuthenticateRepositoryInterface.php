@@ -27,18 +27,18 @@ interface AuthenticateRepositoryInterface
      */
     public function verify(string $token): void;
 
-    // /**
-    //  * Send a password reset link to a user.
-    //  * 
-    //  * @param string $email
-    //  */
-    // public function sendPasswordResetLink(string $email): void;
+    /**
+     * Send a password reset link to a user.
+     * 
+     * @param string $email
+     */
+    public function sendPasswordResetLink(string $email): void;
 
 
-    // /**
-    //  * Reset a user's password.
-    //  * 
-    //  * @param array<string, mixed> $data
-    //  */
-    // public function resetPassword(array $data): void;
+    /**
+     * Reset a user's password.
+     * 
+     * @param array<string, mixed> $data
+     */
+    public function resetPassword(array $data): void;
 }

@@ -14,21 +14,15 @@
                         <h3>Reset Password</h3>
                         <p>Fill in the form below to reset your password.</p>
                     </div>
-                    <form class="w-100">
+                    <form class="w-100" action="{{ route('user.reset-password.handle') }}" method="POST">
+                        @csrf
                         <div class="row">
+                            <input type="hidden" name="token" value="{{ $token }}">
                             <div class="col-12">
-                                <div class="form-inner">
-                                    <label>New Password *</label>
-                                    <input type="password" name="password" id="password" placeholder="Password">
-                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                </div>
+                                <x-input-field name="password" type="password" label="New Password" placeholder="Create A New Password" />
                             </div>
                             <div class="col-12">
-                                <div class="form-inner">
-                                    <label>Confirm Password *</label>
-                                    <input type="password" name="password" id="password" placeholder="Password">
-                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                </div>
+                                <x-input-field name="password_confirmation" type="password" label="Confirm Password" placeholder="Confirm Password" />
                             </div>
                         </div>
                         <button class="account-btn">Send Reset Link</button>
