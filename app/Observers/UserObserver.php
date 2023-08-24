@@ -12,6 +12,7 @@ class UserObserver
     public function creating(User $user): void
     {
         $user->avatar = 'https://ui-avatars.com/api/?name=' . $user->name . '&color=7F9CF5&background=EBF4FF';
+        $user->email_verification_token = generate_verify_token($user->email);
     }
 
     /**

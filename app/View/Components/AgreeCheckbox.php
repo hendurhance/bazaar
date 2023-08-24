@@ -16,6 +16,7 @@ class AgreeCheckbox extends Component
         public string $label,
         public string $class = '',
         public string $id = '',
+        public bool $forgotten = false,
     ) {
         //
     }

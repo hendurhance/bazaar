@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\User\Auth\LoginController;
+use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +33,7 @@ Route::middleware('guest')->group(function () {
     Route::view('/register', 'user.auth.register')->name('user.register');
     Route::view('/forgot-password', 'user.auth.forgot-password')->name('user.forgot-password');
     Route::view('/reset-password', 'user.auth.reset-password')->name('user.reset-password');
-    Route::post('/register', [AuthController::class, 'register'])->name('user.register');
+    Route::get('/verify-email/{token}', [RegisterController::class, 'verify'])->name('user.verify-email');
+    Route::post('/register', [RegisterController::class, 'register'])->name('user.register');
+    Route::post('/login', [LoginController::class, 'login'])->name('user.login');
 });
