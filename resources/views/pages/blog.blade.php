@@ -6,8 +6,6 @@
 @include('layouts.breadcrumb', ['title' => 'Blog'])
 
 <div class="blog-section pt-120 pb-120">
-    <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-top">
-    <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-bottom">
     <div class="container">
         <div class="row d-flex justify-content-center g-4 mb-60">
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
