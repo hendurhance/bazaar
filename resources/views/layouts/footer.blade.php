@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-xl-3 col-lg-8 col-md-12">
                     <div class="footer-item">
-                        <a href="index.html"><img alt="image" src="assets/images/bg/footer-logo2.png"></a>
+                        <a href="index.html"><img alt="image" src="/assets/images/bg/footer-logo2.png"></a>
                         <ul class="address-list">
                             <li><a href="#">Add. 168/170, Avenue 01, Mirpur DOHS, Bangladesh.</a></li>
                             <li><a href="tel:+029169852">Phone: +029169852 / +88017600000</a></li>
@@ -70,11 +70,11 @@
                     class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center flex-sm-nowrap flex-wrap">
                     <p class="d-sm-flex d-none">We Accepts:</p>
                     <ul class="footer-logo-list">
-                        <li><a href="#"><img alt="image" src="assets/images/bg/footer-pay1.png"></a></li>
-                        <li><a href="#"><img alt="image" src="assets/images/bg/footer-pay2.png"></a></li>
-                        <li><a href="#"><img alt="image" src="assets/images/bg/footer-pay3.png"></a></li>
-                        <li><a href="#"><img alt="image" src="assets/images/bg/footer-pay4.png"></a></li>
-                        <li><a href="#"><img alt="image" src="assets/images/bg/footer-pay5.png"></a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/bg/footer-pay1.png"></a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/bg/footer-pay2.png"></a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/bg/footer-pay3.png"></a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/bg/footer-pay4.png"></a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/bg/footer-pay5.png"></a></li>
                     </ul>
                 </div>
             </div>

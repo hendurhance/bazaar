@@ -14,13 +14,11 @@
                         <h3>Fogot Password</h3>
                         <p>Write your email address below and we will send you password reset instructions.</p>
                     </div>
-                    <form class="w-100">
+                    <form class="w-100" action="{{ route('user.forgot-password.handle') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-inner">
-                                    <label>Enter Your Email *</label>
-                                    <input type="email" placeholder="Enter Your Email">
-                                </div>
+                                <x-input-field name="email" type="email" label="Enter Your Email" placeholder="Enter Your Email" />
                             </div>
                         </div>
                         <button class="account-btn">Send Reset Link</button>

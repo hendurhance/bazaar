@@ -1,11 +1,11 @@
 <header class="style-2">
     <div class="header-logo">
-        <a href="index.html"><img alt="image" src="assets/images/bg/header-logo2.png"></a>
+        <a href="index.html"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
     </div>
     <div class="main-menu">
         <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div class="mobile-logo-wrap">
-                <a href="index.html"><img alt="image" src="assets/images/bg/header-logo2.png"></a>
+                <a href="index.html"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
             </div>
             <div class="menu-close-btn">
                 <i class="bi bi-x-lg"></i>

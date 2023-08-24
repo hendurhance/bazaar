@@ -7,6 +7,7 @@ use App\Exceptions\AuthenticateException;
 use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthenticateRepository implements AuthenticateRepositoryInterface
@@ -60,6 +61,53 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
         ]);
 
         // TODO: Send welcome email.
+    }
+
+    /**
+     * Send password reset link
+     * @param string $email
+     */
+    public function sendPasswordResetLink(string $email): void
+    {
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            throw new AuthenticateException('An error occurred while sending password reset link.');
+        }
+
+        DB::table('password_reset_tokens')->insert([
+            'email' => $email,
+            'token' => generate_password_reset_token($email),
+            'created_at' => now(),
+        ]);
+
+        // TODO: Send password reset email.
+    }
+
+    /**
+     * Reset a user's password.
+     * 
+     * @param array<string, mixed> $data
+     */
+    public function resetPassword(array $data): void
+    {
+        $resetToken = DB::table('password_reset_tokens')->where('token', $data['token'])->first();
+
+        if (!$resetToken) {
+            throw new AuthenticateException('Invalid password reset token.');
+        }
+
+        $user = User::where('email', $resetToken->email)->first();
+
+        if (!$user) {
+            throw new AuthenticateException('An error occurred while resetting password.');
+        }
+
+        $user->update([
+            'password' => Hash::make($data['password']),
+        ]);
+
+        DB::table('password_reset_tokens')->where('token', $data['token'])->delete();
     }
 
     /**

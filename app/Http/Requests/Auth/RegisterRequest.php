@@ -3,11 +3,13 @@
 namespace App\Http\Requests\Auth;
 
 use App\Rules\Username;
+use App\Traits\PasswordEnvironments;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends FormRequest
 {
+    use PasswordEnvironments;
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -31,32 +33,6 @@ class RegisterRequest extends FormRequest
             'password' => $this->passwordRules(app()->environment()),
             'terms' => 'required|accepted',
         ];
-    }
-
-    /**
-     * Get password rules for environment.
-     * 
-     * @param string $environment
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
-     */
-    protected function passwordRules(string $environment)
-    {
-        return match ($environment) {
-            'production' => [
-                'required',
-                'string',
-                Password::min(8)     // must be at least 8 characters in length
-                    ->mixedCase()     // must contain both uppercase and lowercase letters
-                    ->letters()       // must contain at least one letter
-                    ->numbers()       // must contain at least one digit
-                    ->symbols()       // must contain at least one special character
-                    ->uncompromised(), // must not be compromised in a data breach
-            ],
-            default => [
-                'string',
-                Password::min(8)     // must be at least 8 characters in length
-            ],
-        };
     }
 
     /**
