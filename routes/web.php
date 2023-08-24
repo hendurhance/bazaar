@@ -21,3 +21,11 @@ Route::view('/live-auction', 'pages.live-auction')->name('live-auction');
 Route::view('/blog', 'pages.blog')->name('blog');
 Route::view('blog-details', 'pages.blog-details')->name('blog-details');
 Route::view('auction-details', 'pages.auction-details')->name('auction-details');
+
+/**
+ * User Authentication Routes
+ */
+Route::middleware('guest')->group(function () {
+    Route::view('/login', 'user.auth.login')->name('user.login');
+    Route::view('/register', 'user.auth.register')->name('user.register');
+});
