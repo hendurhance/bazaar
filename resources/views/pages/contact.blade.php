@@ -3,7 +3,7 @@
 @section('description', 'Contact us for any questions or concerns.')
 @section('content')
 
-@include('layouts.breadcrumb', ['title' => 'Contact'])
+@include('layouts.breadcrumb', ['pageTitle' => 'Contact'])
 
 <div class="contact-section pt-120 pb-120">
     <div class="container">

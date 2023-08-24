@@ -1,8 +1,8 @@
 @extends('partials.app')
-@section('title', 'Forgot Password')
+@section('title', 'Reset Password')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Forgot Password'])
+@include('layouts.breadcrumb', ['pageTitle' => 'Reset Password'])
 
 <div class="login-section pt-120 pb-120">
     <div class="container">
@@ -11,15 +11,23 @@
                 <div class="form-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
                     <div class="form-title">
-                        <h3>Fogot Password</h3>
-                        <p>Write your email address below and we will send you password reset instructions.</p>
+                        <h3>Reset Password</h3>
+                        <p>Fill in the form below to reset your password.</p>
                     </div>
                     <form class="w-100">
                         <div class="row">
                             <div class="col-12">
                                 <div class="form-inner">
-                                    <label>Enter Your Email *</label>
-                                    <input type="email" placeholder="Enter Your Email">
+                                    <label>New Password *</label>
+                                    <input type="password" name="password" id="password" placeholder="Password">
+                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-inner">
+                                    <label>Confirm Password *</label>
+                                    <input type="password" name="password" id="password" placeholder="Password">
+                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
                                 </div>
                             </div>
                         </div>

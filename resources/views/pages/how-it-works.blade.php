@@ -3,7 +3,7 @@
 @section('description', 'How to auction on our platform')
 @section('content')
 
-@include('layouts.breadcrumb', ['title' => 'How it works'])
+@include('layouts.breadcrumb', ['pageTitle' => 'How it works'])
 
  <div class="how-work-section pt-120 pb-120">
     <div class="container">
