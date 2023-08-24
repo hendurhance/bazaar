@@ -18,7 +18,6 @@
 </div>
 
 <div class="about-section pt-120 pb-120">
-    <img src="assets/images/bg/section-bg.png" class="img-fluid section-bg-top" alt="section-bg">
     <div class="container">
         <div class="row d-flex justify-content-center g-4">
             <div class="col-lg-6 col-md-10">
