@@ -14,47 +14,26 @@
                         <h3>Sign Up</h3>
                         <p>Do you already have an account? <a href="login.html">Log in here</a></p>
                     </div>
-                    <form class="w-100">
+                    <form class="w-100" action="{{ route('user.register') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-md-6">
-                                <div class="form-inner">
-                                    <label>Frist Name *</label>
-                                    <input type="email" placeholder="Frist Name">
-                                </div>
+                                <x-input-field name="first_name" type="text" label="First Name" placeholder="First Name" />
                             </div>
                             <div class="col-md-6">
-                                <div class="form-inner">
-                                    <label>Last Name *</label>
-                                    <input type="email" placeholder="Last Name">
-                                </div>
+                                <x-input-field name="last_name" type="text" label="Last Name" placeholder="Last Name" />
                             </div>
                             <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Username *</label>
-                                    <input type="username" placeholder="Enter Your Username">
-                                </div>
+                                <x-input-field name="username" type="text" label="Username" placeholder="Enter Your Username" />
                             </div>
                             <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Enter Your Email *</label>
-                                    <input type="email" placeholder="Enter Your Email">
-                                </div>
+                                <x-input-field name="email" type="email" label="Enter Your Email" placeholder="Enter Your Email" />
                             </div>
                             <div class="col-md-12">
-                                <div class="form-inner">
-                                    <label>Password *</label>
-                                    <input type="password" name="password" id="password"
-                                        placeholder="Create A Password">
-                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                </div>
+                                <x-input-field name="password" type="password" label="Password" placeholder="Create A Password" />
                             </div>
                             <div class="col-md-12">
-                                <div class="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                                    <div class="form-group">
-                                        <input type="checkbox" id="html">
-                                        <label for="html">I agree to the Terms &amp; Policy</label>
-                                    </div>
-                                </div>
+                                <x-agree-checkbox class="form-agreement form-inner d-flex justify-content-between flex-wrap" id="html" name="terms" label="I agree to the Terms & Policy" />
                             </div>
                         </div>
                         <button class="account-btn">Create Account</button>

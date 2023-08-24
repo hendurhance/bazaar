@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,4 +31,5 @@ Route::middleware('guest')->group(function () {
     Route::view('/register', 'user.auth.register')->name('user.register');
     Route::view('/forgot-password', 'user.auth.forgot-password')->name('user.forgot-password');
     Route::view('/reset-password', 'user.auth.reset-password')->name('user.reset-password');
+    Route::post('/register', [AuthController::class, 'register'])->name('user.register');
 });
