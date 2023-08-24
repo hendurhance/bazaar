@@ -3,19 +3,7 @@
 @section('description', 'Auction detail page')
 @section('content')
 
-<div class="inner-banner">
-    <div class="container">
-        <h2 class="inner-banner-title  wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".4s"
-            style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInLeft;">
-            Auction Details</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Auction Details</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@include('layouts.breadcrumb', ['pageTitle' => 'Auction Detail'])
 
 <div class="auction-details-section pt-120">
     <div class="container">

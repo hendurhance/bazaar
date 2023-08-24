@@ -3,23 +3,9 @@
 @section('description', 'Read our blog posts to learn more about us and our platform.')
 @section('content')
 
-<div class="inner-banner">
-    <div class="container">
-        <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s"
-            style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInLeft;">
-            Our Blog</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Blog</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@include('layouts.breadcrumb', ['pageTitle' => 'Blog'])
 
 <div class="blog-section pt-120 pb-120">
-    <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-top">
-    <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-bottom">
     <div class="container">
         <div class="row d-flex justify-content-center g-4 mb-60">
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">

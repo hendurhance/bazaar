@@ -13,6 +13,7 @@
 <body>
 
     @include('layouts.preloader')
+    @include('layouts.notify')
     @include('layouts.header')
     @include('layouts.search')
 
