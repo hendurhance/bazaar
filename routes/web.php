@@ -28,4 +28,5 @@ Route::view('auction-details', 'pages.auction-details')->name('auction-details')
 Route::middleware('guest')->group(function () {
     Route::view('/login', 'user.auth.login')->name('user.login');
     Route::view('/register', 'user.auth.register')->name('user.register');
+    Route::view('/forgot-password', 'user.auth.forgot-password')->name('user.forgot-password');
 });
