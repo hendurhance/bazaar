@@ -29,4 +29,5 @@ Route::middleware('guest')->group(function () {
     Route::view('/login', 'user.auth.login')->name('user.login');
     Route::view('/register', 'user.auth.register')->name('user.register');
     Route::view('/forgot-password', 'user.auth.forgot-password')->name('user.forgot-password');
+    Route::view('/reset-password', 'user.auth.reset-password')->name('user.reset-password');
 });

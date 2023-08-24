@@ -2,7 +2,7 @@
 @section('title', 'Login')
 @section('content')
 
-@include('layouts.breadcrumb', ['title' => 'Login'])
+@include('layouts.breadcrumb', ['pageTitle' => 'Login'])
 
 <div class="login-section pt-120 pb-120">
     <div class="container">

@@ -2,7 +2,7 @@
 @section('title', 'Register')
 @section('content')
 
-@include('layouts.breadcrumb', ['title' => 'Register'])
+@include('layouts.breadcrumb', ['pageTitle' => 'Register'])
 
 <div class="signup-section pt-120 pb-120">
     <div class="container">
