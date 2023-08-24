@@ -14,29 +14,17 @@
                         <h3>Log In</h3>
                         <p>New Member? <a href="signup.html">signup here</a></p>
                     </div>
-                    <form class="w-100">
+                    <form class="w-100" action="{{ route('user.login') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-12">
-                                <div class="form-inner">
-                                    <label>Enter Your Email *</label>
-                                    <input type="email" placeholder="Enter Your Email">
-                                </div>
+                                <x-input-field name="email" type="email" label="Enter Your Email" placeholder="Enter Your Email" />
                             </div>
                             <div class="col-12">
-                                <div class="form-inner">
-                                    <label>Password *</label>
-                                    <input type="password" name="password" id="password" placeholder="Password">
-                                    <i class="bi bi-eye-slash" id="togglePassword"></i>
-                                </div>
+                                <x-input-field name="password" type="password" label="Enter Your Password" placeholder="Enter Your Password" />
                             </div>
                             <div class="col-12">
-                                <div class="form-agreement form-inner d-flex justify-content-between flex-wrap">
-                                    <div class="form-group">
-                                        <input type="checkbox" id="html">
-                                        <label for="html">I agree to the <a href="#">Terms &amp; Policy</a></label>
-                                    </div>
-                                    <a href="#" class="forgot-pass">Forgotten Password</a>
-                                </div>
+                                <x-agree-checkbox class="form-agreement form-inner d-flex justify-content-between flex-wrap" id="html" name="terms" label="I agree to the Terms & Policy" forgotten="true" />
                             </div>
                         </div>
                         <button class="account-btn">Log in</button>
