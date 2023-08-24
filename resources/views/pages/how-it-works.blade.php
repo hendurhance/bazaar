@@ -6,7 +6,6 @@
 @include('layouts.breadcrumb', ['title' => 'How it works'])
 
  <div class="how-work-section pt-120 pb-120">
-    <img alt="image" src="assets/images/bg/section-bg.png" class="section-bg-top">
     <div class="container">
        <div class="row g-4 mb-60">
           <div class="col-xl-6 col-lg-6">
