@@ -17,6 +17,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/**
+ * Page Routes
+ */
 Route::view('/', 'pages.index')->name('index');
 Route::view('/about', 'pages.about')->name('about');
 Route::view('/contact', 'pages.contact')->name('contact');
@@ -27,16 +30,20 @@ Route::view('blog-details', 'pages.blog-details')->name('blog-details');
 Route::view('auction-details', 'pages.auction-details')->name('auction-details');
 
 /**
- * User Authentication Routes
+ * User Routes
  */
-Route::middleware('guest')->group(function () {
-    Route::view('/login', 'user.auth.login')->name('user.login');
-    Route::view('/register', 'user.auth.register')->name('user.register');
-    Route::view('/forgot-password', 'user.auth.forgot-password')->name('user.forgot-password');
-    Route::get('/reset-password/{token}', [PasswordController::class, 'resetPasswordForm'])->name('user.reset-password');
-    Route::get('/verify-email/{token}', [RegisterController::class, 'verify'])->name('user.verify-email');
-    Route::post('/register', [RegisterController::class, 'register'])->name('user.register.handle');
-    Route::post('/login', [LoginController::class, 'login'])->name('user.login.handle');
-    Route::post('/forgot-password', [PasswordController::class, 'forgotPassword'])->name('user.forgot-password.handle');
-    Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('user.reset-password.handle');
+Route::group([
+    'as' => 'user.',
+], function () {
+    Route::middleware('guest')->group(function () {
+        Route::view('/login', 'user.auth.login')->name('login');
+        Route::view('/register', 'user.auth.register')->name('register');
+        Route::view('/forgot-password', 'user.auth.forgot-password')->name('forgot-password');
+        Route::get('/reset-password/{token}', [PasswordController::class, 'resetPasswordForm'])->name('reset-password');
+        Route::get('/verify-email/{token}', [RegisterController::class, 'verify'])->name('verify-email');
+        Route::post('/register', [RegisterController::class, 'register'])->name('register.handle');
+        Route::post('/login', [LoginController::class, 'login'])->name('login.handle');
+        Route::post('/forgot-password', [PasswordController::class, 'forgotPassword'])->name('forgot-password.handle');
+        Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('reset-password.handle');
+    });
 });

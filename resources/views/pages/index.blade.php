@@ -20,7 +20,7 @@
                     <p class="wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s">
                         Are you ready to embark on a thrilling journey of buying and selling like never before? Look no further than Bazaar - your one-stop destination for exhilarating online auctions! 
                     </p>
-                    <a href="live-auction.html" class="eg-btn btn--primary2 btn--lg wow fadeInUp"
+                    <a href="{{ route('live-auction') }}" class="eg-btn btn--primary2 btn--lg wow fadeInUp"
                         data-wow-duration="2s" data-wow-delay="0.8s">Start Bidding</a>
                 </div>
             </div>
@@ -41,7 +41,7 @@
                                 <img alt="image" src="assets/images/bg/accessories.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon2.svg">
-                                    <h5><a href="live-auction.html">Accessories</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Accessories</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -51,7 +51,7 @@
                                 <img alt="image" src="assets/images/bg/cars.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/car-icon.svg">
-                                    <h5><a href="live-auction.html">Cars</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Cars</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +61,7 @@
                                 <img alt="image" src="assets/images/bg/motobike.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/moto-bike.svg">
-                                    <h5><a href="live-auction.html">Motor Bike</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Motor Bike</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -71,7 +71,7 @@
                                 <img alt="image" src="assets/images/bg/fashion.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon4.svg">
-                                    <h5><a href="live-auction.html">Fashion</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Fashion</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +81,7 @@
                                 <img alt="image" src="assets/images/bg/virtual.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon5.svg">
-                                    <h5><a href="live-auction.html">Virtual Worlds</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Virtual Worlds</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -91,7 +91,7 @@
                                 <img alt="image" src="assets/images/bg/music.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon1.svg">
-                                    <h5><a href="live-auction.html">Music</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Music</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -101,7 +101,7 @@
                                 <img alt="image" src="assets/images/bg/cards.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon3.svg">
-                                    <h5><a href="live-auction.html">Trading Cards</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Trading Cards</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -111,7 +111,7 @@
                                 <img alt="image" src="assets/images/bg/fashion.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon4.svg">
-                                    <h5><a href="live-auction.html">Fashion</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Fashion</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -121,7 +121,7 @@
                                 <img alt="image" src="assets/images/bg/cards.png" class="category-img">
                                 <div class="content">
                                     <img alt="image" src="assets/images/icons/cat-icon3.svg">
-                                    <h5><a href="live-auction.html">Trading Cards</a></h5>
+                                    <h5><a href="{{ route('live-auction') }}">Trading Cards</a></h5>
                                 </div>
                             </div>
                         </div>
@@ -147,7 +147,7 @@
                 </div>
             </div>
             <div class="col-xl-6 col-lg-4 col-xl-6 text-lg-end text-center">
-                <a href="live-auction.html" class="eg-btn btn--primary2 btn--md">View All</a>
+                <a href="{{ route('live-auction') }}" class="eg-btn btn--primary2 btn--md">View All</a>
             </div>
         </div>
         <div class="row gy-4 d-flex justify-content-center">
@@ -163,7 +163,7 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Brand New royal Enfield 250 CC For special Sale</a></h4>
+                        <h4><a href="{{ route('auction-details') }}">Brand New royal Enfield 250 CC For special Sale</a></h4>
                         <div class="author-price-area">
                             <div class="author">
                                 <img alt="image" src="assets/images/bg/auction-authr1.png"><span class="name">By
@@ -173,7 +173,7 @@
                             <p>$3,45</p>
                         </div>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <i class="bi bi-heart"></i>
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -194,7 +194,7 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Wedding wow Exclusive Cupple Ring (S2022)</a></h4>
+                        <h4><a href="{{ route('auction-details') }}">Wedding wow Exclusive Cupple Ring (S2022)</a></h4>
                         <div class="author-price-area">
                             <div class="author">
                                 <img alt="image" src="assets/images/bg/auction-authr2.png"><span class="name">By
@@ -204,7 +204,7 @@
                             <p>$3,45</p>
                         </div>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <i class="bi bi-heart"></i>
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -225,7 +225,7 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Brand New Honda CBR 600 RR For Sale (2022)</a></h4>
+                        <h4><a href="{{ route('auction-details') }}">Brand New Honda CBR 600 RR For Sale (2022)</a></h4>
                         <div class="author-price-area">
                             <div class="author">
                                 <img alt="image" src="assets/images/bg/auction-authr3.png"><span class="name">By
@@ -235,7 +235,7 @@
                             <p>$3,45</p>
                         </div>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <i class="bi bi-heart"></i>
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -256,7 +256,7 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Toyota AIGID A Class Hatchback Sale</a>
+                        <h4><a href="{{ route('auction-details') }}">Toyota AIGID A Class Hatchback Sale</a>
                         </h4>
                         <div class="author-price-area">
                             <div class="author">
@@ -267,7 +267,7 @@
                             <p>$3,45</p>
                         </div>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <i class="bi bi-heart"></i>
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -288,7 +288,7 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Havit HV-G61 USB Black Double Game With Vibrat</a>
+                        <h4><a href="{{ route('auction-details') }}">Havit HV-G61 USB Black Double Game With Vibrat</a>
                         </h4>
                         <div class="author-price-area">
                             <div class="author">
@@ -299,7 +299,7 @@
                             <p>$3,45</p>
                         </div>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <i class="bi bi-heart"></i>
                                 <i class="bi bi-three-dots-vertical"></i>
@@ -320,7 +320,7 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">IPhone 11 Pro Max All Variants Available For Sale</a>
+                        <h4><a href="{{ route('auction-details') }}">IPhone 11 Pro Max All Variants Available For Sale</a>
                         </h4>
                         <div class="author-price-area">
                             <div class="author">
@@ -331,7 +331,7 @@
                             <p>$3,45</p>
                         </div>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                             <ul class="share-list gap-2">
                                 <li><a href="#"><i class="bi bi-heart"></i></a></li>
                                 <li><a href="#"><i class="bi bi-three-dots-vertical"></i></a></li>
@@ -408,12 +408,12 @@
                             </div>
                             <div class="c-feature-content">
                                 <div class="c-feature-category">Time Zoon</div>
-                                <a href="auction-details.html">
+                                <a href="{{ route('auction-details') }}">
                                     <h4>Michael Kors Watch m20L6</h5>
                                 </a>
                                 <p>Bidding Price : <span>$15.99</span></p>
                                 <div class="auction-card-bttm">
-                                    <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">View
+                                    <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">View
                                         Details</a>
                                     <div class="share-area">
                                         <ul class="social-icons d-flex">
@@ -468,12 +468,12 @@
                             </div>
                             <div class="c-feature-content">
                                 <div class="c-feature-category">Lit Gaslighte</div>
-                                <a href="auction-details.html">
+                                <a href="{{ route('auction-details') }}">
                                     <h4>Toyota AIGID A Clasic Hatchback.</h4>
                                 </a>
                                 <p>Bidding Price : <span>$15.99</span></p>
                                 <div class="auction-card-bttm">
-                                    <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">View
+                                    <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">View
                                         Details</a>
                                     <div class="share-area">
                                         <ul class="social-icons d-flex">
@@ -528,12 +528,12 @@
                             </div>
                             <div class="c-feature-content">
                                 <div class="c-feature-category">Motor Bike</div>
-                                <a href="auction-details.html">
+                                <a href="{{ route('auction-details') }}">
                                     <h4>North Casual Lifestle Shoes..</h4>
                                 </a>
                                 <p>Bidding Price : <span>$15.99</span></p>
                                 <div class="auction-card-bttm">
-                                    <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">View
+                                    <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">View
                                         Details</a>
                                     <div class="share-area">
                                         <ul class="social-icons d-flex">
@@ -588,12 +588,12 @@
                             </div>
                             <div class="c-feature-content">
                                 <div class="c-feature-category">Time Zoon</div>
-                                <a href="auction-details.html">
+                                <a href="{{ route('auction-details') }}">
                                     <h4>Michael Kors Watch m20L6</h4>
                                 </a>
                                 <p>Bidding Price : <span>$15.99</span></p>
                                 <div class="auction-card-bttm">
-                                    <a href="auction-details.html" class="eg-btn btn--primary2 btn--sm">View
+                                    <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">View
                                         Details</a>
                                     <div class="share-area">
                                         <ul class="social-icons d-flex">
@@ -692,12 +692,12 @@
                         <img alt="image" src="assets/images/blog/recent21.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">David Droga Still Has Faith in Online Advertising Creative
+                        <h5><a href="{{ route('blog-details') }}">David Droga Still Has Faith in Online Advertising Creative
                             </a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -716,12 +716,12 @@
                         <img alt="image" src="assets/images/blog/recent22.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">Take our friend Johnny No-Job, for example. He’s a
+                        <h5><a href="{{ route('blog-details') }}">Take our friend Johnny No-Job, for example. He’s a
                                 specialist in .</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -740,12 +740,12 @@
                         <img alt="image" src="assets/images/blog/recent23.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">The second-price sealed-bid auction is similar to the
+                        <h5><a href="{{ route('blog-details') }}">The second-price sealed-bid auction is similar to the
                                 first.</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">

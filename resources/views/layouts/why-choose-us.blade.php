@@ -48,7 +48,7 @@
                         </svg>
                     </div>
                     <div class="content">
-                        <h5><a href="live-auction.html">High Quality Products</a></h5>
+                        <h5><a href="#">High Quality Products</a></h5>
                         <p class="para">We have a wide range of high quality products that you can choose from.</p>
                     </div>
                 </div>
@@ -154,7 +154,7 @@
                         </svg>
                     </div>
                     <div class="content">
-                        <h5><a href="live-auction.html">Top Class Product Price</a></h5>
+                        <h5><a href="#">Top Class Product Price</a></h5>
                         <p class="para">Products are sold at a price that is decided by the market.</p>
                     </div>
                 </div>
@@ -206,7 +206,7 @@
                         </svg>
                     </div>
                     <div class="content">
-                        <h5><a href="dashboard.html">Show All Bidders History</a></h5>
+                        <h5><a href="#">Show All Bidders History</a></h5>
                         <p class="para">For transparency, all bidders history will be shown to you.</p>
                     </div>
                 </div>
