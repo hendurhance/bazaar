@@ -202,7 +202,8 @@
             </div>
             <div class="slider-arrows testimonial2-arrow d-flex justify-content-between gap-3">
                 <div class="testi-prev2 swiper-prev-arrow" tabindex="0" role="button" aria-label="Next slide"
-                    aria-controls="swiper-wrapper-8be698db210fb5d1a"><i class="bi bi-arrow-left"></i></div>
+                    aria-controls="swiper-wrapper-8be698db210fb5d1a"><i class="bi bi-arrow-left"></i>
+                </div>
                 <div class="testi-next2 swiper-next-arrow" tabindex="0" role="button" aria-label="Previous slide"
                     aria-controls="swiper-wrapper-8be698db210fb5d1a">
                     <i class="bi bi-arrow-right"></i>

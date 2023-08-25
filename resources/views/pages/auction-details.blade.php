@@ -259,11 +259,11 @@
                                         </div>
                                     </div>
                                     <div class="auction-content">
-                                        <h4><a href="auction-details.html">Brand New royal Enfield 250 CC For Sale</a>
+                                        <h4><a href="{{ route('auction-details') }}">Brand New royal Enfield 250 CC For Sale</a>
                                         </h4>
                                         <p>Bidding Price : <span>$85.9</span> </p>
                                         <div class="auction-card-bttm">
-                                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a
+                                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a
                                                 Bid</a>
                                             <div class="share-area">
                                                 <ul class="social-icons d-flex">
@@ -305,11 +305,11 @@
                                         </div>
                                     </div>
                                     <div class="auction-content">
-                                        <h4><a href="auction-details.html">Wedding Special Exclusive Cupple Ring
+                                        <h4><a href="{{ route('auction-details') }}">Wedding Special Exclusive Cupple Ring
                                                 (S2022)</a></h4>
                                         <p>Bidding Price : <span>$85.9</span> </p>
                                         <div class="auction-card-bttm">
-                                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a
+                                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a
                                                 Bid</a>
                                             <div class="share-area">
                                                 <ul class="social-icons d-flex">
@@ -341,7 +341,7 @@
                         <div class="banner-content">
                             <span>CARS</span>
                             <h3>Toyota AIGID A Clasis Cars Sale</h3>
-                            <a href="auction-details.html" class="eg-btn btn--primary card--btn">Details</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary card--btn">Details</a>
                         </div>
                     </div>
                 </div>

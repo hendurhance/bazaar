@@ -12,7 +12,7 @@
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
                     <div class="form-title">
                         <h3>Log In</h3>
-                        <p>New Member? <a href="signup.html">signup here</a></p>
+                        <p>New Member? <a href="{{ route('user.register') }}">register here</a></p>
                     </div>
                     <form class="w-100" action="{{ route('user.login.handle') }}" method="POST">
                         @csrf

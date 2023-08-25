@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Services\Avatar\UIAvatar;
 
 class UserObserver
 {
@@ -11,7 +12,7 @@ class UserObserver
      */
     public function creating(User $user): void
     {
-        $user->avatar = 'https://ui-avatars.com/api/?name=' . $user->name . '&color=7F9CF5&background=EBF4FF';
+        $user->avatar = (new UIAvatar($user->name))->getUrl();
         $user->email_verification_token = generate_verify_token($user->email);
     }
 

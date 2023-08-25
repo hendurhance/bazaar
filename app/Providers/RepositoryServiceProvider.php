@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Contracts\AuthenticateRepositoryInterface;
+use App\Contracts\Repository\AuthenticateRepositoryInterface;
 use App\Repositories\Auth\AuthenticateRepository;
 use Illuminate\Support\ServiceProvider;
 

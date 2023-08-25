@@ -3,19 +3,7 @@
 @section('description', 'Learn more about how we work and what we do.')
 @section('content')
 
-<div class="inner-banner">
-    <div class="container">
-        <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s"
-            style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInLeft;">
-            About Us</h2>
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                <li class="breadcrumb-item active" aria-current="page">About Us</li>
-            </ol>
-        </nav>
-    </div>
-</div>
+@include('layouts.breadcrumb', ['pageTitle' => 'About'])
 
 <div class="about-section pt-120 pb-120">
     <div class="container">

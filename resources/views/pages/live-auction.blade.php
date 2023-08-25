@@ -29,10 +29,10 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Brand New royal Enfield 250 CC For Sale</a></h4>
+                        <h4><a href="{{ route('auction-details') }}">Brand New royal Enfield 250 CC For Sale</a></h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -69,10 +69,10 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Wedding Special Exclusive Cupple Ring (S2022)</a></h4>
+                        <h4><a href="{{ route('auction-details') }}">Wedding Special Exclusive Cupple Ring (S2022)</a></h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -109,10 +109,10 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Brand New Honda CBR 600 RR For Sale (2022)</a></h4>
+                        <h4><a href="{{ route('auction-details') }}">Brand New Honda CBR 600 RR For Sale (2022)</a></h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -149,11 +149,11 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Toyota AIGID A Class Hatchback Sale (2017 - 2021)</a>
+                        <h4><a href="{{ route('auction-details') }}">Toyota AIGID A Class Hatchback Sale (2017 - 2021)</a>
                         </h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -190,11 +190,11 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Havit HV-G61 USB Black Double Game Pad With Vibrat</a>
+                        <h4><a href="{{ route('auction-details') }}">Havit HV-G61 USB Black Double Game Pad With Vibrat</a>
                         </h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -231,11 +231,11 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">IPhone 11 Pro Max All Variants Available For Sale</a>
+                        <h4><a href="{{ route('auction-details') }}">IPhone 11 Pro Max All Variants Available For Sale</a>
                         </h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -272,11 +272,11 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Blue ray filter All Variants Available For Sale</a>
+                        <h4><a href="{{ route('auction-details') }}">Blue ray filter All Variants Available For Sale</a>
                         </h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -313,11 +313,11 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Pure leather All Variants Available For Sale</a>
+                        <h4><a href="{{ route('auction-details') }}">Pure leather All Variants Available For Sale</a>
                         </h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -354,11 +354,11 @@
                         </div>
                     </div>
                     <div class="auction-content">
-                        <h4><a href="auction-details.html">Water resist All Variants Available For Sale</a>
+                        <h4><a href="{{ route('auction-details') }}">Water resist All Variants Available For Sale</a>
                         </h4>
                         <p>Bidding Price : <span>$85.9</span></p>
                         <div class="auction-card-bttm">
-                            <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                             <div class="share-area">
                                 <ul class="social-icons d-flex">
                                     <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>

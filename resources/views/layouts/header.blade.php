@@ -1,11 +1,11 @@
 <header class="style-2">
     <div class="header-logo">
-        <a href="index.html"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
+        <a href="{{ route('index') }}"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
     </div>
     <div class="main-menu">
         <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div class="mobile-logo-wrap">
-                <a href="index.html"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
+                <a href="{{ route('index') }}"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
             </div>
             <div class="menu-close-btn">
                 <i class="bi bi-x-lg"></i>
@@ -13,23 +13,23 @@
         </div>
         <ul class="menu-list">
             <li>
-                <a href="/">Home</a>
+                <a href="{{ route('index') }}">Home</a>
             </li>
             <li>
-                <a href="how-works.html">How It Works</a>
+                <a href="{{ route('how-it-works') }}">How It Works</a>
             </li>
             <li>
-                <a href="live-auction.html">Live Auction</a>
+                <a href="{{ route('live-auction') }}">Live Auction</a>
             </li>
             <li class="menu-item-has-children">
                 <a href="#">Company</a><i class="bx bx-plus dropdown-icon"></i>
                 <ul class="submenu">
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="{{ route('about') }}">About</a></li>
+                    <li><a href="{{ route('contact') }}">Contact</a></li>
                 </ul>
             </li>
             <li>
-                <a href="about.html">Blog</a>
+                <a href="{{ route('blog') }}">Blog</a>
             </li>
         </ul>
 
@@ -52,9 +52,9 @@
         <div class="search-btn">
             <i class="bi bi-search"></i>
         </div>
-        <a href="join-merchant.html" class="join-btn">Add Listing</a>
+        <a href="#" class="join-btn">Add Listing</a>
         <div class="eg-btn btn--primary2 header-btn">
-            <a href="dashboard.html">My Account</a>
+            <a href="#">My Account</a>
         </div>
         <div class="mobile-menu-btn d-lg-none d-block">
             <i class="bx bx-menu"></i>

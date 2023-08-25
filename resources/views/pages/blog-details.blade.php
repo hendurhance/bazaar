@@ -230,35 +230,35 @@
                                 <ul class="recent-post">
                                     <li class="single-post">
                                         <div class="post-img">
-                                            <a href="blog-details.html"><img alt="image"
+                                            <a href="{{ route('blog-details') }}"><img alt="image"
                                                     src="assets/images/blog/recent-feed1.png"></a>
                                         </div>
                                         <div class="post-content">
                                             <span>January 31, 2022</span>
-                                            <h6><a href="blog-details.html">Grant Distributions Conti nu to Incr
+                                            <h6><a href="{{ route('blog-details') }}">Grant Distributions Conti nu to Incr
                                                     Ease.</a>
                                             </h6>
                                         </div>
                                     </li>
                                     <li class="single-post">
                                         <div class="post-img">
-                                            <a href="blog-details.html"><img alt="image"
+                                            <a href="{{ route('blog-details') }}"><img alt="image"
                                                     src="assets/images/blog/recent-feed2.png"></a>
                                         </div>
                                         <div class="post-content">
                                             <span>February 21, 2022</span>
-                                            <h6><a href="blog-details.html">Seminar for Children to Learn About.</a>
+                                            <h6><a href="{{ route('blog-details') }}">Seminar for Children to Learn About.</a>
                                             </h6>
                                         </div>
                                     </li>
                                     <li class="single-post">
                                         <div class="post-img">
-                                            <a href="blog-details.html"><img alt="image"
+                                            <a href="{{ route('blog-details') }}"><img alt="image"
                                                     src="assets/images/blog/recent-feed3.png"></a>
                                         </div>
                                         <div class="post-content">
                                             <span>March 22, 2022</span>
-                                            <h6><a href="blog-details.html">Education and teacher for all African
+                                            <h6><a href="{{ route('blog-details') }}">Education and teacher for all African
                                                     Children.</a></h6>
                                         </div>
                                     </li>
@@ -307,7 +307,7 @@
                         <div class="banner-content">
                             <span>CARS</span>
                             <h3>Toyota AIGID A Clasis Cars Sale</h3>
-                            <a href="auction-details.html" class="eg-btn btn--primary card--btn">Details</a>
+                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary card--btn">Details</a>
                         </div>
                     </div>
                 </div>
