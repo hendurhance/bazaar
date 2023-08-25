@@ -16,12 +16,12 @@
                         <img alt="image" src="assets/images/blog/blogstyle11.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">Still Has in Advertising Creative
+                        <h5><a href="{{ route('blog-details') }}">Still Has in Advertising Creative
                                 Digital Reviews</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -39,12 +39,12 @@
                         <img alt="image" src="assets/images/blog/blogstyle12.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">Our friend Johnny No-Job He’s a
+                        <h5><a href="{{ route('blog-details') }}">Our friend Johnny No-Job He’s a
                                 specialist in influencer.</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -62,11 +62,11 @@
                         <img alt="image" src="assets/images/blog/blogstyle13.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">While these are just estimates, they encouraging guide</a></h5>
+                        <h5><a href="{{ route('blog-details') }}">While these are just estimates, they encouraging guide</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -84,11 +84,11 @@
                         <img alt="image" src="assets/images/blog/blogstyle14.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">What skills do you need marketing consultant?</a></h5>
+                        <h5><a href="{{ route('blog-details') }}">What skills do you need marketing consultant?</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -106,11 +106,11 @@
                         <img alt="image" src="assets/images/blog/blogstyle15.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">If you feel the same way becoming a.</a></h5>
+                        <h5><a href="{{ route('blog-details') }}">If you feel the same way becoming a.</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
@@ -128,11 +128,11 @@
                         <img alt="image" src="assets/images/blog/blogstyle16.png">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="blog-details.html">Creative Fashion Riboon Digital with rgb lights.</a></h5>
+                        <h5><a href="{{ route('blog-details') }}">Creative Fashion Riboon Digital with rgb lights.</a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="blog-details.html" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
