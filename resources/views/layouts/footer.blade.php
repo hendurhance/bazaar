@@ -24,11 +24,11 @@
                     <div class="footer-item">
                         <h5>Importants links</h5>
                         <ul class="footer-list">
-                            <li><a href="live-auction.html">All Product</a></li>
-                            <li><a href="how-works.html">How It Works</a></li>
-                            <li><a href="dashboard.html">My Account</a></li>
-                            <li><a href="about.html">About Company</a></li>
-                            <li><a href="blog.html">Our News Feed</a></li>
+                            <li><a href="{{ route('live-auction') }}">Live Auctions</a></li>
+                            <li><a href="{{ route('how-it-works') }}">How It Works</a></li>
+                            <li><a href="#">My Account</a></li>
+                            <li><a href="{{ route('about') }}">About Company</a></li>
+                            <li><a href="{{ route('blog') }}">Our News Feed</a></li>
                         </ul>
                     </div>
                 </div>
@@ -36,17 +36,17 @@
                     <div class="footer-item">
                         <h5>Help & FAQs</h5>
                         <ul class="footer-list">
-                            <li><a href="product.html">Help Center</a></li>
-                            <li><a href="faq.html">Customer FAQs</a></li>
-                            <li><a href="login.html">Terms and Conditions</a></li>
-                            <li><a href="about.html">Security Information</a></li>
-                            <li><a href="blog.html">Merchant Add Policy</a></li>
+                            <li><a href="#">Help Center</a></li>
+                            <li><a href="#">Customer FAQs</a></li>
+                            <li><a href="#">Terms and Conditions</a></li>
+                            <li><a href="#">Security Information</a></li>
+                            <li><a href="#">Merchant Add Policy</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-xl-3 col-lg-8 col-md-12">
                     <div class="footer-item">
-                        <a href="index.html"><img alt="image" src="/assets/images/bg/footer-logo2.png"></a>
+                        <a href="{{ route('index') }}"><img alt="image" src="/assets/images/bg/footer-logo2.png"></a>
                         <ul class="address-list">
                             <li><a href="#">Add. 168/170, Avenue 01, Mirpur DOHS, Bangladesh.</a></li>
                             <li><a href="tel:+029169852">Phone: +029169852 / +88017600000</a></li>

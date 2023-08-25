@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Auth;
 
-use App\Contracts\AuthenticateRepositoryInterface;
+use App\Contracts\Repository\AuthenticateRepositoryInterface;
 use App\Exceptions\AuthenticateException;
 use App\Models\User;
 use App\Models\Admin;
