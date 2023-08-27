@@ -42,7 +42,7 @@ class PasswordController extends Controller
      */
     public function resetPasswordForm(string $token): View
     {
-        return view('user.auth.reset-password', ['token' => $token]);
+        return view('auth.user.password.reset', ['token' => $token]);
     }
 
     /**
