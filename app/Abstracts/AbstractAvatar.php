@@ -2,7 +2,7 @@
 
 namespace App\Abstracts;
 
-use App\Contracts\AvatarInterface;
+use App\Contracts\Services\AvatarInterface;
 
 abstract class AbstractAvatar implements AvatarInterface
 {

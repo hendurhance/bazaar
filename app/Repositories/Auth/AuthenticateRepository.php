@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Auth;
 
-use App\Contracts\Repository\AuthenticateRepositoryInterface;
+use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Exceptions\AuthenticateException;
 use App\Models\User;
 use App\Models\Admin;
@@ -40,6 +40,19 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
         if (!Auth::guard($guard)->attempt($data)) {
             throw new AuthenticateException('Username or password is incorrect.');
         }
+    }
+
+    /**
+     * Logout a user.
+     * 
+     * @param string $guard
+     */
+    public function logout(string $guard): void
+    {
+        Auth::guard($guard)->logout();
+        session()->invalidate();
+        session()->regenerateToken();
+        session()->flush();
     }
 
     /**

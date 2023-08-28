@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Contracts\Repository;
+namespace App\Contracts\Repositories;
 
 interface AuthenticateRepositoryInterface
 {
@@ -19,6 +19,13 @@ interface AuthenticateRepositoryInterface
      * @param string $guard 
      */
     public function login(array $data, string $guard): void;
+
+    /**
+     * Logout a user.
+     * 
+     * @param string $guard
+     */
+    public function logout(string $guard): void;
 
     /**
      * Verify a user's email.
