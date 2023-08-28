@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User\Auth;
 
-use App\Contracts\Repository\AuthenticateRepositoryInterface;
+use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\RegisterRequest;
 use Illuminate\Http\RedirectResponse;

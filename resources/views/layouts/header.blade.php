@@ -54,7 +54,7 @@
         </div>
         <a href="#" class="join-btn">Add Listing</a>
         <div class="eg-btn btn--primary2 header-btn">
-            <a href="#">My Account</a>
+            <a href="{{ route('user.dashboard') }}">My Account</a>
         </div>
         <div class="mobile-menu-btn d-lg-none d-block">
             <i class="bx bx-menu"></i>
