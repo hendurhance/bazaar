@@ -59,7 +59,7 @@
        </a>
        <form action="{{ route('user.logout.handle') }}" method="POST">
         @csrf
-        <button href="" @class(['nav-link', 'nav-btn-style', 'mx-auto'])>
+        <button type="submit" @class(['nav-link', 'nav-btn-style', 'mx-auto'])>
             <svg width="22" height="22"
                 viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                 <g clip-path="url(#clip0_382_377)">
@@ -81,6 +81,6 @@
             </svg>
             Logout
         </button>
-     </form>
+       </form>
     </div>
  </div>

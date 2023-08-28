@@ -6,6 +6,9 @@ use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Exceptions\AuthenticateException;
 use App\Models\User;
 use App\Models\Admin;
+use App\Notifications\User\PasswordResetNotification;
+use App\Notifications\User\WelcomeEmailNotification;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -45,14 +48,14 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
     /**
      * Logout a user.
      * 
+     * @param Request $request
      * @param string $guard
      */
-    public function logout(string $guard): void
+    public function logout(Request $request, string $guard): void
     {
         Auth::guard($guard)->logout();
-        session()->invalidate();
-        session()->regenerateToken();
-        session()->flush();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
     }
 
     /**
@@ -73,7 +76,7 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
             'email_verification_token' => null,
         ]);
 
-        // TODO: Send welcome email.
+        $user->notifyNow(new WelcomeEmailNotification($user));
     }
 
     /**
@@ -87,14 +90,14 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
         if (!$user) {
             throw new AuthenticateException('An error occurred while sending password reset link.');
         }
-
+        $token = generate_password_reset_token($email);
         DB::table('password_reset_tokens')->insert([
             'email' => $email,
-            'token' => generate_password_reset_token($email),
+            'token' => $token,
             'created_at' => now(),
         ]);
 
-        // TODO: Send password reset email.
+        $user->notifyNow(new PasswordResetNotification($user, $token));
     }
 
     /**
