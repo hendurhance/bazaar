@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\User;
+use App\Notifications\User\UserVerificationNotification;
 use App\Services\Avatar\UIAvatar;
 
 class UserObserver
@@ -21,7 +22,7 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        // Send email verification notification
+        $user->notifyNow(new UserVerificationNotification($user));
     }
 
     /**

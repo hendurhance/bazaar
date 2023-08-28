@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\User\Auth;
 
-use App\Contracts\Repository\AuthenticateRepositoryInterface;
+use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
@@ -19,7 +20,7 @@ class LoginController extends Controller
     public function __construct(protected AuthenticateRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->middleware('guest');
+        $this->middleware('guest')->except('logout');
     }
 
     /**
@@ -33,5 +34,17 @@ class LoginController extends Controller
         $this->repository->login($request->validated(), self::GUARD);
 
         return redirect()->route('user.dashboard');
+    }
+
+    /**
+     * Logout a user.
+     * 
+     * @param Request $request
+     */
+    public function logout(Request $request)
+    {
+        $this->repository->logout($request, self::GUARD);
+
+        return redirect()->route('user.login');
     }
 }

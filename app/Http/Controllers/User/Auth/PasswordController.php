@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\User\Auth;
 
-use App\Contracts\Repository\AuthenticateRepositoryInterface;
+use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\ForgotPasswordRequest;
 use App\Http\Requests\Auth\ResetPasswordRequest;
@@ -42,7 +42,7 @@ class PasswordController extends Controller
      */
     public function resetPasswordForm(string $token): View
     {
-        return view('user.auth.reset-password', ['token' => $token]);
+        return view('auth.user.password.reset', ['token' => $token]);
     }
 
     /**
