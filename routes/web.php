@@ -28,6 +28,7 @@ Route::view('/live-auction', 'pages.live-auction.index')->name('live-auction');
 Route::view('/blog', 'pages.blog.index')->name('blog');
 Route::view('blog-details', 'pages.blog.show')->name('blog-details');
 Route::view('auction-details', 'pages.live-auction.show')->name('auction-details');
+Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
 
 /**
  * User Routes
