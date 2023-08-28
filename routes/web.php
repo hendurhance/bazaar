@@ -43,12 +43,12 @@ Route::group([
         Route::get('/verify-email/{token}', [RegisterController::class, 'verify'])->name('verify-email');
         Route::post('/register', [RegisterController::class, 'register'])->name('register.handle');
         Route::post('/login', [LoginController::class, 'login'])->name('login.handle');
-        Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
         Route::post('/forgot-password', [PasswordController::class, 'forgotPassword'])->name('forgot-password.handle');
         Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('reset-password.handle');
     });
 
     Route::middleware('auth:web')->group(function () {
+        Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
         Route::view('/dashboard', 'dashboard.user.index')->name('dashboard');
     });
 });
