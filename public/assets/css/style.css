@@ -9316,3 +9316,7 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 .error-section .error-wrapper .error-content p {
     margin-bottom: 45px
 }
+
+.form-section{
+    padding: .825rem 0;
+}

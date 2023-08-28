@@ -52,7 +52,7 @@
         <div class="search-btn">
             <i class="bi bi-search"></i>
         </div>
-        <a href="#" class="join-btn">Add Listing</a>
+        <a href="{{ route('add-listing') }}" class="join-btn">Add Listing</a>
         <div class="eg-btn btn--primary2 header-btn">
             <a href="{{ route('user.dashboard') }}">My Account</a>
         </div>
