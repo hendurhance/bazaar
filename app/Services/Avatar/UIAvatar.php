@@ -2,9 +2,9 @@
 
 namespace App\Services\Avatar;
 
-use App\Abstracts\AbstractAvatar;
+use App\Abstracts\BaseAvatar;
 
-class UIAvatar extends AbstractAvatar
+class UIAvatar extends BaseAvatar
 {
     protected string $apiUrl = 'https://ui-avatars.com';
 

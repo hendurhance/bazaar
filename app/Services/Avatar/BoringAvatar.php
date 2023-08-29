@@ -2,10 +2,10 @@
 
 namespace App\Services\Avatar;
 
-use App\Abstracts\AbstractAvatar;
+use App\Abstracts\BaseAvatar;
 use InvalidArgumentException;
 
-class BoringAvatar extends AbstractAvatar
+class BoringAvatar extends BaseAvatar
 {
     protected string $apiUrl = 'https://boring-avatars-api.vercel.app/api/avatar';
 

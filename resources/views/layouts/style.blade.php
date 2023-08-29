@@ -13,4 +13,4 @@
 <link rel="stylesheet" href="/assets/css/style.css">
 <link rel="stylesheet" href="/plugin/notify/css/app.css">
 <link rel="stylesheet" href="/plugin/notify/css/notify.css">
-@yield('styles')
+@stack('styles')

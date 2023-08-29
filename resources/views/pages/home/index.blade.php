@@ -3,10 +3,6 @@
 @section('description', 'The right marketplace to auction your items.')
 @section('content')
 <div class="hero-area hero-style-two">
-    <img alt="image" src="assets/images/bg/section-bg2.png" class="radial-bg">
-    <img alt="image" src="assets/images/bg/banner2-icon1.png" class="banner2-icon1">
-    <img alt="image" src="assets/images/bg/banner2-icon2.png" class="banner2-icon2">
-    <img alt="image" src="assets/images/bg/banner2-icon3.png" class="banner2-icon3">
     <div class="scroll-text">
         <h6><a href="#category">Scroll Down</a></h6>
     </div>
@@ -29,112 +25,10 @@
 </div>
 
 
-<div class="category-section2 pt-120 pb-120" id="category">
-    <div class="container position-relative">
-        <div class="row">
-            <div class="col-12">
-                <div class="swiper category2-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.2s">
-                                <img alt="image" src="assets/images/bg/accessories.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon2.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Accessories</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.4s">
-                                <img alt="image" src="assets/images/bg/cars.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/car-icon.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Cars</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.6s">
-                                <img alt="image" src="assets/images/bg/motobike.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/moto-bike.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Motor Bike</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.2s">
-                                <img alt="image" src="assets/images/bg/fashion.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon4.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Fashion</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.4s">
-                                <img alt="image" src="assets/images/bg/virtual.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon5.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Virtual Worlds</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.6s">
-                                <img alt="image" src="assets/images/bg/music.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon1.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Music</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="1s">
-                                <img alt="image" src="assets/images/bg/cards.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon3.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Trading Cards</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="0.2s">
-                                <img alt="image" src="assets/images/bg/fashion.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon4.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Fashion</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
-                                data-wow-delay="1s">
-                                <img alt="image" src="assets/images/bg/cards.png" class="category-img">
-                                <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon3.svg">
-                                    <h5><a href="{{ route('live-auction') }}">Trading Cards</a></h5>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<x-categories-card />
 
 
 <div class="live-auction pb-120">
-    <img alt="image" src="assets/images/bg/section-bg2.png" class="img-fluid section-bg2">
     <div class="container position-relative">
         <img alt="image" src="assets/images/bg/dotted2.png" class="dotted3">
         <div class="row d-flex justify-content-center align-items-center mb-60 g-4">
@@ -349,7 +243,6 @@
 
 
 <div class="upcoming-seciton pt-120 pb-120">
-    <img alt="image" src="assets/images/bg/section-bg2.png" class="img-fluid section-bg2">
     <div class="container">
         <div class="row d-flex justify-content-center align-items-center mb-60">
             <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
@@ -672,7 +565,6 @@
 
 
 <div class="recent-news-section pt-120 pb-120">
-    <img alt="image" src="assets/images/bg/section-bg2.png" class="img-fluid section-bg2">
     <div class="container">
         <div class="row d-flex justify-content-center">
             <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">

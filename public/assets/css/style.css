@@ -5599,7 +5599,7 @@ header.style-3 .mobile-menu-form input[type=text] {
 }
 
 .sponsor-section.style-2 {
-    background: rgba(249, 57, 95, .1)
+    background: rgba(57, 142, 249, .1)
 }
 
 .sponsor-section.style-2 .slick-dots .slick-active {
@@ -9315,4 +9315,105 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 
 .error-section .error-wrapper .error-content p {
     margin-bottom: 45px
+}
+
+.form-section{
+    padding: .825rem 0;
+}
+
+.ck .ck-powered-by {
+    display: none;
+}
+
+.images-btn{
+    background: none;
+    border: none;
+    outline: none;
+    color: #3A46D1;
+}
+
+.nice-select.open .list{
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.flag{
+    margin-right: 5px;
+    width: 20px !important;
+    height: 15px !important;
+}
+
+.expandable-input{
+    position: relative;
+}
+
+.phone-select{
+    position: absolute;
+    max-height: 300px;
+    width: 100%;
+    background: #fbfbfb;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    overflow-y: auto;
+    z-index: 99;
+    opacity: 0;
+    display: none;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.phone-select-list-item.selected{
+    background: #f2f2f2;
+}
+
+.phone-select.open{
+    opacity: 1;
+    display: block;
+    transition: all .42s ease;
+}
+
+.phone-select-selected{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #f2f2f2;
+    height: 50px;
+    width: 45px;
+    border: 1px solid #eee;
+    cursor: pointer;
+}
+
+.phone-select-selected span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #696969;
+    width: 15px !important;
+    height: 11px !important;
+}
+
+.phone-select-selected span i{
+    position: relative !important;
+    font-size: 10px;
+    left: 17px;
+    bottom: 60% !important;
+}
+
+.expandable-input{
+    padding-left: 55px !important;
+}
+
+.phone-select-list{
+    padding-left: .525rem;
+}
+
+.phone-select-list-item{
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.phone-select-list-item-dial-code{
+    font-size: 14px;
+    font-weight: 400;
+    color: #696969;
 }
