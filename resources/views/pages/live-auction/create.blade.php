@@ -17,7 +17,6 @@
                                 href="{{ route('user.login') }}">login</a> to have your listing associated with your account.</p>
                     </x-alert>
                     @endguest
-
                     <x-alert type="info" icon="info-circle" dismissible="true">
                         <p>Once you submit your listing, it will be reviewed by our team. Once approved, it will be
                             listed on the auction.</p>
@@ -91,10 +90,8 @@
                                 <x-input-field name="seller_email" type="email" label="Seller Email"
                                     placeholder="Enter Seller Email" />
                             </div>
-                            <div class="col-md-12">
-                                <x-input-field name="seller_phone" type="tel" label="Seller Phone"
-                                    placeholder="Enter Seller Phone" />
-                            </div>
+                            <x-phone-selectable name="seller_phone" label="Seller Phone"
+                                placeholder="Enter Seller Phone" />
                             <div class="col-md-12">
                                 <x-input-field name="seller_address" type="text" label="Seller Address"
                                     placeholder="Enter Seller Address" />

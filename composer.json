@@ -1,7 +1,7 @@
 {
-    "name": "laravel/laravel",
+    "name": "martian/bazaar",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Bazaar: an open-source auction marketplace",
     "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {

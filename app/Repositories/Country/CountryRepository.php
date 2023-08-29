@@ -5,10 +5,14 @@ namespace App\Repositories\Country;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Country;
 use App\Contracts\Repositories\CountryRepositoryInterface;
-use App\Models\City;
 use App\Models\State;
 use Illuminate\Database\Eloquent\Collection;
 
+/**
+ * @todo TODO:
+ * 1. Handle exceptions properly.
+ * 2. Add tests.
+ */
 class CountryRepository extends BaseCrudRepository  implements CountryRepositoryInterface
 {
     public function __construct(Country $model)
@@ -50,5 +54,15 @@ class CountryRepository extends BaseCrudRepository  implements CountryRepository
         return $this->findBy('iso2', strtoupper($iso2code), function() {
             throw new \Exception('Country not found.');
         });
+    }
+
+    /**
+     * Get the calling code for the country.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCallingCode(): Collection
+    {
+        return $this->model->select('id', 'iso2', 'name', 'phone_code', 'emoji')->get();
     }
 }
