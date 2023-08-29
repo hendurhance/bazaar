@@ -79,16 +79,7 @@
                             <div class="form-section">
                                 <h4>Location</h4>
                             </div>
-                            <div class="col-md-12">
-                                <x-input-field name="country" type="text" label="Country"
-                                    placeholder="Enter Country" />
-                            </div>
-                            <div class="col-md-12">
-                                <x-input-field name="state" type="text" label="State" placeholder="Enter State" />
-                            </div>
-                            <div class="col-md-12">
-                                <x-input-field name="city" type="text" label="City" placeholder="Enter City" />
-                            </div>
+                            <x-countries-selectable />
                             <div class="form-section">
                                 <h4>Seller Information</h4>
                             </div>
