@@ -4,7 +4,7 @@ namespace App\Abstracts;
 
 use App\Contracts\Services\AvatarInterface;
 
-abstract class AbstractAvatar implements AvatarInterface
+abstract class BaseAvatar implements AvatarInterface
 {
     /**
      * The key to generate the avatar. <email|name>
