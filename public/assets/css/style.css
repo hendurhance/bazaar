@@ -9320,3 +9320,14 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 .form-section{
     padding: .825rem 0;
 }
+
+.ck .ck-powered-by {
+    display: none;
+}
+
+.images-btn{
+    background: none;
+    border: none;
+    outline: none;
+    color: #3A46D1;
+}
