@@ -22,7 +22,7 @@ class CategoriesCard extends Component
     public function render(): View|Closure|string
     {
         return view('components.categories-card', [
-            'categories' => $this->categoryRepository->getCategoriesWithSubCategories(),
+            'categories' => $this->categoryRepository->getPrimaryCategories(),
         ]);
     }
 }

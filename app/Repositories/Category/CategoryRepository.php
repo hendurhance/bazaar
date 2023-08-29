@@ -5,6 +5,7 @@ namespace App\Repositories\Category;
 use App\Abstracts\BaseCrudRepository;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Models\Category;
+use Illuminate\Database\Eloquent\Collection;
 
 class CategoryRepository extends BaseCrudRepository implements CategoryRepositoryInterface
 {
@@ -28,8 +29,18 @@ class CategoryRepository extends BaseCrudRepository implements CategoryRepositor
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getCategoriesWithSubCategories()
+    public function getSubCategories(string $slug): Collection
     {
-        return $this->model->with('subCategories')->get();
+        return $this->model->where('slug', $slug)->with('subCategories')->get();
+    }
+
+    /**
+     * Get primary categories.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getPrimaryCategories(): Collection
+    {
+        return $this->model->whereNull('parent_id')->get();
     }
 }
