@@ -50,14 +50,7 @@
                             <div class="form-section">
                                 <h4>Category</h4>
                             </div>
-                            <div class="col-md-6">
-                                <x-input-field name="category" type="text" label="Category"
-                                    placeholder="Enter Category" />
-                            </div>
-                            <div class="col-md-6">
-                                <x-input-field name="sub_category" type="text" label="Sub Category"
-                                    placeholder="Enter Sub Category" :required="false" />
-                            </div>
+                            <x-category-selectable />
                             <div class="form-section">
                                 <h4>Images</h4>
                             </div>
