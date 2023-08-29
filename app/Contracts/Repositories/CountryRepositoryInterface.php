@@ -38,4 +38,11 @@ interface CountryRepositoryInterface
      * @return \App\Models\Country
      */
     public function findByIso2Code(string $iso2code): Country;
+
+    /**
+     * Get the calling code for the country.
+     * 
+     * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getCallingCode(): Collection;
 }

@@ -67,11 +67,8 @@
         getStates(country);
     });
     $('#state').on('change', function(){
-        console.log('state changed');
-        // get the value of country
         const country = document.getElementById('country').value;
         const state = this.value;
-
         getCities(country, state);
     });
 
