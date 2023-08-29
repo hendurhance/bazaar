@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\API\CategoryController as APICategoryController;
+use App\Http\Controllers\Api\CategoryController as ApiCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +15,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/subcategories/{slug}', [APICategoryController::class, 'getSubCategories'])->name('categories.sub-categories');
+Route::get('/subcategories/{slug}', [ApiCategoryController::class, 'getSubCategories'])->name('categories.sub-categories');

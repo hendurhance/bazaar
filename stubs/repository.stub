@@ -1,0 +1,17 @@
+<?php
+
+namespace {{ namespace }};
+
+use App\Abstracts\BaseCrudRepository;
+use App\Models\{{ model }};
+use App\Contracts\Repositories\{{ interface }};
+
+class {{ class }} extends BaseCrudRepository implements {{ interface }}
+{
+    public function __construct({{ model }} $model)
+    {
+        parent::__construct($model);
+    }
+
+    // Add your custom repository methods here...
+}

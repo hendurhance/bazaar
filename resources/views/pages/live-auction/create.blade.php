@@ -80,7 +80,7 @@
                                 <h4>Location</h4>
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="location" type="text" label="Location"
+                                <x-input-field name="country" type="text" label="Country"
                                     placeholder="Enter Country" />
                             </div>
                             <div class="col-md-12">
