@@ -32,10 +32,10 @@ interface CountryRepositoryInterface
     public function cities(string $iso2code, string $stateCode): Collection;
 
     /**
-     * Get the country by the ISO2 code.
+     * Find the country by the ISO2 code.
      * 
      * @param string $iso2code
      * @return \App\Models\Country
      */
-    public function getByIso2Code(string $iso2code): Country;
+    public function findByIso2Code(string $iso2code): Country;
 }

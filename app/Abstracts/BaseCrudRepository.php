@@ -36,7 +36,7 @@ abstract class BaseCrudRepository
      * 
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function all()
+    public function all(): \Illuminate\Database\Eloquent\Collection
     {
         return $this->model->all();
     }

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
 class CategoryController extends Controller
 {
@@ -25,8 +25,6 @@ class CategoryController extends Controller
      */
     public function getSubCategories(string $slug)
     {
-        return response()->json([
-            'categories' => $this->categoryRepository->getSubCategories($slug),
-        ]);
+        return $this->response('categories', $this->categoryRepository->getSubCategories($slug));
     }
 }

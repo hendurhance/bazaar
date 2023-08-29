@@ -21,7 +21,7 @@
         fetch(`/api/subcategories/${slug}`)
         .then(response => response.json())
         .then(data => {
-            const subcategories = data.categories[0].sub_categories;
+            const subcategories = data.data[0].sub_categories;
             let options = '';
             subcategories.forEach(subcategory => {
                 options += `<option value="${subcategory.slug}">${subcategory.name}</option>`;
