@@ -53,8 +53,16 @@
             <i class="bi bi-search"></i>
         </div>
         <a href="{{ route('add-listing') }}" class="join-btn">Add Listing</a>
+        @guest('web')
+        <a href="{{ route('user.login') }}" class="join-btn">Login</a>
+        @endguest
         <div class="eg-btn btn--primary2 header-btn">
+            @guest('web')
+            <a href="{{ route('user.login') }}">Register</a>
+            @endguest
+            @auth('web')
             <a href="{{ route('user.dashboard') }}">My Account</a>
+            @endauth
         </div>
         <div class="mobile-menu-btn d-lg-none d-block">
             <i class="bx bx-menu"></i>
