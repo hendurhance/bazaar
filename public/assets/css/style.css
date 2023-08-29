@@ -9355,7 +9355,7 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     border: 1px solid #eee;
     border-radius: 5px;
     overflow-y: auto;
-    z-index: 999;
+    z-index: 99;
     opacity: 0;
     display: none;
     box-shadow: 0 0 10px rgba(0,0,0,.1);
