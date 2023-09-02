@@ -9,7 +9,7 @@ use App\Contracts\Repositories\CountryRepositoryInterface;
 use App\Repositories\Auth\AuthenticateRepository;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
-use App\Repositories\Repositories\AdRepository;
+use App\Repositories\Ad\AdRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider

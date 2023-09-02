@@ -34,13 +34,13 @@ class Media extends Model
 
 
 
-    /**
-     * Get all of the owning mediaable models (ad or post).
-     */
-    public function mediaable(): MorphTo
-    {
-        return $this->morphTo();
-    }
+    // /**
+    //  * Get all of the owning mediaable models (ad or post).
+    //  */
+    // public function mediaable(): MorphTo
+    // {
+    //     return $this->morphTo();
+    // }
 
     /**
      * Get the user that owns the media.

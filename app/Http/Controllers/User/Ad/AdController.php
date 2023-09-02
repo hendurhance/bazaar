@@ -21,6 +21,6 @@ class AdController extends Controller
      */
     public function store(CreateAdRequest $request)
     {
-        $this->adRepository->create(null ,$request->validated());
+        return $this->adRepository->create(null ,$request->validated());
     }
 }

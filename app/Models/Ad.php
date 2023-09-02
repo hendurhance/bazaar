@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ad extends Model
 {
-    use HasFactory, HasMedia, HasSlug, HasUuids;
+    use HasFactory, HasSlug, HasUuids;
 
     /**
      * The attributes that are mass assignable.
@@ -39,7 +39,6 @@ class Ad extends Model
         'country_id',
         'state_id',
         'city_id',
-        'media_ids',
     ];
 
     /**
@@ -96,7 +95,6 @@ class Ad extends Model
      * @var array
      */
     protected $casts = [
-        'media_ids' => 'array',
         'is_negotiable' => 'boolean',
         'mark_as_urgent' => 'boolean',
         'started_at' => 'datetime',
@@ -111,15 +109,6 @@ class Ad extends Model
     protected $dates = [
         'started_at',
         'expired_at',
-    ];
-
-    /**
-     * The attributes that should be appended.
-     * 
-     * @var array
-     */
-    protected $appends = [
-        'media',
     ];
 }
 
