@@ -4,9 +4,6 @@
         <input class="expandable-input" type="tel" name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}" @class(['error'=>
         $errors->has($name)])>
         <div class="phone-select-selected" id="phoneSelect">
-            <span class="flag flag-ng">
-                <i class="bi bi-caret-down-fill"></i>
-            </span>
         </div>
         <div class="phone-select">
             <ul class="phone-select-list">
@@ -18,16 +15,14 @@
                 @endforeach
             </ul>
         </div>
-        <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
     </div>
+    <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
 </div>
 
 @push('scripts')
 <script>
     $(document).ready(function(){
-        // set the first country as the default
         const firstCountry = $('.phone-select-list-item').first();
-        console.log(firstCountry);  
         $('#phoneSelect').html(`<span class="flag flag-${firstCountry.data('country-code').toLowerCase()}">
                 <i class="bi bi-caret-down-fill"></i>
             </span>`);

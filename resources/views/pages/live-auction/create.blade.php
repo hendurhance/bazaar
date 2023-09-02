@@ -21,30 +21,30 @@
                         <p>Once you submit your listing, it will be reviewed by our team. Once approved, it will be
                             listed on the auction.</p>
                     </x-alert>
-                    <form class="w-100" action="#" method="POST">
+                    <form class="w-100" action="{{ route('add-listing.handle') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="form-section">
                                 <h4>Lisiting Information</h4>
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="title" type="text" label="Ad Title" placeholder="Enter Ad Title" />
+                                <x-input-field name="title" type="text" label="Ad Title" placeholder="Enter Ad Title" value="{{ old('title') }}" />
                             </div>
                             <div class="col-md-12">
                                 <x-textarea-field name="description" label="Ad Description"
-                                    placeholder="Enter Description" />
+                                    placeholder="Enter Description" value="{{ old('description') }}" />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="price" type="number" label="Starting Price"
-                                    placeholder="Enter Starting Price" />
+                                    placeholder="Enter Starting Price" value="{{ old('price') }}" />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="start_date" type="datetime-local" label="Start Date"
-                                    placeholder="Enter Start Date" />
+                                    placeholder="Enter Start Date" value="{{ old('start_date') }}" />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="end_date" type="datetime-local" label="End Date"
-                                    placeholder="Enter End Date" />
+                                    placeholder="Enter End Date" value="{{ old('end_date') }}" />
                             </div>
                             <div class="form-section">
                                 <h4>Category</h4>
@@ -54,11 +54,11 @@
                                 <h4>Images</h4>
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="image[]" type="file" label="Upload Image"
+                                <x-input-field name="images[]" type="file" label="Upload Image"
                                     placeholder="Upload Image" />
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="image[]" type="file" label="Upload Image"
+                                <x-input-field name="images[]" type="file" label="Upload Image"
                                     placeholder="Upload Image" />
                             </div>
                             {{-- add more images button --}}
@@ -70,8 +70,8 @@
                                 <h4>Video</h4>
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="video" type="url" label="Video URL"
-                                    placeholder="Enter Video URL" />
+                                <x-input-field name="video_url" type="url" label="Video URL"
+                                    placeholder="Enter Video URL" value="{{ old('video_url') }}" />
                                 <p class="text-muted">Please enter a valid video URL from YouTube or Vimeo, ex.
                                     https://www.youtube.com/watch?v=video_id </p>
                             </div>
@@ -84,17 +84,17 @@
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="seller_name" type="text" label="Seller Name"
-                                    placeholder="Enter Seller Name" />
+                                    placeholder="Enter Seller Name" :value="old('seller_name') ?? auth()->user()->name ?? ''" />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="seller_email" type="email" label="Seller Email"
-                                    placeholder="Enter Seller Email" />
+                                    placeholder="Enter Seller Email" :value="old('seller_email') ?? auth()->user()->email ?? ''" />
                             </div>
-                            <x-phone-selectable name="seller_phone" label="Seller Phone"
-                                placeholder="Enter Seller Phone" />
+                            <x-phone-selectable name="seller_mobile" label="Seller Phone"
+                                placeholder="Enter Seller Phone" :value="old('seller_mobile') ?? auth()->user()->mobile ?? ''" />
                             <div class="col-md-12">
                                 <x-input-field name="seller_address" type="text" label="Seller Address"
-                                    placeholder="Enter Seller Address" />
+                                    placeholder="Enter Seller Address" :value="old('seller_address') ?? auth()->user()->address ?? ''" />
                             </div>
                             <div class="col-md-12">
                                 <x-agree-checkbox
@@ -123,7 +123,7 @@
     // Create a new input field for images
     function createNewInputField() {
         return `<div class="col-md-12">
-                    <x-input-field name="image[]" type="file" label="Upload Image" placeholder="Upload Image" />
+                    <x-input-field name="images[]" type="file" label="Upload Image" placeholder="Upload Image" />
                 </div>`;
     }
 
@@ -134,6 +134,9 @@
         let newInputFieldElement = document.createElement('div');
         newInputFieldElement.innerHTML = newInputField;
         imagesBtn.parentNode.insertBefore(newInputFieldElement, imagesBtn);
+        if (document.querySelectorAll('input[name="images[]"]').length == 5) {
+            imagesBtn.style.display = 'none';
+        }
     }
 
     // Add event listener to the button

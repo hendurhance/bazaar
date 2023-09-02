@@ -57,6 +57,20 @@ class CountryRepository extends BaseCrudRepository  implements CountryRepository
     }
 
     /**
+     * Find a state by its country ID and state code.
+     * 
+     * @param int $countryId
+     * @param string $stateCode
+     * @return \App\Models\State
+     */
+    public function findStateByCode(int $countryId, string $stateCode): State
+    {
+        return State::where('country_id', $countryId)->where('code', strtoupper($stateCode))->firstOr(function() {
+            throw new \Exception('State not found.');
+        });
+    }
+
+    /**
      * Get the calling code for the country.
      * 
      * @return \Illuminate\Database\Eloquent\Collection

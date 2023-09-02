@@ -58,7 +58,7 @@
         @endguest
         <div class="eg-btn btn--primary2 header-btn">
             @guest('web')
-            <a href="{{ route('user.login') }}">Register</a>
+            <a href="{{ route('user.register') }}">Register</a>
             @endguest
             @auth('web')
             <a href="{{ route('user.dashboard') }}">My Account</a>
