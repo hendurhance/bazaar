@@ -14,8 +14,6 @@ return new class extends Migration
         Schema::create('media', function (Blueprint $table) {
             $table->uuid('id')->primary();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignUuid('mediaable_id')->index()->nullable();
-            $table->string('mediaable_type')->index()->nullable();
             $table->string('name')->nullable();
             $table->smallInteger('type')->nullable();
             $table->string('path')->nullable();
