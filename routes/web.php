@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
@@ -29,6 +30,7 @@ Route::view('/blog', 'pages.blog.index')->name('blog');
 Route::view('blog-details', 'pages.blog.show')->name('blog-details');
 Route::view('auction-details', 'pages.live-auction.show')->name('auction-details');
 Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
+Route::post('/add-listing', [AdController::class, 'store'])->name('add-listing.handle');
 
 /**
  * User Routes

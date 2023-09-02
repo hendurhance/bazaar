@@ -6,12 +6,13 @@
         id="{{ $name }}" 
         placeholder="{{ $placeholder }}" 
         @class(['error'=> $errors->has($name)]) 
+        value="{{ $value }}"
         @if ($type == 'datetime-local') step="3600" @endif
     >
     @if ($type == 'password')
     <i class="bi bi-eye-slash" id="togglePassword"></i>
     @endif
-    <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
+    <span class="text-danger fs-6">{{ $errors->first(preg_replace('/\[\]/', '', $name)) }}</span>
 </div>
 
 @if ($type == 'datetime-local')

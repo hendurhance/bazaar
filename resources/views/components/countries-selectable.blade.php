@@ -30,7 +30,7 @@
 
 
 @push('styles')
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@amplifiedhq/countries-atlas/dist/flags/css/flags.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@amplifiedhq/countries-atlas/dist/flags/css/flags.min.css" async defer>
 @endpush
 
 @push('scripts')
@@ -73,14 +73,11 @@
     });
 
     // when document is ready
-    $(document).ready(function(){
         $('#country').find('option').each(function(){
             const country = this.value;
             const flag = `<span class="flag flag-${country.toLowerCase()}"></span>`;
             $(this).html(flag + $(this).html());
         });
         $('#country').niceSelect('update');
-    });
-    
 </script>
 @endpush

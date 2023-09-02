@@ -1,6 +1,6 @@
 <div class="form-inner">
     <label>{{ $label }} {{$required ? '*' : ''}}</label>
-    <textarea name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}" @class(['error'=> $errors->has($name)])></textarea>
+    <textarea name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}" @class(['error'=> $errors->has($name)])>{{ $value }}</textarea>
     <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
 </div>
 {{-- include ckeditor --}}
@@ -23,7 +23,6 @@
                     { model: 'heading4', view: 'h4', title: 'Heading 4', class: 'ck-heading_heading4' },
                     { model: 'heading5', view: 'h5', title: 'Heading 5', class: 'ck-heading_heading5' },
                     { model: 'heading6', view: 'h6', title: 'Heading 6', class: 'ck-heading_heading6' },
-                    { model: 'Formatted', view: 'pre', title: 'Formatted' }
                 ]
             }
         } )

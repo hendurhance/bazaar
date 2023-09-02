@@ -6,6 +6,8 @@ use App\Console\Commands\MakeInterfaceCommand;
 use App\Console\Commands\MakeRepositoryCommand;
 use App\Models\User;
 use App\Observers\UserObserver;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,6 +32,12 @@ class AppServiceProvider extends ServiceProvider
             'command.make.interface',
         ]);
 
+        // Enable the query log.
+        if(config('app.debug')) {
+           DB::listen(function($query) {
+               Log::channel('query')->info($query->sql, $query->bindings, $query->time);
+           });
+        }
     }
 
     /**

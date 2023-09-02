@@ -2,7 +2,8 @@
 
 namespace App\Enums;
 
-enum PaymentStatus: int {
+enum PaymentStatus: int 
+{
     case INITIATED = 0;
     case PENDING = 1;
     case SUCCESS = 2;
