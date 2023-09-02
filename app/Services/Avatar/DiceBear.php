@@ -2,10 +2,10 @@
 
 namespace App\Services\Avatar;
 
-use App\Abstracts\BaseAvatar;
+use App\Abstracts\BaseAvatarService;
 use InvalidArgumentException;
 
-class DiceBear extends BaseAvatar
+class DiceBear extends BaseAvatarService
 {
     protected string $apiUrl = 'https://api.dicebear.com';
 

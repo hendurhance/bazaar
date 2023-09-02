@@ -9,7 +9,6 @@ use App\Models\Media;
 use App\Models\User;
 use App\Repositories\Media\MediaRepository;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
 trait MediaHandler

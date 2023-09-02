@@ -2,7 +2,7 @@
 
 namespace App\Contracts\Services;
 
-interface AvatarInterface
+interface AvatarServiceInterface
 {
     /**
      * Generate a new avatar.
