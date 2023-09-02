@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Ad extends Model
 {
-    use HasFactory, HasSlug, HasUuids;
+    use HasFactory, HasSlug, HasUuids, HasMedia;
 
     /**
      * The attributes that are mass assignable.

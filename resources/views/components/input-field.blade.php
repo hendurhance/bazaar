@@ -6,6 +6,7 @@
         id="{{ $name }}" 
         placeholder="{{ $placeholder }}" 
         @class(['error'=> $errors->has($name)]) 
+        value="{{ $value }}"
         @if ($type == 'datetime-local') step="3600" @endif
     >
     @if ($type == 'password')
