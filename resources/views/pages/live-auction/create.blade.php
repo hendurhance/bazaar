@@ -21,7 +21,7 @@
                         <p>Once you submit your listing, it will be reviewed by our team. Once approved, it will be
                             listed on the auction.</p>
                     </x-alert>
-                    <form class="w-100" action="#" method="POST">
+                    <form class="w-100" action="{{ route('add-listing.handle') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="row">
                             <div class="form-section">
@@ -54,11 +54,11 @@
                                 <h4>Images</h4>
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="image[]" type="file" label="Upload Image"
+                                <x-input-field name="images[]" type="file" label="Upload Image"
                                     placeholder="Upload Image" />
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="image[]" type="file" label="Upload Image"
+                                <x-input-field name="images[]" type="file" label="Upload Image"
                                     placeholder="Upload Image" />
                             </div>
                             {{-- add more images button --}}
@@ -70,7 +70,7 @@
                                 <h4>Video</h4>
                             </div>
                             <div class="col-md-12">
-                                <x-input-field name="video" type="url" label="Video URL"
+                                <x-input-field name="video_url" type="url" label="Video URL"
                                     placeholder="Enter Video URL" />
                                 <p class="text-muted">Please enter a valid video URL from YouTube or Vimeo, ex.
                                     https://www.youtube.com/watch?v=video_id </p>
@@ -90,7 +90,7 @@
                                 <x-input-field name="seller_email" type="email" label="Seller Email"
                                     placeholder="Enter Seller Email" />
                             </div>
-                            <x-phone-selectable name="seller_phone" label="Seller Phone"
+                            <x-phone-selectable name="seller_mobile" label="Seller Phone"
                                 placeholder="Enter Seller Phone" />
                             <div class="col-md-12">
                                 <x-input-field name="seller_address" type="text" label="Seller Address"
@@ -123,7 +123,7 @@
     // Create a new input field for images
     function createNewInputField() {
         return `<div class="col-md-12">
-                    <x-input-field name="image[]" type="file" label="Upload Image" placeholder="Upload Image" />
+                    <x-input-field name="images[]" type="file" label="Upload Image" placeholder="Upload Image" />
                 </div>`;
     }
 
@@ -134,6 +134,9 @@
         let newInputFieldElement = document.createElement('div');
         newInputFieldElement.innerHTML = newInputField;
         imagesBtn.parentNode.insertBefore(newInputFieldElement, imagesBtn);
+        if (document.querySelectorAll('input[name="images[]"]').length == 5) {
+            imagesBtn.style.display = 'none';
+        }
     }
 
     // Add event listener to the button

@@ -1,5 +1,5 @@
 <div class="col-md-6">
-    <select name="category" id="category">
+    <select name="category" id="category" @class(['error' => $errors->has('category')])>
         <option value="">Select Category</option>
         @foreach ($categories as $category)
         <option value="{{ $category->slug }}">{{ $category->name }}</option>
@@ -8,7 +8,7 @@
     <span class="text-danger fs-6">{{ $errors->first('category') }}</span>
 </div>
 <div class="col-md-6">
-    <select name="subcategory" id="subcategory">
+    <select name="subcategory" id="subcategory" @class(['error' => $errors->has('subcategory')])>
         <option value="">Select Subcategory</option>
     </select>
     <span class="text-danger fs-6">{{ $errors->first('subcategory') }}</span>

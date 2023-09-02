@@ -66,3 +66,27 @@ if (!function_exists('hex2rgba')) {
         return 'rgba(' . implode(',', $rgb) . ',' . $alpha . ')';
     }
 }
+
+/**
+ * Remove special characters from a string.
+ * @param string $string
+ * @return string
+ */
+if (!function_exists('remove_special_chars')) {
+    function remove_special_chars(string $string): string
+    {
+        return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
+    }
+}
+
+/**
+ * Sanitize html from form inputs
+ * @param string $html
+ * @return string
+ */
+if (!function_exists('sanitize_html')) {
+    function sanitize_html(string $html): string
+    {
+        return htmlspecialchars($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+    }
+}

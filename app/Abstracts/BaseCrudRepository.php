@@ -2,6 +2,7 @@
 
 namespace App\Abstracts;
 
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 
 abstract class BaseCrudRepository
@@ -69,13 +70,11 @@ abstract class BaseCrudRepository
     /**
      * Create a new record.
      * 
+     * @param ?User|null $user
      * @param array $data
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function create(array $data)
-    {
-        return $this->model->create($data);
-    }
+    // abstract public function create(?User $user, array $data): Model;
 
     /**
      * Update the record by id.

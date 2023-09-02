@@ -6692,7 +6692,8 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 }
 
 .nice-select .list {
-    width: 100%
+    width: 100%;
+    max-height: 400px;
 }
 
 .login-section {

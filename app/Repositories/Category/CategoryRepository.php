@@ -43,4 +43,17 @@ class CategoryRepository extends BaseCrudRepository implements CategoryRepositor
     {
         return $this->model->whereNull('parent_id')->get();
     }
+
+    /**
+     * Find a category by slug.
+     * 
+     * @param string $slug
+     * @return \App\Models\Category
+     */
+    public function findBySlug(string $slug): Category
+    {
+        return $this->findBy('slug', $slug, function () {
+            throw new \Exception('Category not found.');
+        });
+    }
 }
