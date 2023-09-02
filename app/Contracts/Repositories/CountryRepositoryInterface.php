@@ -3,6 +3,7 @@
 namespace App\Contracts\Repositories;
 
 use App\Models\Country;
+use App\Models\State;
 use Illuminate\Database\Eloquent\Collection;
 
 interface CountryRepositoryInterface
@@ -38,6 +39,15 @@ interface CountryRepositoryInterface
      * @return \App\Models\Country
      */
     public function findByIso2Code(string $iso2code): Country;
+
+    /**
+     * Find the state by the country ID and state code.
+     * 
+     * @param int $countryId
+     * @param string $stateCode
+     * @return \App\Models\State
+     */
+    public function findStateByCode(int $countryId, string $stateCode): State;
 
     /**
      * Get the calling code for the country.

@@ -11,7 +11,7 @@
     @if ($type == 'password')
     <i class="bi bi-eye-slash" id="togglePassword"></i>
     @endif
-    <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
+    <span class="text-danger fs-6">{{ $errors->first(preg_replace('/\[\]/', '', $name)) }}</span>
 </div>
 
 @if ($type == 'datetime-local')

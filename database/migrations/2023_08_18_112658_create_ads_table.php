@@ -28,12 +28,17 @@ return new class extends Migration
             $table->string('seller_name')->nullable();
             $table->string('seller_email')->nullable();
             $table->string('seller_mobile', 15)->nullable();
+            $table->string('seller_address')->nullable();
 
             $table->boolean('mark_as_urgent')->default(false);
             $table->smallInteger('status')->default(1); // 1: pending for review, 2: published, 3: rejected, 4: expired
-            $table->date('started_at')->nullable();
-            $table->date('expired_at')->nullable();
+            $table->dateTimeTz('started_at')->nullable();
+            $table->dateTimeTz('expired_at')->nullable();
             $table->unsignedBigInteger('views')->default(0);
+
+            $table->foreignId('country_id')->nullable()->constrained('countries')->onDelete('cascade');
+            $table->foreignId('state_id')->nullable()->constrained('states')->onDelete('cascade');
+            $table->string('city_id')->nullable()->constrained('cities')->onDelete('cascade');
 
             $table->json('media_ids')->nullable();
             $table->timestamps();
