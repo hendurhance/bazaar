@@ -2,9 +2,9 @@
 
 namespace App\Services\Avatar;
 
-use App\Abstracts\BaseAvatar;
+use App\Abstracts\BaseAvatarService;
 
-class Gravatar extends BaseAvatar
+class Gravatar extends BaseAvatarService
 {
     protected string $apiUrl = 'https://www.gravatar.com/avatar';
 
