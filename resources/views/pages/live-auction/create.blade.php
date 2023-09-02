@@ -84,17 +84,17 @@
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="seller_name" type="text" label="Seller Name"
-                                    placeholder="Enter Seller Name" value="{{ old('seller_name') }}" />
+                                    placeholder="Enter Seller Name" :value="old('seller_name') ?? auth()->user()->name ?? ''" />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="seller_email" type="email" label="Seller Email"
-                                    placeholder="Enter Seller Email" value="{{ old('seller_email') }}" />
+                                    placeholder="Enter Seller Email" :value="old('seller_email') ?? auth()->user()->email ?? ''" />
                             </div>
                             <x-phone-selectable name="seller_mobile" label="Seller Phone"
-                                placeholder="Enter Seller Phone" />
+                                placeholder="Enter Seller Phone" :value="old('seller_mobile') ?? auth()->user()->mobile ?? ''" />
                             <div class="col-md-12">
                                 <x-input-field name="seller_address" type="text" label="Seller Address"
-                                    placeholder="Enter Seller Address" value="{{ old('seller_address') }}" />
+                                    placeholder="Enter Seller Address" :value="old('seller_address') ?? auth()->user()->address ?? ''" />
                             </div>
                             <div class="col-md-12">
                                 <x-agree-checkbox

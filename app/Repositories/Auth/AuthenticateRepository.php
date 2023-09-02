@@ -128,11 +128,11 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
 
     /**
      * Authenticated user.
-     * @return User
+     * @return ?User|null
      */
-    public function user(): User
+    public function user(): ?User
     {
-        return Auth::guard(self::WEB_GUARD)->user();
+        return Auth::guard(self::WEB_GUARD)->user() ?? null;
     }
 
     /**

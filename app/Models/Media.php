@@ -59,6 +59,6 @@ class Media extends Model
     protected $casts = [
         'is_featured' => 'boolean',
         'storage' => StorageDiskType::class,
-        'type' => MediaType::class,
+        // 'type' => MediaType::class,
     ];
 }

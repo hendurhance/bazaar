@@ -6,13 +6,17 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
+use App\Enums\StorageDiskType;
 use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
+use App\Traits\MediaHandler;
 use Illuminate\Support\Facades\DB;
 
 class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
 {
+    use MediaHandler;
+
     public function __construct(Ad $model)
     {
         parent::__construct($model);
@@ -29,7 +33,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     {
         return DB::transaction(function () use ($user, $data) {
             $ad = $this->store($user, $data);
-
+            $this->uploadMedia($ad, $data['images'] ?? [], StorageDiskType::LOCAL, 'public/ad', 640, 480, $user);
             return $ad;
         });
     }
