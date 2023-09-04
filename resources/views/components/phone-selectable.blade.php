@@ -2,7 +2,7 @@
     <div class="form-inner">
         <label for="{{ $name }}">{{ $label }}</label>
         <input class="expandable-input" type="tel" name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}" @class(['error'=>
-        $errors->has($name)])>
+        $errors->has($name)]) value="{{ $value }}" />
         <div class="phone-select-selected" id="phoneSelect">
         </div>
         <div class="phone-select">
@@ -22,11 +22,25 @@
 @push('scripts')
 <script>
     $(document).ready(function(){
-        const firstCountry = $('.phone-select-list-item').first();
-        $('#phoneSelect').html(`<span class="flag flag-${firstCountry.data('country-code').toLowerCase()}">
+         // Check if the input field has a value longer than 4 characters
+        const inputValue = $('#{{ $name }}').val();
+        const shouldSetInitialCountry = inputValue.length <= 4;
+
+        if (shouldSetInitialCountry) {
+            const firstCountry = $('.phone-select-list-item').first();
+            $('#phoneSelect').html(`<span class="flag flag-${firstCountry.data('country-code').toLowerCase()}">
                 <i class="bi bi-caret-down-fill"></i>
             </span>`);
-        $('#{{ $name }}').val(`+${firstCountry.data('dial-code')}`);
+            $('#{{ $name }}').val(`+${firstCountry.data('dial-code')}`);
+        } else {
+            const dialCode = inputValue.substring(0, 4);
+            const country = $('.phone-select-list-item').filter(function(){
+                return $(this).data('dial-code') == dialCode;
+            }).first();
+            $('#phoneSelect').html(`<span class="flag flag-${country.data('country-code').toLowerCase()}">
+                <i class="bi bi-caret-down-fill"></i>
+            </span>`);
+        }
         // show the phone select on click
         $('#phoneSelect').on('click', function(){
             $('.phone-select').toggleClass('open');
