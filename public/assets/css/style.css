@@ -9413,6 +9413,10 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     cursor: pointer;
 }
 
+.phone-select-list-item:hover{
+    background: #f2f2f2;
+}
+
 .phone-select-list-item-dial-code{
     font-size: 14px;
     font-weight: 400;

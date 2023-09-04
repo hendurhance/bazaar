@@ -6,7 +6,6 @@ use App\Abstracts\BaseMediaStorageService;
 use App\Contracts\Services\MediaStorageServiceInterface;
 use App\Enums\StorageDiskType;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Log;
 use Intervention\Image\Facades\Image;
 
 class LocalStorage extends BaseMediaStorageService implements MediaStorageServiceInterface
