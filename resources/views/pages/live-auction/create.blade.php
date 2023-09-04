@@ -84,7 +84,7 @@
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="seller_name" type="text" label="Seller Name"
-                                    placeholder="Enter Seller Name" :value="old('seller_name') ?? auth()->user()->name ?? ''" />
+                                    placeholder="Enter Seller Name" :value="old('seller_name') ?? auth()->user()->name ?? '' " />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="seller_email" type="email" label="Seller Email"

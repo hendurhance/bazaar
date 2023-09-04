@@ -6,7 +6,7 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateAdRequest;
 use App\Repositories\Auth\AuthenticateRepository;
-use Intervention\Image\Facades\Image;
+use Illuminate\Http\RedirectResponse;
 
 class AdController extends Controller
 {
@@ -20,9 +20,11 @@ class AdController extends Controller
      * Create an ad listing.
      * 
      * @param \App\Http\Requests\Ad\CreateAdRequest $request
+     * @return RedirectResponse;
      */
-    public function store(CreateAdRequest $request)
+    public function store(CreateAdRequest $request): RedirectResponse
     {
-        return $this->adRepository->create($this->authRepository->user(), $request->validated());
+        $this->adRepository->create($this->authRepository->user(), $request->validated());
+        return redirect()->route('add-listing')->with('success', 'Your ad has been created successfully, it will be reviewed by our team before it is published.');
     }
 }

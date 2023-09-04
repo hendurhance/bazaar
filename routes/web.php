@@ -1,10 +1,10 @@
 <?php
 
+use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
-use App\Http\Controllers\User\AuthController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,7 +21,7 @@ use Illuminate\Support\Facades\Route;
 /**
  * Page Routes
  */
-Route::view('/', 'pages.home.index')->name('index');
+Route::get(uri: '/', action: HomeController::class)->name('home');
 Route::view('/about', 'pages.about.index')->name('about');
 Route::view('/contact', 'pages.contact.index')->name('contact');
 Route::view('/how-it-works', 'pages.how-it-works.index')->name('how-it-works');
