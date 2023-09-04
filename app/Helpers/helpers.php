@@ -1,4 +1,12 @@
 <?php
+/* ==========================================================================
+ * This file contains all the helper functions used in the application.
+ * ========================================================================== */
+
+use App\Services\Avatar\BoringAvatar;
+
+
+
 
 /**
  * Generate verify token.
@@ -100,5 +108,49 @@ if (!function_exists('html_to_ckeditor')) {
     function html_to_ckeditor(string $html): string
     {
         return str_replace(['<p>', '</p>'], '', $html);
+    }
+}
+
+/**
+ * Get random dicebear avatar
+ * @return string
+ */
+if (!function_exists('get_random_avatar')) {
+    function get_random_avatar(): string
+    {
+        $randomNames = [
+            'Alice',
+            'Bob',
+            'Charlie',
+            'David',
+            'Eva',
+            'Frank',
+            'Grace',
+            'Helen',
+            'Ivy',
+            'Jack',
+            'Kate',
+            'Liam',
+            'Mia',
+            'Noah',
+            'Olivia',
+            'Parker',
+            'Quinn',
+            'Ryan',
+            'Sophia',
+            'Tom',
+            'Uma',
+            'Violet',
+            'William',
+            'Xander',
+            'Yara',
+            'Zane',
+        ];
+        
+        // Access a random name from the array
+        $randomName = $randomNames[array_rand($randomNames)];
+        $boringAvatar = new BoringAvatar($randomName);
+        $boringAvatar->setVariant('beam')->generate();
+        return $boringAvatar->getUrl();
     }
 }
