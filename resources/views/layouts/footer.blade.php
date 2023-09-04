@@ -46,7 +46,7 @@
                 </div>
                 <div class="col-xl-3 col-lg-8 col-md-12">
                     <div class="footer-item">
-                        <a href="{{ route('index') }}"><img alt="image" src="/assets/images/bg/footer-logo2.png"></a>
+                        <a href="{{ route('home') }}"><img alt="image" src="/assets/images/bg/footer-logo2.png"></a>
                         <ul class="address-list">
                             <li><a href="#">Add. 168/170, Avenue 01, Mirpur DOHS, Bangladesh.</a></li>
                             <li><a href="tel:+029169852">Phone: +029169852 / +88017600000</a></li>

@@ -11,6 +11,7 @@ use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Traits\MediaHandler;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
 class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
@@ -63,7 +64,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'description' => $data['description'],
             'price' => $data['price'],
             'video_url' => $data['video_url'] ?? null,
-            'status' => AdStatus::PENDING->value,
+            'status' => AdStatus::PENDING,
             'started_at' => $data['start_date'],
             'expired_at' => $data['end_date'],
             'seller_name' => $data['seller_name'],
@@ -71,5 +72,26 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'seller_mobile' => $data['seller_mobile'],
             'seller_address' => $data['seller_address'],
         ]);
+    }
+
+    /**
+     * Get latest active|upcoming ads
+     * 
+     * @param int $limit
+     * @param string $type = 'active' <active|upcoming>
+    * @return \Illuminate\Database\Eloquent\Collection
+     */
+    public function getLatestAds(int $limit = 10, string $type = 'active'): Collection
+    {
+        //return with user and media (only one image)
+        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+            ->when($type === 'active', function ($query) {
+                $query->active();
+            }, function ($query) {
+                $query->upcoming();
+            })
+            ->orderBy('created_at', 'desc')
+            ->limit($limit)
+            ->get();
     }
 }

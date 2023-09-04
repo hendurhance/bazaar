@@ -3536,7 +3536,8 @@ header.style-3 .mobile-menu-form input[type=text] {
     font-weight: 600;
     color: #1f2230;
     line-height: 1.5;
-    margin-top: -7px
+    margin-top: -7px;
+    height: 60px;
 }
 
 .auction-card2 .auction-content p {
@@ -4519,7 +4520,8 @@ header.style-3 .mobile-menu-form input[type=text] {
 .c-feature-card2 .c-feature-content h4 {
     font-size: 23px;
     font-weight: 700;
-    color: #1f2230
+    color: #1f2230;
+    height: 60px;
 }
 
 .c-feature-card2 .c-feature-content p {
@@ -9411,6 +9413,10 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 .phone-select-list-item{
     padding: 5px 15px;
     cursor: pointer;
+}
+
+.phone-select-list-item:hover{
+    background: #f2f2f2;
 }
 
 .phone-select-list-item-dial-code{
