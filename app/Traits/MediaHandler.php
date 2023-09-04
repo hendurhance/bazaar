@@ -4,12 +4,11 @@ namespace App\Traits;
 
 use App\Enums\StorageDiskType;
 use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Facades\Storage;
 use App\Models\Media;
 use App\Models\User;
 use App\Repositories\Media\MediaRepository;
+use App\Services\Media\MediaStorageService;
 use Illuminate\Database\Eloquent\Model;
-use Intervention\Image\Facades\Image;
 
 trait MediaHandler
 {
@@ -46,35 +45,18 @@ trait MediaHandler
      */
     protected function storeMedia(UploadedFile $file, string $directory, StorageDiskType $disk, int $width, int $height, ?User $user = null): Media
     {
-        $path = $file->store($directory, ['disk' => strtolower($disk->label())]);
-        $url = Storage::disk(strtolower($disk->value))->url($path);
-        $this->resizeImage($file, $width, $height);
+        $mediaStorage = new MediaStorageService($disk);
+        $uploadedMedia = $mediaStorage->upload($file, $directory, $width, $height);
         $media = app(MediaRepository::class)->create($user, [
             'name' => $file->getClientOriginalName(),
             // 'type' => $file->getMimeType(),
-            'path' => $path,
-            'url' => $url,
+            'path' => $uploadedMedia['path'],
+            'url' => $uploadedMedia['url'],
             'extension' => $file->getClientOriginalExtension(),
             'mime_type' => $file->getMimeType(),
             'storage' => $disk
         ]);
         return $media;
-    }
-
-    /**
-     * Resize image.
-     * 
-     * @param UploadedFile $file
-     * @param int $width
-     * @param int $height
-     * @return void
-     */
-    protected function resizeImage(UploadedFile $file, int $width, int $height): void
-    {
-        $image = Image::make($file->path());
-        $image->resize($width, $height, function ($constraint) {
-            $constraint->aspectRatio();
-        })->save('storage/ad/' . $file->hashName());
     }
 
     /**
@@ -99,7 +81,8 @@ trait MediaHandler
      */
     protected function deleteMediaFile(Media $media): void
     {
-        Storage::disk($media->storage)->delete($media->path);
+        $mediaStorage = new MediaStorageService($media->storage);
+        $mediaStorage->delete($media->path);
         $media->delete();
     }
 }

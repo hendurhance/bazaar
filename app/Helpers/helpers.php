@@ -90,3 +90,15 @@ if (!function_exists('sanitize_html')) {
         return htmlspecialchars($html, ENT_QUOTES | ENT_HTML5, 'UTF-8');
     }
 }
+
+/**
+ * Convert html to CKEditor format
+ * @param string $html
+ * @return string
+ */
+if (!function_exists('html_to_ckeditor')) {
+    function html_to_ckeditor(string $html): string
+    {
+        return str_replace(['<p>', '</p>'], '', $html);
+    }
+}
