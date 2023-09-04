@@ -1,11 +1,11 @@
 <header class="style-2">
     <div class="header-logo">
-        <a href="{{ route('index') }}"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
+        <a href="{{ route('home') }}"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
     </div>
     <div class="main-menu">
         <div class="mobile-logo-area d-lg-none d-flex justify-content-between align-items-center">
             <div class="mobile-logo-wrap">
-                <a href="{{ route('index') }}"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
+                <a href="{{ route('home') }}"><img alt="image" src="/assets/images/bg/header-logo2.png"></a>
             </div>
             <div class="menu-close-btn">
                 <i class="bi bi-x-lg"></i>
@@ -13,7 +13,7 @@
         </div>
         <ul class="menu-list">
             <li>
-                <a href="{{ route('index') }}">Home</a>
+                <a href="{{ route('home') }}">Home</a>
             </li>
             <li>
                 <a href="{{ route('how-it-works') }}">How It Works</a>

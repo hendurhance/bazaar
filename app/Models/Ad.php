@@ -2,9 +2,12 @@
 
 namespace App\Models;
 
+use App\Enums\AdStatus;
+use App\Services\Avatar\DiceBear;
 use App\Traits\HasMedia;
 use App\Traits\HasSlug;
 use App\Traits\HasUuids;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -62,7 +65,10 @@ class Ad extends Model
      */
     public function user(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class)->withDefault([
+            'name' => 'Guest',
+            'username' => 'guest',
+        ]);
     }
 
     /**
@@ -99,6 +105,7 @@ class Ad extends Model
         'mark_as_urgent' => 'boolean',
         'started_at' => 'datetime',
         'expired_at' => 'datetime',
+        'status' => AdStatus::class,
     ];
 
     /**
@@ -110,6 +117,36 @@ class Ad extends Model
         'started_at',
         'expired_at',
     ];
+
+    /**
+     * Scope a query using AdStatus
+     * 
+     * @param AdStatus $status
+     * @return Builder
+     */
+    public function scopeStatus(Builder $query, AdStatus $status)
+    {
+        return $query->where('status', $status);
+    }
+
+    /**
+     * Scope a query to only include active ads.
+     */
+    public function scopeActive(Builder $query)
+    {
+        return $query->whereDate('started_at', '<=', now())
+            ->whereDate('expired_at', '>=', now())
+            ->where('status', AdStatus::PUBLISHED);
+    }
+
+    /**
+     * Scope a query to only include upcoming ads.
+     */
+    public function scopeUpcoming(Builder $query)
+    {
+        return $query->whereDate('started_at', '>', now())
+            ->where('status', AdStatus::PUBLISHED);
+    }
 }
 
 
