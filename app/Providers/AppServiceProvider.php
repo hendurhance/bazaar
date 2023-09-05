@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Console\Commands\LogPruneCommand;
 use App\Console\Commands\MakeInterfaceCommand;
 use App\Console\Commands\MakeRepositoryCommand;
 use App\Models\User;
