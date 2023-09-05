@@ -8,9 +8,9 @@
                         <div class="swiper-slide">
                             <div class="eg-card category-card2 wow fadeInDown" data-wow-duration="1.5s"
                                 data-wow-delay="0.2s">
-                                <img alt="image" src="assets/images/bg/accessories.png" class="category-img">
+                                <img alt="image" src="{{ asset($category->image) }}" alt="{{ $category->name }}" class="category-img">
                                 <div class="content">
-                                    <img alt="image" src="assets/images/icons/cat-icon2.svg">
+                                    <img alt="image" src="{{ asset($category->icon) }}" alt="{{ $category->name }}">
                                     <h5><a href="{{ route('live-auction') }}?category={{ $category->slug }}">{{ $category->name }}</a></h5>
                                 </div>
                             </div>

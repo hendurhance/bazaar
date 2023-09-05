@@ -41,7 +41,7 @@ class CategoryRepository extends BaseCrudRepository implements CategoryRepositor
      */
     public function getPrimaryCategories(): Collection
     {
-        return $this->model->whereNull('parent_id')->get();
+        return $this->model->whereNull('parent_id')->select('id', 'name', 'slug', 'icon', 'image')->get();
     }
 
     /**

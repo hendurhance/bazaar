@@ -4375,7 +4375,7 @@ header.style-3 .mobile-menu-form input[type=text] {
     color: #3A46D1
 }
 
-.c-feature-card1 .c-feature-content .c-feature-category {
+.c-feature-card1 .c-feature-content .c-feature-category, .c-feature-category {
     font-size: 16px;
     font-weight: 500;
     color: #696969;
@@ -6135,7 +6135,7 @@ footer.style-2 .footer-item .input-with-btn button {
 }
 
 footer.style-2 .footer-item .input-with-btn button:hover {
-    background: rgba(249, 57, 95, .9)
+    background: rgba(57, 143, 249, 0.9)
 }
 
 footer.style-2 .footer-item .input-with-btn button img {
@@ -9423,4 +9423,11 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     font-size: 14px;
     font-weight: 400;
     color: #696969;
+}
+
+.filter-btn{
+    border: 0;
+    outline: none;
+    padding: 12px 30px;
+    border-radius: 5px;
 }

@@ -35,11 +35,12 @@ abstract class BaseCrudRepository
     /**
      * Get all the records.
      * 
+     * @param ?array $columns|null
      * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function all(): \Illuminate\Database\Eloquent\Collection
+    public function all(?array $columns = ['*']): \Illuminate\Database\Eloquent\Collection
     {
-        return $this->model->all();
+        return $this->model->select($columns)->get();
     }
 
     /**
