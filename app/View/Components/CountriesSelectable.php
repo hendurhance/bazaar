@@ -22,7 +22,7 @@ class CountriesSelectable extends Component
     public function render(): View|Closure|string
     {
         return view('components.countries-selectable', [
-            'countries' => $this->countryRepository->all(),
+            'countries' => $this->countryRepository->all([ 'id', 'name', 'iso2', 'emoji']),
         ]);
     }
 }
