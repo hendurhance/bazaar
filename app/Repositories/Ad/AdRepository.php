@@ -81,7 +81,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * @param int $limit
      * @param string $type = 'active' <active|upcoming>
      * @param array $filters
-    * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Database\Eloquent\Collection
      */
     public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): Collection
     {
@@ -92,15 +92,15 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
                 $query->upcoming();
             })
             ->when($filters, function ($query) use ($filters) {
-                if (isset($filters['category'])) {
-                    $query->where('category_id', app(CategoryRepository::class)->findBySlug($filters['category'])->id);
-                }
-                if (isset($filters['country'])) {
-                    $query->where('country_id', app(CountryRepository::class)->findByIso2Code($filters['country'])->id);
-                }
-                if (isset($filters['price_range'])) {
-                    $query->whereBetween('price', PriceRange::range($filters['price_range']));
-                }
+                $query->when(isset($filters['category']), function ($query) use ($filters) {
+                        $query->where('category_id', app(CategoryRepository::class)->findBySlug($filters['category'])->id);
+                    })
+                    ->when(isset($filters['country']), function ($query) use ($filters) {
+                        $query->where('country_id', app(CountryRepository::class)->findByIso2Code($filters['country'])->id);
+                    })
+                    ->when(isset($filters['price_range']), function ($query) use ($filters) {
+                        $query->whereBetween('price', PriceRange::range($filters['price_range']));
+                    });
             })
             ->orderBy('created_at', 'desc')
             ->limit($limit)
