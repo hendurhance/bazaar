@@ -15,7 +15,7 @@ class AdFilterComponent extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(protected CategoryRepositoryInterface $categoryRepository, protected CountryRepositoryInterface $countryRepository, protected array $request)
+    public function __construct(protected CategoryRepositoryInterface $categoryRepository, protected CountryRepositoryInterface $countryRepository)
     {
     }
 
@@ -26,9 +26,8 @@ class AdFilterComponent extends Component
     {
         return view('components.ad-filter-component', [
             'categories' => $this->categoryRepository->getPrimaryCategories(),
-            'countries' => $this->countryRepository->all(),
+            'countries' => $this->countryRepository->all([ 'id', 'name', 'iso2' ]),
             'priceRanges' => PriceRange::all(),
-            'request' => $this->request,
         ]);
     }
 }

@@ -4375,7 +4375,7 @@ header.style-3 .mobile-menu-form input[type=text] {
     color: #3A46D1
 }
 
-.c-feature-card1 .c-feature-content .c-feature-category {
+.c-feature-card1 .c-feature-content .c-feature-category, .c-feature-category {
     font-size: 16px;
     font-weight: 500;
     color: #696969;

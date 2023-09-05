@@ -8,6 +8,7 @@ use App\Http\Requests\Ad\CreateAdRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
 use App\Repositories\Auth\AuthenticateRepository;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Log;
 
 class AdController extends Controller
 {
@@ -26,8 +27,7 @@ class AdController extends Controller
     public function index(FilterAdRequest $request)
     {
         return view('pages.live-auction.index', [
-            'ads' => $this->adRepository->getLatestAds(12, 'active'),
-            'request' => $request->validated(),
+            'ads' => $this->adRepository->getLatestAds(12, 'active', $request->validated()),
         ]);
     }
 
