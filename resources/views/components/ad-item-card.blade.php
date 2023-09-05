@@ -102,7 +102,7 @@
     <div data-wow-duration="1.5s" data-wow-delay="0.6s" class="eg-card auction-card1 wow fadeInDown"
         style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.6s; animation-name: fadeInDown;">
         <div class="auction-img">
-            <img alt="image" src="assets/images/bg/live-auc3.png">
+            <img alt="image" src="{{ $ad->media->first()->url }}">
             <div class="auction-timer">
                 <div class="countdown" id="timer3">
                     <h4><span id="hours3">04</span>H : <span id="minutes3">22</span>M : <span
@@ -111,16 +111,17 @@
             </div>
             <div class="author-area">
                 <div class="author-emo">
-                    <img alt="image" src="assets/images/icons/smile-emo.svg">
+                    <img alt="image" src="{{ $ad->user?->avatar ?? get_random_avatar() }}">
                 </div>
                 <div class="author-name">
-                    <span>by @robatfox</span>
+                    <span>by {{ '@'.$ad->user->username }}</span>
                 </div>
             </div>
         </div>
         <div class="auction-content">
-            <h4><a href="{{ route('auction-details') }}">Brand New Honda CBR 600 RR For Sale (2022)</a></h4>
-            <p>Bidding Price : <span>$85.9</span></p>
+            <div class="c-feature-category">{{ $ad->category->name }}</div>
+            <h4><a href="{{ route('auction-details') }}">{{ shorten_title($ad->title)}}</a></h4>
+            <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                 <div class="share-area">

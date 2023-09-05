@@ -3,29 +3,28 @@
         <h2>Filter Listing</h2>
     </div>
     <div class="col-lg-8 col-md-6 col-sm-12">
-        <form action="">
+        <form>
             <div class="row d-flex">
                 <div class="col-md-3">
-                    <select class="form-inner" name="category">
-                        <option selected>Category</option>
+                    <select class="form-inner" name="category" @class(['error'=> $errors->has('category')])>
+                        <option selected value="">Category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->slug }}" @selected(isset($request['category']) && $request['category'] === $category->slug)>{{ $category->name }}</option>
+                            <option value="{{ $category->slug }}" @selected($category->slug == request()->category)>{{ $category->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-4">
-                    <select class="form-inner" name="country">
-                        <option selected>Location</option>
+                    <select class="form-inner" name="country" @class(['error'=> $errors->has('country')])>
+                        <option selected value="">Location</option>
                         @foreach ($countries as $country)
-                            <option value="{{ $country->iso2 }}" @selected(isset($request['country']) && $request['country'] === $country->iso2)>{{ $country->name }}</option>
+                            <option value="{{ $country->iso2 }}" @selected($country->iso2 == request()->country)>{{ $country->name }}</option>
                         @endforeach
                     </select>
                 </div>
                 <div class="col-md-3">
-                    <select class="form-inner" name="price_range">
-                        <option selected>Price Range</option>
+                    <select class="form-inner" name="price_range" @class(['error'=> $errors->has('price_range')])>
                         @foreach ($priceRanges as $priceRange)
-                            <option value="{{ $priceRange->value }}" @selected(isset($request['price_range']) && $request['price_range'] == $priceRange->value)>{{ $priceRange->name }}</option>
+                            <option value="{{ $priceRange->value }}" @selected($priceRange->value == request()->price_range)>{{ $priceRange->label() }}</option>
                         @endforeach
                     </select>
                 </div>

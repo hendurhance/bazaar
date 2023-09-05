@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
+use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
 use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
@@ -79,16 +80,27 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * 
      * @param int $limit
      * @param string $type = 'active' <active|upcoming>
+     * @param array $filters
     * @return \Illuminate\Database\Eloquent\Collection
      */
-    public function getLatestAds(int $limit = 10, string $type = 'active'): Collection
+    public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): Collection
     {
-        //return with user and media (only one image)
         return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
             ->when($type === 'active', function ($query) {
                 $query->active();
             }, function ($query) {
                 $query->upcoming();
+            })
+            ->when($filters, function ($query) use ($filters) {
+                if (isset($filters['category'])) {
+                    $query->where('category_id', app(CategoryRepository::class)->findBySlug($filters['category'])->id);
+                }
+                if (isset($filters['country'])) {
+                    $query->where('country_id', app(CountryRepository::class)->findByIso2Code($filters['country'])->id);
+                }
+                if (isset($filters['price_range'])) {
+                    $query->whereBetween('price', PriceRange::range($filters['price_range']));
+                }
             })
             ->orderBy('created_at', 'desc')
             ->limit($limit)
