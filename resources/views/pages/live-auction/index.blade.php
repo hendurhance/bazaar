@@ -29,5 +29,6 @@
 </div>
 
 @include('layouts.metrics')
-
+@push('scripts')
+<script src="/assets/js/countdown.js"></script>
 @endsection
