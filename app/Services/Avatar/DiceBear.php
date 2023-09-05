@@ -75,44 +75,50 @@ class DiceBear extends BaseAvatarService
      * Set the avatar style.
      * 
      * @param string $style
-     * @return void
+     * @return self
      */
-    public function setStyle(string $style): void
+    public function setStyle(string $style): self
     {
         if (!in_array($style, $this->styles)) {
             throw new InvalidArgumentException('Invalid avatar style.');
         }
 
         $this->style = $style;
+
+        return $this;
     }
 
     /**
      * Set the avatar size.
      * 
      * @param int $size
-     * @return void
+     * @return self
      */
-    public function setSize(int $size): void
+    public function setSize(int $size): self
     {
         if (!in_array($size, $this->sizes)) {
             throw new InvalidArgumentException('Invalid avatar size.');
         }
 
         $this->size = $size;
+
+        return $this;
     }
 
     /**
      * Set the avatar format.
      * 
      * @param string $format
-     * @return void
+     * @return self
      */
-    public function setFormat(string $format): void
+    public function setFormat(string $format): self
     {
         if (!in_array($format, $this->formats)) {
             throw new InvalidArgumentException('Invalid avatar format.');
         }
 
         $this->format = $format;
+
+        return $this;
     }
 }

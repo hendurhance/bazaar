@@ -6,11 +6,13 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
+use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
 use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Traits\MediaHandler;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -67,10 +69,10 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'status' => AdStatus::PENDING,
             'started_at' => $data['start_date'],
             'expired_at' => $data['end_date'],
-            'seller_name' => $data['seller_name'],
-            'seller_email' => $data['seller_email'],
-            'seller_mobile' => $data['seller_mobile'],
-            'seller_address' => $data['seller_address'],
+            'seller_name' => $user?->name ?? $data['seller_name'],
+            'seller_email' => $user?->email ?? $data['seller_email'],
+            'seller_mobile' => $user?->mobile ?? $data['seller_mobile'],
+            'seller_address' => $user?->address ?? $data['seller_address'],
         ]);
     }
 
@@ -79,19 +81,29 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * 
      * @param int $limit
      * @param string $type = 'active' <active|upcoming>
-    * @return \Illuminate\Database\Eloquent\Collection
+     * @param array $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getLatestAds(int $limit = 10, string $type = 'active'): Collection
+    public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): LengthAwarePaginator
     {
-        //return with user and media (only one image)
         return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
             ->when($type === 'active', function ($query) {
                 $query->active();
             }, function ($query) {
                 $query->upcoming();
             })
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['category']), function ($query) use ($filters) {
+                        $query->where('category_id', app(CategoryRepository::class)->findBySlug($filters['category'])->id);
+                    })
+                    ->when(isset($filters['country']), function ($query) use ($filters) {
+                        $query->where('country_id', app(CountryRepository::class)->findByIso2Code($filters['country'])->id);
+                    })
+                    ->when(isset($filters['price_range']), function ($query) use ($filters) {
+                        $query->whereBetween('price', PriceRange::range($filters['price_range']));
+                    });
+            })
             ->orderBy('created_at', 'desc')
-            ->limit($limit)
-            ->get();
+            ->paginate($limit);
     }
 }

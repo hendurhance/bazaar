@@ -20,7 +20,6 @@ class CategoryFactory extends Factory
             'parent_id' => null,
             'name' => $this->faker->unique()->word,
             'slug' => $this->faker->unique()->slug,
-            'icon' => $this->faker->imageUrl(),
             'description' => $this->faker->sentence,
         ];
     }

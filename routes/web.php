@@ -25,7 +25,7 @@ Route::get(uri: '/', action: HomeController::class)->name('home');
 Route::view('/about', 'pages.about.index')->name('about');
 Route::view('/contact', 'pages.contact.index')->name('contact');
 Route::view('/how-it-works', 'pages.how-it-works.index')->name('how-it-works');
-Route::view('/live-auction', 'pages.live-auction.index')->name('live-auction');
+Route::get('/live-auction', [AdController::class, 'index'])->name('live-auction');
 Route::view('/blog', 'pages.blog.index')->name('blog');
 Route::view('blog-details', 'pages.blog.show')->name('blog-details');
 Route::view('auction-details', 'pages.live-auction.show')->name('auction-details');
