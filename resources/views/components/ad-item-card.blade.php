@@ -5,20 +5,22 @@
             <img alt="image" src="{{ $ad->media->first()->url }}">
             <div class="auction-timer">
                 <div class="countdown" id="timer1">
-                    <h5><span id="days1">05</span>D :<span id="hours1">05</span>H : <span
-                            id="minutes1">52</span>M : <span id="seconds1">32</span>S</h5>
+                    <h5>
+                        <span id="days1">05</span>D :<span id="hours1">05</span>H : <span
+                            id="minutes1">52</span>M : <span id="seconds1">32</span>S
+                    </h5>
                 </div>
             </div>
         </div>
         <div class="auction-content">
-            <h4><a href="{{ route('auction-details') }}">{{ strlen($ad->title) > 30 ? substr($ad->title, 0, 30) . '...' : $ad->title }}</a></h4>
+            <h4><a href="{{ route('auction-details') }}">{{ shorten_title($ad->title)}}</a></h4>
             <div class="author-price-area">
                 <div class="author">
                     <img alt="image" src="{{ $ad->user?->avatar  ?? get_random_avatar() }}"><span class="name">By
                         {{ $ad->user->name }}</span>
                         </span>
                 </div>
-                <p>$3,45</p>
+                <p>${{ number_format($ad->price) }}</p>
             </div>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
@@ -68,9 +70,9 @@
         <div class="c-feature-content">
             <div class="c-feature-category">{{ $ad->category->name }}</div>
             <a href="{{ route('auction-details') }}">
-                <h4>{{ strlen($ad->title) > 30 ? substr($ad->title, 0, 30) . '...' : $ad->title }}</h4>
+                <h4>{{ shorten_title($ad->title)}}</h4>
             </a>
-            <p>Bidding Price : <span>$15.99</span></p>
+            <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details') }}" class="eg-btn btn--primary2 btn--sm">View
                     Details</a>

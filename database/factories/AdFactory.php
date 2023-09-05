@@ -28,7 +28,7 @@ class AdFactory extends Factory
             'sub_category_id' => $parent?->subCategories()->inRandomOrder()->first()->id ?? null,
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph,
-            'price' => $this->faker->randomFloat(2, 10000, 1000000),
+            'price' => $this->faker->numberBetween(10000, 1000000),
             'is_negotiable' => $this->faker->boolean,
             'video_url' => $this->faker->url,
             'seller_name' => $this->faker->name,

@@ -154,3 +154,16 @@ if (!function_exists('get_random_avatar')) {
         return $boringAvatar->getUrl();
     }
 }
+
+/**
+ * Shorten title
+ * @param string $title
+ * @param int $limit
+ * @return string
+ */
+if (!function_exists('shorten_title')) {
+    function shorten_title(string $title, int $limit = 30): string
+    {
+        return strlen($title) > $limit ? substr($title, 0, $limit) . '...' : $title;
+    }
+}
