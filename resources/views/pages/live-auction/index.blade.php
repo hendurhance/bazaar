@@ -7,7 +7,7 @@
 
 <div class="live-auction-section pt-120 pb-120">
     <div class="container">
-        <x-filter-component />
+        <x-ad-filter-component :request="$request"/>
         <div class="row gy-4 mb-60 d-flex justify-content-center">
             <div class="col-lg-4 col-md-6 col-sm-10 ">
                 <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 wow fadeInDown"
