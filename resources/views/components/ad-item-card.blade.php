@@ -7,8 +7,6 @@
                 <div class="countdown">
                     <h5 class="countdown-classic" >
                         {{ $ad->expired_at }}
-                        {{-- <span id="days1">05</span>D :<span id="hours1">05</span>H : <span
-                            id="minutes1">52</span>M : <span id="seconds1">32</span>S --}}
                     </h5>
                 </div>
             </div>
@@ -43,22 +41,6 @@
             <img alt="image" src="{{ $ad->media->first()->url }}">
             <div class="auction-timer2 gap-2 countdown-slider">
                 {{ $ad->expired_at }}
-                {{-- <div class="countdown-single">
-                    <h5 id="days7">7</h5>
-                    <span>Days</span>
-                </div>
-                <div class="countdown-single">
-                    <h5 id="hours7">05</h5>
-                    <span>Hours</span>
-                </div>
-                <div class="countdown-single">
-                    <h5 id="minutes7">56</h5>
-                    <span>Mins</span>
-                </div>
-                <div class="countdown-single">
-                    <h5 id="seconds7">08</h5>
-                    <span>Secs</span>
-                </div> --}}
             </div>
             <div class="author-area3">
                 <div class="author-emo">
@@ -109,8 +91,6 @@
                 <div class="countdown">
                     <h4 class="countdown-default">
                         {{ $ad->expired_at }}
-                        {{-- <span id="hours3">04</span>H : <span id="minutes3">22</span>M : <span
-                            id="seconds3">58</span>S --}}
                     </h4>
                 </div>
             </div>
