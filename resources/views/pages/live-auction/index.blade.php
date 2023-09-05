@@ -23,21 +23,7 @@
             @endforelse
         </div>
         <div class="row">
-            <nav class="pagination-wrap">
-                <ul class="pagination d-flex justify-content-center gap-md-3 gap-2">
-                    <li class="page-item">
-                        <a class="page-link" href="#" tabindex="-1">Prev</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">01</a></li>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">02</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
+            {{ $ads->links('pagination.custom') }}
         </div>
     </div>
 </div>

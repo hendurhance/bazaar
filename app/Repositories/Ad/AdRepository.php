@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Traits\MediaHandler;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
 
@@ -81,9 +82,9 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * @param int $limit
      * @param string $type = 'active' <active|upcoming>
      * @param array $filters
-     * @return \Illuminate\Database\Eloquent\Collection
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): Collection
+    public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): LengthAwarePaginator
     {
         return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
             ->when($type === 'active', function ($query) {
@@ -103,7 +104,6 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
                     });
             })
             ->orderBy('created_at', 'desc')
-            ->limit($limit)
-            ->get();
+            ->paginate($limit);
     }
 }
