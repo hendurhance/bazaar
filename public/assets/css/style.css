@@ -9424,3 +9424,10 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     font-weight: 400;
     color: #696969;
 }
+
+.filter-btn{
+    border: 0;
+    outline: none;
+    padding: 12px 30px;
+    border-radius: 5px;
+}

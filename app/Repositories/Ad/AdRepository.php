@@ -67,10 +67,10 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'status' => AdStatus::PENDING,
             'started_at' => $data['start_date'],
             'expired_at' => $data['end_date'],
-            'seller_name' => $data['seller_name'],
-            'seller_email' => $data['seller_email'],
-            'seller_mobile' => $data['seller_mobile'],
-            'seller_address' => $data['seller_address'],
+            'seller_name' => $user?->name ?? $data['seller_name'],
+            'seller_email' => $user?->email ?? $data['seller_email'],
+            'seller_mobile' => $user?->mobile ?? $data['seller_mobile'],
+            'seller_address' => $user?->address ?? $data['seller_address'],
         ]);
     }
 
