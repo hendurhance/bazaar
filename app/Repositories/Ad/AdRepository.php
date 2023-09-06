@@ -42,6 +42,52 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     }
 
     /**
+     * Get ad by slug
+     * 
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getAd(string $slug): Ad
+    {
+        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+            ->where('slug', $slug)
+            ->firstOr(function () {
+                abort(404);
+            });
+    }
+
+    /**
+     * Get latest active|upcoming ads
+     * 
+     * @param int $limit
+     * @param string $type = 'active' <active|upcoming>
+     * @param array $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): LengthAwarePaginator
+    {
+        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+            ->when($type === 'active', function ($query) {
+                $query->active();
+            }, function ($query) {
+                $query->upcoming();
+            })
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['category']), function ($query) use ($filters) {
+                    $query->where('category_id', app(CategoryRepository::class)->findBySlug($filters['category'])->id);
+                })
+                    ->when(isset($filters['country']), function ($query) use ($filters) {
+                        $query->where('country_id', app(CountryRepository::class)->findByIso2Code($filters['country'])->id);
+                    })
+                    ->when(isset($filters['price_range']), function ($query) use ($filters) {
+                        $query->whereBetween('price', PriceRange::range($filters['price_range']));
+                    });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
+    }
+
+    /**
      * Store an ad listing.
      * 
      * @param ?User $user|null
@@ -74,36 +120,5 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'seller_mobile' => $user?->mobile ?? $data['seller_mobile'],
             'seller_address' => $user?->address ?? $data['seller_address'],
         ]);
-    }
-
-    /**
-     * Get latest active|upcoming ads
-     * 
-     * @param int $limit
-     * @param string $type = 'active' <active|upcoming>
-     * @param array $filters
-     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): LengthAwarePaginator
-    {
-        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
-            ->when($type === 'active', function ($query) {
-                $query->active();
-            }, function ($query) {
-                $query->upcoming();
-            })
-            ->when($filters, function ($query) use ($filters) {
-                $query->when(isset($filters['category']), function ($query) use ($filters) {
-                        $query->where('category_id', app(CategoryRepository::class)->findBySlug($filters['category'])->id);
-                    })
-                    ->when(isset($filters['country']), function ($query) use ($filters) {
-                        $query->where('country_id', app(CountryRepository::class)->findByIso2Code($filters['country'])->id);
-                    })
-                    ->when(isset($filters['price_range']), function ($query) use ($filters) {
-                        $query->whereBetween('price', PriceRange::range($filters['price_range']));
-                    });
-            })
-            ->orderBy('created_at', 'desc')
-            ->paginate($limit);
     }
 }

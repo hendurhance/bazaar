@@ -26,8 +26,8 @@ class AdFactory extends Factory
         return [
             'category_id' => $parent->id,
             'sub_category_id' => $parent?->subCategories()->inRandomOrder()->first()->id ?? null,
-            'title' => $this->faker->sentence,
-            'description' => $this->faker->paragraph,
+            'title' => $this->faker->realText(50),
+            'description' => $this->faker->paragraph(10),
             'price' => $this->faker->numberBetween(10000, 1000000),
             'is_negotiable' => $this->faker->boolean,
             'video_url' => $this->faker->url,
