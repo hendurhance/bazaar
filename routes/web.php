@@ -28,7 +28,7 @@ Route::view('/how-it-works', 'pages.how-it-works.index')->name('how-it-works');
 Route::get('/live-auction', [AdController::class, 'index'])->name('live-auction');
 Route::view('/blog', 'pages.blog.index')->name('blog');
 Route::view('blog-details', 'pages.blog.show')->name('blog-details');
-Route::view('auction-details', 'pages.live-auction.show')->name('auction-details');
+Route::get('auction-details/{ads:slug}', [AdController::class, 'show'])->name('auction-details');
 Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
 Route::post('/add-listing', [AdController::class, 'store'])->name('add-listing.handle');
 

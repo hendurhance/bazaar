@@ -6,6 +6,7 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateAdRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
+use App\Models\Ad;
 use App\Repositories\Auth\AuthenticateRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
@@ -28,6 +29,19 @@ class AdController extends Controller
     {
         return view('pages.live-auction.index', [
             'ads' => $this->adRepository->getLatestAds(12, 'active', $request->validated()),
+        ]);
+    }
+
+    /**
+     * Show ad details.
+     * 
+     * @param string $ad
+     * @return \Illuminate\View\View
+     */
+    public function show(string $ad)
+    {
+        return view('pages.live-auction.show', [
+            'ad' => $this->adRepository->getAd($ad),
         ]);
     }
 

@@ -19,6 +19,14 @@ interface AdRepositoryInterface
     public function create(?User $user, array $data): Ad;
 
     /**
+     * Get ad by slug
+     * 
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getAd(string $slug): Ad;
+
+    /**
      * Get latest active|upcoming ads
      * 
      * @param int $limit
