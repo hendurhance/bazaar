@@ -47,9 +47,14 @@
                             <p>Bid Amount : Minimum Bid ${{ number_format($ad->price) }}</p>
                         </div>
                         <form>
+                            @guest
+                                <x-alert type="warning" icon="bi bi-exclamation-circle-fill">
+                                    <p>You are currently not logged in. If you have an account, please <strong><a href="{{ route('user.login') }}">login</a> </strong> to place a bid to have a chance of winning this auction.</p>
+                                </x-alert>
+                            @endguest
                             <div class="form-inner gap-2">
-                                <input type="text" placeholder="$00.00">
-                                <button class="eg-btn btn--primary btn--sm" type="submit">Place Bid</button>
+                                <input type="text" placeholder="$00.00" @guest disabled @endguest>
+                                <button @class(['eg-btn btn--primary btn--sm' => 'auth', 'eg-btn btn--primary btn--sm disabled' => '!auth']) @guest disabled @else type="submit" @endguest>Place a Bid</button>
                             </div>
                         </form>
                     </div>
