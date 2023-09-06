@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Ad extends Model
 {
@@ -93,6 +94,14 @@ class Ad extends Model
     public function city(): BelongsTo
     {
         return $this->belongsTo(City::class);
+    }
+
+    /**
+     * Get the bids for the ad.
+     */
+    public function bids(): HasMany
+    {
+        return $this->hasMany(Bid::class);
     }
 
     /**
