@@ -13,59 +13,38 @@
                 <ul class="nav small-image-list d-flex flex-md-column flex-row justify-content-center gap-4  wow fadeInDown"
                     data-wow-duration="1.5s" data-wow-delay=".4s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInDown;">
+                    @foreach ($ad->media as $media)
                     <li class="nav-item">
-                        <div id="details-img1" data-bs-toggle="pill" data-bs-target="#gallery-img1"
-                            aria-controls="gallery-img1" class="">
-                            <img alt="image" src="assets/images/bg/prod-gallery1.png" class="img-fluid">
+                        <div id="details-img{{ $loop->index + 1 }}" data-bs-toggle="pill" data-bs-target="#gallery-img{{ $loop->index + 1 }}"
+                            aria-controls="gallery-img{{ $loop->index + 1 }}" class="">
+                            <img alt="image" src="{{ $media->url }}" class="img-fluid">
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <div id="details-img2" data-bs-toggle="pill" data-bs-target="#gallery-img2"
-                            aria-controls="gallery-img2" class="active">
-                            <img alt="image" src="assets/images/bg/prod-gallery2.png" class="img-fluid">
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <div id="details-img3" data-bs-toggle="pill" data-bs-target="#gallery-img3"
-                            aria-controls="gallery-img3" class="">
-                            <img alt="image" src="assets/images/bg/prod-gallery3.png" class="img-fluid">
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
                 <div class="tab-content mb-4 d-flex justify-content-lg-start justify-content-center  wow fadeInUp"
                     data-wow-duration="1.5s" data-wow-delay=".4s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInUp;">
-                    <div class="tab-pane big-image fade" id="gallery-img1">
-                        <div class="auction-gallery-timer d-flex align-items-center justify-content-center flex-wrap">
-                            <h3 id="countdown-timer-1">0-440D : 0-16H : 0-59M : 0-42S </h3>
-                        </div>
-                        <img alt="image" src="assets/images/bg/prod-gallery1.png" class="img-fluid">
-                    </div>
-                    <div class="tab-pane big-image fade active show" id="gallery-img2">
+                    @foreach ($ad->media as $media)
+                    <div class="tab-pane big-image fade {{ $loop->index == 0 ? 'active show' : '' }}" id="gallery-img{{ $loop->index + 1 }}">
                         <div class="auction-gallery-timer d-flex align-items-center justify-content-center">
-                            <h3 id="countdown-timer-2">0-233D : 0-22H : 0-59M : 0-41S </h3>
+                            <h3 class="countdown-classic">{{ $ad->expired_at }}</h3>
                         </div>
-                        <img alt="image" src="assets/images/bg/prod-gallery2.png" class="img-fluid">
+                        <img alt="image" src="{{ $media->url }}" class="img-fluid">
                     </div>
-                    <div class="tab-pane big-image fade" id="gallery-img3">
-                        <div class="auction-gallery-timer d-flex align-items-center justify-content-center">
-                            <h3 id="countdown-timer-3">0-233D : 0-22H : 0-59M : 0-41S </h3>
-                        </div>
-                        <img alt="image" src="assets/images/bg/prod-gallery3.png" class="img-fluid">
-                    </div>
+                    @endforeach
                 </div>
             </div>
             <div class="col-xl-6 col-lg-5">
                 <div class="product-details-right  wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
-                    <h3>Creative Fashion Riboon Digital Watch Little Elegant.</h3>
-                    <p class="para">Korem ipsum dolor amet, consectetur adipiscing elit. Maece nas in pulvinar neque.
-                        Nulla finibus lobortis pulvinar. Donec a consectetur nulla.</p>
-                    <h4>Bidding Price: <span>$465.00</span></h4>
+                    <h3>{{ $ad->title }}</h3>
+                    <p class="para">{{ shorten_characters($ad->description, 150, true) }}</p>
+                    <h4>Bidding Price: <span>${{ number_format($ad->price) }}</span></h4>
                     <div class="bid-form">
                         <div class="form-title">
                             <h5>Bid Now</h5>
-                            <p>Bid Amount : Minimum Bid $20.00</p>
+                            <p>Bid Amount : Minimum Bid ${{ number_format($ad->price) }}</p>
                         </div>
                         <form>
                             <div class="form-inner gap-2">
@@ -103,22 +82,7 @@
                         id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab"
                         style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <div class="describe-content">
-                            <h4>How can have anything you ant in life if you ?</h4>
-                            <p class="para">If you’ve been following the crypto space, you’ve likely heard of
-                                Non-Fungible Tokens (Biddings), more popularly referred to as ‘Crypto Collectibles.’ The
-                                world of Biddings is growing rapidly. It seems there is no slowing down of these assets
-                                as they continue to go up in price. This growth comes with the opportunity for people to
-                                start new businesses to create and capture value. The market is open for players in
-                                every kind of field. Are you a collector.</p>
-                            <p class="para">But getting your own auction site up and running has always required
-                                learning complex coding langua ges, or hiring an expensive design firm for thousands of
-                                dollars and months of work.</p>
-                            <ul class="describe-list">
-                                <li><a href="#">Amet consectetur adipisicing elit. Maxime reprehenderit quaerat, velit
-                                        rem atque vel impedit! Expensive Design.</a></li>
-                                <li><a href="#">Consectetur adipisicing elit. Maxime reprehenderit quaerat</a></li>
-                                <li><a href="#">Fuga magni veritatis ad temporibus atque adipisci nisi rerum...</a></li>
-                            </ul>
+                            {!! $ad->description !!}
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-bid" role="tabpanel" aria-labelledby="pills-bid-tab">
@@ -259,11 +223,11 @@
                                         </div>
                                     </div>
                                     <div class="auction-content">
-                                        <h4><a href="{{ route('auction-details') }}">Brand New royal Enfield 250 CC For Sale</a>
+                                        <h4><a href="{{ route('auction-details', $ad->slug) }}">Brand New royal Enfield 250 CC For Sale</a>
                                         </h4>
                                         <p>Bidding Price : <span>$85.9</span> </p>
                                         <div class="auction-card-bttm">
-                                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a
+                                            <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
                                                 Bid</a>
                                             <div class="share-area">
                                                 <ul class="social-icons d-flex">
@@ -305,11 +269,11 @@
                                         </div>
                                     </div>
                                     <div class="auction-content">
-                                        <h4><a href="{{ route('auction-details') }}">Wedding Special Exclusive Cupple Ring
+                                        <h4><a href="{{ route('auction-details', $ad->slug) }}">Wedding Special Exclusive Cupple Ring
                                                 (S2022)</a></h4>
                                         <p>Bidding Price : <span>$85.9</span> </p>
                                         <div class="auction-card-bttm">
-                                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary btn--sm">Place a
+                                            <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
                                                 Bid</a>
                                             <div class="share-area">
                                                 <ul class="social-icons d-flex">
@@ -341,7 +305,7 @@
                         <div class="banner-content">
                             <span>CARS</span>
                             <h3>Toyota AIGID A Clasis Cars Sale</h3>
-                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary card--btn">Details</a>
+                            <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary card--btn">Details</a>
                         </div>
                     </div>
                 </div>
@@ -351,5 +315,7 @@
 </div>
 
 @include('layouts.metrics', ['class' => 'pt-120'])
-
+@push('scripts')
+<script src="/assets/js/countdown.js"></script>
+@endpush
 @endsection

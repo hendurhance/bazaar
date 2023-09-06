@@ -161,9 +161,12 @@ if (!function_exists('get_random_avatar')) {
  * @param int $limit
  * @return string
  */
-if (!function_exists('shorten_title')) {
-    function shorten_title(string $title, int $limit = 30): string
+if (!function_exists('shorten_characters')) {
+    function shorten_characters(string $title, int $limit = 30, bool $isHTML = false): string
     {
+        if ($isHTML) {
+            $title = strip_tags($title);
+        }
         return strlen($title) > $limit ? substr($title, 0, $limit) . '...' : $title;
     }
 }
