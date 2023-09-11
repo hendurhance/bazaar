@@ -5,6 +5,7 @@ use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
+use App\Http\Controllers\User\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -53,5 +54,6 @@ Route::group([
     Route::middleware('auth:web')->group(function () {
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
         Route::view('/dashboard', 'dashboard.user.index')->name('dashboard');
+        Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
     });
 });

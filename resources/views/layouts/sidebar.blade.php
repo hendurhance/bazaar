@@ -1,6 +1,6 @@
 <div class="col-lg-3">
     <div class="nav flex-column nav-pills gap-4 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
-       <a href="#" @class(['nav-link', 'nav-btn-style', 'mx-auto', 'mb-20', 'active' => $active === 'dashboard'])>
+       <a href="{{ route('user.dashboard') }}" @class(['nav-link', 'nav-btn-style', 'mx-auto', 'mb-20', 'active' => $active === 'dashboard'])>
           <svg width="22" height="22" viewBox="0 0 22 22"
              xmlns="http://www.w3.org/2000/svg">
              <g clip-path="url(#clip0_388_603)">
@@ -25,7 +25,7 @@
           </svg>
           Dashboard
        </a>
-       <a href="#" @class(['nav-link', 'nav-btn-style', 'mx-auto', 'mb-20', 'active' => $active === 'profile'])>
+       <a href="{{ route('user.profile') }}" @class(['nav-link', 'nav-btn-style', 'mx-auto', 'mb-20', 'active' => $active === 'profile'])>
           <i class="lar la-user"></i>
           <svg width="22" height="22" viewBox="0 0 22 22"
              xmlns="http://www.w3.org/2000/svg">
