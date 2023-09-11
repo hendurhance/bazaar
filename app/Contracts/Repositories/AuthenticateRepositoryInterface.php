@@ -44,6 +44,17 @@ interface AuthenticateRepositoryInterface
      */
     public function sendPasswordResetLink(string $email): void;
 
+    /**
+     * Authenticated user.
+     * @return ?\App\Models\User|null
+     */
+    public function user(): ?\App\Models\User;
+
+    /**
+     * Authenticated admin.
+     * @return ?\App\Models\Admin|null
+     */
+    public function admin(): ?\App\Models\Admin;    
 
     /**
      * Reset a user's password.
