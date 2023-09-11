@@ -12,7 +12,8 @@ class AdItemCard extends Component
     protected array $types = [
         'classic',
         'slider',
-        'default'
+        'default',
+        'small'
     ];
 
     /**

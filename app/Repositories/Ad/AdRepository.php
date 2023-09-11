@@ -49,7 +49,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      */
     public function getAd(string $slug): Ad
     {
-        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'bids', 'bids.user:id,name,avatar,username', 'relatedAds:id,title,slug,price', 'relatedAds.media'])
             ->where('slug', $slug)
             ->firstOr(function () {
                 abort(404);

@@ -3317,7 +3317,7 @@ header.style-3 .mobile-menu-form input[type=text] {
 }
 
 .auction-card1 .auction-img .auction-timer .countdown h4 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     color: #444;
     margin-bottom: 0
@@ -9431,4 +9431,13 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     outline: none;
     padding: 12px 30px;
     border-radius: 5px;
+}
+
+.avatar-img{
+    width: 50px !important;
+    border-radius: 50% !important;
+}
+
+.small-countdown-text{
+    font-size: 15px !important;
 }

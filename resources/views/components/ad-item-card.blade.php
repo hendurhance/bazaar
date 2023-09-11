@@ -125,3 +125,49 @@
     </div>
 </div>
 @endif
+
+@if($type == 'small')
+<div class="col-lg-6 col-md-4 col-sm-10">
+    <div class="eg-card auction-card1">
+        <div class="auction-img">
+            <img alt="image" src="{{ $ad->media->first()->url }}">
+            <div class="auction-timer">
+                <div class="countdown" id="timer1">
+                    <h4 class="countdown-default small-countdown-text">{{ $ad->expired_at }}</h4>
+                </div>
+            </div>
+            <div class="author-area">
+                <div class="author-emo">
+                    <img alt="image" src="{{ $ad->user?->avatar ?? get_random_avatar() }}">
+                </div>
+                <div class="author-name">
+                    <span>by {{ '@'.$ad->user->username }}</span>
+                </div>
+            </div>
+        </div>
+        <div class="auction-content">
+            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_characters($ad->title)}}</a></h4>
+            <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
+            <div class="auction-card-bttm">
+                <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
+                    Bid</a>
+                <div class="share-area">
+                    <ul class="social-icons d-flex">
+                        <li><a href="https://www.facebook.com/"><i
+                                    class="bx bxl-facebook"></i></a></li>
+                        <li><a href="https://www.twitter.com/"><i
+                                    class="bx bxl-twitter"></i></a></li>
+                        <li><a href="https://www.pinterest.com/"><i
+                                    class="bx bxl-pinterest"></i></a></li>
+                        <li><a href="https://www.instagram.com/"><i
+                                    class="bx bxl-instagram"></i></a></li>
+                    </ul>
+                    <div>
+                        <a href="#" class="share-btn"><i class="bx bxs-share-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endif

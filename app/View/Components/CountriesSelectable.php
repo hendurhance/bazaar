@@ -12,7 +12,7 @@ class CountriesSelectable extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(protected CountryRepositoryInterface $countryRepository)
+    public function __construct(protected CountryRepositoryInterface $countryRepository, public bool $hasLabels = false)
     {
     }
 
