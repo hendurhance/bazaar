@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use App\Enums\AdStatus;
-use App\Services\Avatar\DiceBear;
 use App\Traits\HasMedia;
 use App\Traits\HasSlug;
 use App\Traits\HasUuids;
@@ -102,6 +101,17 @@ class Ad extends Model
     public function bids(): HasMany
     {
         return $this->hasMany(Bid::class);
+    }
+
+    /**
+     * Get related ads.
+     */
+    public function relatedAds(): HasMany
+    {
+        return $this->hasMany(Ad::class, 'category_id', 'category_id')
+            ->where('id', '!=', $this->id)
+            ->active()
+            ->limit(4);
     }
 
     /**
