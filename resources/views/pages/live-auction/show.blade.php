@@ -93,212 +93,42 @@
                     <div class="tab-pane fade" id="pills-bid" role="tabpanel" aria-labelledby="pills-bid-tab">
                         <div class="bid-list-area">
                             <ul class="bid-list">
+                                @forelse ($ad->bids as $bid)
                                 <li>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-7">
                                             <div class="bidder-area">
                                                 <div class="bidder-img">
-                                                    <img alt="image" src="assets/images/bg/bidder1.png">
+                                                    <img alt="image" src="{{ $bid->user->avatar }}" class="avatar-img">
                                                 </div>
                                                 <div class="bidder-content">
                                                     <a href="#">
-                                                        <h6>Robart FOX</h6>
+                                                        <h6>{{ $bid->user->name }}</h6>
                                                     </a>
-                                                    <p>24.50 ETH</p>
+                                                    <p> ${{ number_format($bid->amount) }} </p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-5 text-end">
                                             <div class="bid-time">
-                                                <p>4 Hours Ago</p>
+                                                <p>{{ $bid->created_at->diffForHumans() }}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </li>
-                                <li>
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-7">
-                                            <div class="bidder-area">
-                                                <div class="bidder-img">
-                                                    <img alt="image" src="assets/images/bg/bidder2.png">
-                                                </div>
-                                                <div class="bidder-content">
-                                                    <a href="#">
-                                                        <h6>Jane Cooper</h6>
-                                                    </a>
-                                                    <p>224.5 ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-5 text-end">
-                                            <div class="bid-time">
-                                                <p>5 Hours Ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-7">
-                                            <div class="bidder-area">
-                                                <div class="bidder-img">
-                                                    <img alt="image" src="assets/images/bg/bidder3.png">
-                                                </div>
-                                                <div class="bidder-content">
-                                                    <a href="#">
-                                                        <h6>Guy Hawkins</h6>
-                                                    </a>
-                                                    <p>34.5 ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-5 text-end">
-                                            <div class="bid-time">
-                                                <p>6 Hours 45 minutes Ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-7">
-                                            <div class="bidder-area">
-                                                <div class="bidder-img">
-                                                    <img alt="image" src="assets/images/bg/bidder1.png">
-                                                </div>
-                                                <div class="bidder-content">
-                                                    <a href="#">
-                                                        <h6>Robart FOX</h6>
-                                                    </a>
-                                                    <p>24.50 ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-5 text-end">
-                                            <div class="bid-time">
-                                                <p>4 Hours Ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-7">
-                                            <div class="bidder-area">
-                                                <div class="bidder-img">
-                                                    <img alt="image" src="assets/images/bg/bidder2.png">
-                                                </div>
-                                                <div class="bidder-content">
-                                                    <a href="#">
-                                                        <h6>Robart FOX</h6>
-                                                    </a>
-                                                    <p>24.50 ETH</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-5 text-end">
-                                            <div class="bid-time">
-                                                <p>4 Hours Ago</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </li>
+                                @empty
+                                <div class="alert alert-warning" role="alert">
+                                    No bid has been placed on this auction yet.
+                                </div>
+                                @endforelse
                             </ul>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
                         <div class="row d-flex justify-content-center g-4">
-                            <div class="col-lg-6 col-md-4 col-sm-10">
-                                <div class="eg-card auction-card1">
-                                    <div class="auction-img">
-                                        <img alt="image" src="assets/images/bg/live-auc1.png">
-                                        <div class="auction-timer">
-                                            <div class="countdown" id="timer1">
-                                                <h4><span id="hours1">02</span>H : <span id="minutes1">01</span>M :
-                                                    <span id="seconds1">19</span>S</h4>
-                                            </div>
-                                        </div>
-                                        <div class="author-area">
-                                            <div class="author-emo">
-                                                <img alt="image" src="assets/images/icons/smile-emo.svg">
-                                            </div>
-                                            <div class="author-name">
-                                                <span>by @robatfox</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="auction-content">
-                                        <h4><a href="{{ route('auction-details', $ad->slug) }}">Brand New royal Enfield 250 CC For Sale</a>
-                                        </h4>
-                                        <p>Bidding Price : <span>$85.9</span> </p>
-                                        <div class="auction-card-bttm">
-                                            <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
-                                                Bid</a>
-                                            <div class="share-area">
-                                                <ul class="social-icons d-flex">
-                                                    <li><a href="https://www.facebook.com/"><i
-                                                                class="bx bxl-facebook"></i></a></li>
-                                                    <li><a href="https://www.twitter.com/"><i
-                                                                class="bx bxl-twitter"></i></a></li>
-                                                    <li><a href="https://www.pinterest.com/"><i
-                                                                class="bx bxl-pinterest"></i></a></li>
-                                                    <li><a href="https://www.instagram.com/"><i
-                                                                class="bx bxl-instagram"></i></a></li>
-                                                </ul>
-                                                <div>
-                                                    <a href="#" class="share-btn"><i class="bx bxs-share-alt"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-4 col-sm-10">
-                                <div class="eg-card auction-card1 wow fadeInDown animated"
-                                    style="visibility: visible; animation-name: fadeInDown;">
-                                    <div class="auction-img">
-                                        <img alt="image" src="assets/images/bg/live-auc2.png">
-                                        <div class="auction-timer">
-                                            <div class="countdown" id="timer2">
-                                                <h4><span id="hours2">02</span>H : <span id="minutes2">01</span>M :
-                                                    <span id="seconds2">19</span>S</h4>
-                                            </div>
-                                        </div>
-                                        <div class="author-area">
-                                            <div class="author-emo">
-                                                <img alt="image" src="assets/images/icons/smile-emo.svg">
-                                            </div>
-                                            <div class="author-name">
-                                                <span>by @robatfox</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="auction-content">
-                                        <h4><a href="{{ route('auction-details', $ad->slug) }}">Wedding Special Exclusive Cupple Ring
-                                                (S2022)</a></h4>
-                                        <p>Bidding Price : <span>$85.9</span> </p>
-                                        <div class="auction-card-bttm">
-                                            <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
-                                                Bid</a>
-                                            <div class="share-area">
-                                                <ul class="social-icons d-flex">
-                                                    <li><a href="https://www.facebook.com/"><i
-                                                                class="bx bxl-facebook"></i></a></li>
-                                                    <li><a href="https://www.twitter.com/"><i
-                                                                class="bx bxl-twitter"></i></a></li>
-                                                    <li><a href="https://www.pinterest.com/"><i
-                                                                class="bx bxl-pinterest"></i></a></li>
-                                                    <li><a href="https://www.instagram.com/"><i
-                                                                class="bx bxl-instagram"></i></a></li>
-                                                </ul>
-                                                <div>
-                                                    <a href="#" class="share-btn"><i class="bx bxs-share-alt"></i></a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @foreach ($ad->relatedAds()->get() as $ad)
+                                <x-ad-item-card :ad="$ad" type="small" />
+                            @endforeach
                         </div>
                     </div>
                 </div>
