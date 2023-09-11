@@ -1,4 +1,4 @@
-<div class="col-md-12">
+<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-6' }}">
     <div class="form-inner">
         <label>Country *</label>
         <select name="country" id="country">
@@ -10,16 +10,22 @@
         <span class="text-danger fs-6">{{ $errors->first('country') }}</span>
     </div>
 </div>
-<div class="col-md-12">
+<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-6' }}">
     <div class="form-inner">
+        @if($hasLabels)
+        <label>State *</label>
+        @endif
         <select name="state" id="state">
             <option value="">Select State</option>
         </select>
         <span class="text-danger fs-6">{{ $errors->first('state') }}</span>
     </div>
 </div>
-<div class="col-md-12">
+<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-6' }}">
     <div class="form-inner">
+        @if($hasLabels)
+        <label>City *</label>
+        @endif
         <select name="city" id="city">
             <option value="">Select City</option>
         </select>

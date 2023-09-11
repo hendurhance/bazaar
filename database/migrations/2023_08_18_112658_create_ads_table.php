@@ -40,7 +40,6 @@ return new class extends Migration
             $table->foreignId('state_id')->nullable()->constrained('states')->onDelete('cascade');
             $table->string('city_id')->nullable()->constrained('cities')->onDelete('cascade');
 
-            $table->json('media_ids')->nullable();
             $table->timestamps();
         });
     }

@@ -10,6 +10,7 @@ use App\Models\Ad;
 use App\Repositories\Auth\AuthenticateRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
+use Illuminate\View\View;
 
 class AdController extends Controller
 {
@@ -25,7 +26,7 @@ class AdController extends Controller
      * @param \App\Http\Requests\Ad\FilterAdsRequest $request
      * @return \Illuminate\View\View
      */
-    public function index(FilterAdRequest $request)
+    public function index(FilterAdRequest $request): View
     {
         return view('pages.live-auction.index', [
             'ads' => $this->adRepository->getLatestAds(12, 'active', $request->validated()),
@@ -38,7 +39,7 @@ class AdController extends Controller
      * @param string $ad
      * @return \Illuminate\View\View
      */
-    public function show(string $ad)
+    public function show(string $ad): View
     {
         return view('pages.live-auction.show', [
             'ad' => $this->adRepository->getAd($ad),

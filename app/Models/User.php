@@ -69,26 +69,20 @@ class User extends Authenticatable
 
     /**
      * Get the user's first name.
-     * 
-     * @return Attribute
+     * @return string
      */
-    public function firstName(): Attribute
+    public function getFirstNameAttribute(): string
     {
-        return Attribute::make(
-            get: fn ($value) => explode(' ', $value)[0] ?? '',
-        );
+        return implode(' ', array_slice(explode(' ', $this->name), 0, count(explode(' ', $this->name)) / 2)) ?? '';
     }
 
     /**
      * Get the user's last name.
-     * 
-     * @return Attribute
+     * @return string
      */
-    public function lastName(): Attribute
+    public function getLastNameAttribute(): string
     {
-        return Attribute::make(
-            get: fn ($value) => explode(' ', $value)[1] ?? '',
-        );
+        return implode(' ', array_slice(explode(' ', $this->name), count(explode(' ', $this->name)) / 2)) ?? '';
     }
 
     /**

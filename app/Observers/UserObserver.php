@@ -22,7 +22,7 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $user->notifyNow(new UserVerificationNotification($user));
+        // $user->notifyNow(new UserVerificationNotification($user));
     }
 
     /**
