@@ -8,6 +8,7 @@ use App\Enums\Gender;
 use App\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -31,6 +32,9 @@ class User extends Authenticatable
         'email_verification_token',
         'email_verified_at',
         'password',
+        'address',
+        'zip_code',
+        'avatar',
     ];
 
     /**
@@ -91,5 +95,29 @@ class User extends Authenticatable
     public function ads(): HasMany
     {
         return $this->hasMany(Ad::class);
+    }
+
+    /**
+     * Get the country the user belongs to.
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(Country::class);
+    }
+
+    /**
+     * Get the state the user belongs to.
+     */
+    public function state(): BelongsTo
+    {
+        return $this->belongsTo(State::class);
+    }
+
+    /**
+     * Get the city the user belongs to.
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(City::class);
     }
 }

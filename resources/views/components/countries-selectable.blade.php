@@ -4,7 +4,8 @@
         <select name="country" id="country">
             <option value="">Select Country</option>
             @foreach ($countries as $country)
-            <option value="{{ $country->iso2 }}">{{ $country->name }}</option>
+            <option value="{{ $country->iso2 }}"
+                >{{ $country->name }}</option>
             @endforeach
         </select>
         <span class="text-danger fs-6">{{ $errors->first('country') }}</span>

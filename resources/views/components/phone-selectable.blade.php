@@ -1,15 +1,17 @@
 <div class="col-md-12">
     <div class="form-inner">
         <label for="{{ $name }}">{{ $label }}</label>
-        <input class="expandable-input" type="tel" name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}" @class(['error'=>
+        <input class="expandable-input" type="tel" name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}"
+            @class(['error'=>
         $errors->has($name)]) value="{{ $value }}" />
         <div class="phone-select-selected" id="phoneSelect">
         </div>
         <div class="phone-select">
             <ul class="phone-select-list">
                 @foreach ($countries as $country)
-                <li class="phone-select-list-item" data-dial-code="{{ $country->phone_code }}" data-country-code="{{ $country->iso2 }}">
-                    <span class="phone-select-list-item-label">{{ $country->emoji }}  {{ $country->name }}</span>
+                <li class="phone-select-list-item" data-dial-code="{{ $country->phone_code }}"
+                    data-country-code="{{ $country->iso2 }}">
+                    <span class="phone-select-list-item-label">{{ $country->emoji }} {{ $country->name }}</span>
                     <span class="phone-select-list-item-dial-code">( +{{ $country->phone_code }} )</span>
                 </li>
                 @endforeach
@@ -37,9 +39,15 @@
             const country = $('.phone-select-list-item').filter(function(){
                 return $(this).data('dial-code') == dialCode;
             }).first();
-            $('#phoneSelect').html(`<span class="flag flag-${country.data('country-code').toLowerCase()}">
-                <i class="bi bi-caret-down-fill"></i>
-            </span>`);
+            if (country.length == 0) {
+                $('#phoneSelect').html(`<span class="flag flag-us">
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>`);
+            } else {
+                $('#phoneSelect').html(`<span class="flag flag-${country.data('country-code').toLowerCase()}">
+                    <i class="bi bi-caret-down-fill"></i>
+                </span>`);
+            }
         }
         // show the phone select on click
         $('#phoneSelect').on('click', function(){
