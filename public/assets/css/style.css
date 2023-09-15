@@ -6790,7 +6790,7 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 }
 
 .form-wrapper input.error,
-.form-wrapper textarea.error {
+.form-wrapper textarea.error, input.error{
     border: 1px solid #d13a3a
 }
 
@@ -7611,7 +7611,7 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     align-items: center
 }
 
-.product-details-right .bid-form .form-inner input[type=text] {
+.product-details-right .bid-form .form-inner input[type=number] {
     width: 100%;
     border-radius: 5px;
     border: 1px solid #eee;
@@ -7619,13 +7619,13 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
     transition: all .42s ease
 }
 
-.product-details-right .bid-form .form-inner input[type=text]::-moz-placeholder {
+.product-details-right .bid-form .form-inner input[type=number]::-moz-placeholder {
     font-size: 16px;
     font-weight: 500;
     color: #696969
 }
 
-.product-details-right .bid-form .form-inner input[type=text]:-ms-input-placeholder {
+.product-details-right .bid-form .form-inner input[type=number]:-ms-input-placeholder {
     font-size: 16px;
     font-weight: 500;
     color: #696969

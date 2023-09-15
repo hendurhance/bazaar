@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\User\Ad;
 
 use App\Contracts\Repositories\AdRepositoryInterface;
+use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateAdRequest;
+use App\Http\Requests\Ad\CreateBidRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
-use App\Models\Ad;
-use App\Repositories\Auth\AuthenticateRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
@@ -17,7 +17,7 @@ class AdController extends Controller
     /**
      * Instantiate new controller instance
      */
-    public function __construct(protected AdRepositoryInterface $adRepository, protected AuthenticateRepository $authRepository)
+    public function __construct(protected AdRepositoryInterface $adRepository, protected AuthenticateRepositoryInterface $authRepository)
     {}
     
     /**
@@ -56,5 +56,17 @@ class AdController extends Controller
     {
         $this->adRepository->create($this->authRepository->user(), $request->validated());
         return redirect()->route('add-listing')->with('success', 'Your ad has been created successfully, it will be reviewed by our team before it is published.');
+    }
+
+    /**
+     * Bid on an ad.
+     * @param string $ad
+     * @param CreateBidRequest $request
+     * @return RedirectResponse
+     */
+    public function bid(string $ad, CreateBidRequest $request): RedirectResponse
+    {
+        $this->adRepository->bid($ad,$this->authRepository->user(), $request->validated());
+        return redirect()->route('auction-details', $ad)->with('success', 'Your bid has been placed successfully.');
     }
 }
