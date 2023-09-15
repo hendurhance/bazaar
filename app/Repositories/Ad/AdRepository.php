@@ -8,6 +8,7 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
 use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
+use App\Exceptions\BidException;
 use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
@@ -49,7 +50,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      */
     public function getAd(string $slug): Ad
     {
-        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'bids', 'bids.user:id,name,avatar,username', 'relatedAds:id,title,slug,price', 'relatedAds.media'])
+        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'bids', 'bids.user:id,name,avatar,username', 'relatedAds:id,title,slug,price', 'relatedAds.media', 'relatedAds.user:id,username,avatar', 'highestBid:id,amount'])
             ->where('slug', $slug)
             ->firstOr(function () {
                 abort(404);
@@ -85,6 +86,46 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             })
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
+    }
+    
+    /**
+     * Get ads by user
+     * 
+     * @param \App\Models\User $user
+     * @param int $limit
+     * @param string $type = 'active' <active|upcoming>
+     * @param array $filters
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    // public function getAdsByUser(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator
+
+    /**
+     * Bid on an ad
+     * 
+     * @param string $ad_id
+     * @param User $user
+     * @param array $data
+     * @return void
+     */
+    public function bid(string $ad_id, User $user, array $data): void
+    {
+        $ad = $this->findBy('slug', $ad_id, function () {
+            abort(404);
+        });
+        // Make sure the user is not the owner of the ad
+        if ($ad->user_id === $user->id) {
+            abort(403);
+        }
+        //TODO: Make sure the new bid is greater than the previous bid
+        $bidHistory = $ad->bids()->orderBy('amount', 'desc')->first();
+        if ($bidHistory && $bidHistory->amount >= $data['amount']) {
+            throw new BidException('Your bid must be greater than the current bid.', $ad->slug);
+        }
+        
+        $ad->bids()->create([
+            'user_id' => $user->id,
+            'amount' => $data['amount'],
+        ]);
     }
 
     /**

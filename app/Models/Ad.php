@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ad extends Model
 {
@@ -102,6 +103,15 @@ class Ad extends Model
     {
         return $this->hasMany(Bid::class);
     }
+
+    /**
+     * Get the highest bid amount for the ad.
+     */
+    public function highestBid(): HasOne
+    {
+        return $this->hasOne(Bid::class)->orderBy('amount', 'desc')->limit(1);
+    }
+
 
     /**
      * Get related ads.

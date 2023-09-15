@@ -32,7 +32,7 @@ Route::view('blog-details', 'pages.blog.show')->name('blog-details');
 Route::get('auction-details/{ads:slug}', [AdController::class, 'show'])->name('auction-details');
 Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
 Route::post('/add-listing', [AdController::class, 'store'])->name('add-listing.handle');
-
+Route::post('/bid/{ads:slug}', [AdController::class, 'bid'])->name('bid.handle')->middleware('auth:web');
 /**
  * User Routes
  */
@@ -55,5 +55,6 @@ Route::group([
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
         Route::view('/dashboard', 'dashboard.user.index')->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
+        // Route::post('/profile', [ProfileController::class, 'update'])->name('profile.handle');
     });
 });
