@@ -35,6 +35,6 @@ class State extends Model
      */
     public function cities(): HasMany
     {
-        return $this->hasMany(City::class)->rememberForever();
+        return $this->hasMany(City::class);
     }
 }

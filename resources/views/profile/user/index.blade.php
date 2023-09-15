@@ -21,7 +21,9 @@
                            </div>
                         </div>
                         <div class="form-wrapper">
-                           <form action="#">
+                           <form action="{{ route('user.profile.handle') }}" method="POST">
+                              @method('PUT')
+                              @csrf
                               <div class="row">
                                  <div class="col-xl-6 col-lg-12 col-md-6">
                                     <x-input-field name="first_name" type="text" label="First Name" placeholder="Your first name" value="{{ $user->first_name }}"/>
@@ -33,10 +35,10 @@
                                     <x-phone-selectable name="mobile" label="Phone" placeholder="Your phone number" value="{{ $user->mobile }}"/>
                                  </div>
                                  <div class="col-xl-6 col-lg-12 col-md-6">
-                                    <x-input-field name="email" type="email" label="Email" placeholder="Your email address" value="{{ $user->email }}"/>
+                                    <x-input-field name="email" type="email" label="Email" placeholder="Your email address" value="{{ $user->email }}" :disabled="true" :readonly="true"/>
                                  </div>
                                  <div class="col-xl-6 col-lg-12 col-md-6">
-                                    <x-input-field name="username" type="text" label="Username" placeholder="Your username" value="{{ $user->username }}"/>
+                                    <x-input-field name="username" type="text" label="Username" placeholder="Your username" value="{{ $user->username }}" :disabled="true" :readonly="true"/>
                                  </div>
                                  <x-gender-selectable label="Gender" name="gender" :selected="$user->gender"/>
                                  <div class="col-12">

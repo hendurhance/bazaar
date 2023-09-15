@@ -25,7 +25,7 @@ class Country extends Model
     public function states(): HasMany
     {
         // cache the states
-        return $this->hasMany(State::class)->rememberForever();
+        return $this->hasMany(State::class);
     }
 
     /**
@@ -35,6 +35,6 @@ class Country extends Model
      */
     public function timezones(): HasMany
     {
-        return $this->hasMany(Timezone::class)->rememberForever();
+        return $this->hasMany(Timezone::class);
     }
 }

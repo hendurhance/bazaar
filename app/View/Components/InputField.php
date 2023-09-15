@@ -18,6 +18,8 @@ class InputField extends Component
         public string $placeholder = '',
         public string $value = '',
         public bool $required = true,
+        public bool $disabled = false,
+        public bool $readonly = false,
     ) {
         //
     }
