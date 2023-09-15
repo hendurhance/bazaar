@@ -10,9 +10,10 @@ trait PasswordEnvironments
      * Get password rules for environment.
      * 
      * @param string $environment
+     * @param bool $shouldRequire
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array|string>
      */
-    protected function passwordRules(string $environment)
+    protected function passwordRules(string $environment, bool $shouldRequire = true): array
     {
         return match ($environment) {
             'production' => [
@@ -26,6 +27,7 @@ trait PasswordEnvironments
                     ->uncompromised(), // must not be compromised in a data breach
             ],
             default => [
+                $shouldRequire ? 'required' : 'nullable',
                 'string',
                 Password::min(8)     // must be at least 8 characters in length
             ],

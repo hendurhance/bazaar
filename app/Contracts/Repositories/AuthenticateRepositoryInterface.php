@@ -62,4 +62,12 @@ interface AuthenticateRepositoryInterface
      * @param array<string, mixed> $data
      */
     public function resetPassword(array $data): void;
+
+    /**
+     * Update a user's profile.
+     * 
+     * @param \App\Models\User $user
+     * @param array<string, mixed> $data
+     */
+    public function update(\App\Models\User $user, array $data): void;
 }

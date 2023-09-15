@@ -55,6 +55,6 @@ Route::group([
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
         Route::view('/dashboard', 'dashboard.user.index')->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
-        // Route::post('/profile', [ProfileController::class, 'update'])->name('profile.handle');
+        Route::put('/profile', [ProfileController::class, 'update'])->name('profile.handle');
     });
 });

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Admin;
 use App\Notifications\User\PasswordResetNotification;
 use App\Notifications\User\WelcomeEmailNotification;
+use App\Repositories\Country\CountryRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -142,6 +143,28 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
     public function admin(): Admin
     {
         return Auth::guard(self::ADMIN_GUARD)->user();
+    }
+
+    /**
+     * Update a user's profile.
+     * 
+     * @param User $user
+     * @param array<string, mixed> $data
+     */
+    public function update(User $user, array $data): void
+    {
+        $user->update([
+            'name' => $data['first_name'] . ' ' . $data['last_name'] ?? $user->name,
+            'mobile' => $data['mobile'] ?? $user->mobile,
+            'gender' => $data['gender'] ?? $user->gender,
+            'address' => $data['address'] ?? $user->address,
+            'country_id' => $countryId = app(CountryRepository::class)->findByIso2Code($data['country'])->id ?? $user->country_id,
+            'state_id' => app(CountryRepository::class)->findStateByCode($countryId, $data['state'])->id ?? $user->state_id,
+            'city_id' => $data['city'] ?? $user->city_id,
+            'zip_code' => $data['zip_code'] ?? $user->zip_code,
+            // 'timezone_id' => $data['timezone'] ?? $user->timezone_id,
+            'password' => $data['password'] ? Hash::make($data['password']) : $user->password,
+        ]);
     }
 
     /**
