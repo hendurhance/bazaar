@@ -30,11 +30,15 @@
                                     <x-input-field name="last_name" type="text" label="Last Name" placeholder="Your last name" value="{{ $user->last_name }}"/>
                                  </div>
                                  <div class="col-xl-6 col-lg-12 col-md-6">
-                                    <x-phone-selectable name="phone" label="Phone" placeholder="Your phone number" value="{{ $user->phone }}"/>
+                                    <x-phone-selectable name="mobile" label="Phone" placeholder="Your phone number" value="{{ $user->mobile }}"/>
                                  </div>
                                  <div class="col-xl-6 col-lg-12 col-md-6">
                                     <x-input-field name="email" type="email" label="Email" placeholder="Your email address" value="{{ $user->email }}"/>
                                  </div>
+                                 <div class="col-xl-6 col-lg-12 col-md-6">
+                                    <x-input-field name="username" type="text" label="Username" placeholder="Your username" value="{{ $user->username }}"/>
+                                 </div>
+                                 <x-gender-selectable label="Gender" name="gender" :selected="$user->gender"/>
                                  <div class="col-12">
                                      <x-input-field name="address" type="text" label="Address" placeholder="Your address" value="{{ $user->address }}"/>
                                  </div>
