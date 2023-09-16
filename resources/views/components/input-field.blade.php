@@ -5,9 +5,11 @@
         name="{{ $name }}" 
         id="{{ $name }}" 
         placeholder="{{ $placeholder }}" 
-        @class(['error'=> $errors->has($name)]) 
+        @class(['error'=> $errors->has($name), 'disabled' => $disabled])
         value="{{ $value }}"
         @if ($type == 'datetime-local') step="3600" @endif
+        @if ($readonly) readonly @endif
+        @if($disabled) disabled @endif
     >
     @if ($type == 'password')
     <i class="bi bi-eye-slash" id="togglePassword"></i>

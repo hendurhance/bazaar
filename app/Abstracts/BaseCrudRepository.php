@@ -46,11 +46,11 @@ abstract class BaseCrudRepository
     /**
      * Get the record by id.
      * 
-     * @param int $id
+     * @param int|string $id
      * @param Callable $callback
      * @return \Illuminate\Database\Eloquent\Model
      */
-    public function find(int $id, Callable $callback = null)
+    public function find(int|string $id, Callable $callback = null)
     {
         return $this->model->findOr($id, $callback);
     }
