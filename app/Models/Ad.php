@@ -148,6 +148,25 @@ class Ad extends Model
     ];
 
     /**
+     * Ad Model Methods
+     * 
+     */
+    public function active(): bool
+    {
+        return $this->started_at->isPast() && $this->expired_at->isFuture() && $this->status === AdStatus::PUBLISHED;
+    }
+
+    public function upcoming(): bool
+    {
+        return $this->started_at->isFuture() && $this->status === AdStatus::PUBLISHED;
+    }
+
+    public function expired(): bool
+    {
+        return $this->expired_at->isPast() && $this->status === AdStatus::PUBLISHED;
+    }
+
+    /**
      * Scope a query using AdStatus
      * 
      * @param AdStatus $status
