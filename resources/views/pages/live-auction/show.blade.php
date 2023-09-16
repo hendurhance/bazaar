@@ -41,23 +41,39 @@
                     <h3>{{ $ad->title }}</h3>
                     <p class="para">{{ shorten_characters($ad->description, 150, true) }}</p>
                     <h4>Bidding Price: <span>${{ number_format($ad->price) }}</span></h4>
+                    @if($ad->active())
                     <div class="bid-form">
                         <div class="form-title">
                             <h5>Bid Now</h5>
-                            <p>Bid Amount : Minimum Bid ${{ number_format($ad->price) }}</p>
+                            <p>Bid Amount : Minimum Bid ${{ number_format($ad->highestBid->amount ?? $ad->price + 1) }}</p>
                         </div>
-                        <form>
+                        <form action="{{ route('bid.handle', $ad->slug) }}" method="POST">
+                            @csrf
                             @guest
                                 <x-alert type="warning" icon="bi bi-exclamation-circle-fill">
                                     <p>You are currently not logged in. If you have an account, please <strong><a href="{{ route('user.login') }}">login</a> </strong> to place a bid to have a chance of winning this auction.</p>
                                 </x-alert>
                             @endguest
                             <div class="form-inner gap-2">
-                                <input type="text" placeholder="$00.00" @guest disabled @endguest>
+                                <input type="number" placeholder="$00.00" @guest disabled @endguest name="amount" required @class(['error' => $errors->has('amount')]) min="{{ $ad->highestBid->amount ?? $ad->price + 1 }}" value="{{ old('amount') }}">
                                 <button @class(['eg-btn btn--primary btn--sm' => 'auth', 'eg-btn btn--primary btn--sm disabled' => '!auth']) @guest disabled @else type="submit" @endguest>Place a Bid</button>
                             </div>
+                            <span class="text-danger">{{ $errors->first('amount') }}</span>
                         </form>
                     </div>
+                    @else
+                    <x-alert type="dark" icon="bi bi-exclamation-circle-fill">
+                        @if($ad->expired())
+                        <p class="text-dark">
+                            This ad listing has expired. You can no longer place a bid on this auction. Try checking out other auctions at <strong><a class="text-gray" href="{{ route('live-auction') }}">live auctions</a></strong> page.
+                        </p>
+                        @elseif($ad->upcoming())
+                        <p class="text-dark">
+                            This ad listing is yet to start. You can not place a bid on this auction yet. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
+                        </p>
+                        @endif
+                    </x-alert>
+                    @endif
                 </div>
             </div>
         </div>
@@ -93,7 +109,7 @@
                     <div class="tab-pane fade" id="pills-bid" role="tabpanel" aria-labelledby="pills-bid-tab">
                         <div class="bid-list-area">
                             <ul class="bid-list">
-                                @forelse ($ad->bids as $bid)
+                                @forelse ($ad->bids->sortByDesc('created_at') as $bid)
                                 <li>
                                     <div class="row d-flex align-items-center">
                                         <div class="col-7">

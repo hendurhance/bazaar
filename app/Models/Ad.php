@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Ad extends Model
 {
@@ -104,6 +105,15 @@ class Ad extends Model
     }
 
     /**
+     * Get the highest bid amount for the ad.
+     */
+    public function highestBid(): HasOne
+    {
+        return $this->hasOne(Bid::class)->orderBy('amount', 'desc')->limit(1);
+    }
+
+
+    /**
      * Get related ads.
      */
     public function relatedAds(): HasMany
@@ -136,6 +146,25 @@ class Ad extends Model
         'started_at',
         'expired_at',
     ];
+
+    /**
+     * Ad Model Methods
+     * 
+     */
+    public function active(): bool
+    {
+        return $this->started_at->isPast() && $this->expired_at->isFuture() && $this->status === AdStatus::PUBLISHED;
+    }
+
+    public function upcoming(): bool
+    {
+        return $this->started_at->isFuture() && $this->status === AdStatus::PUBLISHED;
+    }
+
+    public function expired(): bool
+    {
+        return $this->expired_at->isPast() && $this->status === AdStatus::PUBLISHED;
+    }
 
     /**
      * Scope a query using AdStatus
