@@ -112,11 +112,15 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
         $ad = $this->findBy('slug', $ad_id, function () {
             abort(404);
         });
-        // Make sure the user is not the owner of the ad
+
         if ($ad->user_id === $user->id) {
             abort(403);
         }
-        //TODO: Make sure the new bid is greater than the previous bid
+
+        if(! $ad->active()) {
+            throw new BidException('You cannot bid on an inactive ad.', $ad->slug);
+        }
+
         $bidHistory = $ad->bids()->orderBy('amount', 'desc')->first();
         if ($bidHistory && $bidHistory->amount >= $data['amount']) {
             throw new BidException('Your bid must be greater than the current bid.', $ad->slug);

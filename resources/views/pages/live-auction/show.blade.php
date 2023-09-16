@@ -41,6 +41,7 @@
                     <h3>{{ $ad->title }}</h3>
                     <p class="para">{{ shorten_characters($ad->description, 150, true) }}</p>
                     <h4>Bidding Price: <span>${{ number_format($ad->price) }}</span></h4>
+                    @if($ad->active())
                     <div class="bid-form">
                         <div class="form-title">
                             <h5>Bid Now</h5>
@@ -60,6 +61,19 @@
                             <span class="text-danger">{{ $errors->first('amount') }}</span>
                         </form>
                     </div>
+                    @else
+                    <x-alert type="dark" icon="bi bi-exclamation-circle-fill">
+                        @if($ad->expired())
+                        <p class="text-dark">
+                            This ad listing has expired. You can no longer place a bid on this auction. Try checking out other auctions at <strong><a class="text-gray" href="{{ route('live-auction') }}">live auctions</a></strong> page.
+                        </p>
+                        @elseif($ad->upcoming())
+                        <p class="text-dark">
+                            This ad listing is yet to start. You can not place a bid on this auction yet. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
+                        </p>
+                        @endif
+                    </x-alert>
+                    @endif
                 </div>
             </div>
         </div>
