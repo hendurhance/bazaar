@@ -195,6 +195,23 @@ class Ad extends Model
         return $query->whereDate('started_at', '>', now())
             ->where('status', AdStatus::PUBLISHED);
     }
+
+    /**
+     * Scope a query to only include expired ads.
+     */
+    public function scopeExpired(Builder $query)
+    {
+        return $query->whereDate('expired_at', '<', now())
+            ->where('status', AdStatus::EXPIRED);
+    }
+
+    /**
+     * Scope a query to only rejected ads.
+     */
+    public function scopeRejected(Builder $query)
+    {
+        return $query->where('status', AdStatus::REJECTED);
+    }
 }
 
 
