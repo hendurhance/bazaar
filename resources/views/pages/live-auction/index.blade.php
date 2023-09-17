@@ -16,9 +16,9 @@
                     <div class="text-center mb-4">
                         <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
                     </div>
-                    <div class="alert alert-warning text-center" role="alert">
-                        <strong>Sorry!</strong> No ads found.
-                    </div>
+                    <x-alert type="warning">
+                        <p class="text-center mb-0"><strong>Sorry!</strong> No ads found.</p>
+                    </x-alert>
                 </div>
             @endforelse
         </div>

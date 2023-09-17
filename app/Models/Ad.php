@@ -167,17 +167,6 @@ class Ad extends Model
     }
 
     /**
-     * Scope a query using AdStatus
-     * 
-     * @param AdStatus $status
-     * @return Builder
-     */
-    public function scopeStatus(Builder $query, AdStatus $status)
-    {
-        return $query->where('status', $status);
-    }
-
-    /**
      * Scope a query to only include active ads.
      */
     public function scopeActive(Builder $query)
@@ -185,6 +174,14 @@ class Ad extends Model
         return $query->whereDate('started_at', '<=', now())
             ->whereDate('expired_at', '>=', now())
             ->where('status', AdStatus::PUBLISHED);
+    }
+
+    /**
+     * Scope a query to include pending ads.
+     */
+    public function scopePending(Builder $query)
+    {
+        return $query->where('status', AdStatus::PENDING);
     }
 
     /**
@@ -206,12 +203,14 @@ class Ad extends Model
     }
 
     /**
-     * Scope a query to only rejected ads.
+     * Scope a query to only include rejected ads.
      */
     public function scopeRejected(Builder $query)
     {
         return $query->where('status', AdStatus::REJECTED);
     }
+    
+
 }
 
 
