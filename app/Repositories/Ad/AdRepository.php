@@ -97,7 +97,10 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    // public function getAdsByUser(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator
+    public function getUserAds(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator
+    {
+
+    }
 
     /**
      * Bid on an ad

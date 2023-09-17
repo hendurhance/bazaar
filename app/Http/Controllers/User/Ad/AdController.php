@@ -9,7 +9,6 @@ use App\Http\Requests\Ad\CreateAdRequest;
 use App\Http\Requests\Ad\CreateBidRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
 use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Log;
 use Illuminate\View\View;
 
 class AdController extends Controller
@@ -68,5 +67,17 @@ class AdController extends Controller
     {
         $this->adRepository->bid($ad,$this->authRepository->user(), $request->validated());
         return redirect()->route('auction-details', $ad)->with('success', 'Your bid has been placed successfully.');
+    }
+
+    /**
+     * Get user ads.
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function ads(): View
+    {
+        return view('bids.user.index', [
+            'ads' => $this->adRepository->getUserAds($this->authRepository->user()),
+        ]);
     }
 }
