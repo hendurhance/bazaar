@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateAdRequest;
 use App\Http\Requests\Ad\CreateBidRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
+use App\Http\Requests\Ad\FilterUserAdsRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -22,13 +23,13 @@ class AdController extends Controller
     /**
      * Index page for listing ads.
      * 
-     * @param \App\Http\Requests\Ad\FilterAdsRequest $request
+     * @param \App\Http\Requests\Ad\FilterAdsRequest $query
      * @return \Illuminate\View\View
      */
-    public function index(FilterAdRequest $request): View
+    public function index(FilterAdRequest $query): View
     {
         return view('pages.live-auction.index', [
-            'ads' => $this->adRepository->getLatestAds(12, 'active', $request->validated()),
+            'ads' => $this->adRepository->getLatestAds(12, 'active', $query->validated()),
         ]);
     }
 
@@ -74,10 +75,10 @@ class AdController extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function ads(): View
+    public function ads(FilterUserAdsRequest $query): View
     {
         return view('bids.user.index', [
-            'ads' => $this->adRepository->getUserAds($this->authRepository->user()),
+            'ads' => $this->adRepository->getUserAds($this->authRepository->user(), 10, $query->validated()),
         ]);
     }
 }

@@ -67,7 +67,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      */
     public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): LengthAwarePaginator
     {
-        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
             ->when($type === 'active', function ($query) {
                 $query->active();
             }, function ($query) {
@@ -93,13 +93,18 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * 
      * @param \App\Models\User $user
      * @param int $limit
-     * @param string $type = 'active' <active|upcoming>
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getUserAds(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator
+    public function getUserAds(User $user, int $limit = 10, array $filters = null): Collection|LengthAwarePaginator
     {
-
+        return $this->model->query()->where('user_id', $user->id)->with(['media'])
+            ->when(isset($filters['status']), function ($query) use ($filters) {
+                $status = $filters['status'];
+                $query->$status();
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
     }
 
     /**

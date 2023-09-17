@@ -13,12 +13,12 @@
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
                     @guest('web')
                     <x-alert type="warning" icon="exclamation-triangle">
-                        <p>You are posting as a guest. If you have an account, please <a class="fw-bold"
+                        <p class="mb-0">You are posting as a guest. If you have an account, please <a class="fw-bold"
                                 href="{{ route('user.login') }}">login</a> to have your listing associated with your account.</p>
                     </x-alert>
                     @endguest
                     <x-alert type="info" icon="info-circle" dismissible="true">
-                        <p>Once you submit your listing, it will be reviewed by our team. Once approved, it will be
+                        <p class="mb-0">Once you submit your listing, it will be reviewed by our team. Once approved, it will be
                             listed on the auction.</p>
                     </x-alert>
                     <form class="w-100" action="{{ route('add-listing.handle') }}" method="POST" enctype="multipart/form-data">

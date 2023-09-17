@@ -161,8 +161,8 @@ if (!function_exists('get_random_avatar')) {
  * @param int $limit
  * @return string
  */
-if (!function_exists('shorten_characters')) {
-    function shorten_characters(string $title, int $limit = 30, bool $isHTML = false): string
+if (!function_exists('shorten_chars')) {
+    function shorten_chars(string $title, int $limit = 30, bool $isHTML = false): string
     {
         if ($isHTML) {
             $title = strip_tags($title);

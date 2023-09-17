@@ -45,9 +45,18 @@
             </div>
         </div>
         <div class="row gy-4 d-flex justify-content-center">
-            @foreach ( $ads as $ad )
-                <x-ad-item-card :ad="$ad" type="classic" />
-            @endforeach
+            @forelse ( $ads as $ad )
+            <x-ad-item-card :ad="$ad" type="classic" />
+            @empty
+                <div class="d-flex flex-column align-items-center justify-content-center">
+                    <div class="text-center mb-4">
+                        <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
+                    </div>
+                    <x-alert type="warning">
+                        <p class="text-center mb-0"><strong>Sorry!</strong> No active ads available at this time. Try again later, or check out our upcoming auctions.</p>
+                    </x-alert>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>
@@ -81,9 +90,18 @@
         <div class="row">
             <div class="swiper upcoming-slider2">
                 <div class="swiper-wrapper">
-                    @foreach ( $upcomingAds as $ad )
+                    @forelse ( $upcomingAds as $ad )
                     <x-ad-item-card :ad="$ad" type="slider" />
-                    @endforeach
+                    @empty
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <div class="text-center mb-4">
+                            <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
+                        </div>
+                        <x-alert type="warning">
+                            <p class="text-center mb-0"><strong>Sorry!</strong> No upcoming ads available at this time. Try again later, or check out our active auctions.</p>
+                        </x-alert>
+                    </div>
+                    @endforelse
                 </div>
             </div>
         </div>

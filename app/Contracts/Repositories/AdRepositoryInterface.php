@@ -42,11 +42,10 @@ interface AdRepositoryInterface
      * 
      * @param \App\Models\User $user
      * @param int $limit
-     * @param string $type = 'active' <active|upcoming|expired>
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getUserAds(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator;
+    public function getUserAds(User $user, int $limit = 10, array $filters = null): Collection|LengthAwarePaginator;
 
     /**
      * Bid on an ad
