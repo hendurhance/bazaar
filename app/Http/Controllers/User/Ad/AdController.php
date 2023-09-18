@@ -98,6 +98,7 @@ class AdController extends Controller
     /**
      * Edit user ad.
      * 
+     * @param string $ad
      * @return \Illuminate\View\View
      */
     public function editUserAd(string $ad): View
@@ -105,5 +106,17 @@ class AdController extends Controller
         return view('bids.user.edit', [
             'ad' => $this->adRepository->getUserAd($this->authRepository->user(), $ad),
         ]);
+    }
+
+    /**
+     * Update user ad.
+     * 
+     * @param string $ad
+     * @param \App\Http\Requests\Ad\CreateAdRequest $request
+     */
+    public function updateUserAd(string $ad, CreateAdRequest $request): RedirectResponse
+    {
+        // $this->adRepository->updateUserAd($this->authRepository->user(), $ad, $request->validated());
+        return redirect()->route('user.ads')->with('success', 'Your ad has been updated successfully.');
     }
 }
