@@ -45,7 +45,10 @@
                                 <td data-label="Starting Price">${{ number_format($ad->price) }}</td>
                                 <td data-label="Timeframe">{{ $ad->started_at->format('d M Y') }} - {{ $ad->expired_at->format('d M Y') }}</td>
                                 <td data-label="Status" class="text-{{ $ad->status->color() }}">{{ $ad->status->label() }}</td>
-                                <td data-label="Action"><a href="{{ route('user.ads.show', $ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-eye-fill"></i> View</a></td>
+                                <td data-label="Action">
+                                    <a href="{{ route('user.ads.show', $ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-eye-fill"></i> View</a>
+                                    <a href="{{ route('user.ads.edit', $ad->slug) }}" class="eg-btn action-btn text-dark edit-btn"><i class="bi bi-pencil-fill"></i> Edit</a>
+                                </td>
                              </tr>
                             @endforeach
                           </tbody>

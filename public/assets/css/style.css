@@ -9457,3 +9457,7 @@ a.action-btn.eg-btn{
 .ad-listing-item p{
     word-break: break-all;
 }
+
+.edit-btn{
+    border: 1px solid #0a0a0f;
+}
