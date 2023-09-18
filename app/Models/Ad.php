@@ -77,7 +77,9 @@ class Ad extends Model
      */
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class)->withDefault([
+            'name' => 'N/A',
+        ]);
     }
 
     /**
@@ -85,7 +87,9 @@ class Ad extends Model
      */
     public function state(): BelongsTo
     {
-        return $this->belongsTo(State::class);
+        return $this->belongsTo(State::class)->withDefault([
+            'name' => 'N/A',
+        ]);
     }
 
     /**
@@ -93,7 +97,9 @@ class Ad extends Model
      */
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class)->withDefault([
+            'name' => 'N/A',
+        ]);
     }
 
     /**
@@ -167,17 +173,6 @@ class Ad extends Model
     }
 
     /**
-     * Scope a query using AdStatus
-     * 
-     * @param AdStatus $status
-     * @return Builder
-     */
-    public function scopeStatus(Builder $query, AdStatus $status)
-    {
-        return $query->where('status', $status);
-    }
-
-    /**
      * Scope a query to only include active ads.
      */
     public function scopeActive(Builder $query)
@@ -188,6 +183,14 @@ class Ad extends Model
     }
 
     /**
+     * Scope a query to include pending ads.
+     */
+    public function scopePending(Builder $query)
+    {
+        return $query->where('status', AdStatus::PENDING);
+    }
+
+    /**
      * Scope a query to only include upcoming ads.
      */
     public function scopeUpcoming(Builder $query)
@@ -195,6 +198,25 @@ class Ad extends Model
         return $query->whereDate('started_at', '>', now())
             ->where('status', AdStatus::PUBLISHED);
     }
+
+    /**
+     * Scope a query to only include expired ads.
+     */
+    public function scopeExpired(Builder $query)
+    {
+        return $query->whereDate('expired_at', '<', now())
+            ->where('status', AdStatus::EXPIRED);
+    }
+
+    /**
+     * Scope a query to only include rejected ads.
+     */
+    public function scopeRejected(Builder $query)
+    {
+        return $query->where('status', AdStatus::REJECTED);
+    }
+    
+
 }
 
 

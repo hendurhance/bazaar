@@ -67,7 +67,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      */
     public function getLatestAds(int $limit = 10, string $type = 'active', array $filters = null): LengthAwarePaginator
     {
-        return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
             ->when($type === 'active', function ($query) {
                 $query->active();
             }, function ($query) {
@@ -93,11 +93,63 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      * 
      * @param \App\Models\User $user
      * @param int $limit
-     * @param string $type = 'active' <active|upcoming>
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    // public function getAdsByUser(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator
+    public function getUserAds(User $user, int $limit = 10, array $filters = null): Collection|LengthAwarePaginator
+    {
+        return $this->model->query()->where('user_id', $user->id)->with(['media'])
+            ->when(isset($filters['status']), function ($query) use ($filters) {
+                $status = $filters['status'];
+                $query->$status();
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit);
+    }
+
+    /**
+     * Get user ad by slug
+     * 
+     * @param \App\Models\User $user
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getUserAd(User $user, string $slug): Ad
+    {
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'subcategory:parent_id,id,name','bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name'])
+            ->where('user_id', $user->id)
+            ->where('slug', $slug)
+            ->firstOr(function () {
+                #TODO: Create a custom exception for this
+                abort(404);
+            });
+    }
+
+    /**
+     * Update an ad
+     * 
+     * @param \App\Models\User $user
+     * @param string $ad
+     * @param array $data
+     * @return void
+     */
+    public function updateUserAd(User $user, string $ad, array $data): void
+    {
+        $ad = $this->model->where('user_id', $user->id)->where('slug', $ad)->firstOr(function () {
+            #TODO: Create a custom exception for this
+            abort(404);
+        });
+
+        $ad->update([
+            'title' => $data['title'] ?? $ad->title,
+            'description' => $data['description'] ?? $ad->description,
+            'price' => $data['price'] ?? $ad->price,
+            'video_url' => $data['video_url'] ?? $ad->video_url,
+            'seller_name' => $data['seller_name'] ?? $ad->seller_name,
+            'seller_mobile' => $data['seller_mobile'] ?? $ad->seller_mobile,
+            'seller_address' => $data['seller_address'] ?? $ad->seller_address,
+        ]);
+    }
 
     /**
      * Bid on an ad
@@ -130,6 +182,18 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'user_id' => $user->id,
             'amount' => $data['amount'],
         ]);
+    }
+
+    /**
+     * Get bids by user
+     * 
+     * @param User $user
+     * @param int $limit
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserBids(User $user, int $limit = 10): Collection|LengthAwarePaginator
+    {
+        return $user->bids()->with(['ad:id,title,slug,price,status', 'ad.media', 'ad.user:id,name,avatar,username'])->paginate($limit);
     }
 
     /**

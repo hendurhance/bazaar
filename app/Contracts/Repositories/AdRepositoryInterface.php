@@ -42,11 +42,29 @@ interface AdRepositoryInterface
      * 
      * @param \App\Models\User $user
      * @param int $limit
-     * @param string $type = 'active' <active|upcoming>
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    // public function getAdsByUser(User $user, int $limit = 10, string $type = 'active', array $filters = null): Collection|LengthAwarePaginator;
+    public function getUserAds(User $user, int $limit = 10, array $filters = null): Collection|LengthAwarePaginator;
+
+    /**
+     * Get user ad by slug
+     * 
+     * @param \App\Models\User $user
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getUserAd(User $user, string $slug): Ad;
+
+    /**
+     * Update an ad
+     * 
+     * @param \App\Models\User $user
+     * @param string $ad
+     * @param array $data
+     * @return void
+     */
+    public function updateUserAd(User $user, string $ad, array $data): void;
 
     /**
      * Bid on an ad
@@ -57,4 +75,13 @@ interface AdRepositoryInterface
      * @return void
      */
     public function bid(string $ad_id, User $user, array $data): void;
+
+    /**
+     * Get user bids
+     * 
+     * @param User $user
+     * @param int $limit
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserBids(User $user, int $limit = 10): Collection|LengthAwarePaginator;
 }
