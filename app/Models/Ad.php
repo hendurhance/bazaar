@@ -77,7 +77,9 @@ class Ad extends Model
      */
     public function country(): BelongsTo
     {
-        return $this->belongsTo(Country::class);
+        return $this->belongsTo(Country::class)->withDefault([
+            'name' => 'N/A',
+        ]);
     }
 
     /**
@@ -85,7 +87,9 @@ class Ad extends Model
      */
     public function state(): BelongsTo
     {
-        return $this->belongsTo(State::class);
+        return $this->belongsTo(State::class)->withDefault([
+            'name' => 'N/A',
+        ]);
     }
 
     /**
@@ -93,7 +97,9 @@ class Ad extends Model
      */
     public function city(): BelongsTo
     {
-        return $this->belongsTo(City::class);
+        return $this->belongsTo(City::class)->withDefault([
+            'name' => 'N/A',
+        ]);
     }
 
     /**

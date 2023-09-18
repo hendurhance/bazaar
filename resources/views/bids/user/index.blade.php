@@ -14,12 +14,12 @@
                        <h3>Ads Listing</h3>
                        <form class="d-flex align-items-center">
                        <select name="status">
-                        <option> Show: All Listing (Filter)</option>
-                        <option value="pending">Show: Pending Listing</option>
-                        <option value="active">Show: Active Listing</option>
-                        <option value="upcoming">Show: Upcoming Listing</option>
-                        <option value="expired">Show: Expired Listing</option>
-                        <option value="rejected">Show: Rejected Listing</option>
+                        <option value=""> Show: All Listing (Filter)</option>
+                        <option value="pending" @selected(request()->status == 'pending')>Show: Pending Listing</option>
+                        <option value="active" @selected(request()->status == 'active')>Show: Active Listing</option>
+                        <option value="upcoming" @selected(request()->status == 'upcoming')>Show: Upcoming Listing</option>
+                        <option value="expired" @selected(request()->status == 'expired')>Show: Expired Listing</option>
+                        <option value="rejected" @selected(request()->status == 'rejected')>Show: Rejected Listing</option>
                      </select>
                      <button type="submit" class="filter-btn bg-dark text-white ml-2">Filter</button>
                     </form>
@@ -45,7 +45,7 @@
                                 <td data-label="Starting Price">${{ number_format($ad->price) }}</td>
                                 <td data-label="Timeframe">{{ $ad->started_at->format('d M Y') }} - {{ $ad->expired_at->format('d M Y') }}</td>
                                 <td data-label="Status" class="text-{{ $ad->status->color() }}">{{ $ad->status->label() }}</td>
-                                <td data-label="Action"><button class="eg-btn action-btn green text-white"><i class="bi bi-eye-fill"></i> View</button></td>
+                                <td data-label="Action"><a href="{{ route('user.ads.show', $ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-eye-fill"></i> View</a></td>
                              </tr>
                             @endforeach
                           </tbody>

@@ -108,6 +108,24 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     }
 
     /**
+     * Get user ad by slug
+     * 
+     * @param \App\Models\User $user
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getUserAd(User $user, string $slug): Ad
+    {
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'bids', 'bids.user:id,name,avatar,username', 'highestBid:id,amount'])
+            ->where('user_id', $user->id)
+            ->where('slug', $slug)
+            ->firstOr(function () {
+                #TODO: Create a custom exception for this
+                abort(404);
+            });
+    }
+
+    /**
      * Bid on an ad
      * 
      * @param string $ad_id

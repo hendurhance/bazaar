@@ -56,6 +56,7 @@ Route::group([
         Route::view('/dashboard', 'dashboard.user.index')->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.handle');
-        Route::get('/ads', [AdController::class, 'ads'])->name('ads');
+        Route::get('/ads', [AdController::class, 'userAds'])->name('ads');
+        Route::get('/ads/{ads:slug}', [AdController::class, 'showUserAds'])->name('ads.show');
     });
 });

@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="/assets/css/animate.css">
-<link rel="stylesheet" href="/assets/css/all.css">
+<link rel="stylesheet" href="https://amplifiedhq.github.io/fa-pro/css/all.css">
 <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 <link rel="stylesheet" href="/assets/css/boxicons.min.css">
 <link rel="stylesheet" href="/assets/css/bootstrap-icons.css">
