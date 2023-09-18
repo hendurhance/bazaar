@@ -161,12 +161,27 @@ if (!function_exists('get_random_avatar')) {
  * @param int $limit
  * @return string
  */
-if (!function_exists('shorten_characters')) {
-    function shorten_characters(string $title, int $limit = 30, bool $isHTML = false): string
+if (!function_exists('shorten_chars')) {
+    function shorten_chars(string $title, int $limit = 30, bool $isHTML = false): string
     {
         if ($isHTML) {
             $title = strip_tags($title);
         }
         return strlen($title) > $limit ? substr($title, 0, $limit) . '...' : $title;
+    }
+}
+
+/**
+ * Mask characters
+ * @param string $string
+ * @param int $start
+ * @param int $end
+ */
+if (!function_exists('mask_chars')) {
+    function mask_chars(string $string, int $start = 0, int $end = 0): string
+    {
+        $masked = substr($string, $start, strlen($string) - $end);
+        $masked = str_repeat('*', strlen($masked));
+        return substr_replace($string, $masked, $start, strlen($string) - $end);
     }
 }

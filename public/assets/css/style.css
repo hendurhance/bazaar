@@ -6790,8 +6790,8 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 }
 
 .form-wrapper input.error,
-.form-wrapper textarea.error, input.error{
-    border: 1px solid #d13a3a
+.form-wrapper textarea.error, input.error {
+    border: 1px solid #d13a3a !important;
 }
 
 .form-wrapper input,
@@ -9440,4 +9440,24 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 
 .small-countdown-text{
     font-size: 15px !important;
+}
+
+a.action-btn.eg-btn{
+    padding: 7px 5px !important;
+    height: 30px !important;
+    font-size: 14px !important;
+}
+
+.ad-listing-item span{
+    font-size: 14px;
+    font-weight: 600;
+    color: #585858;
+}
+
+.ad-listing-item p{
+    word-break: break-all;
+}
+
+.edit-btn{
+    border: 1px solid #0a0a0f;
 }

@@ -39,7 +39,7 @@
                 <div class="product-details-right  wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
                     <h3>{{ $ad->title }}</h3>
-                    <p class="para">{{ shorten_characters($ad->description, 150, true) }}</p>
+                    <p class="para">{{ shorten_chars($ad->description, 150, true) }}</p>
                     <h4>Bidding Price: <span>${{ number_format($ad->price) }}</span></h4>
                     @if($ad->active())
                     <div class="bid-form">
@@ -51,7 +51,7 @@
                             @csrf
                             @guest
                                 <x-alert type="warning" icon="bi bi-exclamation-circle-fill">
-                                    <p>You are currently not logged in. If you have an account, please <strong><a href="{{ route('user.login') }}">login</a> </strong> to place a bid to have a chance of winning this auction.</p>
+                                    <p class="mb-0">You are currently not logged in. If you have an account, please <strong><a href="{{ route('user.login') }}">login</a> </strong> to place a bid to have a chance of winning this auction.</p>
                                 </x-alert>
                             @endguest
                             <div class="form-inner gap-2">
@@ -64,11 +64,11 @@
                     @else
                     <x-alert type="dark" icon="bi bi-exclamation-circle-fill">
                         @if($ad->expired())
-                        <p class="text-dark">
+                        <p class="text-dark mb-0">
                             This ad listing has expired. You can no longer place a bid on this auction. Try checking out other auctions at <strong><a class="text-gray" href="{{ route('live-auction') }}">live auctions</a></strong> page.
                         </p>
                         @elseif($ad->upcoming())
-                        <p class="text-dark">
+                        <p class="text-dark mb-0">
                             This ad listing is yet to start. You can not place a bid on this auction yet. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
                         </p>
                         @endif

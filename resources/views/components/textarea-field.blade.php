@@ -5,7 +5,7 @@
 </div>
 {{-- include ckeditor --}}
 @push('scripts')
-<script src="assets/js/ckeditor.js"></script>
+<script src="/assets/js/ckeditor.js"></script>
 <script>
     ClassicEditor
         .create( document.querySelector( '#{{ $name }}' ), {

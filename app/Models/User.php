@@ -98,6 +98,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the bids for the user.
+     */
+    public function bids(): HasMany
+    {
+        return $this->hasMany(Bid::class);
+    }
+
+    /**
      * Get the country the user belongs to.
      */
     public function country(): BelongsTo

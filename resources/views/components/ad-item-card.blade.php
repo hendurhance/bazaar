@@ -12,7 +12,7 @@
             </div>
         </div>
         <div class="auction-content">
-            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_characters($ad->title)}}</a></h4>
+            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_chars($ad->title)}}</a></h4>
             <div class="author-price-area">
                 <div class="author">
                     <img alt="image" src="{{ $ad->user?->avatar  ?? get_random_avatar() }}"><span class="name">By
@@ -54,7 +54,7 @@
         <div class="c-feature-content">
             <div class="c-feature-category">{{ $ad->category->name }}</div>
             <a href="{{ route('auction-details', $ad->slug) }}">
-                <h4>{{ shorten_characters($ad->title)}}</h4>
+                <h4>{{ shorten_chars($ad->title)}}</h4>
             </a>
             <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
             <div class="auction-card-bttm">
@@ -105,7 +105,7 @@
         </div>
         <div class="auction-content">
             <div class="c-feature-category">{{ $ad->category->name }}</div>
-            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_characters($ad->title)}}</a></h4>
+            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_chars($ad->title)}}</a></h4>
             <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
@@ -146,7 +146,7 @@
             </div>
         </div>
         <div class="auction-content">
-            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_characters($ad->title)}}</a></h4>
+            <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_chars($ad->title)}}</a></h4>
             <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
