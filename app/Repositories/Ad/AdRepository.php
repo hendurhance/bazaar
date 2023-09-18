@@ -185,6 +185,18 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     }
 
     /**
+     * Get bids by user
+     * 
+     * @param User $user
+     * @param int $limit
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserBids(User $user, int $limit = 10): Collection|LengthAwarePaginator
+    {
+        return $user->bids()->with(['ad:id,title,slug,price,status', 'ad.media', 'ad.user:id,name,avatar,username'])->paginate($limit);
+    }
+
+    /**
      * Store an ad listing.
      * 
      * @param ?User $user|null

@@ -75,4 +75,13 @@ interface AdRepositoryInterface
      * @return void
      */
     public function bid(string $ad_id, User $user, array $data): void;
+
+    /**
+     * Get user bids
+     * 
+     * @param User $user
+     * @param int $limit
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getUserBids(User $user, int $limit = 10): Collection|LengthAwarePaginator;
 }

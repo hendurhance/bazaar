@@ -120,4 +120,16 @@ class AdController extends Controller
         $this->adRepository->updateUserAd($this->authRepository->user(), $ad, $request->validated());
         return redirect()->route('user.ads')->with('success', 'Your ad has been updated successfully.');
     }
+
+    /**
+     * List user bids.
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function listingBids(): View
+    {
+        return view('bids.user.listing-bids', [
+            'bids' => $this->adRepository->getUserBids($this->authRepository->user(), 10),
+        ]);
+    }
 }
