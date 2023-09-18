@@ -57,6 +57,16 @@ interface AdRepositoryInterface
     public function getUserAd(User $user, string $slug): Ad;
 
     /**
+     * Update an ad
+     * 
+     * @param \App\Models\User $user
+     * @param string $ad
+     * @param array $data
+     * @return void
+     */
+    public function updateUserAd(User $user, string $ad, array $data): void;
+
+    /**
      * Bid on an ad
      * 
      * @param string $ad_id

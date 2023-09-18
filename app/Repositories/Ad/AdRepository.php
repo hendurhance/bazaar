@@ -126,6 +126,32 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     }
 
     /**
+     * Update an ad
+     * 
+     * @param \App\Models\User $user
+     * @param string $ad
+     * @param array $data
+     * @return void
+     */
+    public function updateUserAd(User $user, string $ad, array $data): void
+    {
+        $ad = $this->model->where('user_id', $user->id)->where('slug', $ad)->firstOr(function () {
+            #TODO: Create a custom exception for this
+            abort(404);
+        });
+
+        $ad->update([
+            'title' => $data['title'] ?? $ad->title,
+            'description' => $data['description'] ?? $ad->description,
+            'price' => $data['price'] ?? $ad->price,
+            'video_url' => $data['video_url'] ?? $ad->video_url,
+            'seller_name' => $data['seller_name'] ?? $ad->seller_name,
+            'seller_mobile' => $data['seller_mobile'] ?? $ad->seller_mobile,
+            'seller_address' => $data['seller_address'] ?? $ad->seller_address,
+        ]);
+    }
+
+    /**
      * Bid on an ad
      * 
      * @param string $ad_id

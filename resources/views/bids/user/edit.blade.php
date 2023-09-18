@@ -14,6 +14,7 @@
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
                         <form class="w-100" action="{{ route('user.ads.edit.handle', $ad->slug) }}" method="POST">
                             @csrf
+                            @method('PUT')
                             <div class="row">
                                 <div class="form-section">
                                     <h4>Edit Lisiting Information</h4>
@@ -21,7 +22,7 @@
                                 <div class="col-md-12">
                                     <x-input-field name="title" type="text" label="Ad Title" placeholder="Enter Ad Title" value="{{ $ad->title }}" />
                                 </div>
-                                <div class="col-md-12">
+                            <div class="col-md-12">
                                     <x-textarea-field name="description" label="Ad Description"
                                         placeholder="Enter Description" value="{{ $ad->description }}" />
                                 </div>
