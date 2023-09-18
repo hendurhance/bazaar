@@ -1,8 +1,8 @@
 @extends('partials.app')
-@section('title', 'View Ads Listing - '.$ad->title)
+@section('title', 'View Ad Listing - '.$ad->title)
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'View Ads Listing'])
+@include('layouts.breadcrumb', ['pageTitle' => 'View Ad Listing', 'hasBack' => true, 'backUrl' => route('user.ads'), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">

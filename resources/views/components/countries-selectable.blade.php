@@ -1,17 +1,17 @@
-<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-6' }}">
+<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-12' }}">
     <div class="form-inner">
         <label>Country *</label>
         <select name="country" id="country">
             <option value="">Select Country</option>
             @foreach ($countries as $country)
-            <option value="{{ $country->iso2 }}"
+            <option value="{{ $country->iso2 }}" @selected($selectedFields[0] == $country->iso2)
                 >{{ $country->name }}</option>
             @endforeach
         </select>
         <span class="text-danger fs-6">{{ $errors->first('country') }}</span>
     </div>
 </div>
-<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-6' }}">
+<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-12' }}">
     <div class="form-inner">
         @if($hasLabels)
         <label>State *</label>
@@ -22,7 +22,7 @@
         <span class="text-danger fs-6">{{ $errors->first('state') }}</span>
     </div>
 </div>
-<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-6' }}">
+<div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-12' }}">
     <div class="form-inner">
         @if($hasLabels)
         <label>City *</label>
