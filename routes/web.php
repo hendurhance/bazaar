@@ -60,5 +60,7 @@ Route::group([
         Route::get('/ads/{ads:slug}', [AdController::class, 'showUserAd'])->name('ads.show');
         Route::get('/ads/{ads:slug}/edit', [AdController::class, 'editUserAd'])->name('ads.edit');
         Route::put('/ads/{ads:slug}/edit', [AdController::class, 'updateUserAd'])->name('ads.edit.handle');
+        
+        Route::get('/listing-bids', [AdController::class, 'listingBids'])->name('listing-bids');
     });
 });
