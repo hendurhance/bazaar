@@ -4,7 +4,7 @@
         <select name="country" id="country">
             <option value="">Select Country</option>
             @foreach ($countries as $country)
-            <option value="{{ $country->iso2 }}" @selected($selectedFields[0] == $country->iso2)
+            <option value="{{ $country->iso2 }}"
                 >{{ $country->name }}</option>
             @endforeach
         </select>

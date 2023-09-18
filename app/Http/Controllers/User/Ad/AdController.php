@@ -9,6 +9,7 @@ use App\Http\Requests\Ad\CreateAdRequest;
 use App\Http\Requests\Ad\CreateBidRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
 use App\Http\Requests\Ad\FilterUserAdsRequest;
+use App\Http\Requests\Ad\UpdateAdRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
@@ -112,11 +113,11 @@ class AdController extends Controller
      * Update user ad.
      * 
      * @param string $ad
-     * @param \App\Http\Requests\Ad\CreateAdRequest $request
+     * @param \App\Http\Requests\Ad\UpdateAdRequest $request
      */
-    public function updateUserAd(string $ad, CreateAdRequest $request): RedirectResponse
+    public function updateUserAd(string $ad, UpdateAdRequest $request): RedirectResponse
     {
-        // $this->adRepository->updateUserAd($this->authRepository->user(), $ad, $request->validated());
+        $this->adRepository->updateUserAd($this->authRepository->user(), $ad, $request->validated());
         return redirect()->route('user.ads')->with('success', 'Your ad has been updated successfully.');
     }
 }
