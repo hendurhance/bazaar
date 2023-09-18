@@ -88,9 +88,21 @@ class AdController extends Controller
      * @param string $ad
      * @return \Illuminate\View\View
      */
-    public function showUserAds(string $ad): View
+    public function showUserAd(string $ad): View
     {
         return view('bids.user.show', [
+            'ad' => $this->adRepository->getUserAd($this->authRepository->user(), $ad),
+        ]);
+    }
+
+    /**
+     * Edit user ad.
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function editUserAd(string $ad): View
+    {
+        return view('bids.user.edit', [
             'ad' => $this->adRepository->getUserAd($this->authRepository->user(), $ad),
         ]);
     }

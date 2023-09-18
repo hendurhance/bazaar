@@ -57,6 +57,7 @@ Route::group([
         Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.handle');
         Route::get('/ads', [AdController::class, 'userAds'])->name('ads');
-        Route::get('/ads/{ads:slug}', [AdController::class, 'showUserAds'])->name('ads.show');
+        Route::get('/ads/{ads:slug}', [AdController::class, 'showUserAd'])->name('ads.show');
+        Route::get('/ads/{ads:slug}/edit', [AdController::class, 'editUserAd'])->name('ads.edit');
     });
 });
