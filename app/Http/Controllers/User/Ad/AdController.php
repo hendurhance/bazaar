@@ -75,10 +75,23 @@ class AdController extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function ads(FilterUserAdsRequest $query): View
+    public function userAds(FilterUserAdsRequest $query): View
     {
         return view('bids.user.index', [
             'ads' => $this->adRepository->getUserAds($this->authRepository->user(), 10, $query->validated()),
+        ]);
+    }
+
+    /**
+     * Show user ad details.
+     * 
+     * @param string $ad
+     * @return \Illuminate\View\View
+     */
+    public function showUserAds(string $ad): View
+    {
+        return view('bids.user.show', [
+            'ad' => $this->adRepository->getUserAd($this->authRepository->user(), $ad),
         ]);
     }
 }

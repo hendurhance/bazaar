@@ -33,7 +33,7 @@ class LoginController extends Controller
     {
         $this->repository->login($request->validated(), self::GUARD);
 
-        return redirect()->route('user.dashboard');
+        return redirect()->intended(route('user.dashboard'));
     }
 
     /**

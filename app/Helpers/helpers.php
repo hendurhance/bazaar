@@ -170,3 +170,18 @@ if (!function_exists('shorten_chars')) {
         return strlen($title) > $limit ? substr($title, 0, $limit) . '...' : $title;
     }
 }
+
+/**
+ * Mask characters
+ * @param string $string
+ * @param int $start
+ * @param int $end
+ */
+if (!function_exists('mask_chars')) {
+    function mask_chars(string $string, int $start = 0, int $end = 0): string
+    {
+        $masked = substr($string, $start, strlen($string) - $end);
+        $masked = str_repeat('*', strlen($masked));
+        return substr_replace($string, $masked, $start, strlen($string) - $end);
+    }
+}

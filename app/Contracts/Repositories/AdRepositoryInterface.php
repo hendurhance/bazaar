@@ -48,6 +48,15 @@ interface AdRepositoryInterface
     public function getUserAds(User $user, int $limit = 10, array $filters = null): Collection|LengthAwarePaginator;
 
     /**
+     * Get user ad by slug
+     * 
+     * @param \App\Models\User $user
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getUserAd(User $user, string $slug): Ad;
+
+    /**
      * Bid on an ad
      * 
      * @param string $ad_id
