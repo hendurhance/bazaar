@@ -12,6 +12,20 @@
                 <div class="tab-pane">
                     <div class="table-title-area">
                     <h3>Listing Bids</h3>
+                    <form class="d-flex align-items-center">
+                        <select name="sort">
+                         <option value=""> Sort: All Bids (Sort ASC/DESC)</option>
+                         <option value="created+asc" @selected(request()->sort == 'created+asc')>Sort By: Created At (ASC)</option>
+                         <option value="created+desc" @selected(request()->sort == 'created+desc')>Sort By: Created At (DESC)</option>
+                         <option value="amount+asc" @selected(request()->sort == 'amount+asc')>Sort By: Bid Amount (ASC)</option>
+                         <option value="amount+desc" @selected(request()->sort == 'amount+desc')>Sort By: Bid Amount (DESC)</option>
+                         <option value="start+asc" @selected(request()->sort == 'start+asc')>Sort By : Start Date (ASC)</option>
+                         <option value="start+desc" @selected(request()->sort == 'start+desc')>Sort By : Start Date (DESC)</option>
+                         <option value="end+asc" @selected(request()->sort == 'end+asc')>Show: End Date (ASC)</option>
+                         <option value="end+desc" @selected(request()->sort == 'end+desc')>Show: End Date (DESC)</option>
+                      </select>
+                      <button type="submit" class="filter-btn bg-dark text-white ml-2">Sort</button>
+                     </form>
                     </div>
                     @if($bids->count() > 0)
                     <div class="table-wrapper">
@@ -37,9 +51,9 @@
                                     <td data-label="Action">
                                         @if($bid->is_accepted)
                                             @if($bid->payment?->status === \App\Enums\PaymentStatus::SUCCESS)
-                                            <a href="#" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Paid</a>
+                                            <a href="{{ route('user.listing-bids.show', $bid->ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Paid</a>
                                             @else
-                                            <a href="#" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</a>
+                                            <a href="{{ route('user.listing-bids.show', $bid->ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</a>
                                             @endif
                                         @else
                                         No Action

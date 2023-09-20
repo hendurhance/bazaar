@@ -185,3 +185,26 @@ if (!function_exists('mask_chars')) {
         return substr_replace($string, $masked, $start, strlen($string) - $end);
     }
 }
+
+/**
+ * Sort Query Parser
+ * @param string $sort
+ * @return array
+ */
+if (!function_exists('sort_query_parser')) {
+    function sort_query_parser(string $sort): array
+    {
+        $query = [
+            'created+asc' => ['created_at', 'asc'],
+            'created+desc' => ['created_at', 'desc'],
+            'amount+asc' => ['amount', 'asc'],
+            'amount+desc' => ['amount', 'desc'],
+            'start+asc' => ['started_at', 'asc'],
+            'start+desc' => ['started_at', 'desc'],
+            'end+asc' => ['expired_at', 'asc'],
+            'end+desc' => ['expired_at', 'desc'],
+        ];
+        $sort = urldecode($sort);
+        return $query[$sort] ?? $query['created+desc'];
+    }
+}

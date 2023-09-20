@@ -57,7 +57,7 @@
                             <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
                         </div>
                         <x-alert type="dark">
-                            <p class="text-center mb-0"><strong>Sorry!</strong> You have no ads listing currently. To add a listing, click <a href="{{ route('add-listing') }}" class="fw-bold">here</a>.</p>
+                            <p class="text-center mb-0"><strong>Sorry!</strong> You have no ad purchases yet. Ads you purchase will appear here.</p>
                         </x-alert>
                     </div>
                     @endif
