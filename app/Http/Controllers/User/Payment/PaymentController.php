@@ -22,6 +22,8 @@ class PaymentController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        return view();
+        return view('payments.user.index', [
+            'payments' => $this->paymentRepository->getUserPayments($this->authRepository->user(), 10)
+        ]);
     }
 }
