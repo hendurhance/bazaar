@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use App\Enums\PaymentGateway;
+use App\Enums\PaymentStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -19,8 +21,7 @@ class Payment extends Model
         'ad_id',
         'user_id',
         'bid_id',
-        'price',
-        'price',
+        'amount',
         'method',
         'txn_id',
         'status',
@@ -32,6 +33,17 @@ class Payment extends Model
         'payer_email',
         'gateway',
         'description'
+    ];
+
+     /**
+     * The attributes that should be cast.
+     * 
+     * @var array
+     */
+    protected $casts = [
+        'amount' => 'decimal:2',
+        'status' => PaymentStatus::class,
+        'gateway' => PaymentGateway::class,
     ];
 
     /**

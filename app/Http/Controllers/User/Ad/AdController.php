@@ -65,7 +65,7 @@ class AdController extends Controller
      */
     public function userAds(FilterUserAdsRequest $query): View
     {
-        return view('bids.user.index', [
+        return view('ads.user.index', [
             'ads' => $this->adRepository->getUserAds($this->authRepository->user(), 10, $query->validated()),
         ]);
     }
@@ -78,7 +78,7 @@ class AdController extends Controller
      */
     public function showUserAd(string $ad): View
     {
-        return view('bids.user.show', [
+        return view('ads.user.show', [
             'ad' => $this->adRepository->getUserAd($this->authRepository->user(), $ad),
         ]);
     }
@@ -91,7 +91,7 @@ class AdController extends Controller
      */
     public function editUserAd(string $ad): View
     {
-        return view('bids.user.edit', [
+        return view('ads.user.edit', [
             'ad' => $this->adRepository->getUserAd($this->authRepository->user(), $ad),
         ]);
     }

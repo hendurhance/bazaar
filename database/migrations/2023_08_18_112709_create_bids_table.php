@@ -17,7 +17,6 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->unsignedDecimal('amount', 12, 4)->nullable();
             $table->boolean('is_accepted')->nullable();
-            $table->foreignId('payment_id')->nullable()->constrained('payments')->onDelete('cascade');
             $table->timestamps();
         });
     }
