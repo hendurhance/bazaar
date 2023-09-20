@@ -151,7 +151,7 @@
                                             <td>{{ $bid->user->name }}</td>
                                             <td>${{ number_format($bid->amount) }}</td>
                                             <td>{{ $bid->created_at->format('d M Y h:i A') }}</td>
-                                            <td>{{ $bid->is_accepted ? 'Yes' : 'No' }}</td>
+                                            <td>{{ is_null($bid->is_accepted) ? 'Pending' : ( $bid->is_accepted ? 'Yes' : 'No' ) }}</td>
                                         </tr>
                                         @endforeach
                                     </tbody>
