@@ -8,7 +8,6 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
 use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
-use App\Exceptions\BidException;
 use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
@@ -149,51 +148,6 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'seller_mobile' => $data['seller_mobile'] ?? $ad->seller_mobile,
             'seller_address' => $data['seller_address'] ?? $ad->seller_address,
         ]);
-    }
-
-    /**
-     * Bid on an ad
-     * 
-     * @param string $ad_id
-     * @param User $user
-     * @param array $data
-     * @return void
-     */
-    public function bid(string $ad_id, User $user, array $data): void
-    {
-        $ad = $this->findBy('slug', $ad_id, function () {
-            abort(404);
-        });
-
-        if ($ad->user_id === $user->id) {
-            abort(403);
-        }
-
-        if(! $ad->active()) {
-            throw new BidException('You cannot bid on an inactive ad.', $ad->slug);
-        }
-
-        $bidHistory = $ad->bids()->orderBy('amount', 'desc')->first();
-        if ($bidHistory && $bidHistory->amount >= $data['amount']) {
-            throw new BidException('Your bid must be greater than the current bid.', $ad->slug);
-        }
-        
-        $ad->bids()->create([
-            'user_id' => $user->id,
-            'amount' => $data['amount'],
-        ]);
-    }
-
-    /**
-     * Get bids by user
-     * 
-     * @param User $user
-     * @param int $limit
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getUserBids(User $user, int $limit = 10): Collection|LengthAwarePaginator
-    {
-        return $user->bids()->with(['ad:id,title,slug,price,status,started_at,expired_at', 'ad.user:id,name,avatar,username'])->paginate($limit);
     }
 
     /**
