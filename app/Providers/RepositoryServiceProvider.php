@@ -6,10 +6,12 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Contracts\Repositories\CountryRepositoryInterface;
+use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Repositories\Auth\AuthenticateRepository;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Repositories\Ad\AdRepository;
+use App\Repositories\Payment\PaymentRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -39,6 +41,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             AdRepositoryInterface::class,
             AdRepository::class
+        );
+
+        $this->app->bind(
+            PaymentRepositoryInterface::class,
+            PaymentRepository::class
         );
     }
 }

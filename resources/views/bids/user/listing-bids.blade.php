@@ -28,7 +28,7 @@
                             <tbody>
                                 @foreach($bids as $bid)
                                 <tr>
-                                    <td data-label="Ad Title"><a href="{{ route('auction-details', $bid->ad->slug) }}" class="text-dark">{{ shorten_chars($bid->ad->title, 20) }}</a></td>
+                                    <td data-label="Ad Title"><a href="{{ route('auction-details', $bid->ad->slug) }}" class="text-dark">{{ shorten_chars($bid->ad->title, 25) }}</a></td>
                                     <td data-label="Timeframe">{{ $bid->ad->started_at->format('d M Y') }} - {{ $bid->ad->expired_at->format('d M Y') }}</td>
                                     <td data-label="Bid Amount">${{ number_format($bid->amount) }}</td>
                                     <td data-label="Status" class="text-{{ $bid->ad->status->color() }}">{{ $bid->ad->status->label() }}</td>
