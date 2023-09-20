@@ -5,6 +5,8 @@ use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Auth\LoginController;
 use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
+use App\Http\Controllers\User\Bid\BidController;
+use App\Http\Controllers\User\Payment\PaymentController;
 use App\Http\Controllers\User\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,7 +34,7 @@ Route::view('blog-details', 'pages.blog.show')->name('blog-details');
 Route::get('auction-details/{ads:slug}', [AdController::class, 'show'])->name('auction-details');
 Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
 Route::post('/add-listing', [AdController::class, 'store'])->name('add-listing.handle');
-Route::post('/bid/{ads:slug}', [AdController::class, 'bid'])->name('bid.handle')->middleware('auth:web');
+Route::post('/bid/{ads:slug}', [BidController::class, 'bid'])->name('bid.handle')->middleware('auth:web');
 /**
  * User Routes
  */
@@ -60,7 +62,8 @@ Route::group([
         Route::get('/ads/{ads:slug}', [AdController::class, 'showUserAd'])->name('ads.show');
         Route::get('/ads/{ads:slug}/edit', [AdController::class, 'editUserAd'])->name('ads.edit');
         Route::put('/ads/{ads:slug}/edit', [AdController::class, 'updateUserAd'])->name('ads.edit.handle');
-        
-        Route::get('/listing-bids', [AdController::class, 'listingBids'])->name('listing-bids');
+        Route::get('/listing-bids', [BidController::class, 'index'])->name('listing-bids');
+        Route::get('/listing-bids/{ads:slug}', [BidController::class, 'show'])->name('listing-bids.show');
+        Route::get('/purchase', [PaymentController::class, 'index'])->name('purchase');
     });
 });
