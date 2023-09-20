@@ -23,7 +23,7 @@ class BidController extends Controller
      */
     public function index(): \Illuminate\Contracts\View\View
     {
-        return view('bids.user.listing-bids', [
+        return view('bids.user.index', [
             'bids' => $this->bidRepository->getUserBids($this->authRepository->user(), 10)
         ]);
     }

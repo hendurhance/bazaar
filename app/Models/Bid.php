@@ -45,7 +45,7 @@ class Bid extends Model
     }
 
     /**
-     * Get the payment for the bid.
+     * Get the bid payment.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
      */
