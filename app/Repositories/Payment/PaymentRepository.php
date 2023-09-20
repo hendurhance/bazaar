@@ -16,16 +16,19 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
     }
 
     /**
-     * Get all accepted bids for the user, (paid and unpaid)
+     * Get all user payments
      * 
-     * @param int $userId
+     * @param \App\Models\User $user
      * @param int $limit
+     * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getAcceptedBids(User $user, int $limit = 10): LengthAwarePaginator
+    public function getUserPayments(User $user, int $limit = 10, array $filters = null): LengthAwarePaginator
     {
-        return $user->bids()->with(['ad:id,title,slug,price', 'user:id,name,avatar,username', 'payment:id,bid_id,amount,transaction_id'])
-            ->where('is_accepted', true)
+        return $this->model->query()->with([
+            'ad:id,title,slug',
+        ])->where('user_id', $user->id)
+            ->orderBy('created_at', 'desc')
             ->paginate($limit);
     }
 }
