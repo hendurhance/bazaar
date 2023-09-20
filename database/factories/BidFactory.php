@@ -18,7 +18,7 @@ class BidFactory extends Factory
     {
         return [
             'amount' => $this->faker->numberBetween(10000, 1000000),
-            'is_accepted' => $this->faker->boolean,
+            'is_accepted' => $this->faker->randomElement([null, true, false]),
         ];
     }
 

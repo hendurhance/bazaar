@@ -3,7 +3,6 @@
 namespace App\Contracts\Repositories;
 
 use App\Models\Ad;
-use App\Models\Bid;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -65,23 +64,4 @@ interface AdRepositoryInterface
      * @return void
      */
     public function updateUserAd(User $user, string $ad, array $data): void;
-
-    /**
-     * Bid on an ad
-     * 
-     * @param string $ad_id
-     * @param User $user
-     * @param array $data
-     * @return void
-     */
-    public function bid(string $ad_id, User $user, array $data): void;
-
-    /**
-     * Get user bids
-     * 
-     * @param User $user
-     * @param int $limit
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
-     */
-    public function getUserBids(User $user, int $limit = 10): Collection|LengthAwarePaginator;
 }
