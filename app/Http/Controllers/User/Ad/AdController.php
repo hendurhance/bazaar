@@ -6,7 +6,6 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateAdRequest;
-use App\Http\Requests\Ad\CreateBidRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
 use App\Http\Requests\Ad\FilterUserAdsRequest;
 use App\Http\Requests\Ad\UpdateAdRequest;
@@ -60,18 +59,6 @@ class AdController extends Controller
     }
 
     /**
-     * Bid on an ad.
-     * @param string $ad
-     * @param CreateBidRequest $request
-     * @return RedirectResponse
-     */
-    public function bid(string $ad, CreateBidRequest $request): RedirectResponse
-    {
-        $this->adRepository->bid($ad,$this->authRepository->user(), $request->validated());
-        return redirect()->route('auction-details', $ad)->with('success', 'Your bid has been placed successfully.');
-    }
-
-    /**
      * Get user ads.
      * 
      * @return \Illuminate\View\View
@@ -119,17 +106,5 @@ class AdController extends Controller
     {
         $this->adRepository->updateUserAd($this->authRepository->user(), $ad, $request->validated());
         return redirect()->route('user.ads')->with('success', 'Your ad has been updated successfully.');
-    }
-
-    /**
-     * List user bids.
-     * 
-     * @return \Illuminate\View\View
-     */
-    public function listingBids(): View
-    {
-        return view('bids.user.listing-bids', [
-            'bids' => $this->adRepository->getUserBids($this->authRepository->user(), 10),
-        ]);
     }
 }
