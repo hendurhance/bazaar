@@ -124,6 +124,21 @@ if (!function_exists('html_to_ckeditor')) {
 }
 
 /**
+ * Money format
+ * @param float $amount
+ * @return string
+ */
+if (!function_exists('money')) {
+    function money(float $amount): string
+    {
+        $defaultCurrency = config('payment.currencies.default');
+        $currency = config("payment.currencies.$defaultCurrency.symbol");
+
+        return $currency . number_format($amount);
+    }
+}
+
+/**
  * Get random dicebear avatar
  * @return string
  */

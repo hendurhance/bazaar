@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Enums\PaymentGateway;
 use App\Enums\PaymentStatus;
+use App\Traits\HasTransactionID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payment extends Model
 {
-    use HasFactory;
+    use HasFactory, HasTransactionID;
 
     /**
      * The attributes that are mass assignable.

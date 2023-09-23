@@ -37,7 +37,19 @@ class PaymentController extends Controller
      */
     public function pay(CreatePayRequest $request, string $bid): RedirectResponse
     {
-        $this->paymentRepository->pay($bid, $this->authRepository->user(), $request->payment_method);
-        return redirect()->route('user.listing-bids.show', $bid)->with('success', 'Payment successful.');
+        $url = $this->paymentRepository->pay($bid, $this->authRepository->user(), $request->payment_method);
+        return redirect($url);
+    }
+
+    /**
+     * Confirm payment
+     * 
+     * @param string $txnId
+     * @return RedirectResponse
+     */
+    public function confirm(string $txnId): RedirectResponse
+    {
+        $this->paymentRepository->confirm($txnId);
+        return redirect()->route('user.listing-bids')->with('success', 'Payment successful');
     }
 }

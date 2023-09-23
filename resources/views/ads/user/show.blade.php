@@ -60,7 +60,7 @@
                                 </div>
                                 <div class="ad-listing-item">
                                     <span>Starting Price:</span>
-                                    <h5>${{ number_format($ad->price) }}</h5>
+                                    <h5>{{ money($ad->price) }}</h5>
                                 </div>
                                 <div class="ad-listing-item">
                                     <span>Timeframe:</span>
@@ -149,7 +149,7 @@
                                         @foreach ($ad->bids->sortByDesc('created_at') as $bid)
                                         <tr class="{{ $bid->is_accepted ? 'table-success' : '' }}">
                                             <td>{{ $bid->user->name }}</td>
-                                            <td>${{ number_format($bid->amount) }}</td>
+                                            <td>{{ money($bid->amount) }}</td>
                                             <td>{{ $bid->created_at->format('d M Y h:i A') }}</td>
                                             <td>{{ is_null($bid->is_accepted) ? 'Pending' : ( $bid->is_accepted ? 'Yes' : 'No' ) }}</td>
                                         </tr>
