@@ -134,7 +134,7 @@ if (!function_exists('money')) {
         $defaultCurrency = config('payment.currencies.default');
         $currency = config("payment.currencies.$defaultCurrency.symbol");
 
-        return $currency . number_format($amount);
+        return $currency . ' ' . number_format($amount);
     }
 }
 

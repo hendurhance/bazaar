@@ -76,4 +76,13 @@ class Payment extends Model
     {
         return $this->belongsTo(Bid::class);
     }
+
+    /**
+     * Payment is paid
+     * 
+     */
+    public function paid(): bool
+    {
+        return $this->status === PaymentStatus::SUCCESS;
+    }
 }

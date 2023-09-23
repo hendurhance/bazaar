@@ -45,11 +45,10 @@ class PaymentController extends Controller
      * Confirm payment
      * 
      * @param string $txnId
-     * @return RedirectResponse
      */
-    public function confirm(string $txnId): RedirectResponse
+    public function confirm(string $txnId)
     {
-        $this->paymentRepository->confirm($txnId);
-        return redirect()->route('user.listing-bids')->with('success', 'Payment successful');
+        $bidID = $this->paymentRepository->confirm($txnId);
+        return redirect()->route('user.listing-bids.show', $bidID)->with('success', 'Payment successful');
     }
 }

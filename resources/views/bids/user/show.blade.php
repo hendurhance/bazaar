@@ -108,9 +108,9 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ $bid->payment->payment_id }}</td>
-                                    <td>{{ $bid->payment->payment_method }}</td>
-                                    <td>{{ $bid->payment->status }}</td>
+                                    <td>{{ $bid->payment->txn_id }}</td>
+                                    <td>{{ $bid->payment->gateway->label() }}</td>
+                                    <td class="text-{{ $bid->payment->status->color() }} fw-bold text-uppercase">{{ $bid->payment->status->label() }}</td>
                                     <td>{{ money($bid->payment->amount) }}</td>
                                     <td>{{ $bid->payment->created_at->format('d M Y h:i A') }}</td>
                                 </tr>

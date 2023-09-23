@@ -76,4 +76,33 @@ class PayWithFlutterwave implements PaymentGatewayServiceInterface
 
         return $result['data']['link'];
     }
+
+     /**
+     * Confirm payment
+     * 
+     * @param string $txnId
+     * @return array
+     */
+    public function confirm(string $txnId): array
+    {
+        $response = $this->client->request(
+            'POST',
+            $this->baseUrl.'transactions'.$txnId.'/verify',
+            [
+                'headers' => [
+                    'Authorization: Bearer ' . $this->secretKey,
+                    'Content-Type' => 'application/json',
+                ]
+            ]
+        );
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if (!$result['status'] === 'success') {
+            Log::error('Flutterwave payment error: ' . $result['message']);
+            throw new PaymentException('Unable to confirm payment.');
+        }
+
+        return $result['data'];
+    }
 }
