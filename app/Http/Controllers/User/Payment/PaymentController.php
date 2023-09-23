@@ -48,7 +48,8 @@ class PaymentController extends Controller
      */
     public function confirm(string $txnId)
     {
-        $bidID = $this->paymentRepository->confirm($txnId);
+        $transactionID = request()->query('transaction_id');
+        $bidID = $this->paymentRepository->confirm($txnId, $transactionID);
         return redirect()->route('user.listing-bids.show', $bidID)->with('success', 'Payment successful');
     }
 }

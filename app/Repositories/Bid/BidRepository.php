@@ -61,7 +61,7 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
      */
     public function getUserBids(User $user, int $limit = 10, array $filters = null): LengthAwarePaginator
     {
-        return $this->model->with(['ad:id,title,slug,price,status,started_at,expired_at', 'ad.user:id,name,avatar,username', 'payment:id,bid_id,amount,txn_id'])
+        return $this->model->with(['ad:id,title,slug,price,status,started_at,expired_at', 'ad.user:id,name,avatar,username', 'payment:id,bid_id,amount,txn_id,status'])
             ->where('user_id', $user->id)
             ->when($filters, function ($query, $filters) {
                 if (isset($filters['sort'])) {

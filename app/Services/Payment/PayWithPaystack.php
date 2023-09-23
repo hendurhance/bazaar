@@ -72,9 +72,10 @@ class PayWithPaystack implements PaymentGatewayServiceInterface
      * Confirm payment
      * 
      * @param string $txnId
+     * @param string $transactionID
      * @return array
      */
-    public function confirm(string $txnId): array
+    public function confirm(string $txnId, string $transactionID = null): array
     {
         $response = $this->client->get(
             $this->baseUrl . 'transaction/verify/' . $txnId,

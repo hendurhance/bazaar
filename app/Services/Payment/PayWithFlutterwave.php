@@ -61,7 +61,7 @@ class PayWithFlutterwave implements PaymentGatewayServiceInterface
                         'name' => $payment->user->name,
                     ],
                     'customizations' => [
-                        'title' => 'Payment for ad: ' . $payment->bid->ad->title,
+                        'title' => config('app.name'),
                     ]
                 ],
             ]
@@ -81,16 +81,16 @@ class PayWithFlutterwave implements PaymentGatewayServiceInterface
      * Confirm payment
      * 
      * @param string $txnId
+     * @param string $transactionID
      * @return array
      */
-    public function confirm(string $txnId): array
+    public function confirm(string $txnId, string $transactionID = null): array
     {
-        $response = $this->client->request(
-            'POST',
-            $this->baseUrl.'transactions'.$txnId.'/verify',
+        $response = $this->client->get(
+            $this->baseUrl.'transactions/'.$transactionID.'/verify',
             [
                 'headers' => [
-                    'Authorization: Bearer ' . $this->secretKey,
+                    'Authorization' => 'Bearer ' . $this->secretKey,
                     'Content-Type' => 'application/json',
                 ]
             ]
@@ -103,6 +103,14 @@ class PayWithFlutterwave implements PaymentGatewayServiceInterface
             throw new PaymentException('Unable to confirm payment.');
         }
 
-        return $result['data'];
+        // return $result['data'];
+        return [
+            'currency' => $result['data']['currency'] ?? $this->currency,
+            'payer_email' => $result['data']['customer']['email'] ?? null,
+            'client_ip' => $result['data']['ip'] ?? null,
+            'token' => $result['data']['card']['token'] ?? null,
+            'card_last4' => $result['data']['card']['last_4digits'] ?? null,
+            'method' => $result['data']['payment_type'] ?? null,
+        ];
     }
 }
