@@ -13,4 +13,12 @@ interface PaymentGatewayServiceInterface
      * @return string
      */
     public function pay(Payment $payment): string;
+
+    /**
+     * Confirm payment
+     * 
+     * @param string $txnId
+     * @return array
+     */
+    public function confirm(string $txnId): array;
 }

@@ -27,4 +27,12 @@ interface PaymentRepositoryInterface
      * @return void
      */
     public function pay(string $bid, User $user, string $method): string;
+
+    /**
+     * Confirm payment
+     * 
+     * @param string $txnId
+     * @return string
+     */
+    public function confirm(string $txnId): string;
 }

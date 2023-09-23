@@ -6,9 +6,11 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Payment;
 use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Enums\PaymentGateway;
+use App\Enums\PaymentStatus;
 use App\Exceptions\PaymentException;
 use App\Models\User;
 use App\Repositories\Bid\BidRepository;
+use App\Services\Payment\PaymentGatewayService;
 use App\Services\Payment\PayWithFlutterwave;
 use App\Services\Payment\PayWithPaystack;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -63,7 +65,7 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
         try {
             $payment = $this->createPayment($bid, $user, $paymentMethod);
 
-            $response = (new PayWithFlutterwave())->pay($payment);
+            $response = (new PaymentGatewayService(PaymentGateway::from($paymentMethod)))->pay($payment);
 
             $this->model->getConnection()->commit();
 
@@ -71,6 +73,41 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
         } catch (\Exception $e) {
             $this->model->getConnection()->rollBack();
             // throw new PaymentException('Payment failed. Please try again.');
+            throw $e;
+        }
+    }
+
+    /**
+     * Confirm payment
+     * 
+     * @param string $txnId
+     * @return void
+     */
+    public function confirm(string $txnId): string
+    {
+        $payment = $this->findBy('txn_id', $txnId, function () {
+            throw new PaymentException('Payment not found.');
+        });
+
+        if ($payment->paid()) {
+            throw new PaymentException('Payment has already been confirmed.');
+        }
+
+        $this->model->getConnection()->beginTransaction();
+        try {
+            $response = (new PaymentGatewayService($payment->gateway))->confirm($payment->txn_id);
+
+            $payment->update([
+                ...$response,
+                'status' => PaymentStatus::SUCCESS,
+            ]);
+
+            $this->model->getConnection()->commit();
+
+            return $payment->bid_id;
+        } catch (\Exception $e) {
+            $this->model->getConnection()->rollBack();
+            // throw new PaymentException('Payment confirmation failed. Please try again.');
             throw $e;
         }
     }
