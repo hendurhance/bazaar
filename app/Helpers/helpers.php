@@ -21,6 +21,18 @@ if (!function_exists('generate_verify_token')) {
 }
 
 /**
+ * Generate Transaction ID.
+ * @param string $prefix
+ * @return string
+ */
+if (!function_exists('generate_txn_id')) {
+    function generate_txn_id(string $prefix = 'TXN'): string
+    {
+        return $prefix . '-' . time() . '-' . bin2hex(random_bytes(4));
+    }
+}
+
+/**
  * Generate password reset token.
  * @param string $email
  * @return string

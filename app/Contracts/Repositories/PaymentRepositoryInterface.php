@@ -17,4 +17,14 @@ interface PaymentRepositoryInterface
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getUserPayments(User $user, int $limit = 10, array $filters = null): LengthAwarePaginator;
+
+    /**
+     * Pay for an ad
+     * 
+     * @param string $bid
+     * @param \App\Models\User $user
+     * @param string $method
+     * @return void
+     */
+    public function pay(string $bid, User $user, string $method): void;
 }
