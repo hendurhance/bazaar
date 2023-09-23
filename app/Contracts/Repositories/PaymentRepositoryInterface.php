@@ -26,5 +26,5 @@ interface PaymentRepositoryInterface
      * @param string $method
      * @return void
      */
-    public function pay(string $bid, User $user, string $method): void;
+    public function pay(string $bid, User $user, string $method): string;
 }

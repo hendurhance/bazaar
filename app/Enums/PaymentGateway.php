@@ -8,14 +8,12 @@ use App\Contracts\Types\HasLabel;
 
 enum PaymentGateway: int implements HasAll, HasColor, HasLabel
 {
-    case STRIPE = 0;
-    case PAYSTACK = 1;
-    case FLUTTERWAVE = 2;
+    case PAYSTACK = 0;
+    case FLUTTERWAVE = 1;
 
     public static function all(): array
     {
         return [
-            self::STRIPE,
             self::PAYSTACK,
             self::FLUTTERWAVE,
         ];
@@ -24,7 +22,6 @@ enum PaymentGateway: int implements HasAll, HasColor, HasLabel
     public function color(): string
     {
         return match ($this) {
-            self::STRIPE => 'primary',
             self::PAYSTACK => 'success',
             self::FLUTTERWAVE => 'warning',
         };
@@ -33,7 +30,6 @@ enum PaymentGateway: int implements HasAll, HasColor, HasLabel
     public function label(): string
     {
         return match ($this) {
-            self::STRIPE => 'Stripe',
             self::PAYSTACK => 'Paystack',
             self::FLUTTERWAVE => 'Flutterwave',
         };

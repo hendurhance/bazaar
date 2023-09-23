@@ -8,6 +8,9 @@ use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Enums\PaymentGateway;
 use App\Exceptions\PaymentException;
 use App\Models\User;
+use App\Repositories\Bid\BidRepository;
+use App\Services\Payment\PayWithFlutterwave;
+use App\Services\Payment\PayWithPaystack;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryInterface
@@ -40,9 +43,9 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
      * @param string $bid
      * @param \App\Models\User $user
      * @param string $paymentMethod
-     * @return void
+     * @return string
      */
-    public function pay(string $bid, User $user, string $paymentMethod): void
+    public function pay(string $bid, User $user, string $paymentMethod): string
     {
         $bid = app(BidRepository::class)->findBy('id', $bid, function () {
             abort(404);
@@ -58,14 +61,17 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
         // Begin transaction, then perform payment
         $this->model->getConnection()->beginTransaction();
         try {
-            $this->createPayment($bid, $user, $paymentMethod);
+            $payment = $this->createPayment($bid, $user, $paymentMethod);
 
-            #TODO: Perform payment using payment service here
-            
+            $response = (new PayWithFlutterwave())->pay($payment);
+
             $this->model->getConnection()->commit();
+
+            return $response;
         } catch (\Exception $e) {
             $this->model->getConnection()->rollBack();
-            throw new PaymentException('Payment failed.');
+            // throw new PaymentException('Payment failed. Please try again.');
+            throw $e;
         }
     }
 
@@ -81,6 +87,7 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
     {
         return $this->model->create([
             'bid_id' => $bid->id,
+            'ad_id' => $bid->ad_id,
             'user_id' => $user->id,
             'amount' => $bid->amount,
             'gateway' => PaymentGateway::from($paymentMethod),

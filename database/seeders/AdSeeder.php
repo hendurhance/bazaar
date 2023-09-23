@@ -37,11 +37,15 @@ class AdSeeder extends Seeder
         $ads->each(function ($ad) {
             $medias = Media::factory()->count(2)->create();
             $ad->media()->saveMany($medias);
-            // create a bid for each ad using random user
-            $bid = BidFactory::new()->count(rand(3, 5))->create([
-                'ad_id' => $ad->id,
-                'user_id' => User::where('id', '!=', $ad->user_id)->inRandomOrder()->first()->id,
-            ]);
+            // I want diffrent 5-10 users to bid on the ad except the ad owner
+            $users = User::where('id', '!=', $ad->user_id)->inRandomOrder()->limit(rand(5, 10))->get();
+            $users->each(function ($user) use ($ad) {
+                $bid = BidFactory::new([
+                    'amount' => $ad->price + rand(100, 1000),
+                ])->make();
+                $bid->user_id = $user->id;
+                $ad->bids()->save($bid);
+            });
         });
     }
 }

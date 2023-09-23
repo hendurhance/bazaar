@@ -15,7 +15,7 @@ return [
     */
 
     'flutterwave' => [
-        'payment_url' => 'https://api.flutterwave.com/v3/payments',
+        'base_url' => 'https://api.flutterwave.com/v3/',
         'secret_key' => env('FLUTTERWAVE_SECRET_KEY'),
         'public_key' => env('FLUTTERWAVE_PUBLIC_KEY'),
         'encryption_key' => env('FLUTTERWAVE_ENCRYPTION_KEY'),
@@ -23,21 +23,14 @@ return [
     ],
 
     'paystack' => [
-        'payment_url' => 'https://api.paystack.co/charge',
+        'base_url' => 'https://api.paystack.co/',
         'secret_key' => env('PAYSTACK_SECRET_KEY'),
         'public_key' => env('PAYSTACK_PUBLIC_KEY'),
         'redirect_url' => env('PAYSTACK_REDIRECT_URL'),
     ],
 
-    'stripe' => [
-        'payment_url' => 'https://stripe.com/docs/payments/accept-a-payment-charges',
-        'secret_key' => env('STRIPE_SECRET_KEY'),
-        'public_key' => env('STRIPE_PUBLIC_KEY'),
-        'redirect_url' => env('STRIPE_REDIRECT_URL'),
-    ],
-
     'currencies' => [
-        'default' => 'USD',
+        'default' => 'NGN',
 
         'NGN' => [
             'name' => 'Nigerian Naira',

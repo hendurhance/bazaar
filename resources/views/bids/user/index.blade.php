@@ -45,7 +45,7 @@
                                 <tr>
                                     <td data-label="Ad Title"><a href="{{ route('auction-details', $bid->ad->slug) }}" class="text-dark">{{ shorten_chars($bid->ad->title, 25) }}</a></td>
                                     <td data-label="Timeframe">{{ $bid->ad->started_at->format('d M Y') }} - {{ $bid->ad->expired_at->format('d M Y') }}</td>
-                                    <td data-label="Bid Amount">${{ number_format($bid->amount) }}</td>
+                                    <td data-label="Bid Amount">{{ money($bid->amount) }}</td>
                                     <td data-label="Status" class="text-{{ $bid->ad->status->color() }}">{{ $bid->ad->status->label() }}</td>
                                     <td data-label="Bid Status" class="text-{{ is_null($bid->is_accepted) ? 'warning' : ( $bid->is_accepted ? 'success' : 'danger' ) }}">{{ is_null($bid->is_accepted) ? 'Pending' : ( $bid->is_accepted ? 'Accepted' : 'Rejected' ) }}</td>
                                     <td data-label="Action">
