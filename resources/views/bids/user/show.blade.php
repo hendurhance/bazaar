@@ -46,7 +46,7 @@
                                 </div>
                                 <div class="ad-listing-item">
                                     <span>Starting Price:</span>
-                                    <h5>${{ number_format($bid->ad->price) }}</h5>
+                                    <h5>{{ money($bid->ad->price) }}</h5>
                                 </div>
                                 <div class="ad-listing-item">
                                     <span>Timeframe:</span>
@@ -82,7 +82,7 @@
                                     <td>{{ $bid->user->name }}</td>
                                     <td>{{ $bid->user->email }}</td>
                                     <td>{{ $bid->user->mobile }}</td>
-                                    <td>${{ number_format($bid->amount) }}</td>
+                                    <td>{{ money($bid->amount) }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -108,10 +108,10 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td>{{ $bid->payment->payment_id }}</td>
-                                    <td>{{ $bid->payment->payment_method }}</td>
-                                    <td>{{ $bid->payment->status }}</td>
-                                    <td>${{ number_format($bid->payment->amount) }}</td>
+                                    <td>{{ $bid->payment->txn_id }}</td>
+                                    <td>{{ $bid->payment->gateway->label() }}</td>
+                                    <td class="text-{{ $bid->payment->status->color() }} fw-bold text-uppercase">{{ $bid->payment->status->label() }}</td>
+                                    <td>{{ money($bid->payment->amount) }}</td>
                                     <td>{{ $bid->payment->created_at->format('d M Y h:i A') }}</td>
                                 </tr>
                             </tbody>
@@ -122,24 +122,7 @@
                         <h3>Payment Details:</h3>
                         <p class="text-danger text-center">Payment Pending</p>
                         <div class="d-flex justify-content-center mt-4 ">
-                            <div class="form-wrapper">
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <x-input-field name="amount" type="number" label="Amount" placeholder="Enter Amount" value="{{ $bid->amount }}" :disabled="true" :readonly="true" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <x-input-field name="payment_method" type="text" label="Payment Method" placeholder="Enter Payment Method" value="{{ old('payment_method') }}" />
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="button-group">
-                                               <button type="submit" class="account-btn"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</button>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <x-payable-form :bid="$bid" />
                         </div>
                     </div>
                     @elseif($bid->is_accepted && $bid->payment?->status === \App\Enums\PaymentStatus::FAILED)
@@ -147,24 +130,7 @@
                         <h3>Payment Details:</h3>
                         <p class="text-danger text-center">Payment Failed</p>
                         <div class="d-flex justify-content-center mt-4 ">
-                            <div class="form-wrapper">
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <x-input-field name="amount" type="number" label="Amount" placeholder="Enter Amount" value="{{ $bid->amount }}" :disabled="true" :readonly="true" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <x-input-field name="payment_method" type="text" label="Payment Method" placeholder="Enter Payment Method" value="{{ old('payment_method') }}" />
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="button-group">
-                                               <button type="submit" class="account-btn"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</button>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <x-payable-form :bid="$bid" />
                         </div>
                     </div>
                     @elseif ($bid->is_accepted && !$bid->payment)
@@ -172,24 +138,7 @@
                         <h3>Payment Details:</h3>
                         <p class="text-danger text-center">No Payment Details</p>
                         <div class="d-flex justify-content-center mt-4 ">
-                            <div class="form-wrapper">
-                                <form action="#" method="POST">
-                                    @csrf
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <x-input-field name="amount" type="number" label="Amount" placeholder="Enter Amount" value="{{ $bid->amount }}" :disabled="true" :readonly="true" />
-                                        </div>
-                                        <div class="col-md-6">
-                                            <x-input-field name="payment_method" type="text" label="Payment Method" placeholder="Enter Payment Method" value="{{ old('payment_method') }}" />
-                                        </div>
-                                        <div class="col-12">
-                                            <div class="button-group">
-                                               <button type="submit" class="account-btn"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</button>
-                                            </div>
-                                         </div>
-                                    </div>
-                                </form>
-                            </div>
+                            <x-payable-form :bid="$bid"/>
                         </div>
                     </div>
                     @endif

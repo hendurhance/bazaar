@@ -31,16 +31,12 @@ trait HasSlug
         $slug = Str::slug($this->title ?? $this->name);
 
         $latestSlug =
-            static::whereRaw("slug RLIKE '^{$slug}(-[0-9]+)?$'")
+            static::whereRaw("slug = '{$slug}'")
                 ->latest('id')
                 ->value('slug');
 
         if ($latestSlug) {
-            $pieces = explode('-', $latestSlug);
-
-            $number = intval(end($pieces));
-
-            $slug .= '-' . ($number + 1);
+            $slug .= '-' . uniqid();
         }
 
         return $slug;

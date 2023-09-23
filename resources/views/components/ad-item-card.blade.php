@@ -19,7 +19,7 @@
                         {{ $ad->user->name }}</span>
                         </span>
                 </div>
-                <p>${{ number_format($ad->price) }}</p>
+                <p>{{ money($ad->price) }}</p>
             </div>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
@@ -56,7 +56,7 @@
             <a href="{{ route('auction-details', $ad->slug) }}">
                 <h4>{{ shorten_chars($ad->title)}}</h4>
             </a>
-            <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
+            <p>Bidding Price : <span>{{ money($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary2 btn--sm">View
                     Details</a>
@@ -106,7 +106,7 @@
         <div class="auction-content">
             <div class="c-feature-category">{{ $ad->category->name }}</div>
             <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_chars($ad->title)}}</a></h4>
-            <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
+            <p>Bidding Price : <span>{{ money($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                 <div class="share-area">
@@ -147,7 +147,7 @@
         </div>
         <div class="auction-content">
             <h4><a href="{{ route('auction-details', $ad->slug) }}">{{ shorten_chars($ad->title)}}</a></h4>
-            <p>Bidding Price : <span>${{ number_format($ad->price) }}</span></p>
+            <p>Bidding Price : <span>{{ money($ad->price) }}</span></p>
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary btn--sm">Place a
                     Bid</a>
