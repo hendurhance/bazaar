@@ -51,9 +51,9 @@
                                     <td data-label="Action">
                                         @if($bid->is_accepted)
                                             @if($bid->payment?->status === \App\Enums\PaymentStatus::SUCCESS)
-                                            <a href="{{ route('user.listing-bids.show', $bid->ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Paid</a>
+                                            <a href="{{ route('user.listing-bids.show', $bid->id) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Paid</a>
                                             @else
-                                            <a href="{{ route('user.listing-bids.show', $bid->ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</a>
+                                            <a href="{{ route('user.listing-bids.show', $bid->id) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</a>
                                             @endif
                                         @else
                                         No Action

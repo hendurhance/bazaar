@@ -63,7 +63,8 @@ Route::group([
         Route::get('/ads/{ads:slug}/edit', [AdController::class, 'editUserAd'])->name('ads.edit');
         Route::put('/ads/{ads:slug}/edit', [AdController::class, 'updateUserAd'])->name('ads.edit.handle');
         Route::get('/listing-bids', [BidController::class, 'index'])->name('listing-bids');
-        Route::get('/listing-bids/{ads:slug}', [BidController::class, 'show'])->name('listing-bids.show');
+        Route::get('/listing-bids/{bids:id}', [BidController::class, 'show'])->name('listing-bids.show');
+        Route::post('/pay/{bids:id}', [PaymentController::class, 'pay'])->name('pay');
         Route::get('/purchase', [PaymentController::class, 'index'])->name('purchase');
     });
 });

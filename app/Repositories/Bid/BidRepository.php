@@ -74,18 +74,14 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
     /**
      * Get user bid
      * 
-     * @param string $ad
+     * @param string $bid
      * @param User $user
      * @return \App\Models\Bid
      */
-    public function getUserBid(string $ad, User $user): \App\Models\Bid
+    public function getUserBid(string $bid, User $user): \App\Models\Bid
     {
-        $ad = app(AdRepository::class)->findBy('slug', $ad, function () {
-            abort(404);
-        });
-
         return $this->model->with(['ad:id,title,slug,price,status,started_at,expired_at', 'ad.user:id,name,avatar,username', 'payment:id,bid_id,amount,txn_id'])
-            ->where('ad_id', $ad->id)->where('user_id', $user->id)->firstOr(function () {
+            ->where('id', $bid)->where('user_id', $user->id)->firstOr(function () {
                 abort(404);
             });
     }

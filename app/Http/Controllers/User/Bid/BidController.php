@@ -45,14 +45,14 @@ class BidController extends Controller
      * Show bid details. 
      * {@inheritDoc} Show Bid for Payment
      * 
-     * @param string $ad
+     * @param string $bid
      * @return \Illuminate\Contracts\View\View
      * 
      */
-    public function show(string $ad): \Illuminate\Contracts\View\View
+    public function show(string $bid): \Illuminate\Contracts\View\View
     {
         return view('bids.user.show', [
-            'bid' => $this->bidRepository->getUserBid($ad, $this->authRepository->user()),
+            'bid' => $this->bidRepository->getUserBid($bid, $this->authRepository->user()),
         ]);
     }
 }

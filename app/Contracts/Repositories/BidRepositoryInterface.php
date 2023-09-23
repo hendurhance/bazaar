@@ -31,9 +31,9 @@ interface BidRepositoryInterface
     /**
      * Get user bid
      * 
-     * @param string $ad
+     * @param string $bid
      * @param User $user
      * @return \App\Models\Bid
      */
-    public function getUserBid(string $ad, User $user): \App\Models\Bid;
+    public function getUserBid(string $bid, User $user): \App\Models\Bid;
 }

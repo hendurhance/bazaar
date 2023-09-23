@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
             $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
-            $table->foreignId('bid_id')->constrained('bids')->onDelete('cascade');
+            $table->foreignUuid('bid_id')->constrained('bids')->onDelete('cascade');
             $table->unsignedDecimal('amount', 12, 4)->nullable();
             $table->string('method')->nullable();
             $table->string('txn_id')->index()->nullable();
