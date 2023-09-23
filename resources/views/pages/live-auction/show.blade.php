@@ -40,12 +40,12 @@
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
                     <h3>{{ $ad->title }}</h3>
                     <p class="para">{{ shorten_chars($ad->description, 150, true) }}</p>
-                    <h4>Bidding Price: <span>${{ number_format($ad->price) }}</span></h4>
+                    <h4>Bidding Price: <span>{{ money($ad->price) }}</span></h4>
                     @if($ad->active())
                     <div class="bid-form">
                         <div class="form-title">
                             <h5>Bid Now</h5>
-                            <p>Bid Amount : Minimum Bid ${{ number_format($ad->highestBid->amount ?? $ad->price + 1) }}</p>
+                            <p>Bid Amount : Minimum Bid {{ money($ad->highestBid->amount ?? $ad->price + 1) }}</p>
                         </div>
                         <form action="{{ route('bid.handle', $ad->slug) }}" method="POST">
                             @csrf
@@ -121,7 +121,7 @@
                                                     <a href="#">
                                                         <h6>{{ $bid->user->name }}</h6>
                                                     </a>
-                                                    <p> ${{ number_format($bid->amount) }} </p>
+                                                    <p> {{ money($bid->amount) }} </p>
                                                 </div>
                                             </div>
                                         </div>

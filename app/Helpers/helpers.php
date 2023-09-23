@@ -21,6 +21,18 @@ if (!function_exists('generate_verify_token')) {
 }
 
 /**
+ * Generate Transaction ID.
+ * @param string $prefix
+ * @return string
+ */
+if (!function_exists('generate_txn_id')) {
+    function generate_txn_id(string $prefix = 'TXN'): string
+    {
+        return $prefix . '-' . time() . '-' . bin2hex(random_bytes(4));
+    }
+}
+
+/**
  * Generate password reset token.
  * @param string $email
  * @return string
@@ -108,6 +120,21 @@ if (!function_exists('html_to_ckeditor')) {
     function html_to_ckeditor(string $html): string
     {
         return str_replace(['<p>', '</p>'], '', $html);
+    }
+}
+
+/**
+ * Money format
+ * @param float $amount
+ * @return string
+ */
+if (!function_exists('money')) {
+    function money(float $amount): string
+    {
+        $defaultCurrency = config('payment.currencies.default');
+        $currency = config("payment.currencies.$defaultCurrency.symbol");
+
+        return $currency . ' ' . number_format($amount);
     }
 }
 

@@ -42,7 +42,7 @@
                             <tr>
                                 <td data-label="Image"><img alt="image" src="{{ $ad->media->first()->url }}" class="img-fluid"></td>
                                 <td data-label="Ads Title">{{ shorten_chars($ad->title, 20) }}</td>
-                                <td data-label="Starting Price">${{ number_format($ad->price) }}</td>
+                                <td data-label="Starting Price">{{ money($ad->price) }}</td>
                                 <td data-label="Timeframe">{{ $ad->started_at->format('d M Y') }} - {{ $ad->expired_at->format('d M Y') }}</td>
                                 <td data-label="Status" class="text-{{ $ad->status->color() }}">{{ $ad->status->label() }}</td>
                                 <td data-label="Action">

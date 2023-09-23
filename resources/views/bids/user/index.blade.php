@@ -45,15 +45,15 @@
                                 <tr>
                                     <td data-label="Ad Title"><a href="{{ route('auction-details', $bid->ad->slug) }}" class="text-dark">{{ shorten_chars($bid->ad->title, 25) }}</a></td>
                                     <td data-label="Timeframe">{{ $bid->ad->started_at->format('d M Y') }} - {{ $bid->ad->expired_at->format('d M Y') }}</td>
-                                    <td data-label="Bid Amount">${{ number_format($bid->amount) }}</td>
+                                    <td data-label="Bid Amount">{{ money($bid->amount) }}</td>
                                     <td data-label="Status" class="text-{{ $bid->ad->status->color() }}">{{ $bid->ad->status->label() }}</td>
                                     <td data-label="Bid Status" class="text-{{ is_null($bid->is_accepted) ? 'warning' : ( $bid->is_accepted ? 'success' : 'danger' ) }}">{{ is_null($bid->is_accepted) ? 'Pending' : ( $bid->is_accepted ? 'Accepted' : 'Rejected' ) }}</td>
                                     <td data-label="Action">
                                         @if($bid->is_accepted)
                                             @if($bid->payment?->status === \App\Enums\PaymentStatus::SUCCESS)
-                                            <a href="{{ route('user.listing-bids.show', $bid->ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Paid</a>
+                                            <a href="{{ route('user.listing-bids.show', $bid->id) }}" class="eg-btn action-btn green text-white bg-secondary"><i class="bi bi-credit-card-2-front-fill"></i> Paid</a>
                                             @else
-                                            <a href="{{ route('user.listing-bids.show', $bid->ad->slug) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</a>
+                                            <a href="{{ route('user.listing-bids.show', $bid->id) }}" class="eg-btn action-btn green text-white"><i class="bi bi-credit-card-2-front-fill"></i> Pay Now</a>
                                             @endif
                                         @else
                                         No Action
