@@ -32,7 +32,8 @@ interface PaymentRepositoryInterface
      * Confirm payment
      * 
      * @param string $txnId
+     * @param string $transaction_id
      * @return string
      */
-    public function confirm(string $txnId): string;
+    public function confirm(string $txnId, string $transaction_id = null): string;
 }

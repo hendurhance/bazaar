@@ -36,10 +36,11 @@ class PaymentGatewayService implements PaymentGatewayServiceInterface
     * Confirm payment
     * 
     * @param string $txnId
+    * @param string $transactionID
     * @return array
     */
-   public function confirm(string $txnId): array
+   public function confirm(string $txnId, string $transactionID = null): array
     {
-         return $this->service->confirm($txnId);
+         return $this->service->confirm($txnId, $transactionID);
     }
 }

@@ -81,9 +81,10 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
      * Confirm payment
      * 
      * @param string $txnId
+     * @param string $transactionID
      * @return void
      */
-    public function confirm(string $txnId): string
+    public function confirm(string $txnId, string $transactionID = null): string
     {
         $payment = $this->findBy('txn_id', $txnId, function () {
             throw new PaymentException('Payment not found.');
@@ -95,7 +96,7 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
 
         $this->model->getConnection()->beginTransaction();
         try {
-            $response = (new PaymentGatewayService($payment->gateway))->confirm($payment->txn_id);
+            $response = (new PaymentGatewayService($payment->gateway))->confirm($payment->txn_id, $transactionID);
 
             $payment->update([
                 ...$response,
@@ -107,8 +108,7 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
             return $payment->bid_id;
         } catch (\Exception $e) {
             $this->model->getConnection()->rollBack();
-            // throw new PaymentException('Payment confirmation failed. Please try again.');
-            throw $e;
+            throw new PaymentException('Payment confirmation failed. Please try again.');
         }
     }
 
