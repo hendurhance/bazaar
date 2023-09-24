@@ -7,6 +7,8 @@ use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\Bid\BidController;
 use App\Http\Controllers\User\Payment\PaymentController;
+use App\Http\Controllers\User\Payout\PayoutController;
+use App\Http\Controllers\User\Payout\PayoutMethodController;
 use App\Http\Controllers\User\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -68,5 +70,12 @@ Route::group([
         Route::get('/confirm-payment/{payments:txn_id}', [PaymentController::class, 'confirm'])->name('confirm-payment');
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('/payments/{payments:txn_id}', [PaymentController::class, 'show'])->name('payments.show');
+        Route::get('/payouts', [PayoutController::class, 'index'])->name('payouts');
+        Route::get('/payouts/{payouts:id}', [PayoutController::class, 'show'])->name('payouts.show');
+        // Route::get('/payout-methods', [PayoutMethodController::class, 'index'])->name('payout-methods');
+        // Route::get('/payout-methods/{payoutMethods:id}', [PayoutMethodController::class, 'show'])->name('payout-methods.show');
+        // Route::post('/payout-methods', [PayoutMethodController::class, 'store'])->name('payout-methods.store');
+        // Route::put('/payout-methods/{payoutMethods:id}', [PayoutMethodController::class, 'update'])->name('payout-methods.update');
+        // Route::delete('/payout-methods/{payoutMethods:id}', [PayoutMethodController::class, 'destroy'])->name('payout-methods.destroy');
     });
 });
