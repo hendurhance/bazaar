@@ -1,29 +1,16 @@
 @extends('partials.app')
-@section('title', 'Purchases')
+@section('title', 'Payments')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Purchases'])
+@include('layouts.breadcrumb', ['pageTitle' => 'Payments'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'purchase'])
+            @include('layouts.sidebar', ['active' => 'payments'])
             <div class="col-lg-9">
                 <div class="tab-pane">
-                    <div class="table-title-area">
-                       <h3>Purchases</h3>
-                       <form class="d-flex align-items-center">
-                       <select name="status">
-                        <option value=""> Show: All Purchases (Filter)</option>
-                        <option value="pending" @selected(request()->status == 'pending')>Show: Pending Listing</option>
-                        <option value="active" @selected(request()->status == 'active')>Show: Active Listing</option>
-                        <option value="upcoming" @selected(request()->status == 'upcoming')>Show: Upcoming Listing</option>
-                        <option value="expired" @selected(request()->status == 'expired')>Show: Expired Listing</option>
-                        <option value="rejected" @selected(request()->status == 'rejected')>Show: Rejected Listing</option>
-                     </select>
-                     <button type="submit" class="filter-btn bg-dark text-white ml-2">Filter</button>
-                    </form>
-                    </div>
+                    <x-payment-filter-component />
                     @if($payments->count() > 0)
                     <div class="table-wrapper">
                        <table class="eg-table order-table table mb-0">
@@ -45,7 +32,7 @@
                                 <td data-label="Payment Method" class="text-{{ $payment->gateway->color() }}">{{ $payment->gateway->label() }}</td>
                                 <td data-label="Status" class="fw-bold text-{{ $payment->status->color() }}">{{ $payment->status->label() }}</td>
                                 <td data-label="Date">{{ $payment->created_at->format('d M, Y h:i A') }}</td>
-                                <td data-label="Bid"><a href="{{ route('user.purchase.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View</a></td>
+                                <td data-label="Bid"><a href="{{ route('user.payments.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View</a></td>
                             </tr>
                             @endforeach
                           </tbody>
@@ -58,7 +45,7 @@
                             <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
                         </div>
                         <x-alert type="dark">
-                            <p class="text-center mb-0"><strong>Sorry!</strong> You have no ad purchases yet. Ads you purchase will appear here.</p>
+                            <p class="text-center mb-0"><strong>Sorry!</strong> You have no ad payments yet. Ads you purchase will appear here.</p>
                         </x-alert>
                     </div>
                     @endif
