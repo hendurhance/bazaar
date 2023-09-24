@@ -37,6 +37,14 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
         return $this->model->query()->with([
             'ad:id,title,slug',
         ])->where($type, $user->id)
+            // use when to get when $filters['status] is payment status, and where $filters['gateway'] is payment gateway
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['status']), function ($query) use ($filters) {
+                    $query->where('status', PaymentStatus::from($filters['status']));
+                })->when(isset($filters['gateway']), function ($query) use ($filters) {
+                    $query->where('gateway', PaymentGateway::from($filters['gateway']));
+                });
+            })
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
     }
