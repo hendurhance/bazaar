@@ -20,7 +20,8 @@ class Payment extends Model
      */
     protected $fillable = [
         'ad_id',
-        'user_id',
+        'payer_id',
+        'payee_id',
         'bid_id',
         'amount',
         'method',
@@ -58,13 +59,23 @@ class Payment extends Model
     }
 
     /**
-     * Get the user that owns the payment.
+     * Get the user that paid for the ad.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function user(): BelongsTo
+    public function payer(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'payer_id');
+    }
+
+    /**
+     * Get the user that received the payment.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function payee(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'payee_id');
     }
 
     /**

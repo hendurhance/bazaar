@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUuid('payer_id')->constrained('users')->onDelete('cascade');
+            $table->foreignUuid('payee_id')->constrained('users')->onDelete('cascade');
             $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
             $table->foreignUuid('bid_id')->constrained('bids')->onDelete('cascade');
             $table->unsignedDecimal('amount', 12, 4)->nullable();

@@ -8,6 +8,7 @@ use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Enums\PaymentGateway;
 use App\Enums\PaymentStatus;
 use App\Exceptions\PaymentException;
+use App\Models\Ad;
 use App\Models\User;
 use App\Repositories\Bid\BidRepository;
 use App\Services\Payment\PaymentGatewayService;
@@ -27,14 +28,15 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
      * 
      * @param \App\Models\User $user
      * @param int $limit
+     * @param string $type <payer_id|payee_id>
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getUserPayments(User $user, int $limit = 10, array $filters = null): LengthAwarePaginator
+    public function getUserPayments(User $user, string $type, int $limit = 10, array $filters = null): LengthAwarePaginator
     {
         return $this->model->query()->with([
             'ad:id,title,slug',
-        ])->where('user_id', $user->id)
+        ])->where($type, $user->id)
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
     }
@@ -57,6 +59,19 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
             abort(403);
         }
 
+        // Check if there's a pending payment for this bid and user.
+        $pendingPayment = $this->model->query()->where('bid_id', $bid->id)
+                    ->where('payer_id', $user->id)
+                    ->where('status', PaymentStatus::PENDING)
+                    ->first();
+        if ($pendingPayment) {
+            $pendingPayment->update(['txn_id' => generate_txn_id('BZR')]);
+
+            $response = (new PaymentGatewayService($pendingPayment->gateway))->pay($pendingPayment);
+
+            return $response;
+        }
+
         if ($bid->paid()) {
             throw new PaymentException('Bid has already been paid for.');
         }
@@ -72,8 +87,7 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
             return $response;
         } catch (\Exception $e) {
             $this->model->getConnection()->rollBack();
-            // throw new PaymentException('Payment failed. Please try again.');
-            throw $e;
+            throw new PaymentException('Payment failed. Please try again.');
         }
     }
 
@@ -125,7 +139,8 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
         return $this->model->create([
             'bid_id' => $bid->id,
             'ad_id' => $bid->ad_id,
-            'user_id' => $user->id,
+            'payer_id' => $user->id,
+            'payee_id' => $bid->ad->user_id,
             'amount' => $bid->amount,
             'gateway' => PaymentGateway::from($paymentMethod),
         ]);

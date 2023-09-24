@@ -29,22 +29,23 @@
                        <table class="eg-table order-table table mb-0">
                           <thead>
                              <tr>
-                                <th>Ads Title</th>
-                                <th>Starting Price</th>
-                                <th>Timeframe</th>
+                                <th>Transaction ID</th>
+                                <th>Amount</th>
+                                <th>Payment Method</th>
                                 <th>Status</th>
-                                <th>Action</th>
+                                <th>Date</th>
+                                <th>Bid</th>
                              </tr>
                           </thead>
                           <tbody>
                             @foreach($payments as $payment)
                             <tr>
-                                <td data-label="Title">Auction Title 01</td>
-                                <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                <td data-label="Bid Amount(USD)">1222.8955</td>
-                                <td data-label="Image"><img alt="image" src="assets/images/bg/order1.png" class="img-fluid"></td>
-                                <td data-label="Status" class="text-green">Successfully</td>
-                                <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg"></button></td>
+                                <td data-label="Transaction ID">{{ $payment->txn_id }} <a href="javascript:void(0)" onclick="copyToClipboard('{{ $payment->txn_id }}')" title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="top" class="copy-btn" data-clipboard-text="{{ $payment->txn_id }}"><i class="far fa-copy"></i></a>
+                                <td data-label="Amount" class="text-green">{{ money($payment->amount) }}</td>
+                                <td data-label="Payment Method" class="text-{{ $payment->gateway->color() }}">{{ $payment->gateway->label() }}</td>
+                                <td data-label="Status" class="fw-bold text-{{ $payment->status->color() }}">{{ $payment->status->label() }}</td>
+                                <td data-label="Date">{{ $payment->created_at->format('d M, Y h:i A') }}</td>
+                                <td data-label="Bid"><a href="{{ route('user.listing-bids.show', $payment->bid->id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View Bid</a></td>
                             </tr>
                             @endforeach
                           </tbody>
@@ -68,5 +69,19 @@
 </div>
 
 @include('layouts.metrics')
+@push('scripts')
+{{-- <td data-label="Transaction ID">{{ $payment->txn_id }} <a href="javascript:void(0)" onclick="copyToClipboard('{{ $payment->txn_id }}')" title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="top" class="copy-btn" data-clipboard-text="{{ $payment->txn_id }}"><i class="far fa-copy"></i></a> --}}
+
+<script>
+    function copyToClipboard(text) {
+        var inputc = document.body.appendChild(document.createElement("input"));
+        inputc.value = text;
+        inputc.focus();
+        inputc.select();
+        document.execCommand('copy');
+        inputc.parentNode.removeChild(inputc);
+    }
+</script>
+@endpush
 
 @endsection
