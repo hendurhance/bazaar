@@ -52,13 +52,13 @@ class PayWithFlutterwave implements PaymentGatewayServiceInterface
                     'redirect_url' => route('user.confirm-payment', $payment->txn_id),
                     'meta' => [
                         'bid_id' => $payment->bid_id,
-                        'user_id' => $payment->user_id,
+                        'user_id' => $payment->payer_id,
                         'ad_id' => $payment->bid->ad_id,
                     ],
                     'customer' => [
-                        'email' => $payment->user->email,
-                        'phoneNumber' => $payment->user->mobile,
-                        'name' => $payment->user->name,
+                        'email' => $payment->payer->email,
+                        'phoneNumber' => $payment->payer->mobile,
+                        'name' => $payment->payer->name,
                     ],
                     'customizations' => [
                         'title' => config('app.name'),

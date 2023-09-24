@@ -13,10 +13,11 @@ interface PaymentRepositoryInterface
      * 
      * @param \App\Models\User $user
      * @param int $limit
+     * @param string $type <payer_id|payee_id>
      * @param array $filters
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
-    public function getUserPayments(User $user, int $limit = 10, array $filters = null): LengthAwarePaginator;
+    public function getUserPayments(User $user, string $type, int $limit = 10, array $filters = null): LengthAwarePaginator;
 
     /**
      * Pay for an ad
