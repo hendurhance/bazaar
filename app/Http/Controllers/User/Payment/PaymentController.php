@@ -29,6 +29,18 @@ class PaymentController extends Controller
     }
 
     /**
+     * Show payment details
+     * 
+     * @param string $txnId
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show(string $txnId): \Illuminate\Contracts\View\View
+    {
+        return view('payments.user.show', [
+            'payment' => $this->paymentRepository->getUserPayment($this->authRepository->user(), $txnId),
+        ]);
+    }
+    /**
      * Get sales history
      * 
      * @return \Illuminate\Contracts\View\View

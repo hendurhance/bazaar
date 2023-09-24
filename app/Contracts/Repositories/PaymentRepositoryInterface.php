@@ -20,6 +20,16 @@ interface PaymentRepositoryInterface
     public function getUserPayments(User $user, string $type, int $limit = 10, array $filters = null): LengthAwarePaginator;
 
     /**
+     * Get user payment
+     * 
+     * @param \App\Models\User $user
+     * @param string $txnId
+     * @return \App\Models\Payment
+     */
+    public function getUserPayment(User $user, string $txnId): \App\Models\Payment;
+
+
+    /**
      * Pay for an ad
      * 
      * @param string $bid
