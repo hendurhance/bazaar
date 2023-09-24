@@ -42,6 +42,22 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
     }
 
     /**
+     * Get user payment
+     * 
+     * @param \App\Models\User $user
+     * @param string $txnId
+     * @return \App\Models\Payment
+     */
+    public function getUserPayment(User $user, string $txnId): \App\Models\Payment
+    {
+        return $this->model->query()->with(['ad:id,title,slug', 'bid'])->where('payer_id', $user->id)
+            ->where('txn_id', $txnId)
+            ->firstOr(function () {
+                throw new PaymentException('Payment not found.');
+            });
+    }
+
+    /**
      * Pay for an ad
      * 
      * @param string $bid
@@ -61,9 +77,9 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
 
         // Check if there's a pending payment for this bid and user.
         $pendingPayment = $this->model->query()->where('bid_id', $bid->id)
-                    ->where('payer_id', $user->id)
-                    ->where('status', PaymentStatus::PENDING)
-                    ->first();
+            ->where('payer_id', $user->id)
+            ->where('status', PaymentStatus::PENDING)
+            ->first();
         if ($pendingPayment) {
             $pendingPayment->update(['txn_id' => generate_txn_id('BZR')]);
 

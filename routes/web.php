@@ -67,5 +67,6 @@ Route::group([
         Route::post('/pay/{bids:id}', [PaymentController::class, 'pay'])->name('pay');
         Route::get('/confirm-payment/{payments:txn_id}', [PaymentController::class, 'confirm'])->name('confirm-payment');
         Route::get('/purchase', [PaymentController::class, 'index'])->name('purchase');
+        Route::get('/purchase/{payments:txn_id}', [PaymentController::class, 'show'])->name('purchase.show');
     });
 });

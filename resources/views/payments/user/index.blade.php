@@ -45,7 +45,7 @@
                                 <td data-label="Payment Method" class="text-{{ $payment->gateway->color() }}">{{ $payment->gateway->label() }}</td>
                                 <td data-label="Status" class="fw-bold text-{{ $payment->status->color() }}">{{ $payment->status->label() }}</td>
                                 <td data-label="Date">{{ $payment->created_at->format('d M, Y h:i A') }}</td>
-                                <td data-label="Bid"><a href="{{ route('user.listing-bids.show', $payment->bid->id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View Bid</a></td>
+                                <td data-label="Bid"><a href="{{ route('user.purchase.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View</a></td>
                             </tr>
                             @endforeach
                           </tbody>
@@ -70,8 +70,6 @@
 
 @include('layouts.metrics')
 @push('scripts')
-{{-- <td data-label="Transaction ID">{{ $payment->txn_id }} <a href="javascript:void(0)" onclick="copyToClipboard('{{ $payment->txn_id }}')" title="Copy to clipboard" data-bs-toggle="tooltip" data-bs-placement="top" class="copy-btn" data-clipboard-text="{{ $payment->txn_id }}"><i class="far fa-copy"></i></a> --}}
-
 <script>
     function copyToClipboard(text) {
         var inputc = document.body.appendChild(document.createElement("input"));
