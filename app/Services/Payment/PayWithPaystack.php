@@ -46,12 +46,12 @@ class PayWithPaystack implements PaymentGatewayServiceInterface
                 'form_params' => [
                     'amount' => round($payment->amount * 100),
                     'currency' => $this->currency,
-                    'email' => $payment->user->email,
+                    'email' => $payment->payer->email,
                     'reference' => $payment->txn_id,
                     'callback_url' => route('user.confirm-payment', $payment->txn_id),
                     'metadata' => [
                         'bid_id' => $payment->bid_id,
-                        'user_id' => $payment->user_id,
+                        'user_id' => $payment->payer_id,
                         'ad_id' => $payment->bid->ad_id,
                         'cancel_action' => route('user.listing-bids.show', $payment->bid_id),
                     ],
