@@ -7,7 +7,6 @@ use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Contracts\Repositories\PayoutRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\FilterUserPaymentRequest;
-use Illuminate\Http\Request;
 
 class PayoutController extends Controller
 {
