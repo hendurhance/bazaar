@@ -28,4 +28,17 @@ class PayoutController extends Controller
             'payments' => $this->paymentRepository->getUserPayments($this->authRepository->user(), 'payee_id', 10, $filter->validated()),
         ]);
     }
+
+    /**
+     * Get payer payments
+     * 
+     * @param string $txnId
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show(string $txnId): \Illuminate\Contracts\View\View
+    {
+        return view('payouts.user.show', [
+            'payment' => $this->payoutRepository->getUserPayment($this->authRepository->user(), $txnId),
+        ]);
+    }
 }

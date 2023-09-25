@@ -71,7 +71,7 @@ Route::group([
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('/payments/{payments:txn_id}', [PaymentController::class, 'show'])->name('payments.show');
         Route::get('/payouts', [PayoutController::class, 'index'])->name('payouts');
-        Route::get('/payouts/{payouts:id}', [PayoutController::class, 'show'])->name('payouts.show');
+        Route::get('/payouts/{payments:txn_id}', [PayoutController::class, 'show'])->name('payouts.show');
         Route::resource('/payout-methods', PayoutMethodController::class)->except(['show']);
     });
 });

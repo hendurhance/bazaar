@@ -28,6 +28,8 @@ class Payout extends Model
         'currency',
         'pyt_token',
         'status',
+        'description',
+        'gateway',
         'paid_at',
     ];
 
