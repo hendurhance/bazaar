@@ -6,6 +6,7 @@ use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\CreatePayRequest;
+use App\Http\Requests\Payment\FilterUserPaymentRequest;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class PaymentController extends Controller
@@ -19,12 +20,37 @@ class PaymentController extends Controller
     /**
      * Get purchase history
      * 
+     * @param \App\Http\Requests\Payment\FilterUserPaymentRequest $filter
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(): \Illuminate\Contracts\View\View
+    public function index(FilterUserPaymentRequest $filter): \Illuminate\Contracts\View\View
     {
         return view('payments.user.index', [
-            'payments' => $this->paymentRepository->getUserPayments($this->authRepository->user(), 10)
+            'payments' => $this->paymentRepository->getUserPayments($this->authRepository->user(), 'payer_id', 10, $filter->validated()),
+        ]);
+    }
+
+    /**
+     * Show payment details
+     * 
+     * @param string $txnId
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show(string $txnId): \Illuminate\Contracts\View\View
+    {
+        return view('payments.user.show', [
+            'payment' => $this->paymentRepository->getUserPayment($this->authRepository->user(), $txnId),
+        ]);
+    }
+    /**
+     * Get sales history
+     * 
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function sales(): \Illuminate\Contracts\View\View
+    {
+        return view('payments.user.sales', [
+            'payments' => $this->paymentRepository->getUserPayments($this->authRepository->user(), 'payee_id', 10),
         ]);
     }
 

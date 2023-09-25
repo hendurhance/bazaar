@@ -7,6 +7,8 @@ use App\Http\Controllers\User\Auth\PasswordController;
 use App\Http\Controllers\User\Auth\RegisterController;
 use App\Http\Controllers\User\Bid\BidController;
 use App\Http\Controllers\User\Payment\PaymentController;
+use App\Http\Controllers\User\Payout\PayoutController;
+use App\Http\Controllers\User\Payout\PayoutMethodController;
 use App\Http\Controllers\User\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +68,10 @@ Route::group([
         Route::get('/listing-bids/{bids:id}', [BidController::class, 'show'])->name('listing-bids.show');
         Route::post('/pay/{bids:id}', [PaymentController::class, 'pay'])->name('pay');
         Route::get('/confirm-payment/{payments:txn_id}', [PaymentController::class, 'confirm'])->name('confirm-payment');
-        Route::get('/purchase', [PaymentController::class, 'index'])->name('purchase');
+        Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
+        Route::get('/payments/{payments:txn_id}', [PaymentController::class, 'show'])->name('payments.show');
+        Route::get('/payouts', [PayoutController::class, 'index'])->name('payouts');
+        Route::get('/payouts/{payouts:id}', [PayoutController::class, 'show'])->name('payouts.show');
+        Route::resource('/payout-methods', PayoutMethodController::class)->except(['show']);
     });
 });

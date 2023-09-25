@@ -1,13 +1,13 @@
 @extends('partials.app')
-@section('title', 'Payments')
+@section('title', 'Payouts')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Payments'])
+@include('layouts.breadcrumb', ['pageTitle' => 'Payouts'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'payments'])
+            @include('layouts.sidebar', ['active' => 'payouts'])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <x-payment-filter-component />
@@ -21,7 +21,7 @@
                                 <th>Payment Method</th>
                                 <th>Status</th>
                                 <th>Date</th>
-                                <th>Bid</th>
+                                <th>Request Payout</th>
                              </tr>
                           </thead>
                           <tbody>
@@ -31,8 +31,12 @@
                                 <td data-label="Amount" class="text-green">{{ money($payment->amount) }}</td>
                                 <td data-label="Payment Method" class="text-{{ $payment->gateway->color() }}">{{ $payment->gateway->label() }}</td>
                                 <td data-label="Status" class="fw-bold text-{{ $payment->status->color() }}">{{ $payment->status->label() }}</td>
-                                <td data-label="Date">{{ $payment->created_at->format('d M, Y h:i A') }}</td>
-                                <td data-label="Bid"><a href="{{ route('user.payments.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View</a></td>
+                                <td data-label="Date">{{ $payment->created_at->format('D M Y') }}</td>
+                                @if($payment->status === \App\Enums\PaymentStatus::SUCCESS)
+                                <td data-label="Request Payout"><a href="#" class="eg-btn action-btn green text-white"><i class="fa-regular fa-money-simple-from-bracket"></i> Request Payout</a></td>
+                                @else
+                                <td data-label="Request Payout">No Action</td>
+                                @endif
                             </tr>
                             @endforeach
                           </tbody>
@@ -45,7 +49,7 @@
                             <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
                         </div>
                         <x-alert type="dark">
-                            <p class="text-center mb-0"><strong>Sorry!</strong> You have no ad payments yet. Ads you purchase will appear here.</p>
+                            <p class="text-center mb-0"><strong>Sorry!</strong> You have not received any payments yet. Payments you receive will appear here.</p>
                         </x-alert>
                     </div>
                     @endif

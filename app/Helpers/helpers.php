@@ -33,6 +33,17 @@ if (!function_exists('generate_txn_id')) {
 }
 
 /**
+ * Generate Payout Token.
+ * @param string $prefix
+ * @return string
+ */
+if (!function_exists('generate_payout_token')) {
+    function generate_payout_token(string $prefix = 'PYT'): string
+    {
+        return $prefix . '-' . uniqid() . '-' . random_int(1000, 9999);
+    }
+}
+/**
  * Generate password reset token.
  * @param string $email
  * @return string
