@@ -31,11 +31,11 @@
                                 <td data-label="Amount" class="text-green">{{ money($payment->amount) }}</td>
                                 <td data-label="Payment Method" class="text-{{ $payment->gateway->color() }}">{{ $payment->gateway->label() }}</td>
                                 <td data-label="Status" class="fw-bold text-{{ $payment->status->color() }}">{{ $payment->status->label() }}</td>
-                                <td data-label="Date">{{ $payment->created_at->format('d M, Y h:i A') }}</td>
-                                @if($payment->status === \App\Enums\PayoutStatus::PENDING)
-                                <td data-label="Bid"><a href="{{ route('user.payments.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> Request Payout</a></td>
-                                @elseif($payment->status === \App\Enums\PayoutStatus::SUCCESS)
-                                <td data-label="Bid"><a href="{{ route('user.payments.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fas fa-eye"></i> View Payout</a></td>
+                                <td data-label="Date">{{ $payment->created_at->format('D M Y') }}</td>
+                                @if($payment->status === \App\Enums\PaymentStatus::SUCCESS)
+                                <td data-label="Request Payout"><a href="#" class="eg-btn action-btn green text-white"><i class="fa-regular fa-money-simple-from-bracket"></i> Request Payout</a></td>
+                                @else
+                                <td data-label="Request Payout">No Action</td>
                                 @endif
                             </tr>
                             @endforeach
