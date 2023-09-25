@@ -8,6 +8,7 @@ use App\Traits\HasTransactionID;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Payment extends Model
 {
@@ -76,6 +77,16 @@ class Payment extends Model
     public function payee(): BelongsTo
     {
         return $this->belongsTo(User::class, 'payee_id');
+    }
+
+    /**
+     * Get the payout the payment has been made for.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function payout(): HasOne
+    {
+        return $this->hasOne(Payout::class);
     }
 
     /**

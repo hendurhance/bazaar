@@ -20,6 +20,8 @@ return new class extends Migration
             $table->unsignedDecimal('fee', 12, 4);
             $table->string('currency')->nullable();
             $table->string('pyt_token')->nullable();
+            $table->text('description')->nullable();
+            $table->smallInteger('gateway')->nullable();
             $table->smallInteger('status')->default(1); // 'pending', 'success', 'failed'
             $table->dateTimeTz('paid_at')->nullable();
             $table->timestamps();
