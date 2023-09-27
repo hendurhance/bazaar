@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payout extends Model
 {
-    use HasFactory, HasUuids, HasPayoutToken;
+    use HasFactory, HasPayoutToken;
 
     /**
      * The attributes that are mass assignable.
@@ -28,6 +28,8 @@ class Payout extends Model
         'currency',
         'pyt_token',
         'status',
+        'description',
+        'gateway',
         'paid_at',
     ];
 

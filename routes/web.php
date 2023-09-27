@@ -64,6 +64,7 @@ Route::group([
         Route::get('/ads/{ads:slug}', [AdController::class, 'showUserAd'])->name('ads.show');
         Route::get('/ads/{ads:slug}/edit', [AdController::class, 'editUserAd'])->name('ads.edit');
         Route::put('/ads/{ads:slug}/edit', [AdController::class, 'updateUserAd'])->name('ads.edit.handle');
+        Route::post('/ads/{ads:slug}/bids/{bids:id}/accept', [BidController::class, 'acceptBid'])->name('ads.bids.accept');
         Route::get('/listing-bids', [BidController::class, 'index'])->name('listing-bids');
         Route::get('/listing-bids/{bids:id}', [BidController::class, 'show'])->name('listing-bids.show');
         Route::post('/pay/{bids:id}', [PaymentController::class, 'pay'])->name('pay');
@@ -71,7 +72,8 @@ Route::group([
         Route::get('/payments', [PaymentController::class, 'index'])->name('payments');
         Route::get('/payments/{payments:txn_id}', [PaymentController::class, 'show'])->name('payments.show');
         Route::get('/payouts', [PayoutController::class, 'index'])->name('payouts');
-        Route::get('/payouts/{payouts:id}', [PayoutController::class, 'show'])->name('payouts.show');
+        Route::get('/payouts/{payments:txn_id}', [PayoutController::class, 'show'])->name('payouts.show');
+        Route::post('/payouts/{payments:txn_id}/request', [PayoutController::class, 'request'])->name('payouts.request');
         Route::resource('/payout-methods', PayoutMethodController::class)->except(['show']);
     });
 });

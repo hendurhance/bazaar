@@ -5,6 +5,7 @@ namespace App\Repositories\Bid;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Bid;
 use App\Contracts\Repositories\BidRepositoryInterface;
+use App\Enums\AdStatus;
 use App\Exceptions\BidException;
 use App\Models\User;
 use App\Repositories\Ad\AdRepository;
@@ -80,9 +81,36 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
      */
     public function getUserBid(string $bid, User $user): \App\Models\Bid
     {
-        return $this->model->with(['ad:id,title,slug,price,status,started_at,expired_at', 'ad.user:id,name,avatar,username', 'payment:id,bid_id,amount,txn_id,status,created_at,gateway'])
+        return $this->model->with(['ad:id,title,slug,price,status,started_at,expired_at,seller_name,seller_email,seller_mobile,seller_address', 'ad.user:id,name,avatar,username', 'payment:id,bid_id,amount,txn_id,status,created_at,gateway'])
             ->where('id', $bid)->where('user_id', $user->id)->firstOr(function () {
                 abort(404);
             });
+    }
+
+    /**
+     * Accept bid
+     * 
+     * @param string $adSlug
+     * @param string $bidId
+     * @param User $user
+     * @return void
+     */
+    public function acceptBid(string $adSlug, string $bidId, User $user): void
+    {
+        $ad = app(AdRepository::class)->findBy('slug', $adSlug, function () {
+            abort(404);
+        });
+
+        if ($ad->hasAcceptedBid()) {
+            throw new BidException('Ad has already been sold.', $ad->slug, true);
+        }
+
+        $bid = $this->model->where('id', $bidId)->where('ad_id', $ad->id)->firstOr(function () use ($ad) {
+            throw new BidException('Bid not found.', $ad->slug, true);
+        });
+
+        $bid->update(['is_accepted' => true]);
+
+        $ad->update(['status' => AdStatus::EXPIRED, 'expired_at' => now()]);
     }
 }

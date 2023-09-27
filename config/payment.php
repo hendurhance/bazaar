@@ -68,4 +68,9 @@ return [
             'code' => 'KES',
         ],
     ],
+
+    'payout' => [
+        'fee' => 5.0, // 5%
+        'processing_time' => 3, // 3 days
+    ]
 ];

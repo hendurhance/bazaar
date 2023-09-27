@@ -5,9 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
-class BidException extends Exception
+class PayoutException extends Exception
 {
-     /**
+    /**
      * The exception message.
      *
      * @var string
@@ -15,19 +15,11 @@ class BidException extends Exception
     protected $message;
 
     /**
-     * The ad slug.
-     *
-     * @var string
-     */
-    protected $adSlug;
-
-    /**
      * Instantiate a new exception instance.
      */
-    public function __construct(string $message = 'Your bid could not be placed.', string $adSlug, protected bool $loggedInPage = false)
+    public function __construct(string $message = 'An error occurred while processing your payout', string $payout = null)
     {
         $this->message = $message;
-        $this->adSlug = $adSlug;
     }
 
     /**
@@ -37,10 +29,7 @@ class BidException extends Exception
      */
     public function render(): RedirectResponse
     {
-        if ($this->loggedInPage) {
-            return redirect()->route('user.ads.show', $this->adSlug)->with('error', $this->message);
-        }
-        return redirect()->route('auction-details', $this->adSlug)->with('error', $this->message)->withErrors(['amount' => $this->message]);
+        return redirect()->route('user.payouts')->with('error', $this->message);
     }
 
     /**

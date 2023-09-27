@@ -2,7 +2,7 @@
 @section('title', 'Listing Bid'. ' - '.$bid->ad->title)
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Listing Bid', 'hasBack' => true, 'backUrl' => route('user.listing-bids'), 'backTitle' => 'Listing Bids', 'routeItem' => $bid->ad->title])
+@include('layouts.breadcrumb', ['pageTitle' => 'Listing Bid', 'hasBack' => true, 'backUrl' => route('user.listing-bids'), 'backTitle' => 'My Bids', 'routeItem' => $bid->ad->title])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
@@ -64,6 +64,27 @@
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    <div class="ad-listing-wrapper mt-4">
+                        <h3>Ad Seller Details:</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Seller Name</th>
+                                    <th scope="col">Seller Email</th>
+                                    <th scope="col">Seller Phone</th>
+                                    <th scope="col">Seller Address</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{{ $bid->ad->seller_name ?? 'Not Available' }}</td>
+                                    <td>{{ $bid->ad->seller_email ?? 'Not Available' }}</td>
+                                    <td>{{ $bid->ad->seller_mobile ?? 'Not Available' }}</td>
+                                    <td>{{ $bid->ad->seller_address ?? 'Not Available' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     @if($bid->is_accepted)
                     <div class="ad-listing-wrapper mt-4">

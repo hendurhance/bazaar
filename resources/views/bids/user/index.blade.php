@@ -1,8 +1,8 @@
 @extends('partials.app')
-@section('title', 'Listing Bids')
+@section('title', 'My Bids')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Listing Bids'])
+@include('layouts.breadcrumb', ['pageTitle' => 'My Bids'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
@@ -11,7 +11,7 @@
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="table-title-area">
-                    <h3>Listing Bids</h3>
+                    <h3>My Bids</h3>
                     <form class="d-flex align-items-center">
                         <select name="sort">
                          <option value=""> Sort: All Bids (Sort ASC/DESC)</option>

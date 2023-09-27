@@ -24,8 +24,7 @@
             <div class="auction-card-bttm">
                 <a href="{{ route('auction-details', $ad->slug) }}" class="eg-btn btn--primary2 btn--sm">Place a Bid</a>
                 <div class="share-area">
-                    <i class="bi bi-heart"></i>
-                    <i class="bi bi-three-dots-vertical"></i>
+                    <a href="#" class="share-btn"><i class="bx bxs-share-alt"></i></a>
                 </div>
             </div>
         </div>

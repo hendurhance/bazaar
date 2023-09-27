@@ -33,7 +33,7 @@
                                 <td data-label="Status" class="fw-bold text-{{ $payment->status->color() }}">{{ $payment->status->label() }}</td>
                                 <td data-label="Date">{{ $payment->created_at->format('D M Y') }}</td>
                                 @if($payment->status === \App\Enums\PaymentStatus::SUCCESS)
-                                <td data-label="Request Payout"><a href="#" class="eg-btn action-btn green text-white"><i class="fa-regular fa-money-simple-from-bracket"></i> Request Payout</a></td>
+                                <td data-label="Request Payout"><a href="{{ route('user.payouts.show', $payment->txn_id) }}" class="eg-btn action-btn green text-white"><i class="fa-regular fa-money-simple-from-bracket"></i> Request Payout</a></td>
                                 @else
                                 <td data-label="Request Payout">No Action</td>
                                 @endif
