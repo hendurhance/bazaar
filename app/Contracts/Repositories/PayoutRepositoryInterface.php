@@ -15,4 +15,15 @@ interface PayoutRepositoryInterface
      * @return \App\Models\Payment
      */
     public function getUserPayment(User $user, string $txnId): \App\Models\Payment;
+
+    /**
+     * Request payout
+     * @description User can request a payout for a payment
+     * 
+     * @param \App\Models\User $user
+     * @param string $txnId
+     * @param array<string, mixed> $data
+     * @return void
+     */
+    public function request(User $user, string $txnId, array $data): void;
 }

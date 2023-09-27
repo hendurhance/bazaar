@@ -15,7 +15,7 @@ class PayoutMethodException extends Exception
     protected $message;
 
     /**
-     * The ad slug.
+     * The payout method.
      *
      * @var string
      */

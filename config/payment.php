@@ -70,6 +70,7 @@ return [
     ],
 
     'payout' => [
-        'fee' => 5.0, // 4.5%
+        'fee' => 5.0, // 5%
+        'processing_time' => 3, // 3 days
     ]
 ];

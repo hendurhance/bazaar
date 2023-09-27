@@ -5,6 +5,7 @@ namespace App\Repositories\Payout;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Payout;
 use App\Contracts\Repositories\PayoutRepositoryInterface;
+use App\Exceptions\PayoutException;
 use App\Models\Payment;
 use App\Models\User;
 
@@ -28,5 +29,63 @@ class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInt
             ->where('txn_id', $txnId)->where('payee_id', $user->id)->firstOr(function () {
                 abort(404);
             });
+    }
+    
+    /**
+     * Request payout
+     * @description User can request a payout for a payment
+     * 
+     * @param \App\Models\User $user
+     * @param string $txnId
+     * @param array<string, mixed> $data
+     * @return void
+     */
+    public function request(User $user, string $txnId, array $data): void
+    {
+        $payment = Payment::query()->where('txn_id', $txnId)->where('payee_id', $user->id)->firstOr(function () {
+            abort(404);
+        });
+        if ($payment->payout) {
+            throw new PayoutException('Payout request already exists for this payment');
+        }
+
+        $payoutCalc = $this->calculatePayout($payment->amount);
+        
+        # Create payout request
+        try {
+            $this->model->getConnection()->beginTransaction();
+
+            $this->model->create([
+                'user_id' => $user->id,
+                'payment_id' => $payment->id,
+                'payout_method_id' => $data['payment_method'],
+                'amount' => $payoutCalc['amount'],
+                'fee' => $payoutCalc['fee'],
+                'description' => $data['description'] ?? null,
+                'currency' => $payment->currency ?? config('payment.currencies.default'),
+            ]);
+
+            $this->model->getConnection()->commit();
+
+            # TODO: Send payout request notification to admin and user
+        } catch (\Throwable $th) {
+            $this->model->getConnection()->rollBack();
+            throw $th;
+            // throw new PayoutException($th->getMessage());
+        }
+    }
+
+    /**
+     * Calculate payout
+     * 
+     * @param float $amount
+     * @return array<string, float>
+     */
+    protected function calculatePayout(float $amount): array
+    {
+        $fee = $amount * (config('payment.payout.fee') / 100);
+        $amount = $amount - $fee;
+
+        return compact('fee', 'amount');
     }
 }

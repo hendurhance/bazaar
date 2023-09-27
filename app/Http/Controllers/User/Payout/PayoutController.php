@@ -7,6 +7,7 @@ use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Contracts\Repositories\PayoutRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\FilterUserPaymentRequest;
+use App\Http\Requests\Payout\RequestPayout;
 
 class PayoutController extends Controller
 {
@@ -40,5 +41,19 @@ class PayoutController extends Controller
         return view('payouts.user.show', [
             'payment' => $this->payoutRepository->getUserPayment($this->authRepository->user(), $txnId),
         ]);
+    }
+
+    /**
+     * Request payout
+     * 
+     * @param string $txnId
+     * @param \App\Http\Requests\Payout\RequestPayout $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function request(string $txnId, RequestPayout $request): \Illuminate\Http\RedirectResponse
+    {
+        $this->payoutRepository->request($this->authRepository->user(), $txnId, $request->validated());
+
+        return redirect()->back()->with('success', 'Payout request has been sent, you will be notified when it is processed');
     }
 }
