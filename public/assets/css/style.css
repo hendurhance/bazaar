@@ -9461,3 +9461,10 @@ a.action-btn.eg-btn{
 .edit-btn{
     border: 1px solid #0a0a0f;
 }
+
+.cta-button{
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 16px;
+    background: #3A46D1;
+}

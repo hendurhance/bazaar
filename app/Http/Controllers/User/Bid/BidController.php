@@ -55,4 +55,16 @@ class BidController extends Controller
             'bid' => $this->bidRepository->getUserBid($bid, $this->authRepository->user()),
         ]);
     }
+    
+    /**
+     * Accept bid
+     * 
+     * @param string $adSlug
+     * @param string $bidId
+     */
+    public function acceptBid(string $adSlug, string $bidId): RedirectResponse
+    {
+        $this->bidRepository->acceptBid($adSlug, $bidId, $this->authRepository->user());
+        return redirect()->back()->with('success', 'Bid accepted successfully.');
+    }
 }
