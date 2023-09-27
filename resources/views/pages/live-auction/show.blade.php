@@ -41,8 +41,26 @@
                     <h3>{{ $ad->title }}</h3>
                     <p class="para">{{ shorten_chars($ad->description, 150, true) }}</p>
                     <h4>Bidding Price: <span>{{ money($ad->price) }}</span></h4>
+                    <div class="row d-flex mt-4">
+                        <div class="ad-listing-item col-6">
+                            <span>Seller Name:</span>
+                            <p class="fw-bold">{{ $ad->seller_name }}</p>
+                        </div>
+                        <div class="ad-listing-item col-6">
+                            <span>Seller Email:</span>
+                            <p>{{ $ad->seller_email ?? 'Not Available' }}</p>
+                        </div>
+                        <div class="ad-listing-item col-6">
+                            <span>Seller Phone:</span>
+                            <p>{{ $ad->seller_mobile ?? 'Not Available' }}</p>
+                        </div>
+                        <div class="ad-listing-item col-6">
+                            <span>Seller Address:</span>
+                            <address>{{ $ad->seller_address ?? 'Not Available' }}</address>
+                        </div>
+                    </div>
                     @if($ad->active())
-                    <div class="bid-form">
+                    <div class="bid-form mt-0">
                         <div class="form-title">
                             <h5>Bid Now</h5>
                             <p>Bid Amount : Minimum Bid {{ money($ad->highestBid->amount ?? $ad->price + 1) }}</p>
