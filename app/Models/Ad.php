@@ -216,6 +216,13 @@ class Ad extends Model
         return $query->where('status', AdStatus::REJECTED);
     }
     
+    /**
+     * Check if ad has an accepted bid
+     */
+    public function hasAcceptedBid(): bool
+    {
+        return $this->bids()->where('is_accepted', true)->exists();
+    }
 
 }
 

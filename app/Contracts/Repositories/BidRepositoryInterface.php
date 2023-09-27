@@ -36,4 +36,14 @@ interface BidRepositoryInterface
      * @return \App\Models\Bid
      */
     public function getUserBid(string $bid, User $user): \App\Models\Bid;
+
+    /**
+     * Accept bid
+     * 
+     * @param string $adSlug
+     * @param string $bidId
+     * @param User $user
+     * @return void
+     */
+    public function acceptBid(string $adSlug, string $bidId, User $user): void;
 }

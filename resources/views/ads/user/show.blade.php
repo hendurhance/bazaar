@@ -142,7 +142,8 @@
                                             <th>Username</th>
                                             <th>Bid Amount</th>
                                             <th>Bid Date</th>
-                                            <th>Accepted</th>
+                                            <th>Current State</th>
+                                            <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -151,7 +152,18 @@
                                             <td>{{ $bid->user->name }}</td>
                                             <td>{{ money($bid->amount) }}</td>
                                             <td>{{ $bid->created_at->format('d M Y h:i A') }}</td>
-                                            <td>{{ is_null($bid->is_accepted) ? 'Pending' : ( $bid->is_accepted ? 'Yes' : 'No' ) }}</td>
+                                            <td>{{ is_null($bid->is_accepted) ? 'Pending' : ( $bid->is_accepted ? 'Accepted' : 'Reject' ) }}</td>
+                                            <td>
+                                                @if($ad->hasAcceptedBid())
+                                                    No Action
+                                                @else
+                                               <form action="{{ route('user.ads.bids.accept', [$ad->slug, $bid->id]) }}" method="POST">
+                                                    @csrf
+                                                    @method('POST')
+                                                    <button type="submit" class="btn btn-primary btn-sm">Accept</button>
+                                                </form>
+                                                @endif
+                                            </td>
                                         </tr>
                                         @endforeach
                                     </tbody>
