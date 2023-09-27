@@ -93,7 +93,7 @@
                             </table>
                             @else
                             <div class="payout-form">
-                                <x-payout-form :user="$payment->payee" :amount="$payment->amount" />
+                                <x-payout-form :user="$payment->payee" :amount="$payment->amount" :txn-id="$payment->txn_id" />
                             </div>
                             @endif
                         </div>

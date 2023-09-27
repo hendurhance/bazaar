@@ -72,6 +72,7 @@ Route::group([
         Route::get('/payments/{payments:txn_id}', [PaymentController::class, 'show'])->name('payments.show');
         Route::get('/payouts', [PayoutController::class, 'index'])->name('payouts');
         Route::get('/payouts/{payments:txn_id}', [PayoutController::class, 'show'])->name('payouts.show');
+        Route::post('/payouts/{payments:txn_id}/request', [PayoutController::class, 'request'])->name('payouts.request');
         Route::resource('/payout-methods', PayoutMethodController::class)->except(['show']);
     });
 });

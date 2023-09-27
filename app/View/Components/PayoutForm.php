@@ -19,6 +19,7 @@ class PayoutForm extends Component
         protected User $user, 
         public float $amount, 
         protected PayoutMethodRepositoryInterface $payoutMethodRepository,
+        public string $txnId,
     )
     {
         $this->feePercentage = config('payment.payout.fee');

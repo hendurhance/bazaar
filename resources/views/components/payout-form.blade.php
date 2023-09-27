@@ -1,5 +1,5 @@
 <div class="form-wrapper">
-    <form  method="POST">
+    <form action="{{ route('user.payouts.request', $txnId) }}" method="POST">
         @csrf
         <div class="row">
             <div class="col-md-6">
