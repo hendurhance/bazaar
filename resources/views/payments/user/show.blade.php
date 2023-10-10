@@ -77,7 +77,7 @@
     </div>
 </div>
 
-@include('layouts.metrics')
+<x-metric-card />
 @push('scripts')
 <script>
     function copyToClipboard(text) {

@@ -71,6 +71,6 @@
     </div>
 </div>
 
-@include('layouts.metrics')
+<x-metric-card />
 
 @endsection

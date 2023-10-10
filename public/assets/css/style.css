@@ -9468,3 +9468,7 @@ a.action-btn.eg-btn{
     font-size: 16px;
     background: #3A46D1;
 }
+
+a.text-dark.title-hover:hover{
+    color: #3A46D1 !important;
+}
