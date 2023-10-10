@@ -57,7 +57,7 @@ Route::group([
 
     Route::middleware('auth:web')->group(function () {
         Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
-        Route::view('/dashboard', 'dashboard.user.index')->name('dashboard');
+        Route::get('/dashboard', [ProfileController::class, 'dashboard'])->name('dashboard');
         Route::get('/profile', [ProfileController::class, 'show'])->name('profile');
         Route::put('/profile', [ProfileController::class, 'update'])->name('profile.handle');
         Route::get('/ads', [AdController::class, 'userAds'])->name('ads');

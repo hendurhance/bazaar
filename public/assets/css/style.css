@@ -6058,7 +6058,6 @@ ul.category-list li a:hover span:last-child {
 }
 
 footer.style-2 {
-    background-image: url(../images/bg/footer2-bg.png);
     position: relative
 }
 
@@ -9467,4 +9466,8 @@ a.action-btn.eg-btn{
     border-radius: 5px;
     font-size: 16px;
     background: #3A46D1;
+}
+
+a.text-dark.title-hover:hover{
+    color: #3A46D1 !important;
 }

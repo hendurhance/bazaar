@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
 use App\Enums\Gender;
+use App\Traits\HasAvatar;
 use App\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,7 +17,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar;
 
     /**
      * The attributes that are mass assignable.
@@ -103,6 +104,14 @@ class User extends Authenticatable
     public function bids(): HasMany
     {
         return $this->hasMany(Bid::class);
+    }
+
+    /**
+     * Get the payout methods for the user.
+     */
+    public function payoutMethods(): HasMany
+    {
+        return $this->hasMany(PayoutMethod::class);
     }
 
     /**
