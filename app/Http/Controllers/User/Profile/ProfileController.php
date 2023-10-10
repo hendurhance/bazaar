@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User\Profile;
 
+use App\Contracts\Repositories\AnalyticRepositoryInterface;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\UpdateProfileRequest;
@@ -11,8 +12,20 @@ class ProfileController extends Controller
     /**
      * Instantiate new controller instance
      */
-    public function __construct(protected AuthenticateRepositoryInterface $authRepository)
+    public function __construct(protected AuthenticateRepositoryInterface $authRepository, protected AnalyticRepositoryInterface $analyticRepository)
     {}
+
+    /**
+     * Show dashboard page.
+     * 
+     * @return \Illuminate\View\View
+     */
+    public function dashboard(): \Illuminate\View\View
+    {
+        return view('dashboard.user.index', [
+            'metrics' => $this->analyticRepository->getUserDashboardMetrics($this->authRepository->user()),
+        ]);
+    }
 
     /**
      * Show user profile.

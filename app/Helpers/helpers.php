@@ -140,12 +140,22 @@ if (!function_exists('html_to_ckeditor')) {
  * @return string
  */
 if (!function_exists('money')) {
-    function money(float $amount): string
+    function money(float $amount, bool $withSuffix = false): string
     {
         $defaultCurrency = config('payment.currencies.default');
         $currency = config("payment.currencies.$defaultCurrency.symbol");
 
-        return $currency . ' ' . number_format($amount);
+        $suffixes = ["", "K", "M", "B", "T"];
+        $suffixIndex = 0;
+        while ($amount >= 1000) {
+            $suffixIndex++;
+            $amount /= 1000;
+        }
+
+        return match ($withSuffix) {
+            true => $currency . ' ' . number_format($amount, 2) . $suffixes[$suffixIndex],
+            default => $currency . ' ' . number_format($amount, 2),
+        };
     }
 }
 

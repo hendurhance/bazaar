@@ -48,6 +48,6 @@
 
 @include('layouts.testimonials')
 
-@include('layouts.metrics')
+<x-metric-card />
 
 @endsection
