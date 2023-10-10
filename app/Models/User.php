@@ -107,6 +107,14 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the payout methods for the user.
+     */
+    public function payoutMethods(): HasMany
+    {
+        return $this->hasMany(PayoutMethod::class);
+    }
+
+    /**
      * Get the accepted bids for the user.
      */
     public function acceptedBids(): HasMany
