@@ -15,4 +15,12 @@ interface AnalyticRepositoryInterface
      * @return array
      */
     public function getMajorMetrics(): array;
+
+    /**
+     * Get user dashboard metrics
+     * 
+     * @param \App\Models\User $user
+     * @return array
+     */
+    public function getUserDashboardMetrics(\App\Models\User $user): array;
 }
