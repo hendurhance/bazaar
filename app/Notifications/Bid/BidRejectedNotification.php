@@ -2,6 +2,8 @@
 
 namespace App\Notifications\Bid;
 
+use App\Models\Ad;
+use App\Models\Bid;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,11 +16,10 @@ class BidRejectedNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(protected Ad $ad, protected Bid $bid)
     {
         //
     }
-
     /**
      * Get the notification's delivery channels.
      *
@@ -35,9 +36,14 @@ class BidRejectedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Bid Rejected - ' . $this->ad->title)
+                    ->greeting('Hello ' . $notifiable->name . '!')
+                    ->line('Your bid has been rejected.')
+                    ->line('Accepted Bid Amount: ' . money($this->ad->winningBid->amount))
+                    ->line('Sorry, your bid was not accepted. We encourage you to bid on other ads.')
+                    ->line('Our live auction is still open. You can bid on other ads by visiting the link below.')
+                    ->action('Browse Ads', route('live-auction'))
+                    ->salutation('Thank you for using ' . config('app.name') . '!');
     }
 
     /**

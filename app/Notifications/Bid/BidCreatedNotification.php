@@ -2,6 +2,8 @@
 
 namespace App\Notifications\Bid;
 
+use App\Models\Ad;
+use App\Models\Bid;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,9 +16,8 @@ class BidCreatedNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(protected Ad $ad, protected Bid $bid, protected bool $isAdOwner)
     {
-        //
     }
 
     /**
@@ -35,9 +36,21 @@ class BidCreatedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Bid Placed On - ' . $this->ad->title)
+                    ->greeting('Hello ' .($this->isAdOwner ? $this->ad->user->name : $this->bid->user->name) . '!')
+                    ->linesIf($this->isAdOwner, [
+                        'A new bid has been placed on your ad.',
+                        'Bid Amount: ' . money($this->bid->amount),
+                        'Bidder Name: ' . $this->bid->user->name,
+                        'Bidder Email: ' . $this->bid->user->email,
+                    ])
+                    ->linesIf(!$this->isAdOwner, [
+                        'Your bid has been placed successfully.',
+                        'Bid Amount: ' . money($this->bid->amount),
+                        'Ad Title: ' . $this->ad->title,
+                    ])
+                    ->action($this->isAdOwner ? 'View Ad' : 'View Bid',  $this->isAdOwner ? route('user.ads.show', $this->ad->slug) : route('user.listing-bids.show', $this->bid->id))
+                    ->salutation('Thank you for using ' . config('app.name') . '!');
     }
 
     /**

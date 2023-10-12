@@ -2,6 +2,8 @@
 
 namespace App\Notifications\Bid;
 
+use App\Models\Ad;
+use App\Models\Bid;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +16,7 @@ class BidAcceptedNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(protected Ad $ad, protected Bid $bid)
     {
         //
     }
@@ -35,9 +37,17 @@ class BidAcceptedNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Bid Accepted - ' . $this->ad->title)
+                    ->greeting('Hello ' . $notifiable->name . '!')
+                    ->line('Your bid has been accepted.')
+                    ->line('Bid Amount: ' . money($this->bid->amount))
+                    ->line('Ad Title: ' . $this->ad->title)
+                    ->line('You can contact the ad owner using the following details.')
+                    ->line('Name: ' . $this->ad->user->name)
+                    ->line('Email: ' . $this->ad->user->email)
+                    ->line('Phone: ' . $this->ad->user->phone)
+                    ->action('View Ad', route('user.listing-bids.show', $this->bid->id))
+                    ->salutation('Thank you for using ' . config('app.name') . '!');
     }
 
     /**

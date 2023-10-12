@@ -147,9 +147,11 @@ if (!function_exists('money')) {
 
         $suffixes = ["", "K", "M", "B", "T"];
         $suffixIndex = 0;
-        while ($amount >= 1000) {
-            $suffixIndex++;
-            $amount /= 1000;
+        if ($withSuffix) {
+            while ($amount >= 1000) {
+                $suffixIndex++;
+                $amount /= 1000;
+            }
         }
 
         return match ($withSuffix) {
@@ -194,7 +196,7 @@ if (!function_exists('get_random_avatar')) {
             'Yara',
             'Zane',
         ];
-        
+
         // Access a random name from the array
         $randomName = $randomNames[array_rand($randomNames)];
         $boringAvatar = new BoringAvatar($randomName);

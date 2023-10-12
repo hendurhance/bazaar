@@ -13,6 +13,7 @@ use App\Notifications\Ad\AdCreatedNotification;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Traits\MediaHandler;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
@@ -179,7 +180,8 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'price' => $data['price'],
             'video_url' => $data['video_url'] ?? null,
             'status' => AdStatus::PENDING,
-            'started_at' => $data['start_date'],
+            'started_at' => Carbon::parse($data['start_date'])->format('Y-m-d H:00:00'),
+            'started_at' => Carbon::parse($data['start_date'])->format('Y-m-d H:00:00'),
             'expired_at' => $data['end_date'],
             'seller_name' => $user?->name ?? $data['seller_name'],
             'seller_email' => $user?->email ?? $data['seller_email'],
