@@ -42,7 +42,7 @@ class AdCreatedNotification extends Notification
                     ->lines([
                         'Title: ' . $this->ad->title ?? 'N/A',
                         'Description: ' . strip_tags($this->ad->description) ?? 'N/A',
-                        'Price: ' . $this->ad->price ?? 'N/A',
+                        'Price: ' . money($this->ad->price) ?? 'N/A',
                         'Category: ' . $this->ad->category->name ?? 'N/A',
                         'Subcategory: ' . $this->ad->subcategory->name ?? 'N/A',
                         'Country: ' . $this->ad->country->name ?? 'N/A',
