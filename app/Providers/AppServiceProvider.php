@@ -5,7 +5,9 @@ namespace App\Providers;
 use App\Console\Commands\LogPruneCommand;
 use App\Console\Commands\MakeInterfaceCommand;
 use App\Console\Commands\MakeRepositoryCommand;
+use App\Models\Ad;
 use App\Models\User;
+use App\Observers\AdObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -47,5 +49,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         User::observe(UserObserver::class);
+        Ad::observe(AdObserver::class);
     }
 }
