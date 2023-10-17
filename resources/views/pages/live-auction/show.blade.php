@@ -59,6 +59,13 @@
                             <address>{{ $ad->seller_address ?? 'Not Available' }}</address>
                         </div>
                     </div>
+                    {{-- div for report ad button --}}
+                    <div class="row d-flex mb-4">
+                        <div class="ad-listing-item col-12">
+                            <span> If you find this ad inappropriate, please report it to us.</span>
+                            <a href="{{ route('auction-details.report', $ad->slug) }}" class="text-danger fw-bold"><i class="bi bi-exclamation-circle-fill"></i> Report Ad</a>
+                        </div>
+                    </div>
                     @if($ad->active())
                     <div class="bid-form mt-0">
                         <div class="form-title">

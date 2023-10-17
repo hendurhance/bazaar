@@ -8,6 +8,7 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
 use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
+use App\Models\ReportAd;
 use App\Models\User;
 use App\Notifications\Ad\AdCreatedNotification;
 use App\Repositories\Category\CategoryRepository;
@@ -90,7 +91,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
     }
-    
+
     /**
      * Get ads by user
      * 
@@ -119,7 +120,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
      */
     public function getUserAd(User $user, string $slug): Ad
     {
-        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'subcategory:parent_id,id,name','bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name'])
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'subcategory:parent_id,id,name', 'bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name'])
             ->where('user_id', $user->id)
             ->where('slug', $slug)
             ->firstOr(function () {
@@ -151,6 +152,40 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'seller_name' => $data['seller_name'] ?? $ad->seller_name,
             'seller_mobile' => $data['seller_mobile'] ?? $ad->seller_mobile,
             'seller_address' => $data['seller_address'] ?? $ad->seller_address,
+        ]);
+    }
+
+    /**
+     * Get ad by slug
+     * 
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getReportAd(string $slug): Ad
+    {
+        return $this->model->query()
+            ->whereNot('status', AdStatus::PENDING)
+            ->where('slug', $slug)
+            ->firstOr(function () {
+                abort(404);
+            });
+    }
+
+    /**
+     * Report an ad
+     * 
+     * @param \App\Models\User $user
+     * @param string $slug
+     * @param array $data
+     * @return void
+     */
+    public function reportAd(string $slug, array $data): void
+    {
+        ReportAd::create([
+            'ad_id' => $this->getReportAd($slug)->id,
+            'reason' => $data['reason'],
+            'description' => $data['description'],
+            'email' => $data['email'],
         ]);
     }
 

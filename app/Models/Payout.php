@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Payout extends Model
 {
-    use HasFactory, HasPayoutToken;
+use HasFactory, HasPayoutToken;
 
     /**
      * The attributes that are mass assignable.

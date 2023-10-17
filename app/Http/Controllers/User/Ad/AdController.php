@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateAdRequest;
 use App\Http\Requests\Ad\FilterAdRequest;
 use App\Http\Requests\Ad\FilterUserAdsRequest;
+use App\Http\Requests\Ad\ReportAdRequest;
 use App\Http\Requests\Ad\UpdateAdRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
@@ -106,5 +107,31 @@ class AdController extends Controller
     {
         $this->adRepository->updateUserAd($this->authRepository->user(), $ad, $request->validated());
         return redirect()->route('user.ads')->with('success', 'Your ad has been updated successfully.');
+    }
+
+    /**
+     * Report ad.
+     * 
+     * @param string $ad
+     * @return \Illuminate\View\View
+     */
+    public function report(string $ad): View
+    {
+        return view('pages.live-auction.report', [
+            'ad' => $this->adRepository->getAd($ad),
+        ]);
+    }
+
+    /**
+     * Handle ad report.
+     * 
+     * @param string $ad
+     * @param \App\Http\Requests\Ad\ReportAdRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function handleReport(string $ad, ReportAdRequest $request): RedirectResponse
+    {
+        $this->adRepository->reportAd($ad, $request->validated());
+        return redirect()->route('auction-details', $ad)->with('success', 'Your report has been submitted successfully.');
     }
 }
