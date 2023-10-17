@@ -66,6 +66,6 @@
  
 @include('layouts.why-choose-us')
 
-@include('layouts.metrics')
+<x-metric-card />
 
 @endsection

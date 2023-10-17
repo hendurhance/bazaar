@@ -9,12 +9,15 @@ use App\Enums\AdStatus;
 use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
 use App\Models\User;
+use App\Notifications\Ad\AdCreatedNotification;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Traits\MediaHandler;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 
 class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
 {
@@ -50,6 +53,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     public function getAd(string $slug): Ad
     {
         return $this->model->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'bids', 'bids.user:id,name,avatar,username', 'relatedAds:id,title,slug,price', 'relatedAds.media', 'relatedAds.user:id,username,avatar', 'highestBid:id,amount'])
+            ->whereNot('status', AdStatus::PENDING)
             ->where('slug', $slug)
             ->firstOr(function () {
                 abort(404);
@@ -176,7 +180,8 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'price' => $data['price'],
             'video_url' => $data['video_url'] ?? null,
             'status' => AdStatus::PENDING,
-            'started_at' => $data['start_date'],
+            'started_at' => Carbon::parse($data['start_date'])->format('Y-m-d H:00:00'),
+            'started_at' => Carbon::parse($data['start_date'])->format('Y-m-d H:00:00'),
             'expired_at' => $data['end_date'],
             'seller_name' => $user?->name ?? $data['seller_name'],
             'seller_email' => $user?->email ?? $data['seller_email'],

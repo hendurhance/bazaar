@@ -13,7 +13,6 @@ class UserObserver
      */
     public function creating(User $user): void
     {
-        $user->avatar = (new UIAvatar($user->name))->getUrl();
         $user->email_verification_token = generate_verify_token($user->email);
     }
 
@@ -22,7 +21,7 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        // $user->notifyNow(new UserVerificationNotification($user));
+        $user->notifyNow(new UserVerificationNotification($user));
     }
 
     /**

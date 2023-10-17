@@ -10,6 +10,7 @@ use App\Enums\PaymentStatus;
 use App\Exceptions\PaymentException;
 use App\Models\Ad;
 use App\Models\User;
+use App\Notifications\Payment\BidPaymentNotification;
 use App\Repositories\Bid\BidRepository;
 use App\Services\Payment\PaymentGatewayService;
 use App\Services\Payment\PayWithFlutterwave;
@@ -37,7 +38,6 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
         return $this->model->query()->with([
             'ad:id,title,slug',
         ])->where($type, $user->id)
-            // use when to get when $filters['status] is payment status, and where $filters['gateway'] is payment gateway
             ->when($filters, function ($query) use ($filters) {
                 $query->when(isset($filters['status']), function ($query) use ($filters) {
                     $query->where('status', PaymentStatus::from($filters['status']));
@@ -142,6 +142,9 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
             ]);
 
             $this->model->getConnection()->commit();
+            
+            $payment->payee->notify(new BidPaymentNotification($payment, true));
+            $payment->payer->notify(new BidPaymentNotification($payment, false));
 
             return $payment->bid_id;
         } catch (\Exception $e) {

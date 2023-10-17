@@ -46,7 +46,7 @@
     </div>
 </div>
 
-@include('layouts.metrics')
+<x-metric-card />
 
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@amplifiedhq/countries-atlas/dist/flags/css/flags.min.css" async defer>
