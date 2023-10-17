@@ -8,6 +8,7 @@ use App\Contracts\Repositories\PayoutRepositoryInterface;
 use App\Exceptions\PayoutException;
 use App\Models\Payment;
 use App\Models\User;
+use App\Notifications\Payout\PayoutRequestNotification;
 
 class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInterface
 {
@@ -55,7 +56,7 @@ class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInt
         try {
             $this->model->getConnection()->beginTransaction();
 
-            $this->model->create([
+            $payout = $this->model->create([
                 'user_id' => $user->id,
                 'payment_id' => $payment->id,
                 'payout_method_id' => $data['payment_method'],
@@ -67,7 +68,7 @@ class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInt
 
             $this->model->getConnection()->commit();
 
-            # TODO: Send payout request notification to admin and user
+            $user->notify(new PayoutRequestNotification($payout));
         } catch (\Throwable $th) {
             $this->model->getConnection()->rollBack();
             throw $th;
