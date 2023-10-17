@@ -64,4 +64,21 @@ interface AdRepositoryInterface
      * @return void
      */
     public function updateUserAd(User $user, string $ad, array $data): void;
+
+    /**
+     * Get ad by slug
+     * 
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getReportAd(string $slug): Ad;
+
+    /**
+     * Report an ad
+     * 
+     * @param string $slug
+     * @param array $data
+     * @return void
+     */
+    public function reportAd(string $slug, array $data): void;
 }
