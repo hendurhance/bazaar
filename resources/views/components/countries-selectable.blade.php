@@ -37,17 +37,7 @@
 
 
 @push('styles')
-<script>
-    document.addEventListener('DOMContentLoaded', function(){
-        setTimeout(() => {
-            // load css
-            const css = document.createElement('link');
-            css.rel = 'stylesheet';
-            css.href = 'https://cdn.jsdelivr.net/npm/@amplifiedhq/countries-atlas/dist/flags/css/flags.min.css';
-            document.head.appendChild(css);
-        }, 800);
-    });
-</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@amplifiedhq/countries-atlas/dist/flags/css/flags.min.css">
 @endpush
 
 @push('scripts')
