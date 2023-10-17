@@ -2,6 +2,7 @@
 
 namespace App\Notifications\Payout;
 
+use App\Models\Payout;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -14,7 +15,7 @@ class PayoutRequestNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct()
+    public function __construct(protected Payout $payout)
     {
         //
     }
@@ -35,9 +36,21 @@ class PayoutRequestNotification extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-                    ->line('The introduction to the notification.')
-                    ->action('Notification Action', url('/'))
-                    ->line('Thank you for using our application!');
+                    ->subject('Payout Request')
+                    ->greeting('Hello!, ' . $notifiable->name)
+                    ->lines([
+                        'You have requested a payout for the payment below:',
+                        'Payout ID: ' . $this->payout->pyt_token,
+                        'Amount: ' . $this->payout->amount,
+                        'Fee: ' . $this->payout->fee,
+                        'Total: ' . $this->payout->total,
+                        'Payout Method: ' . $this->payout->payoutMethod->bank_name,
+                        'Account Name: ' . $this->payout->payoutMethod->account_name,
+                        'Account Number: ' . $this->payout->payoutMethod->account_number,
+                    ])
+                    ->line('View payout request details by clicking the button below.')
+                    ->action('View Payout Request', route('user.payouts.show', $this->payout->pyt_token))
+                    ->salutation('Thank you for using ' . config('app.name') . '!');
     }
 
     /**

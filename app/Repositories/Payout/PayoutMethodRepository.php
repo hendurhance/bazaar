@@ -7,6 +7,7 @@ use App\Contracts\Repositories\PayoutMethodRepositoryInterface;
 use App\Exceptions\PayoutMethodException;
 use App\Models\PayoutMethod;
 use App\Models\User;
+use App\Notifications\Payout\PayoutMethodCreatedNotification;
 use App\Services\Payout\BankCodeService;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -61,7 +62,7 @@ class PayoutMethodRepository extends BaseCrudRepository implements PayoutMethodR
             $bankService = new BankCodeService();
             $bank = $bankService->resolveBankCode($data['bank_code']);
             $resolvedBank = $bankService->resolveBankAccount($data['account_number'], $data['bank_code']);
-            $this->model->create([
+            $payoutMethod = $this->model->create([
                 'user_id' => $user->id,
                 'country_id' => $user->country_id,
                 'bank_name' => $bank['name'],
@@ -75,6 +76,8 @@ class PayoutMethodRepository extends BaseCrudRepository implements PayoutMethodR
             ]);
 
             $this->model->getConnection()->commit();
+
+            $user->notify(new PayoutMethodCreatedNotification($payoutMethod));
         } catch (\Exception $e) {
             $this->model->getConnection()->rollBack();
             throw new PayoutMethodException('Unable to create payout method');
