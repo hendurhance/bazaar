@@ -24,7 +24,6 @@ class Country extends Model
      */
     public function states(): HasMany
     {
-        // cache the states
         return $this->hasMany(State::class);
     }
 

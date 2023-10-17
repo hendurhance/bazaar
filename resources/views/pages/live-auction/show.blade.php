@@ -89,6 +89,10 @@
                         <p class="text-dark mb-0">
                             This ad listing is yet to start. You can not place a bid on this auction yet. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
                         </p>
+                        @else
+                        <p class="text-dark mb-0">
+                            This ad listing has been closed. You can no longer place a bid on this auction. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
+                        </p>
                         @endif
                     </x-alert>
                     @endif
@@ -183,7 +187,7 @@
     </div>
 </div>
 
-@include('layouts.metrics', ['class' => 'pt-120'])
+<x-metric-card :class="'pt-120'" />
 @push('scripts')
 <script src="/assets/js/countdown.js"></script>
 @endpush

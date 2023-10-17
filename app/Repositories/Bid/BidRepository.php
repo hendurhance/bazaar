@@ -8,6 +8,9 @@ use App\Contracts\Repositories\BidRepositoryInterface;
 use App\Enums\AdStatus;
 use App\Exceptions\BidException;
 use App\Models\User;
+use App\Notifications\Bid\BidAcceptedNotification;
+use App\Notifications\Bid\BidCreatedNotification;
+use App\Notifications\Bid\BidRejectedNotification;
 use App\Repositories\Ad\AdRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -45,11 +48,14 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
             throw new BidException('Your bid must be greater than the current bid.', $ad->slug);
         }
 
-        $this->model->create([
+        $bid = $this->model->create([
             'ad_id' => $ad->id,
             'user_id' => $user->id,
             'amount' => $data['amount'],
         ]);
+
+        $ad->user->notify(new BidCreatedNotification($ad, $bid, true));
+        $user->notify(new BidCreatedNotification($ad, $bid, false));
     }
 
     /**
@@ -112,5 +118,11 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
         $bid->update(['is_accepted' => true]);
 
         $ad->update(['status' => AdStatus::EXPIRED, 'expired_at' => now()]);
+
+        $bid->user->notify(new BidAcceptedNotification($ad, $bid));
+        // Send notification to other bidders who lost the bid
+        $this->model->where('ad_id', $ad->id)->where('id', '!=', $bid->id)->orWhere('is_accepted', false)->orWhereNull('is_accepted')->get()->each(function ($bid) use ($ad) {
+            $bid->user->notify(new BidRejectedNotification($ad, $bid));
+        });
     }
 }

@@ -118,6 +118,14 @@ class Ad extends Model
         return $this->hasOne(Bid::class)->orderBy('amount', 'desc')->limit(1);
     }
 
+    /**
+     * Get the winning bid for the ad.
+     */
+    public function winningBid(): HasOne
+    {
+        return $this->hasOne(Bid::class)->where('is_accepted', true);
+    }
+
 
     /**
      * Get related ads.
