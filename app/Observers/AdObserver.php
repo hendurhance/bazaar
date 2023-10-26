@@ -15,11 +15,11 @@ class AdObserver
      */
     public function created(Ad $ad): void
     {
-        if($ad->user->exists) {
-            $ad->user?->notify(new AdCreatedNotification($ad));
-        } else {
-            Notification::route('mail', $ad->seller_email)->notify(new AdCreatedNotification($ad));
-        }
+        // if($ad->user->exists) {
+        //     $ad->user?->notify(new AdCreatedNotification($ad));
+        // } else {
+        //     Notification::route('mail', $ad->seller_email)->notify(new AdCreatedNotification($ad));
+        // }
     }
 
     /**
@@ -27,12 +27,12 @@ class AdObserver
      */
     public function updated(Ad $ad): void
     {
-        Log::info('Updated');
-        if($ad->isDirty('status') && $ad->user->exists) {
-            $ad->user?->notify(new AdStatusUpdatedNotification($ad));
-        } elseif($ad->isDirty('status') && !$ad->user->exists) {
-            Notification::route('mail', $ad->seller_email)->notify(new AdStatusUpdatedNotification($ad));
-        }
+        // Log::info('Updated');
+        // if($ad->isDirty('status') && $ad->user->exists) {
+        //     $ad->user?->notify(new AdStatusUpdatedNotification($ad));
+        // } elseif($ad->isDirty('status') && !$ad->user->exists) {
+        //     Notification::route('mail', $ad->seller_email)->notify(new AdStatusUpdatedNotification($ad));
+        // }
     }
 
     /**

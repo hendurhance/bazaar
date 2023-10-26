@@ -7,7 +7,7 @@
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'payments'])
+            @include('layouts.sidebar', ['active' => 'payments', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <x-payment-filter-component />

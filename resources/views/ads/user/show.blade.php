@@ -7,7 +7,7 @@
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'ads'])
+            @include('layouts.sidebar', ['active' => 'ads', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="ad-listing-wrapper">

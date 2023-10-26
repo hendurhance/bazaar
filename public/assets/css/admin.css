@@ -1,0 +1,12 @@
+.bg-admin{
+    background: linear-gradient(90deg, #c2dcff 0%, #8bb4ff 100%);
+}
+
+
+
+/** ====== MEDIA QUERIES ====== **/
+@media (min-width: 992px) {
+    .sidebar-mini.sidenav-toggled i.fa-chevron-right {
+        display: none;
+    }
+}
