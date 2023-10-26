@@ -24,7 +24,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('command.make.repository', function ($app) {
             return new MakeRepositoryCommand($app['files']);
         });
-        
+
         // Register the interface command.
         $this->app->singleton('command.make.interface', function ($app) {
             return new MakeInterfaceCommand($app['files']);
@@ -36,10 +36,10 @@ class AppServiceProvider extends ServiceProvider
         ]);
 
         // Enable the query log.
-        if(config('app.debug')) {
-           DB::listen(function($query) {
-               Log::channel('query')->info($query->sql, $query->bindings, $query->time);
-           });
+        if (config('app.debug')) {
+            DB::listen(function ($query) {
+                Log::channel('query')->info($query->sql, $query->bindings, $query->time);
+            });
         }
     }
 
@@ -48,7 +48,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        User::observe(UserObserver::class);
-        Ad::observe(AdObserver::class);
+        if (!app()->environment('local')) {
+            User::observe(UserObserver::class);
+            Ad::observe(AdObserver::class);
+        }
     }
 }

@@ -89,7 +89,7 @@
         </div>
         <div class="row">
             <div class="swiper upcoming-slider2">
-                <div class="swiper-wrapper">
+                <div class="swiper-wrapper" @if (count($upcomingAds) < 1) style="display: block !important;" @endif>
                     @forelse ( $upcomingAds as $ad )
                     <x-ad-item-card :ad="$ad" type="slider" />
                     @empty
