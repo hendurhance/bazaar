@@ -41,8 +41,9 @@ interface AuthenticateRepositoryInterface
      * Send a password reset link to a user.
      * 
      * @param string $email
+     * @param mixed $model
      */
-    public function sendPasswordResetLink(string $email): void;
+    public function sendPasswordResetLink(string $email, mixed $model): void;
 
     /**
      * Authenticated user.
@@ -60,8 +61,9 @@ interface AuthenticateRepositoryInterface
      * Reset a user's password.
      * 
      * @param array<string, mixed> $data
+     * @param mixed $model
      */
-    public function resetPassword(array $data): void;
+    public function resetPassword(array $data, mixed $model): void;
 
     /**
      * Update a user's profile.

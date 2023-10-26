@@ -3,7 +3,7 @@
 @section('description', 'Read our blog posts to learn more about us and our platform.')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Blog'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Blog'])
 
 <div class="blog-section pt-120 pb-120">
     <div class="container">

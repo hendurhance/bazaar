@@ -2,7 +2,7 @@
 @section('title', 'Create Payout Method')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Create Payout Method'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Create Payout Method'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">

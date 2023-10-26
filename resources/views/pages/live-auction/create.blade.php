@@ -3,7 +3,7 @@
 @section('description', 'Add your listing to the auction, and get the best price for your item.')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Add Listing'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Add Listing'])
 
 <div class="pt-120 pb-120">
     <div class="container">

@@ -3,7 +3,7 @@
 @section('description', 'Report listing if you think it is inappropriate.')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Report Listing', 'hasBack' => true, 'backUrl' => route('auction-details', $ad->slug), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Report Listing', 'hasBack' => true, 'backUrl' => route('auction-details', $ad->slug), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
 
 <div class="pt-120 pb-120">
     <div class="container">

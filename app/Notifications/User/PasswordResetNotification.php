@@ -2,6 +2,7 @@
 
 namespace App\Notifications\User;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -15,7 +16,7 @@ class PasswordResetNotification extends Notification
     /**
      * Create a new notification instance.
      */
-    public function __construct(protected User $user, protected string $token)
+    public function __construct(protected User|Admin $user, protected string $token)
     {
         $this->user = $user;
         $this->token = $token;
@@ -40,6 +41,7 @@ class PasswordResetNotification extends Notification
                     ->subject('Reset your password')
                     ->greeting('Hello, ' . $this->user->name)
                     ->line('You are receiving this email because we received a password reset request for your account.')
+                    ->action('Reset Password', $this->getActionUrl())
                     ->action('Reset Password', route('user.reset-password',  [$this->token]))
                     ->line('If you did not request a password reset, no further action is required.')
                     ->salutation('Regards, ' . config('app.name'));
@@ -55,5 +57,16 @@ class PasswordResetNotification extends Notification
         return [
             //
         ];
+    }
+
+    /**
+     * Get action url.
+     */
+    protected function getActionUrl(): string
+    {
+        return match ($this->user) {
+            $this->user instanceof User => route('user.reset-password', [$this->token]),
+            $this->user instanceof Admin => route('admin.reset-password', [$this->token]),
+        };
     }
 }

@@ -83,20 +83,26 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
     /**
      * Send password reset link
      * @param string $email
+     * @param mixed $model
      */
-    public function sendPasswordResetLink(string $email): void
+    public function sendPasswordResetLink(string $email, mixed $model): void
     {
-        $user = User::where('email', $email)->first();
+        $user = $model::where('email', $email)->first();
 
         if (!$user) {
             throw new AuthenticateException('An error occurred while sending password reset link.');
         }
         $token = generate_password_reset_token($email);
-        DB::table('password_reset_tokens')->insert([
-            'email' => $email,
-            'token' => $token,
-            'created_at' => now(),
-        ]);
+        DB::table('password_reset_tokens')->updateOrInsert(
+            [
+                'email' => $email,
+            ],
+            [
+                'email' => $email,
+                'token' => $token,
+                'created_at' => now(),
+            ]
+        );
 
         $user->notifyNow(new PasswordResetNotification($user, $token));
     }
@@ -105,8 +111,9 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
      * Reset a user's password.
      * 
      * @param array<string, mixed> $data
+     * @param mixed $model
      */
-    public function resetPassword(array $data): void
+    public function resetPassword(array $data, mixed $model): void
     {
         $resetToken = DB::table('password_reset_tokens')->where('token', $data['token'])->first();
 
@@ -114,7 +121,7 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
             throw new AuthenticateException('Invalid password reset token.');
         }
 
-        $user = User::where('email', $resetToken->email)->first();
+        $user = $model::where('email', $resetToken->email)->first();
 
         if (!$user) {
             throw new AuthenticateException('An error occurred while resetting password.');

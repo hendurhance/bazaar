@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\Auth\LoginController;
+use App\Http\Controllers\Admin\Auth\PasswordController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -22,8 +23,12 @@ Route::middleware('guest:admin_web')->group(function () {
     Route::view('/login', 'auth.admin.login')->name('login');
     Route::post('/login', [LoginController::class, 'login'])->name('login.handle');
     Route::view('/forgot-password', 'auth.admin.password.forgot')->name('forgot-password');
-    // Route::post('/forgot-password', [App\Http\Controllers\Admin\Auth\PasswordController::class, 'forgotPassword'])->name('forgot-password.handle');
-    // Route::get('/reset-password/{token}', [App\Http\Controllers\Admin\Auth\PasswordController::class, 'resetPasswordForm'])->name('reset-password');
+    Route::post('/forgot-password', [PasswordController::class, 'forgotPassword'])->name('forgot-password.handle');
+    Route::get('/reset-password/{token}', [PasswordController::class, 'resetPasswordForm'])->name('reset-password');
+    Route::post('/reset-password', [PasswordController::class, 'resetPassword'])->name('reset-password.handle');
 });
 
-Route::view('/', 'dashboard.admin.index')->name('dashboard');
+
+Route::middleware('auth:admin_web')->group(function () {
+    Route::view('/', 'dashboard.admin.index')->name('dashboard');
+});

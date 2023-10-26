@@ -1,5 +1,7 @@
 @extends('partials.admin')
+@section('title', 'Admin Login')
 @section('content')
+
 
 <div class="bg-admin">
     <div class="page">
@@ -24,14 +26,14 @@
                                             <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
-                                            <input class="input100 border-start-0 form-control ms-0" type="email" placeholder="Email">
+                                            <input class="input100 border-start-0 form-control ms-0" type="email" name="email" placeholder="Email">
                                         </div>
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                         <div class="wrap-input100 validate-input input-group" id="Password-toggle">
                                             <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                                 <i class="fa-solid fa-eye"></i>
                                             </a>
-                                            <input class="input100 border-start-0 form-control ms-0" type="password" placeholder="Password">
+                                            <input class="input100 border-start-0 form-control ms-0" type="password" name="password" placeholder="Password">
                                         </div>
                                         <span class="text-danger">{{ $errors->first('password') }}</span>
                                         <br>

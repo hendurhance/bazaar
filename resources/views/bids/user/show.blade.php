@@ -2,7 +2,7 @@
 @section('title', 'Listing Bid'. ' - '.$bid->ad->title)
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Listing Bid', 'hasBack' => true, 'backUrl' => route('user.listing-bids'), 'backTitle' => 'My Bids', 'routeItem' => $bid->ad->title])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Listing Bid', 'hasBack' => true, 'backUrl' => route('user.listing-bids'), 'backTitle' => 'My Bids', 'routeItem' => $bid->ad->title])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">

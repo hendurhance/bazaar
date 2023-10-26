@@ -2,7 +2,7 @@
 @section('title', 'Edit Payout Method')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Edit Payout Method', 'hasBack' => true, 'backUrl' => route('user.payout-methods.index'), 'routeItem' => $payoutMethod->bank_name, 'backTitle' => 'Payout Methods'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Edit Payout Method', 'hasBack' => true, 'backUrl' => route('user.payout-methods.index'), 'routeItem' => $payoutMethod->bank_name, 'backTitle' => 'Payout Methods'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
