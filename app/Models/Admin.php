@@ -26,6 +26,7 @@ class Admin extends Authenticatable
         'mobile',
         'gender',
         'password',
+        'avatar',
     ];
 
     /**

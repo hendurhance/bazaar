@@ -2,7 +2,7 @@
 @section('title', 'Profile')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Profile'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Profile'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">

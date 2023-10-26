@@ -1,4 +1,5 @@
 @extends('partials.admin')
+@section('title', 'Admin Forgot Password')
 @section('content')
 
 <div class="bg-admin">
@@ -11,7 +12,8 @@
             </div>
             <div class="container-login100">
                 <div class="wrap-login100 p-6">
-                    <form class="login100-form validate-form">
+                    <form class="login100-form validate-form" method="POST" action="{{ route('admin.forgot-password.handle') }}">
+                        @csrf
                         <span class="login100-form-title pb-5">
                             Admin Forgot Password
                         </span>
@@ -23,13 +25,14 @@
                                             <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
                                                 <i class="fa-solid fa-envelope"></i>
                                             </a>
-                                            <input class="input100 border-start-0 form-control ms-0" type="email" placeholder="Email">
+                                            <input class="input100 border-start-0 form-control ms-0" type="email" name="email" placeholder="Email">
                                         </div>
+                                        <span class="text-danger">{{ $errors->first('email') }}</span><br>
                                         <span>Note: By requesting, you agree to the <a href="#">Terms & Conditions</a> and <a href="#">Privacy Policy</a></span>
                                         <div class="container-login100-form-btn ">
-                                            <a class="login100-form-btn btn-primary">
+                                            <button type="submit" class="login100-form-btn btn-primary">
                                                 Send Password Reset Link
-                                            </a>
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

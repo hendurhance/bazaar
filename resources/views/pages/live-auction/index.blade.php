@@ -3,7 +3,7 @@
 @section('description', 'View current live auctions, and bid on items.')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Live Auction'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Live Auction'])
 
 <div class="live-auction-section pt-120 pb-120">
     <div class="container">

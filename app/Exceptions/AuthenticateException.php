@@ -29,7 +29,7 @@ class AuthenticateException extends Exception
      */
     public function render(): RedirectResponse
     {
-        return redirect()->route('user.login')->with('error', $this->message);
+        return redirect()->back()->with('error', $this->message);
     }
 
     /**

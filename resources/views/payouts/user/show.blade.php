@@ -2,7 +2,7 @@
 @section('title', 'Payout')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Payout', 'hasBack' => true, 'backUrl' => route('user.payouts'),
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Payout', 'hasBack' => true, 'backUrl' => route('user.payouts'),
 'backTitle' => 'Payout', 'routeItem' => $payment->txn_id])
 
 <div class="dashboard-section pt-120 pb-120">

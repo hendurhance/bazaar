@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\User\Auth;
+namespace App\Http\Controllers\Admin\Auth;
 
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
@@ -29,9 +29,9 @@ class PasswordController extends Controller
      */
     public function forgotPassword(ForgotPasswordRequest $request): RedirectResponse
     {
-        $this->repository->sendPasswordResetLink($request->email, \App\Models\User::class);
+        $this->repository->sendPasswordResetLink($request->email, \App\Models\Admin::class);
 
-        return redirect()->route('user.login')->with('success', 'A password reset link has been sent to your email.');
+        return redirect()->route('admin.login')->with('success', 'A password reset link has been sent to your email.');
     }
 
     /**
@@ -42,7 +42,7 @@ class PasswordController extends Controller
      */
     public function resetPasswordForm(string $token): View
     {
-        return view('auth.user.password.reset', ['token' => $token]);
+        return view('auth.admin.password.reset', ['token' => $token]);
     }
 
     /**
@@ -54,8 +54,8 @@ class PasswordController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request): RedirectResponse
     {
-        $this->repository->resetPassword($request->validated(), \App\Models\User::class);
+        $this->repository->resetPassword($request->validated(), \App\Models\Admin::class);
 
-        return redirect()->route('user.login')->with('success', 'Your password has been reset.');
+        return redirect()->route('admin.login')->with('success', 'Your password has been reset.');
     }
 }
