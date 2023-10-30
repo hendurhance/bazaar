@@ -180,6 +180,16 @@ class Ad extends Model
         return $this->expired_at->isPast() && $this->status === AdStatus::PUBLISHED;
     }
 
+    public function rejected(): bool
+    {
+        return $this->status === AdStatus::REJECTED;
+    }
+
+    public function pending(): bool
+    {
+        return $this->status === AdStatus::PENDING;
+    }
+
     /**
      * Scope a query to only include active ads.
      */

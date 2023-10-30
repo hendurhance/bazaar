@@ -25,6 +25,22 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
     public function getAds(int $limit = 10, string $type, array $filters = null): LengthAwarePaginator
     {
         return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name'])
+            ->when(
+                match ($type) {
+                    'active' => fn ($query) => $query->active(),
+                    'upcoming' => fn ($query) => $query->upcoming(),
+                    'pending' => fn ($query) => $query->pending(),
+                    'expired' => fn ($query) => $query->expired(),
+                    'rejected' => fn ($query) => $query->rejected(),
+                    'all' => fn ($query) => $query,
+                }
+            )
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['search']), function ($query) use ($filters) {
+                    $query->where('title', 'like', '%' . $filters['search'] . '%')
+                        ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+                });
+            })
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
     }

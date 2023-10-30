@@ -6,10 +6,10 @@
 <script src="/assets/js/sticky.js"></script>
 <script src="/plugin/p-scroll/perfect-scrollbar.js"></script>
 <script src="/plugin/p-scroll/pscroll.js"></script>
-<script src="/plugin/p-scroll/pscroll-1.js"></script>
 <script src="/assets/js/sidebar.js"></script>
 <script src="/assets/js/sidemenu.js"></script>
 <script src="/assets/js/landing.js"></script>
+{{-- <script src="/assets/js/tooltip&popover.js"></script> --}}
 @else
 <script src="/assets/js/jquery-ui.js"></script>
 <script src="/assets/js/wow.min.js"></script>
