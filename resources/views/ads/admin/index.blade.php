@@ -19,6 +19,7 @@
                       </div>
                       <div class="card-body pt-4">
                          <div class="grid-margin">
+                           @if(count($ads) > 0)
                             <div class="">
                                <div class="panel panel-primary">
                                   <div class="panel-body tabs-menu-body border-0 pt-0">
@@ -158,6 +159,12 @@
                                   </div>
                                </div>
                             </div>
+                           @else
+                              <div class="text-center p-4">
+                                <img src="{{ asset('assets/images/icons/man.svg') }}" class="w-25" alt="empty">
+                                <h4 class="mt-3">No Ads Found</h4>
+                              </div>
+                           @endif
                          </div>
                       </div>
                    </div>
