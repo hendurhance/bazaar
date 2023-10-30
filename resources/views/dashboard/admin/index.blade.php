@@ -3,7 +3,7 @@
 @section('content')
 
 @include('layouts.header', ['admin' => true])
-@include('layouts.sidebar', ['admin' => true])
+@include('layouts.sidebar', ['admin' => true, 'active' => 'dashboard'])
 
 <div class="main-content app-content mt-0">
   <div class="side-app">

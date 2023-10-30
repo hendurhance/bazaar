@@ -20,7 +20,7 @@
          <li class="sub-category">
            <h3>Main</h3>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'active' => $active === 'dashboard'])>
            <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
             <i class="side-menu__icon fa-regular fa-house"></i>
             <span class="side-menu__label">Dashboard</span>
@@ -36,7 +36,7 @@
            <h3>Ads</h3>
          </li>
          <li class="slide">
-           <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+           <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/ads.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-regular fa-cube"></i><span class="side-menu__label">Ads</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
@@ -46,12 +46,12 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side1">
                      <ul class="sidemenu-list">
-                       <li><a href="cards.html" class="slide-item"> All Listings</a></li>
-                       <li><a href="calendar.html" class="slide-item"> Active Listings</a></li>
-                       <li><a href="calendar2.html" class="slide-item"> Upcoming Listings</a></li>
-                       <li><a href="calendar3.html" class="slide-item"> Pending Listings</a></li>
-                       <li><a href="calendar4.html" class="slide-item"> Expired Listings</a></li>
-                       <li><a href="calendar5.html" class="slide-item"> Rejected Listings</a></li>
+                       <li><a href="cards.html" @class(['slide-item', 'active' => $active === 'ads.all'])> All Listings</a></li>
+                       <li><a href="calendar.html" @class(['slide-item', 'active' => $active === 'ads.active'])> Active Listings</a></li>
+                       <li><a href="calendar2.html" @class(['slide-item', 'active' => $active === 'ads.upcoming'])> Upcoming Listings</a></li>
+                       <li><a href="calendar3.html" @class(['slide-item', 'active' => $active === 'ads.pending'])> Pending Listings</a></li>
+                       <li><a href="calendar4.html" @class(['slide-item', 'active' => $active === 'ads.expired'])> Expired Listings</a></li>
+                       <li><a href="calendar5.html" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Rejected Listings</a></li>
                      </ul>
                    </div>
                  </div>
@@ -59,7 +59,7 @@
              </li>
            </ul>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'active' => $active === 'bids'])>
           <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
            <i class="side-menu__icon fa-regular fa-gavel"></i>
            <span class="side-menu__label">Bids</span>
@@ -69,7 +69,7 @@
            <h3>Payments</h3>
          </li>
          <li class="slide">
-           <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+           <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/payments.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-light fa-credit-card"></i><span class="side-menu__label">Payments</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
@@ -79,10 +79,10 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side9">
                      <ul class="sidemenu-list">
-                       <li><a href="profile.html" class="slide-item"> All Payments</a></li>
-                       <li><a href="editprofile.html" class="slide-item"> Pending Payments</a></li>
-                       <li><a href="notify-list.html" class="slide-item"> Successful Payments</a></li>
-                       <li><a href="email-compose.html" class="slide-item"> Failed Payments</a></li>
+                       <li><a href="profile.html" @class(['slide-item', 'active' => $active === 'payments.all'])> All Payments</a></li>
+                       <li><a href="editprofile.html" @class(['slide-item', 'active' => $active === 'payments.pending'])> Pending Payments</a></li>
+                       <li><a href="notify-list.html" @class(['slide-item', 'active' => $active === 'payments.successful'])> Successful Payments</a></li>
+                       <li><a href="email-compose.html" @class(['slide-item', 'active' => $active === 'payments.failed'])> Failed Payments</a></li>
                      </ul>
                    </div>
                  </div>
@@ -91,7 +91,7 @@
            </ul>
          </li>
          <li class="slide">
-           <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+           <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/payouts.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-regular fa-money-check"></i><span class="side-menu__label">Payouts</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
@@ -101,9 +101,9 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side13">
                      <ul class="sidemenu-list">
-                       <li><a href="shop.html" class="slide-item"> All Payouts</a></li>
-                       <li><a href="shop-description.html" class="slide-item"> Pending Payouts</a></li>
-                       <li><a href="cart.html" class="slide-item"> Successful Payouts</a></li>
+                       <li><a href="shop.html" @class(['slide-item', 'active' => $active === 'payouts.all'])> All Payouts</a></li>
+                       <li><a href="shop-description.html" @class(['slide-item', 'active' => $active === 'payouts.pending'])> Pending Payouts</a></li>
+                       <li><a href="cart.html" @class(['slide-item', 'active' => $active === 'payouts.successful'])> Successful Payouts</a></li>
                      </ul>
                    </div>
                  </div>
@@ -111,7 +111,7 @@
              </li>
            </ul>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'active' => $active === 'methods'])>
           <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
            <i class="side-menu__icon fa-regular fa-building-columns"></i>
            <span class="side-menu__label">Methods</span>
@@ -120,16 +120,16 @@
          <li class="sub-category">
            <h3>General</h3>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'active' => $active === 'media'])>
           <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
            <i class="side-menu__icon fa-regular  fa-pen-to-square"></i>
            <span class="side-menu__label">Media</span>
           </a>
          </li>
          <li class="slide">
-           <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
-               class="side-menu__icon fa-regular fa-pen-to-square"></i><span class="side-menu__label">Blogs</span><span
-               class="badge bg-secondary side-badge">6</span><i class="fa-light fa-chevron-right fa-2xs hor-angle"></i>
+           <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/blogs.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
+               class="side-menu__icon fa-regular fa-pen-to-square"></i><span class="side-menu__label">Blogs</span><i
+               class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
            <ul class="slide-menu">
              <li class="panel sidetab-menu">
@@ -137,8 +137,8 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side33">
                      <ul class="sidemenu-list">
-                       <li><a href="chart-chartist.html" class="slide-item">All Blogs</a></li>
-                       <li><a href="chart-flot.html" class="slide-item"> Create Blog</a></li>
+                       <li><a href="chart-chartist.html" @class(['slide-item', 'active' => $active === 'blogs.all'])>All Blogs</a></li>
+                       <li><a href="chart-flot.html" @class(['slide-item', 'active' => $active === 'blogs.create'])> Create Blog</a></li>
                      </ul>
                    </div>
                  </div>
@@ -147,7 +147,7 @@
            </ul>
          </li>
          <li class="slide">
-           <a class="side-menu__item" data-bs-toggle="slide" href="javascript:void(0)"><i
+           <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/support.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-regular fa-messages"></i><span class="side-menu__label">Support</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
@@ -157,9 +157,9 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side37">
                      <ul class="sidemenu-list">
-                       <li><a href="icons.html" class="slide-item"> All Tickets</a></li>
-                       <li><a href="icons2.html" class="slide-item"> Pending Tickets</a></li>
-                       <li><a href="icons3.html" class="slide-item"> Resolved Tickets</a></li>
+                       <li><a href="icons.html" @class(['slide-item', 'active' => $active === 'support.all'])> All Tickets</a></li>
+                       <li><a href="icons2.html" @class(['slide-item', 'active' => $active === 'support.pending'])> Pending Tickets</a></li>
+                       <li><a href="icons3.html" @class(['slide-item', 'active' => $active === 'support.resolved'])> Resolved Tickets</a></li>
                      </ul>
                    </div>
                  </div>

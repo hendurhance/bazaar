@@ -3,7 +3,7 @@
 @section('content')
 
 @include('layouts.header', ['admin' => true])
-@include('layouts.sidebar', ['admin' => true])
+@include('layouts.sidebar', ['admin' => true, 'active' => 'ads.all'])
 
 <div class="main-content app-content mt-0">
     <div class="side-app">
@@ -23,7 +23,7 @@
                                <div class="panel panel-primary">
                                   <div class="panel-body tabs-menu-body border-0 pt-0">
                                     <form class="input-group mb-5">
-                                       <input name="search" type="text" class="form-control" placeholder="Search">
+                                       <input name="search" type="text" class="form-control" placeholder="Search" value="{{ request()->search }}" />
                                        <div class="input-group-text btn btn-primary">
                                           <button class="bg-transparent border-0 text-white">
                                            <i type="submit" class="fa-regular fa-search" aria-hidden="true"></i>
