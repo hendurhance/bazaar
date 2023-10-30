@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\Ad\AdController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use Illuminate\Support\Facades\Route;
@@ -31,4 +32,5 @@ Route::middleware('guest:admin_web')->group(function () {
 
 Route::middleware('auth:admin_web')->group(function () {
     Route::view('/', 'dashboard.admin.index')->name('dashboard');
+    Route::get('/ads', [AdController::class, 'index'])->name('ads.index');
 });

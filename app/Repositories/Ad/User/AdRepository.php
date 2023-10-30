@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Ad;
+namespace App\Repositories\Ad\User;
 
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
@@ -10,7 +10,6 @@ use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
 use App\Models\ReportAd;
 use App\Models\User;
-use App\Notifications\Ad\AdCreatedNotification;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Country\CountryRepository;
 use App\Traits\MediaHandler;
@@ -18,7 +17,6 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Notification;
 
 class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
 {
