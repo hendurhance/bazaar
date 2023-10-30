@@ -46,12 +46,12 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side1">
                      <ul class="sidemenu-list">
-                       <li><a href="cards.html" @class(['slide-item', 'active' => $active === 'ads.all'])> All Listings</a></li>
-                       <li><a href="calendar.html" @class(['slide-item', 'active' => $active === 'ads.active'])> Active Listings</a></li>
-                       <li><a href="calendar2.html" @class(['slide-item', 'active' => $active === 'ads.upcoming'])> Upcoming Listings</a></li>
-                       <li><a href="calendar3.html" @class(['slide-item', 'active' => $active === 'ads.pending'])> Pending Listings</a></li>
-                       <li><a href="calendar4.html" @class(['slide-item', 'active' => $active === 'ads.expired'])> Expired Listings</a></li>
-                       <li><a href="calendar5.html" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Rejected Listings</a></li>
+                       <li><a href="{{ route('admin.ads.index') }}" @class(['slide-item', 'active' => $active === 'ads.all'])> All Listings</a></li>
+                       <li><a href="{{ route('admin.ads.active') }}" @class(['slide-item', 'active' => $active === 'ads.active'])> Active Listings</a></li>
+                       <li><a href="{{ route('admin.ads.upcoming') }}" @class(['slide-item', 'active' => $active === 'ads.upcoming'])> Upcoming Listings</a></li>
+                       <li><a href="{{ route('admin.ads.pending') }}" @class(['slide-item', 'active' => $active === 'ads.pending'])> Pending Listings</a></li>
+                       <li><a href="{{ route('admin.ads.expired') }}" @class(['slide-item', 'active' => $active === 'ads.expired'])> Expired Listings</a></li>
+                       <li><a href="{{ route('admin.ads.rejected') }}" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Rejected Listings</a></li>
                      </ul>
                    </div>
                  </div>

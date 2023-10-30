@@ -33,4 +33,9 @@ Route::middleware('guest:admin_web')->group(function () {
 Route::middleware('auth:admin_web')->group(function () {
     Route::view('/', 'dashboard.admin.index')->name('dashboard');
     Route::get('/ads', [AdController::class, 'index'])->name('ads.index');
+    Route::get('/ads/pending', [AdController::class, 'pending'])->name('ads.pending');
+    Route::get('/ads/upcoming', [AdController::class, 'upcoming'])->name('ads.upcoming');
+    Route::get('/ads/rejected', [AdController::class, 'rejected'])->name('ads.rejected');
+    Route::get('/ads/expired', [AdController::class, 'expired'])->name('ads.expired');
+    Route::get('/ads/active', [AdController::class, 'active'])->name('ads.active');
 });
