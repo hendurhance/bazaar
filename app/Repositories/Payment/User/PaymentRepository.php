@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Payment;
+namespace App\Repositories\Payment\User;
 
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Payment;

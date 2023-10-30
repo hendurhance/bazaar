@@ -27,13 +27,13 @@
               <div class="d-flex order-lg-2">
                 <div class="dropdown d-lg-none d-flex">
                   <a href="javascript:void(0)" class="nav-link icon" data-bs-toggle="dropdown">
-                    <i class="fe fe-search"></i>
+                    <i class="fa-regular fa-magnifying-glass"></i>
                   </a>
                   <div class="dropdown-menu header-search dropdown-menu-start">
                     <div class="input-group w-100 p-2">
                       <input type="text" class="form-control" placeholder="Search....">
                       <div class="input-group-text btn btn-primary">
-                        <i class="fa fa-search" aria-hidden="true"></i>
+                        <i class="fa-regular fa-search" aria-hidden="true"></i>
                       </div>
                     </div>
                   </div>

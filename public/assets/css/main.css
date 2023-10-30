@@ -17050,6 +17050,7 @@ table.table-bordered.dataTable thead tr:first-child td {
 
 .app-header .container-fluid.main-container div:first-child {
     align-items: center !important;
+    justify-content: space-evenly !important;
 }
 
 .hor-header .container.main-container div:first-child {

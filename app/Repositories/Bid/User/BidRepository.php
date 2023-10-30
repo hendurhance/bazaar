@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Bid;
+namespace App\Repositories\Bid\User;
 
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Bid;

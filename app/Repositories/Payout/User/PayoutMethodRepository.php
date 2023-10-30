@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Payout;
+namespace App\Repositories\Payout\User;
 
 use App\Abstracts\BaseCrudRepository;
 use App\Contracts\Repositories\PayoutMethodRepositoryInterface;
