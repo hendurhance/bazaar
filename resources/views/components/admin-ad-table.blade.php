@@ -80,10 +80,10 @@
                                                    style="background-image: url({{$ad->media->first()->url}})"></span>
                                                 <div
                                                    class="ms-3 mt-0 mt-sm-2 d-block">
-                                                   <h6
-                                                      class="mb-0 fs-14 fw-semibold">
+                                                   <a href="{{ route('admin.ads.show', $ad->slug) }}"
+                                                      class="mb-0 fs-14 fw-semibold text-info">
                                                       {{ shorten_chars($ad->title, 30) }}
-                                                   </h6>
+                                                   </a>
                                                 </div>
                                              </div>
                                           </td>
@@ -112,7 +112,7 @@
                                           </td>
                                           <td>
                                              <div class="g-2">
-                                                <a class="btn text-dark btn-sm"
+                                                <a href="{{ route('admin.ads.show', $ad->slug) }}" class="btn text-dark btn-sm"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-original-title="View"><span
                                                    class="fa-regular fa-eye fs-14"></span></a>

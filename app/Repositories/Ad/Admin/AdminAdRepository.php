@@ -44,4 +44,20 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
     }
+
+    /**
+     * Get ad by slug
+     * 
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getAdBySlug(string $adSlug): Ad
+    {
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'subcategory:parent_id,id,name', 'bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name', 'relatedAds:id,title,slug,price', 'relatedAds.media',])
+            ->where('slug', $adSlug)
+            ->firstOr(function () {
+                #TODO: throw custom exception
+                abort(404);
+            });
+    }
 }

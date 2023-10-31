@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Ad;
 
 use App\Contracts\Repositories\AdminAdRepositoryInterface;
-use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\FilterAdminAdsRequest;
 use Illuminate\Contracts\View\View;
@@ -96,4 +95,16 @@ class AdController extends Controller
         ]);
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $ad
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function show(string $adSlug): View
+    {
+        return view('ads.admin.show', [
+            'ad' => $this->adminAdRepository->getAdBySlug($adSlug)
+        ]);
+    }
 }
