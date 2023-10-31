@@ -13,4 +13,13 @@ interface AdminAdRepositoryInterface
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getAds(int $limit = 10, string $type, array $filters = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+    /**
+     * Get ad by slug
+     * 
+     * @param string $slug
+     * @return \App\Models\Ad
+     */
+    public function getAdBySlug(string $adSlug) : \App\Models\Ad;
+
 }

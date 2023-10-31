@@ -118,7 +118,7 @@
                             <div class="col-lg-2 col-xl-3 col-md-6 col-sm-6 col-6 border-end border-bottom border-top">
                                 <div class="ad-listing-item">
                                     <span>Seller Phone:</span>
-                                    <p><i class="fa fa-phone"></i> {{ $ad->seller_phone }}</p>
+                                    <p><i class="fa fa-phone"></i> {{ $ad->seller_mobile }}</p>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-xl-3 col-md-6 col-sm-6 col-6 border-top border-bottom border-end">
