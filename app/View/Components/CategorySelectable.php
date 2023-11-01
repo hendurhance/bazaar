@@ -12,7 +12,7 @@ class CategorySelectable extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(protected CategoryRepositoryInterface $categoryRepository)
+    public function __construct(protected CategoryRepositoryInterface $categoryRepository, public bool $admin, public $selectedCategory = null)
     {
     }
 

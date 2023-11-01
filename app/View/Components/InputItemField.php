@@ -6,19 +6,22 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TextareaField extends Component
+class InputItemField extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public bool $admin,
+        public string $type = 'text',
         public string $name,
         public string $label = '',
         public string $placeholder = '',
         public string $value = '',
         public bool $required = true,
+        public bool $disabled = false,
+        public bool $readonly = false,
     )
+
     {
         //
     }
@@ -28,6 +31,6 @@ class TextareaField extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.textarea-field');
+        return view('components.input-item-field');
     }
 }

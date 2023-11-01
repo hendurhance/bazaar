@@ -53,7 +53,7 @@
                                         <h4 class="mt-4"><b> Description</b></h4>
                                         <p>{{shorten_chars($ad->description, 250, true)}}</p>
                                         <h3 class="mb-4"><span class="me-2 fw-bold fs-25 d-inline-flex"> {{ money($ad->price) }} </span></h3>
-                                        <div class=" mt-4 mb-5"><span class="fw-bold me-2">Category :</span><span class="fw-bold text-primary">{{ $ad->category->name }}</span> | <span class="fw-bold me-2 ms-2">Sub Category :</span><span class="fw-bold text-primary">{{ $ad->subCategory->name }}</span></div>
+                                        <div class=" mt-4 mb-5"><span class="fw-bold me-2">Category :</span><span class="fw-bold text-primary">{{ $ad->category->name ?? 'N/A' }}</span> | <span class="fw-bold me-2 ms-2">Sub Category :</span><span class="fw-bold text-primary">{{ $ad->subCategory->name ?? 'N/A' }}</span></div>
                                         <div class=" mt-4 mb-5"><span class="fw-bold me-2">Timeframe :</span><span class="fw-bold text-dark">{{ $ad->started_at->format('d M, Y') }} - {{ $ad->expired_at->format('d M, Y') }}</span></div>
                                         <div class=" mt-4 mb-5">
                                             <span class="fw-bold me-2">Status :</span><span class="fw-bold text-{{ $ad->status->color() }}">{{ $ad->status->label() }}</span> | 
@@ -64,8 +64,8 @@
                                         </div>
                                         <hr>
                                         <div class="btn-list mt-4">
-                                            <a href="cart.html" class="btn ripple btn-primary me-2"><i class="fa-regular fa-edit"> </i> Edit Ad</a>
-                                            <a href="checkout.html" class="btn ripple btn-danger"><i class="fa-regular fa-trash"> </i> Delete Ad</a>
+                                            <a href="{{ route('admin.ads.edit', $ad->slug) }}" class="btn ripple btn-primary me-2"><i class="fa-regular fa-edit"> </i> Edit Ad</a>
+                                            <a href="#" class="btn ripple btn-danger"><i class="fa-regular fa-trash"> </i> Delete Ad</a>
                                         </div>
                                     </div>
                                 </div>
@@ -83,7 +83,7 @@
                                         <ul class="nav panel-tabs" role="tablist">
                                             <li><a href="#tab5" class="active" data-bs-toggle="tab" aria-selected="true" role="tab">Details</a></li>
                                             <li><a href="#tab6" data-bs-toggle="tab" aria-selected="false" role="tab" class="" tabindex="-1">Bids</a></li>
-                                            <li><a href="#tab7" data-bs-toggle="tab" aria-selected="false" role="tab" class="" tabindex="-1">Features</a></li>
+                                            <li><a href="#tab7" data-bs-toggle="tab" aria-selected="false" role="tab" class="" tabindex="-1">Others</a></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -159,12 +159,10 @@
                                         </div>
                                         <div class="tab-pane" id="tab7" role="tabpanel">
                                             <ul class="p-5">
-                                                <li><i class="fa fa-check me-3 text-success mb-5"></i>Asthetic Product - more lively movies and music</li>
-                                                <li><i class="fa fa-check me-3 text-success mb-5"></i>Long lasting 7,040 mAH battery with fast adaptive charging</li>
-                                                <li><i class="fa fa-check me-3 text-success mb-5"></i>8 MP Primary Camera, 5 MP Front Facing Camera</li>
-                                                <li><i class="fa fa-check me-3 text-success mb-5"></i>Seamless apps and gaming experience with Qualcomm Snapdragon 662 processor (4X2.0 GHz+4X1.8 GHz)</li>
-                                                <li><i class="fa fa-check me-3 text-success mb-5"></i>1 year manufacturer warranty for device and 6 months manufacturer warranty for in-box accessories</li>
-                                                <li><i class="fa fa-check me-3 text-success"></i>Customer care :1234 567 678</li>
+                                                <li><i class="fa-light fa-check me-3 text-success mb-5"></i>Video URL : <a href="{{ $ad->video_url }}" target="_blank">{{ $ad->video_url }}</a></li>
+                                                <li><i class="fa-light fa-check me-3 text-success mb-5"></i>Mark as Urgent: <span class="badge bg-{{ $ad->mark_as_urgent ? 'success' : 'danger' }}">{{ $ad->mark_as_urgent ? 'Yes' : 'No' }}</span></li>
+                                                <li><i class="fa-light fa-check me-3 text-success mb-5"></i>Is Negotiable: <span class="badge bg-{{ $ad->is_negotiable ? 'success' : 'danger' }}">{{ $ad->is_negotiable ? 'Yes' : 'No' }}</span></li>
+                                                <li><i class="fa-light fa-check me-3 text-success mb-5"></i>Ad Type: <span class="text-dark">{{ $ad->ad_type ?? 'N/A' }}</span></li>
                                             </ul>
                                         </div>
                                     </div>

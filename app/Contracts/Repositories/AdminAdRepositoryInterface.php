@@ -22,4 +22,12 @@ interface AdminAdRepositoryInterface
      */
     public function getAdBySlug(string $adSlug) : \App\Models\Ad;
 
+    /**
+     * Update ad by slug
+     * 
+     * @param string $slug
+     * @param array $data
+     * @return void
+     */
+    public function updateAd(string $slug, array $data) : void;
 }

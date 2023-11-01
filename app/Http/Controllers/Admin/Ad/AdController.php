@@ -5,8 +5,9 @@ namespace App\Http\Controllers\Admin\Ad;
 use App\Contracts\Repositories\AdminAdRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\FilterAdminAdsRequest;
+use App\Http\Requests\Ad\UpdateAdAdminRequest;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class AdController extends Controller
 {
@@ -106,5 +107,32 @@ class AdController extends Controller
         return view('ads.admin.show', [
             'ad' => $this->adminAdRepository->getAdBySlug($adSlug)
         ]);
+    }
+
+    /**
+     * Edit the specified resource in storage.
+     *
+     * @param  string  $ad
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function edit(string $adSlug): View
+    {
+        return view('ads.admin.edit', [
+            'ad' => $this->adminAdRepository->getAdBySlug($adSlug)
+        ]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     * 
+     * @param  string  $ad
+     * @param  \Illuminate\Http\Request  $request
+     * @return \App\Http\Requests\Ad\UpdateAdAdminRequest
+     */
+    public function update(string $adSlug, UpdateAdAdminRequest $request): RedirectResponse
+    {
+        $this->adminAdRepository->updateAd($adSlug, $request->validated());
+
+        return redirect()->route('admin.ads.show', $adSlug)->with('success', 'Ad updated successfully.');
     }
 }

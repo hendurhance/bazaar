@@ -1,8 +1,19 @@
+@if($admin)
+<div class="row">
+    <label class="col-md-3 form-label mb-4"> {{ $label }} {{$required ? '*' : ''}} :</label>
+    <div class="col-md-9 mb-4">
+        <textarea name="{{$name}}" id="{{$name}}" placeholder="{{ $placeholder }}" @class(['error'=> $errors->has($name)])>{!! $value !!}</textarea>
+        <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
+    </div>
+</div>
+@else
 <div class="form-inner">
     <label>{{ $label }} {{$required ? '*' : ''}}</label>
     <textarea name="{{ $name }}" id="{{ $name }}" placeholder="{{ $placeholder }}" @class(['error'=> $errors->has($name)])>{!! $value !!}</textarea>
     <span class="text-danger fs-6">{{ $errors->first($name) }}</span>
 </div>
+@endif
+
 {{-- include ckeditor --}}
 @push('scripts')
 <script src="/assets/js/ckeditor.js"></script>

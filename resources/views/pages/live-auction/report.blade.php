@@ -25,7 +25,7 @@
                             </div>
                             <div class="col-md-12">
                                 <x-textarea-field name="description" label="Ad Report Description"
-                                    placeholder="Enter Reason" value="{{ old('description') }}" />
+                                    placeholder="Enter Reason" value="{{ old('description') }}" :admin="false" />
                             </div>
                             <div class="col-md-12">
                                 <x-agree-checkbox
