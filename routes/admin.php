@@ -38,6 +38,8 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::get('/ads/rejected', [AdController::class, 'rejected'])->name('ads.rejected');
     Route::get('/ads/expired', [AdController::class, 'expired'])->name('ads.expired');
     Route::get('/ads/active', [AdController::class, 'active'])->name('ads.active');
+    Route::get('/ads/reported', [AdController::class, 'reported'])->name('ads.reported');
+    Route::get('/ad/{ads:slug}/report', [AdController::class, 'reportAd'])->name('ads.reported.show');
     Route::get('/ad/{ads:slug}', [AdController::class, 'show'])->name('ads.show');
     Route::get('/ad/{ads:slug}/edit', [AdController::class, 'edit'])->name('ads.edit');
     Route::put('/ad/{ads:slug}/edit', [AdController::class, 'update'])->name('ads.update');

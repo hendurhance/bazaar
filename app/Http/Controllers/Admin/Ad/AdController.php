@@ -97,6 +97,34 @@ class AdController extends Controller
     }
 
     /**
+     * Display a reported ad of the resource.
+     * 
+     * @param \App\Http\Requests\Ad\FilterAdminAdsRequest $query
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function reported(FilterAdminAdsRequest $request): View
+    {
+        return view('ads.admin.status.reported', [
+            'reportedAds' => $this->adminAdRepository->getReportedAds(10, $request->validated())
+        ]);
+    }
+
+    /**
+     * Display a reported ad of the resource.
+     * 
+     * @param string $adSlug
+     * @return \Illuminate\Contracts\View\View
+     */
+    public function reportAd(string $adSlug): View
+    {
+        return view('ads.admin.report', [
+            'reportAd' => $this->adminAdRepository->getReportedAd($adSlug)
+        ]);
+    }
+
+
+
+    /**
      * Display the specified resource.
      *
      * @param  string  $ad

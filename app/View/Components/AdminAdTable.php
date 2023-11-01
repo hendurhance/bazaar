@@ -12,7 +12,7 @@ class AdminAdTable extends Component
     /**
      * Create a new component instance.
      */
-    public function __construct(public LengthAwarePaginator $collection)
+    public function __construct(public LengthAwarePaginator $collection, public bool $reported = false)
     {
     }
 

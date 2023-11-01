@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdminAdRepositoryInterface;
 use App\Enums\AdStatus;
+use App\Models\ReportAd;
 use App\Repositories\Category\CategoryRepository;
 use App\Traits\MediaHandler;
 use Carbon\Carbon;
@@ -100,6 +101,46 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
                 'status' => $data['status'],
             ]);
         });
+    }
+
+    /**
+     * Get reported all ads
+     * 
+     * @param int $limit
+     * @param array $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getReportedAds(int $limit = 10, array $filters = null): LengthAwarePaginator
+    {
+        return ReportAd::query()->with('ad:id,slug,title,status', 'ad.media')
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['search']), function ($query) use ($filters) {
+                    $query->whereHas('ad', function ($query) use ($filters) {
+                        $query->where('title', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+                    });
+                });
+            })
+            ->orderBy('created_at','desc')
+            ->paginate($limit);
+    }
+
+
+    /**
+     * Get reported all ads
+     * 
+     * @param string $slug
+     * @return \App\Models\ReportAd
+     */
+    public function getReportedAd(string $slug ): \App\Models\ReportAd
+    {
+        return ReportAd::query()->with('ad:id,slug,title,status', 'ad.media', 'ad.user:id,name,avatar,username')
+            ->whereHas('ad', function ($query) use ($slug) {
+                $query->where('slug', $slug);
+            })
+            ->firstOr(function () {
+                abort(404);
+            });
     }
 
     /**

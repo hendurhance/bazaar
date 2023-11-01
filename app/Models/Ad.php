@@ -103,6 +103,14 @@ class Ad extends Model
     }
 
     /**
+     * Get the reports for the ad.
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(ReportAd::class);
+    }
+
+    /**
      * Get the bids for the ad.
      */
     public function bids(): HasMany

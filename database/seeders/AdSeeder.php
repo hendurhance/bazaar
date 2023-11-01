@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Ad;
 use App\Models\Media;
+use App\Models\ReportAd;
 use App\Models\User;
 use Database\Factories\BidFactory;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -37,6 +38,9 @@ class AdSeeder extends Seeder
         $ads->each(function ($ad) {
             $medias = Media::factory()->count(2)->create();
             $ad->media()->saveMany($medias);
+            // create report for ad
+            $reports = ReportAd::factory()->count(rand(5,15))->create();
+            $ad->reports()->saveMany($reports);
             // I want diffrent 5-10 users to bid on the ad except the ad owner
             $users = User::where('id', '!=', $ad->user_id)->inRandomOrder()->limit(rand(5, 10))->get();
             $users->each(function ($user) use ($ad) {
