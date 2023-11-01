@@ -135,4 +135,16 @@ class AdController extends Controller
 
         return redirect()->route('admin.ads.show', $adSlug)->with('success', 'Ad updated successfully.');
     }
+
+    /**
+     * Delete the specified resource in storage.
+     * 
+     * @param  string  $ad
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy(string $adSlug): RedirectResponse
+    {
+        $this->adminAdRepository->deleteAd($adSlug);
+        return redirect()->route('admin.ads.index', $adSlug)->with('success', 'Ad deleted successfully.');
+    }
 }

@@ -30,4 +30,13 @@ interface AdminAdRepositoryInterface
      * @return void
      */
     public function updateAd(string $slug, array $data) : void;
+
+     /**
+     * Delete ad by status
+     * 
+     * @param string $status
+     * @param int $limit
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function deleteAd(string $adSlug) : void;
 }

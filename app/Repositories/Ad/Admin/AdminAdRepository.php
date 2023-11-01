@@ -5,6 +5,7 @@ namespace App\Repositories\Ad\Admin;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdminAdRepositoryInterface;
+use App\Enums\AdStatus;
 use App\Repositories\Category\CategoryRepository;
 use App\Traits\MediaHandler;
 use Carbon\Carbon;
@@ -100,4 +101,22 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
             ]);
         });
     }
+
+    /**
+     * Delete ad by status
+     * 
+     * @param string $status
+     * @param int $limit
+     * @return void
+     */
+    public function deleteAd(string $adSlug): void
+    {
+        $ad = $this->model->where('slug', $adSlug)->firstOr(function () {
+            abort(404);
+        });
+        if($ad->status === AdStatus::PUBLISHED) {
+            abort(404);
+        }
+        $ad->delete();
+    }   
 }

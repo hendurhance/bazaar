@@ -111,19 +111,21 @@
                                              </div>
                                           </td>
                                           <td>
-                                             <div class="g-2">
+                                             <div class="d-flex">
                                                 <a href="{{ route('admin.ads.show', $ad->slug) }}" class="btn text-dark btn-sm"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-original-title="View"><span
                                                    class="fa-regular fa-eye fs-14"></span></a>
-                                                <a class="btn text-primary btn-sm"
+                                                <a href="{{ route('admin.ads.edit', $ad->slug) }}" class="btn text-primary btn-sm"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-original-title="Edit"><span
-                                                   class="fa-regular fa-edit fs-14"></span></a>
-                                                <a class="btn text-danger btn-sm"
-                                                   data-bs-toggle="tooltip"
-                                                   data-bs-original-title="Delete"><span
-                                                   class="fa-regular fa-trash fs-14"></span></a>
+                                                   class="fa-regular fa-edit fs-14"></span>
+                                                </a>
+                                                <form action="{{ route('admin.ads.destroy', $ad->slug) }}" method="POST">
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <button class="btn text-danger btn-sm"><span class="fa-regular fa-trash fs-14"></span></button>
+                                                </form>
                                              </div>
                                           </td>
                                        </tr>
