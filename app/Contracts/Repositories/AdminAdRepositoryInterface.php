@@ -15,6 +15,15 @@ interface AdminAdRepositoryInterface
     public function getAds(int $limit = 10, string $type, array $filters = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
     /**
+     * Get reported all ads
+     * 
+     * @param int $limit
+     * @param array $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getReportedAds(int $limit = 10, array $filters = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+    /**
      * Get ad by slug
      * 
      * @param string $slug
@@ -30,6 +39,14 @@ interface AdminAdRepositoryInterface
      * @return void
      */
     public function updateAd(string $slug, array $data) : void;
+
+     /**
+     * Get reported all ads
+     * 
+     * @param string $slug
+     * @return \App\Models\ReportAd
+     */
+    public function getReportedAd(string $slug): \App\Models\ReportAd;
 
      /**
      * Delete ad by status

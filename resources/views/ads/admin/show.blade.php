@@ -181,13 +181,13 @@
                     <div class="card">
                         <div class="product-grid6">
                             <div class="product-image6 p-5">
-                                <a href="shop-description.html" class="bg-light">
+                                <a href="{{route('admin.ads.show', $relatedAd->slug)}}" class="bg-light">
                                     <img class="img-fluid br-7 w-100" src="{{$relatedAd->media->first()->url}}" alt="img">
                                 </a>
                             </div>
                             <div class="card-body pt-0">
                                 <div class="product-content text-center">
-                                    <h1 class="title fw-bold fs-20"><a href="shop-description.html">{{$relatedAd->title}}</a></h1>
+                                    <h1 class="title fw-bold fs-20"><a href="{{route('admin.ads.show', $relatedAd->slug)}}">{{$relatedAd->title}}</a></h1>
                                     <div class="price">{{money($relatedAd->price)}}</div>
                                 </div>
                             </div>

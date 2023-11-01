@@ -52,6 +52,7 @@
                        <li><a href="{{ route('admin.ads.pending') }}" @class(['slide-item', 'active' => $active === 'ads.pending'])> Pending Listings</a></li>
                        <li><a href="{{ route('admin.ads.expired') }}" @class(['slide-item', 'active' => $active === 'ads.expired'])> Expired Listings</a></li>
                        <li><a href="{{ route('admin.ads.rejected') }}" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Rejected Listings</a></li>
+                       <li><a href="{{ route('admin.ads.reported') }}" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Reported Listings</a></li>
                      </ul>
                    </div>
                  </div>
