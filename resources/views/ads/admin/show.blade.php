@@ -63,9 +63,13 @@
                                             <span class="fw-bold me-2">Bids:</span><span class="fw-bold text-dark">{{ $ad->bids->count() }} Bids</span>
                                         </div>
                                         <hr>
-                                        <div class="btn-list mt-4">
+                                        <div class="btn-list d-flex mt-4">
                                             <a href="{{ route('admin.ads.edit', $ad->slug) }}" class="btn ripple btn-primary me-2"><i class="fa-regular fa-edit"> </i> Edit Ad</a>
-                                            <a href="#" class="btn ripple btn-danger"><i class="fa-regular fa-trash"> </i> Delete Ad</a>
+                                            <form action="{{ route('admin.ads.destroy', $ad->slug) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button class="btn ripple btn-danger" type="submit"><i class="fa-regular fa-trash"> </i> Delete Ad</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
