@@ -2,22 +2,18 @@
 
 namespace App\View\Components;
 
+use App\Enums\AdStatus;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class TextareaField extends Component
+class AdStatusSelectable extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public bool $admin,
-        public string $name,
-        public string $label = '',
-        public string $placeholder = '',
-        public string $value = '',
-        public bool $required = true,
+        public $selectedStatus,
     )
     {
         //
@@ -28,6 +24,8 @@ class TextareaField extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.textarea-field');
+        return view('components.ad-status-selectable', [
+            'statuses' => AdStatus::all(),
+        ]);
     }
 }

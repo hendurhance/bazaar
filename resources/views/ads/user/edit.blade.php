@@ -24,7 +24,7 @@
                                 </div>
                             <div class="col-md-12">
                                     <x-textarea-field name="description" label="Ad Description"
-                                        placeholder="Enter Description" value="{{ $ad->description }}" />
+                                        placeholder="Enter Description" value="{{ $ad->description }}" :admin="false" />
                                 </div>
                                 <div class="col-md-12">
                                     <x-input-field name="price" type="number" label="Starting Price"

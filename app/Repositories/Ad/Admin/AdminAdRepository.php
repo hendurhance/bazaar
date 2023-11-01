@@ -5,10 +5,16 @@ namespace App\Repositories\Ad\Admin;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdminAdRepositoryInterface;
+use App\Repositories\Category\CategoryRepository;
+use App\Traits\MediaHandler;
+use Carbon\Carbon;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\DB;
 
 class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryInterface
 {
+    use MediaHandler;
+
     public function __construct(Ad $model)
     {
         parent::__construct($model);
@@ -53,11 +59,45 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
      */
     public function getAdBySlug(string $adSlug): Ad
     {
-        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name', 'subcategory:parent_id,id,name', 'bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name', 'relatedAds:id,title,slug,price', 'relatedAds.media',])
+        return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name,slug', 'subcategory:parent_id,id,name,slug', 'bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name', 'relatedAds:id,title,slug,price', 'relatedAds.media',])
             ->where('slug', $adSlug)
             ->firstOr(function () {
                 #TODO: throw custom exception
                 abort(404);
             });
+    }
+
+    /**
+     * Update ad by slug
+     * 
+     * @param string $slug
+     * @param array $data
+     * @return void
+     */
+    public function updateAd(string $slug, array $data): void
+    {
+        $ad = $this->model->where('slug', $slug)->firstOr(function () {
+            abort(404);
+        });
+        $category = isset($data['category']) ? app(CategoryRepository::class)->findBySlug($data['category']) : null;
+        $subcategory = isset($data['subcategory']) ? app(CategoryRepository::class)->findBySlug($data['subcategory']) : null;
+
+        DB::transaction(function () use ($data, $ad, $category, $subcategory) {
+            $ad->update([
+                'title' => $data['title'],
+                'description' => $data['description'],
+                'category_id' => $category?->id ?? $ad->category_id,
+                'sub_category_id' => $subcategory?->id ?? $ad->subcategory_id,
+                'price' => $data['price'],
+                'video_url' => $data['video_url'],
+                'started_at' => Carbon::parse($data['start_date'])->format('Y-m-d H:00:00'),
+                'expired_at' => Carbon::parse($data['end_date'])->format('Y-m-d H:00:00'),
+                'seller_name' => $data['seller_name'],
+                'seller_email' => $data['seller_email'],
+                'seller_mobile' => $data['seller_mobile'] ?? $ad->seller_mobile,
+                'seller_address' => $data['seller_address'] ?? $ad->seller_address,
+                'status' => $data['status'],
+            ]);
+        });
     }
 }

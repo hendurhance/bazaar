@@ -19,7 +19,7 @@
                 @endif
                 <span class="text-danger">{{ $errors->first('payment_method') }}</span>
             </div>
-            <x-textarea-field name="description" type="text" label="Description" placeholder="Enter Description" value="{{ old('description') }}" />
+            <x-textarea-field name="description" type="text" label="Description" placeholder="Enter Description" value="{{ old('description') }}" :admin="false" />
             <div class="col-12">
                 <div class="button-group">
                    <button type="submit" class="account-btn"><i class="bi bi-cash-coin"></i> Request Payout</button>

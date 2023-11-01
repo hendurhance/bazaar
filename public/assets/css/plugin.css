@@ -5969,7 +5969,7 @@ div.DTE div.DTE_Processing_Indicator:after {
     border-radius: 5px;
     padding: 0;
     background-color: #f6f6fb;
-    background-image: url("../plugins/fancyuploder/fancy_upload.png");
+    background-image: url("/plugin/fancyuploader/fancy_upload.png");
     background-repeat: no-repeat;
     background-position: center center;
     opacity: 0.85;
@@ -6025,11 +6025,11 @@ div.DTE div.DTE_Processing_Indicator:after {
 }
 
 .ff_fileupload_wrap .ff_fileupload_recordaudio {
-    background-image: url("../plugins/fancyuploder/fancy_microphone.png");
+    background-image: url("/plugin/fancyuploader/fancy_microphone.png");
 }
 
 .ff_fileupload_wrap .ff_fileupload_recordvideo {
-    background-image: url("../plugins/fancyuploder/fancy_webcam.png");
+    background-image: url("/plugin/fancyuploader/fancy_webcam.png");
 }
 
 .ff_fileupload_wrap .ff_fileupload_recordvideo_preview {
@@ -6191,11 +6191,11 @@ div.DTE div.DTE_Processing_Indicator:after {
 }
 
 .ff_fileupload_wrap table.ff_fileupload_uploads button.ff_fileupload_start_upload {
-    background-image: url("../plugins/fancyuploder/fancy_okay.png");
+    background-image: url("/plugin/fancyuploader/fancy_okay.png");
 }
 
 .ff_fileupload_wrap table.ff_fileupload_uploads button.ff_fileupload_remove_file {
-    background-image: url("../plugins/fancyuploder/fancy_remove.png");
+    background-image: url("/plugin/fancyuploader/fancy_remove.png");
 }
 
 .ff_fileupload_wrap table.ff_fileupload_uploads td.ff_fileupload_preview .ff_fileupload_preview_text_with_color {

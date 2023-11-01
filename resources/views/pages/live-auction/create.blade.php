@@ -32,7 +32,7 @@
                             </div>
                             <div class="col-md-12">
                                 <x-textarea-field name="description" label="Ad Description"
-                                    placeholder="Enter Description" value="{{ old('description') }}" />
+                                    placeholder="Enter Description" value="{{ old('description') }}" :admin="false" />
                             </div>
                             <div class="col-md-12">
                                 <x-input-field name="price" type="number" label="Starting Price"
@@ -49,7 +49,7 @@
                             <div class="form-section">
                                 <h4>Category</h4>
                             </div>
-                            <x-category-selectable />
+                            <x-category-selectable :admin="false" />
                             <div class="form-section">
                                 <h4>Images</h4>
                             </div>
