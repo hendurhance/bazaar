@@ -112,8 +112,8 @@
              </li>
            </ul>
          </li>
-         <li @class(['slide', 'active' => $active === 'methods'])>
-          <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+         <li @class(['slide', 'active' => $active === 'payout-methods'])>
+          <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.payout-methods.index')}}">
            <i class="side-menu__icon fa-regular fa-building-columns"></i>
            <span class="side-menu__label">Methods</span>
           </a>

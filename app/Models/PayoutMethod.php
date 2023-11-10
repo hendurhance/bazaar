@@ -6,6 +6,7 @@ use App\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PayoutMethod extends Model
 {
@@ -57,4 +58,15 @@ class PayoutMethod extends Model
     {
         return $this->belongsTo(Country::class);
     }
+
+    /**
+     * Get payouts that owns the payout method.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+     public function payouts(): HasMany
+     {
+         return $this->hasMany(Payout::class);
+     }
+
 }

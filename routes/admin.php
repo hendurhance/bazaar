@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Ad\AdController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Bid\BidController;
+use App\Http\Controllers\Admin\Payout\PayoutMethodController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,4 +53,8 @@ Route::middleware('auth:admin_web')->group(function () {
     /* ========  BIDS  =========== */
     Route::get('/bids', [BidController::class, 'index'])->name('bids.index');
     Route::get('/bids/{bids:id}', [BidController::class, 'show'])->name('bids.show');
+
+    /* ========  PAYOUT METHOD  =========== */
+    Route::get('/payout-methods', [PayoutMethodController::class, 'index'])->name('payout-methods.index');
+    Route::get('/payout-methods/{payoutMethods:id}', [PayoutMethodController::class, 'show'])->name('payout-methods.show');
 });
