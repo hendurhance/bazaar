@@ -24,7 +24,7 @@ class FilterAdminBidRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'accepted' => ['nullable', 'in:accepted,rejected'],
+            'accepted' => ['nullable', 'in:accepted,rejected,pending'],
             'date_from' => ['nullable', 'date'],
             'date_to' => ['nullable', 'date'],
             'bid_id' => ['nullable', 'string', 'uuid'],
