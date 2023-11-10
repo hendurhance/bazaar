@@ -60,7 +60,7 @@ class MakeRepositoryCommand extends Command
      */
     protected function validateModelName(string $model): void
     {
-        if (! $this->files->exists(app_path("Models/{$model}.php"))) {
+        if (!$this->files->exists(app_path("Models/{$model}.php"))) {
             $this->error("The model {$model} does not exist.");
 
             return;
@@ -72,7 +72,7 @@ class MakeRepositoryCommand extends Command
      */
     protected function validateInterfaceName(string $interface): void
     {
-        if (! $this->files->exists(app_path("Contracts/Repositories/{$interface}.php"))) {
+        if (!$this->files->exists(app_path("Contracts/Repositories/{$interface}.php"))) {
             $this->error("The interface {$interface} does not exist.");
 
             return;
@@ -86,20 +86,21 @@ class MakeRepositoryCommand extends Command
     {
         // If there is a directory in the name, create the directory and the repository class.
         if (str_contains($name, '/')) {
-            $directory = explode('/', $name)[0];
+            $directories = explode('/', $name);
+            $className = array_pop($directories);
+            $path = 'Repositories';
 
-            $this->files->ensureDirectoryExists(app_path("Repositories/{$directory}"));
+            foreach ($directories as $directory) {
+                $path .= "/{$directory}";
+                $this->files->ensureDirectoryExists(app_path($path));
+            }
 
-            $this->files->put(app_path("Repositories/{$name}.php"), $this->buildRepository($name, $model, $interface));
-
+            $this->files->put(app_path("{$path}/{$className}.php"), $this->buildRepository($name, $model, $interface));
             $this->info("Repository {$name} created successfully.");
-
-            return;
+        } else {
+            $this->files->put(app_path("Repositories/{$name}.php"), $this->buildRepository($name, $model, $interface));
+            $this->info("Repository {$name} created successfully.");
         }
-
-        $this->files->put(app_path("Repositories/{$name}.php"), $this->buildRepository($name, $model, $interface));
-
-        $this->info("Repository {$name} created successfully.");
     }
 
     /**
@@ -124,9 +125,17 @@ class MakeRepositoryCommand extends Command
     protected function getNamespace(string $name): string
     {
         if (str_contains($name, '/')) {
-            $directory = explode('/', $name)[0];
+            $directories = explode('/', $name);
+            $namespace = 'App\\Repositories';
 
-            return "App\\Repositories\\{$directory}";
+            foreach ($directories as $directory) {
+                if ($directory === end($directories)) {
+                    break;
+                }
+                $namespace .= "\\{$directory}";
+            }
+
+            return $namespace;
         }
 
         return 'App\\Repositories';
@@ -138,7 +147,7 @@ class MakeRepositoryCommand extends Command
     protected function getClass(string $name): string
     {
         if (str_contains($name, '/')) {
-            $name = explode('/', $name)[1];
+            $name = explode('/', $name)[count(explode('/', $name)) - 1];
         }
 
         return $name;

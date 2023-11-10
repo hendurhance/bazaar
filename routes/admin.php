@@ -3,6 +3,7 @@
 use App\Http\Controllers\Admin\Ad\AdController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
+use App\Http\Controllers\Admin\Bid\BidController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -32,6 +33,9 @@ Route::middleware('guest:admin_web')->group(function () {
 
 Route::middleware('auth:admin_web')->group(function () {
     Route::view('/', 'dashboard.admin.index')->name('dashboard');
+
+    /* ========  ADS  =========== */
+
     Route::get('/ads', [AdController::class, 'index'])->name('ads.index');
     Route::get('/ads/pending', [AdController::class, 'pending'])->name('ads.pending');
     Route::get('/ads/upcoming', [AdController::class, 'upcoming'])->name('ads.upcoming');
@@ -44,4 +48,8 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::get('/ad/{ads:slug}/edit', [AdController::class, 'edit'])->name('ads.edit');
     Route::put('/ad/{ads:slug}/edit', [AdController::class, 'update'])->name('ads.update');
     Route::delete('/ad/{ads:slug}/', [AdController::class, 'destroy'])->name('ads.destroy');
+
+    /* ========  BIDS  =========== */
+    Route::get('/bids', [BidController::class, 'index'])->name('bids.index');
+    Route::get('/bids/{bids:id}', [BidController::class, 'show'])->name('bids.show');
 });

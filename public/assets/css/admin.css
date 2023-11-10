@@ -2,7 +2,18 @@
     background: linear-gradient(90deg, #c2dcff 0%, #8bb4ff 100%);
 }
 
+.badge.bg-green.br-5.side-badge.blink-text.pb-1{
+    margin-top: -7px;
+}
 
+.bid-id:hover{
+    cursor: pointer;
+    color: var(--primary-bg-color) !important;
+}
+
+.bid-filter{
+    padding: 15px 45px 0px;
+}
 
 /** ====== MEDIA QUERIES ====== **/
 @media (min-width: 992px) {
