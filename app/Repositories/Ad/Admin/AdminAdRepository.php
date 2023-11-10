@@ -50,7 +50,8 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($limit);
+            ->paginate($limit)
+            ->appends(['search' => $filters['search'] ?? null]);
     }
 
     /**
@@ -117,12 +118,14 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
                 $query->when(isset($filters['search']), function ($query) use ($filters) {
                     $query->whereHas('ad', function ($query) use ($filters) {
                         $query->where('title', 'like', '%' . $filters['search'] . '%')
-                            ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+                            ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('id', $filters['search']);
                     });
                 });
             })
             ->orderBy('created_at','desc')
-            ->paginate($limit);
+            ->paginate($limit)
+            ->appends(['search' => $filters['search'] ?? null]);
     }
 
 
@@ -132,7 +135,7 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
      * @param string $slug
      * @return \App\Models\ReportAd
      */
-    public function getReportedAd(string $slug ): \App\Models\ReportAd
+    public function getReportedAd(string $slug): \App\Models\ReportAd
     {
         return ReportAd::query()->with('ad:id,slug,title,status', 'ad.media', 'ad.user:id,name,avatar,username')
             ->whereHas('ad', function ($query) use ($slug) {

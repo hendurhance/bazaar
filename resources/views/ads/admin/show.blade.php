@@ -57,7 +57,8 @@
                                         <div class=" mt-4 mb-5"><span class="fw-bold me-2">Timeframe :</span><span class="fw-bold text-dark">{{ $ad->started_at->format('d M, Y') }} - {{ $ad->expired_at->format('d M, Y') }}</span></div>
                                         <div class=" mt-4 mb-5">
                                             <span class="fw-bold me-2">Status :</span><span class="fw-bold text-{{ $ad->status->color() }}">{{ $ad->status->label() }}</span> | 
-                                            <span class="fw-bold me-2">Availabality :</span><span class="fw-bold text-dark">{{ $ad->hasAcceptedBid() ? 'Sold' : 'Available' }}</span>
+                                            <span class="fw-bold me-2">Availability :</span><span class="fw-bold text-dark">{{ $ad->hasAcceptedBid() ? 'Sold' : 'Available' }}</span> |
+                                            <span class="fw-bold me-2">Reports :</span><a href="{{ route('admin.ads.reported', ['search' => $ad->id]) }}" class="fw-bold text-primary">See Ad Reports</a>
                                         </div>
                                         <div class="colors d-flex me-3 mt-4 mb-5">
                                             <span class="fw-bold me-2">Bids:</span><span class="fw-bold text-dark">{{ $ad->bids->count() }} Bids</span>
@@ -193,7 +194,7 @@
                             </div>
                             <div class="card-footer text-center">
                                 <a href="{{route('admin.ads.show', $relatedAd->slug)}}" class="btn btn-outline-primary mb-1"><i class="fe fe-heart mx-2"></i>View Ad</a>
-                            </div>
+                        </div>
                         </div>
                     </div>
                 </div>

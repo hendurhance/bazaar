@@ -3,7 +3,7 @@
    <div class="app-sidebar__overlay" data-bs-toggle="sidebar"></div>
    <div class="app-sidebar">
      <div class="side-header">
-       <a class="header-brand1" href="index.html">
+       <a class="header-brand1" href="{{ route('admin.dashboard') }}">
          <img src="/assets/images/bg/header-logo2.png" class="header-brand-img desktop-logo" alt="logo">
          <img src="/assets/images/bg/header-icon-logo2.png" class="header-brand-img toggle-logo" alt="logo">
          <img src="/assets/images/bg/header-icon-logo2.png" class="header-brand-img light-logo" alt="logo">
@@ -52,7 +52,7 @@
                        <li><a href="{{ route('admin.ads.pending') }}" @class(['slide-item', 'active' => $active === 'ads.pending'])> Pending Listings</a></li>
                        <li><a href="{{ route('admin.ads.expired') }}" @class(['slide-item', 'active' => $active === 'ads.expired'])> Expired Listings</a></li>
                        <li><a href="{{ route('admin.ads.rejected') }}" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Rejected Listings</a></li>
-                       <li><a href="{{ route('admin.ads.reported') }}" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Reported Listings</a></li>
+                       <li><a href="{{ route('admin.ads.reported') }}" @class(['slide-item', 'active' => $active === 'ads.rejected'])> Reported Listings</a><span class="badge bg-green br-5 side-badge blink-text pb-1">New</span></li>
                      </ul>
                    </div>
                  </div>
@@ -61,7 +61,7 @@
            </ul>
          </li>
          <li @class(['slide', 'active' => $active === 'bids'])>
-          <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+          <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('admin.bids.index') }}">
            <i class="side-menu__icon fa-regular fa-gavel"></i>
            <span class="side-menu__label">Bids</span>
           </a>

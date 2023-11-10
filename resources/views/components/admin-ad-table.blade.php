@@ -6,8 +6,8 @@
                <form class="input-group mb-5">
                   <input name="search" type="text" class="form-control" placeholder="Search" value="{{ request()->search }}" />
                   <div class="input-group-text btn btn-primary">
-                     <button class="bg-transparent border-0 text-white">
-                      <i type="submit" class="fa-regular fa-search" aria-hidden="true"></i>
+                     <button type="submit" class="bg-transparent border-0 text-white">
+                      <i class="fa-regular fa-search" aria-hidden="true"></i>
                      </button>
                   </div>
                </form>
@@ -105,7 +105,7 @@
                                              </div>
                                           </td>
                                           <td>
-                                             <div class="g-2">
+                                             <div class="g-2 text-center">
                                                 <a href="{{ route('admin.ads.reported.show', $reportAd->ad->slug) }}" class="btn text-dark btn-sm"
                                                    data-bs-toggle="tooltip"
                                                    data-bs-original-title="View"><span
@@ -229,6 +229,16 @@
                                                   data-bs-original-title="View"><span
                                                   class="fa-regular fa-eye fs-14"></span>
                                                 </a>
+                                                <a href="{{ route('admin.ads.edit', $ad->slug) }}" class="btn text-primary btn-sm"
+                                                   data-bs-toggle="tooltip"
+                                                   data-bs-original-title="Edit"><span
+                                                   class="fa-regular fa-edit fs-14"></span>
+                                                </a>
+                                                <form action="{{ route('admin.ads.destroy', $ad->slug) }}" method="POST">
+                                                   @csrf
+                                                   @method('DELETE')
+                                                   <button class="btn text-danger btn-sm"><span class="fa-regular fa-trash fs-14"></span></button>
+                                                </form>
                                             </div>
                                          </td>
                                       </tr>
