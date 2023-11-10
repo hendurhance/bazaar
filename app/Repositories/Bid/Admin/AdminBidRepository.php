@@ -27,7 +27,7 @@ class AdminBidRepository extends BaseCrudRepository implements AdminBidRepositor
         return $this->model->query()->with(['ad:id,slug,price,title', 'user:id,name,avatar,username'])
             ->when($filters, function ($query) use ($filters) {
                 $query->when(isset($filters['accepted']), function ($query) use ($filters) {
-                    $query->where('is_accepted', true ? $filters['accepted'] === 'accepted' : $filters['accepted'] === 'rejected');
+                    $query->where('is_accepted', $filters['accepted'] === 'accepted' ? true : ($filters['accepted'] === 'rejected' ? false : null));
                 })
                     ->when(isset($filters['price_range']), function ($query) use ($filters) {
                         $query->whereBetween('amount', PriceRange::range($filters['price_range']));

@@ -25,6 +25,7 @@
                 <label>Accepted</label>
                 <select name="accepted" id="status" class="form-control form-select select2" data-bs-placeholder="Select Status">
                     <option value="">All</option>
+                    <option value="pending" @if (request()->accepted == 'pending') selected @endif>Pending</option>
                     <option value="accepted" @if (request()->accepted == 'accepted') selected @endif>Accepted</option>
                     <option value="rejected" @if (request()->accepted == 'rejected') selected @endif>Rejected</option>
                 </select>
