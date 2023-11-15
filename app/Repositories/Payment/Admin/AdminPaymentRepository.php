@@ -64,7 +64,7 @@ class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentR
     }
 
     /**
-     * Get payment by id\
+     * Get payment by id
      * 
      * @param string $txnId
      * @return \App\Models\Payment
@@ -76,5 +76,17 @@ class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentR
             ->firstOr(function () {
                 abort(404);
             });
+    }
+
+    /**
+     * Update a payment status
+     * 
+     * @param string $txnId
+     * @param string $status
+     * @return void
+     */
+    public function updatePaymentStatus(string $txnId, string $status): void
+    {
+        $this->model->where('txn_id', $txnId)->update(['status' => $status]);
     }
 }

@@ -113,7 +113,10 @@
                                                             </a>
                                                             <a href="{{ route('admin.payments.update.status', $payment->txn_id) }}"
                                                                 class="btn text-primary btn-sm"
-                                                                data-bs-toggle="tooltip"
+                                                                data-bs-target="#select2modal"
+                                                                data-bs-toggle="modal"
+                                                                href="javascript:;"
+                                                                onclick="addToSelect2('{{$payment->txn_id}}', '{{$payment->status->label()}}')"
                                                                 data-bs-original-title="Edit"><span
                                                                     class="fa-regular fa-edit fs-14"></span>
                                                             </a>
