@@ -1,5 +1,5 @@
 @extends('partials.admin')
-@section('title', 'Admin Bids')
+@section('title', 'Admin Bid Details')
 @section('content')
 
 @include('layouts.header', ['admin' => true])
