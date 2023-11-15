@@ -21,4 +21,13 @@ interface AdminPaymentRepositoryInterface
      * @return \App\Models\Payment
      */
     public function getPayment(string $txnId): \App\Models\Payment;
+
+    /**
+     * Update payment status
+     * 
+     * @param string $txnId
+     * @param string $status
+     * @return void
+     */
+    public function updatePaymentStatus(string $txnId, string $status): void;
 }
