@@ -57,7 +57,7 @@ class AdminPayoutMethodRepository extends BaseCrudRepository implements AdminPay
      */
     public function getPayoutMethod(string $id): \App\Models\PayoutMethod
     {
-        return $this->model->query->with(['user:id,name,email', 'country:id,name,iso2,iso3,emoji', 'payouts:id,user_id,payout_method_id,payment_id,amount,fee'])
+        return $this->model->query()->with(['user:id,name,email', 'country:id,name,iso2,iso3,emoji', 'payouts:id,user_id,payout_method_id,payment_id,amount,fee'])
             ->where('id', $id)
             ->firstOr(function () {
                 // TODO: throw custom exception
