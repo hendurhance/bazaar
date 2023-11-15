@@ -11,6 +11,12 @@
     color: var(--primary-bg-color) !important;
 }
 
+.copy-text:hover{
+    cursor: pointer;
+    color: var(--primary-bg-color) !important;
+
+}
+
 .bid-filter{
     padding: 15px 45px 0px;
 }
