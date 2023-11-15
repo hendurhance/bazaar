@@ -105,7 +105,7 @@
                                                     </td>
                                                     <td>
                                                         <div class="d-flex">
-                                                            <a href="{{ route('admin.payments.index', $payment->txn_id) }}"
+                                                            <a href="{{ route('admin.payments.show', $payment->txn_id) }}"
                                                                 class="btn text-dark btn-sm"
                                                                 data-bs-toggle="tooltip"
                                                                 data-bs-original-title="View"><span

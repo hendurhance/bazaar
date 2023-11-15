@@ -112,7 +112,7 @@ class Payment extends Model
     /**
      * Scope a query to only include pending payments.
      */
-    public function scopeActive(Builder $query)
+    public function scopePending(Builder $query)
     {
         return $query->where('status', PaymentStatus::PENDING);
     }
