@@ -11,7 +11,7 @@ use App\Exceptions\PaymentException;
 use App\Models\Ad;
 use App\Models\User;
 use App\Notifications\Payment\BidPaymentNotification;
-use App\Repositories\Bid\BidRepository;
+use App\Repositories\Bid\User\BidRepository;
 use App\Services\Payment\PaymentGatewayService;
 use App\Services\Payment\PayWithFlutterwave;
 use App\Services\Payment\PayWithPaystack;

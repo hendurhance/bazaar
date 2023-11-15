@@ -10,8 +10,7 @@
 
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
-            @include('layouts.breadcrumb', ['admin' => true, 'pageTitle' => 'Payout Methods Details', 'hasBack' => true,
-            'backTitle' => 'Dashboard', 'backUrl' => route('admin.dashboard')])
+            @include('layouts.breadcrumb', ['admin' => true, 'pageTitle' => 'Payout Method Details', 'hasBack' => true, 'backTitle' => 'Payment Methods', 'backUrl' => route('admin.payout-methods.index')])
             <div class="row">
                 <div class="col-xl-12 col-md-12">
                     <div class="card productdesc">

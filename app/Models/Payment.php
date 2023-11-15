@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\PaymentGateway;
 use App\Enums\PaymentStatus;
 use App\Traits\HasTransactionID;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -106,5 +107,29 @@ class Payment extends Model
     public function paid(): bool
     {
         return $this->status === PaymentStatus::SUCCESS;
+    }
+
+    /**
+     * Scope a query to only include pending payments.
+     */
+    public function scopeActive(Builder $query)
+    {
+        return $query->where('status', PaymentStatus::PENDING);
+    }
+
+    /**
+     * Scope a query to only include failed payments.
+     */
+    public function scopeFailed(Builder $query)
+    {
+        return $query->where('status', PaymentStatus::FAILED);
+    }
+
+    /**
+     * Scope a query to only include success payments.
+     */
+    public function scopeSuccess(Builder $query)
+    {
+        return $query->where('status', PaymentStatus::SUCCESS);
     }
 }

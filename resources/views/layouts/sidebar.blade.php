@@ -60,11 +60,11 @@
              </li>
            </ul>
          </li>
-         <li @class(['slide', 'active' => $active === 'bids'])>
-          <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('admin.bids.index') }}">
-           <i class="side-menu__icon fa-regular fa-gavel"></i>
-           <span class="side-menu__label">Bids</span>
-          </a>
+         <li class="slide">
+          <a @class(['side-menu__item', 'has-link', 'active' => $active === 'bids']) data-bs-toggle="slide" href="{{ route('admin.bids.index') }}">
+            <i class="side-menu__icon fa-regular fa-gavel"></i>
+            <span class="side-menu__label">Bids</span>
+           </a>
          </li>
          <li class="sub-category">
            <h3>Payments</h3>
@@ -80,10 +80,10 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side9">
                      <ul class="sidemenu-list">
-                       <li><a href="profile.html" @class(['slide-item', 'active' => $active === 'payments.all'])> All Payments</a></li>
-                       <li><a href="editprofile.html" @class(['slide-item', 'active' => $active === 'payments.pending'])> Pending Payments</a></li>
-                       <li><a href="notify-list.html" @class(['slide-item', 'active' => $active === 'payments.successful'])> Successful Payments</a></li>
-                       <li><a href="email-compose.html" @class(['slide-item', 'active' => $active === 'payments.failed'])> Failed Payments</a></li>
+                       <li><a href="{{ route('admin.payments.index') }}" @class(['slide-item', 'active' => $active === 'payments.all'])> All Payments</a></li>
+                       <li><a href="{{ route('admin.payments.pending') }}" @class(['slide-item', 'active' => $active === 'payments.pending'])> Pending Payments</a></li>
+                       <li><a href="{{ route('admin.payments.success') }}" @class(['slide-item', 'active' => $active === 'payments.successful'])> Successful Payments</a></li>
+                       <li><a href="{{ route('admin.payments.failed') }}" @class(['slide-item', 'active' => $active === 'payments.failed'])> Failed Payments</a></li>
                      </ul>
                    </div>
                  </div>
@@ -112,8 +112,8 @@
              </li>
            </ul>
          </li>
-         <li @class(['slide', 'active' => $active === 'payout-methods'])>
-          <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{route('admin.payout-methods.index')}}">
+         <li class="slide">
+          <a @class(['side-menu__item', 'has-link', 'active' => $active === 'payout-methods']) data-bs-toggle="slide" href="{{route('admin.payout-methods.index')}}">
            <i class="side-menu__icon fa-regular fa-building-columns"></i>
            <span class="side-menu__label">Methods</span>
           </a>
@@ -175,8 +175,8 @@
          </svg></div>
      </div>
    </div>
- </div>
- @else
+</div>
+@else
 <div class="col-lg-3">
     <div class="nav flex-column nav-pills gap-4 wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s" style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInUp;">
        <a href="{{ route('user.dashboard') }}" @class(['nav-link', 'nav-btn-style', 'mx-auto', 'mb-20', 'active' => $active === 'dashboard'])>
@@ -285,5 +285,5 @@
         </button>
        </form>
     </div>
- </div>
- @endif
+</div>
+@endif
