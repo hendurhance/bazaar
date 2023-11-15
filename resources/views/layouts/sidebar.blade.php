@@ -35,12 +35,12 @@
          <li class="sub-category">
            <h3>Ads</h3>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'is-expanded' => preg_match('/ads.*/', $active)])>
            <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/ads.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-regular fa-cube"></i><span class="side-menu__label">Ads</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
-           <ul class="slide-menu">
+           <ul @class(['slide-menu', 'open' => preg_match('/ads.*/', $active)])>
              <li class="panel sidetab-menu">
                <div class="panel-body tabs-menu-body p-0 border-0">
                  <div class="tab-content">
@@ -69,12 +69,12 @@
          <li class="sub-category">
            <h3>Payments</h3>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'is-expanded' => preg_match('/payments.*/', $active)])>
            <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/payments.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-light fa-credit-card"></i><span class="side-menu__label">Payments</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
-           <ul class="slide-menu">
+           <ul @class(['slide-menu', 'open' => preg_match('/payments.*/', $active)])>
              <li class="panel sidetab-menu">
                <div class="panel-body tabs-menu-body p-0 border-0">
                  <div class="tab-content">
@@ -91,12 +91,12 @@
              </li>
            </ul>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'is-expanded' => preg_match('/payouts.*/', $active)])>
            <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/payouts.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-regular fa-money-check"></i><span class="side-menu__label">Payouts</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
-           <ul class="slide-menu">
+           <ul @class(['slide-menu', 'open' => preg_match('/payouts.*/', $active)])>
              <li class="panel sidetab-menu">
                <div class="panel-body tabs-menu-body p-0 border-0">
                  <div class="tab-content">

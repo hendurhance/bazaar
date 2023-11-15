@@ -38,7 +38,7 @@ class PaymentController extends Controller
     public function pending(Request $request): \Illuminate\View\View
     {
         return view('payments.admin.status.pending', [
-            'payments' => $this->adminPaymentRepository->getAllPayments(10, 'pending', $request->all())
+            'pendingPayments' => $this->adminPaymentRepository->getAllPayments(10, 'pending', $request->all())
         ]);
     }
 
@@ -51,7 +51,7 @@ class PaymentController extends Controller
     public function failed(Request $request): \Illuminate\View\View
     {
         return view('payments.admin.status.failed', [
-            'payments' => $this->adminPaymentRepository->getAllPayments(10, 'failed', $request->all())
+            'failedPayments' => $this->adminPaymentRepository->getAllPayments(10, 'failed', $request->all())
         ]);
     }
 
@@ -64,7 +64,20 @@ class PaymentController extends Controller
     public function success(Request $request): \Illuminate\View\View
     {
         return view('payments.admin.status.successful', [
-            'payments' => $this->adminPaymentRepository->getAllPayments(10, 'success', $request->all())
+            'successfulPayments' => $this->adminPaymentRepository->getAllPayments(10, 'success', $request->all())
+        ]);
+    }
+
+    /**
+     * Get a payment
+     * 
+     * @param string $txnId
+     * @return \Illuminate\View\View
+     */
+    public function show(string $txnId): \Illuminate\View\View
+    {
+        return view('payments.admin.show', [
+            'payment' => $this->adminPaymentRepository->getPayment($txnId)
         ]);
     }
 }

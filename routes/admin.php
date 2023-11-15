@@ -60,7 +60,7 @@ Route::middleware('auth:admin_web')->group(function () {
 
     /* ========  PAYMENTS  =========== */
     Route::get('/payments', [PaymentController::class, 'index'])->name('payments.index');
-    Route::get('/payments/pending', [PaymentController::class, 'index'])->name('payments.pending');
+    Route::get('/payments/pending', [PaymentController::class, 'pending'])->name('payments.pending');
     Route::get('/payments/success', [PaymentController::class, 'success'])->name('payments.success');
     Route::get('/payments/failed', [PaymentController::class, 'failed'])->name('payments.failed');
     Route::get('/payment/{payments:id}', [PaymentController::class, 'show'])->name('payments.show');

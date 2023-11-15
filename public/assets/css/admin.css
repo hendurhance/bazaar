@@ -27,3 +27,11 @@
         display: none;
     }
 }
+
+/* less than tablet */
+@media (max-width: 767px) {
+    .flex-payer-wrap{
+        flex-direction: column;
+        align-items: flex-start !important;
+    }
+}

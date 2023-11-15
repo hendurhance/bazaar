@@ -13,4 +13,12 @@ interface AdminPaymentRepositoryInterface
      * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
      */
     public function getAllPayments(int $limit = 10, string $type = 'all', array $filters = null): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
+
+    /**
+     * Get payment by id
+     * 
+     * @param string $txnId
+     * @return \App\Models\Payment
+     */
+    public function getPayment(string $txnId): \App\Models\Payment;
 }

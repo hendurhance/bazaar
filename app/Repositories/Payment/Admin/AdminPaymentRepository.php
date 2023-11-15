@@ -48,18 +48,33 @@ class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentR
                                 ->orWhere('id', $filters['search']);
                         });
                 })
-                ->when(isset($filters['date_from']) && isset($filters['date_to']), function ($query) use ($filters) {
-                    $query->whereBetween('created_at', [$filters['date_from'], $filters['date_to']]);
-                })
-                ->when(isset($filters['gateway']), function ($query) use ($filters) {
-                    $query->where('gateway', $filters['gateway']);
-                })
-                ->when(isset($filters['price_range']), function ($query) use ($filters) {
-                    $query->whereBetween('amount', PriceRange::range($filters['price_range']));
-                });
+                    ->when(isset($filters['date_from']) && isset($filters['date_to']), function ($query) use ($filters) {
+                        $query->whereBetween('created_at', [$filters['date_from'], $filters['date_to']]);
+                    })
+                    ->when(isset($filters['gateway']), function ($query) use ($filters) {
+                        $query->where('gateway', $filters['gateway']);
+                    })
+                    ->when(isset($filters['price_range']), function ($query) use ($filters) {
+                        $query->whereBetween('amount', PriceRange::range($filters['price_range']));
+                    });
             })
             ->orderBy('created_at', 'desc')
             ->paginate($limit)
             ->appends(['search' => $filters['search'] ?? null]);
+    }
+
+    /**
+     * Get payment by id\
+     * 
+     * @param string $txnId
+     * @return \App\Models\Payment
+     */
+    public function getPayment(string $txnId): \App\Models\Payment
+    {
+        return $this->model->query()->with(['payee:id,name,username,avatar', 'ad:id,title,slug', 'bid:id,ad_id,user_id,amount', 'payer:id,name,username,avatar', 'payout:id,user_id,payout_method_id,payment_id,amount,fee'])
+            ->where('txn_id', $txnId)
+            ->firstOr(function () {
+                abort(404);
+            });
     }
 }
