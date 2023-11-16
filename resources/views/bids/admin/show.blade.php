@@ -28,7 +28,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="fw-bold">Ad Details</td>
-                                                        <td> <a href="{{ route('admin.ads.show', $bid->ad->slug) }}">{{ $bid->ad->title }}</a></td>
+                                                        <td> <a href="{{ route('admin.ads.show', $bid->ad->slug) }}">See linked ad: {{ $bid->ad->title }}</a></td>
                                                     </tr>
                                                     <tr>
                                                         <td class="fw-bold">Ads Starting Price</td>
@@ -46,7 +46,7 @@
                                                         <td class="fw-bold">Payment</td>
                                                         <td>
                                                             @if($bid->payment?->exists())
-                                                                <a href="{{ route('admin.bids.show', $bid->payment->id) }}">See linked payment here - {{ $bid->payment->payment_id }}</a>
+                                                                <a href="{{ route('admin.bids.show', $bid->payment->txn_id) }}">See linked payment here - {{ $bid->payment->txn_id }}</a>
                                                             @else
                                                                 <span class="text-danger">No payment linked</span>
                                                             @endif

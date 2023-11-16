@@ -51,7 +51,7 @@
                                                         <tr>
                                                             <td class="fw-bold">Payouts Requested</td>
                                                             <td class="d-flex justify-between"><span>{{ $payoutMethod->payouts->count() }} counts </span><a
-                                                                    href="{{ route('admin.payout-methods.index', ['payout_method_id' => $payoutMethod->id]) }}">See
+                                                                    href="{{ route('admin.payouts.index', ['payout_method' => $payoutMethod->id]) }}">See
                                                                     all payouts</a></td>
                                                         </tr>
                                                         <tr>
