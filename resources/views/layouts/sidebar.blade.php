@@ -102,9 +102,10 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side13">
                      <ul class="sidemenu-list">
-                       <li><a href="shop.html" @class(['slide-item', 'active' => $active === 'payouts.all'])> All Payouts</a></li>
-                       <li><a href="shop-description.html" @class(['slide-item', 'active' => $active === 'payouts.pending'])> Pending Payouts</a></li>
-                       <li><a href="cart.html" @class(['slide-item', 'active' => $active === 'payouts.successful'])> Successful Payouts</a></li>
+                       <li><a href="{{ route('admin.payouts.index') }}" @class(['slide-item', 'active' => $active === 'payouts.all'])> All Payouts</a></li>
+                       <li><a href="{{ route('admin.payouts.pending') }}" @class(['slide-item', 'active' => $active === 'payouts.pending'])> Pending Payouts</a></li>
+                       <li><a href="{{ route('admin.payouts.success') }}" @class(['slide-item', 'active' => $active === 'payouts.successful'])> Successful Payouts</a></li>
+                       <li><a href="{{ route('admin.payouts.failed') }}" @class(['slide-item', 'active' => $active === 'payouts.failed'])> Failed Payouts</a></li>
                      </ul>
                    </div>
                  </div>

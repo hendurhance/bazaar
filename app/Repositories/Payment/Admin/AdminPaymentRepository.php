@@ -36,17 +36,19 @@ class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentR
             )
             ->when($filters, function ($query) use ($filters) {
                 $query->when(isset($filters['search']), function ($query) use ($filters) {
-                    $query->where('txn_id', $filters['search'])
-                        ->orWhereHas('payee', function ($query) use ($filters) {
-                            $query->where('name', 'like', '%' . $filters['search'] . '%')
-                                ->orWhere('username', 'like', '%' . $filters['search'] . '%')
-                                ->orWhere('id', $filters['search']);
-                        })
-                        ->orWhereHas('payer', function ($query) use ($filters) {
-                            $query->where('name', 'like', '%' . $filters['search'] . '%')
-                                ->orWhere('username', 'like', '%' . $filters['search'] . '%')
-                                ->orWhere('id', $filters['search']);
-                        });
+                    $query->where(function ($query) use ($filters) {
+                        $query->where('txn_id', $filters['search'])
+                            ->orWhereHas('payee', function ($query) use ($filters) {
+                                $query->where('name', 'like', '%' . $filters['search'] . '%')
+                                    ->orWhere('username', 'like', '%' . $filters['search'] . '%')
+                                    ->orWhere('id', $filters['search']);
+                            })
+                            ->orWhereHas('payer', function ($query) use ($filters) {
+                                $query->where('name', 'like', '%' . $filters['search'] . '%')
+                                    ->orWhere('username', 'like', '%' . $filters['search'] . '%')
+                                    ->orWhere('id', $filters['search']);
+                            });
+                    });
                 })
                     ->when(isset($filters['date_from']) && isset($filters['date_to']), function ($query) use ($filters) {
                         $query->whereBetween('created_at', [$filters['date_from'], $filters['date_to']]);
@@ -60,7 +62,13 @@ class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentR
             })
             ->orderBy('created_at', 'desc')
             ->paginate($limit)
-            ->appends(['search' => $filters['search'] ?? null]);
+            ->appends([
+                'search' => $filters['search'] ?? null,
+                'date_from' => $filters['date_from'] ?? null,
+                'date_to' => $filters['date_to'] ?? null,
+                'price_range' => isset($filters['amount_from']) ? PriceRange::range($filters['price_range']) : null,
+                'gateway' => $filters['gateway'] ?? null,
+            ]);
     }
 
     /**

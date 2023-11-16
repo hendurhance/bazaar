@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Bid\BidController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
+use App\Http\Controllers\Admin\Payout\PayoutController;
 use App\Http\Controllers\Admin\Payout\PayoutMethodController;
 use Illuminate\Support\Facades\Route;
 
@@ -63,7 +64,13 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::get('/payments/pending', [PaymentController::class, 'pending'])->name('payments.pending');
     Route::get('/payments/success', [PaymentController::class, 'success'])->name('payments.success');
     Route::get('/payments/failed', [PaymentController::class, 'failed'])->name('payments.failed');
-    Route::get('/payment/{payments:id}', [PaymentController::class, 'show'])->name('payments.show');
-    Route::patch('/payment/{payments:id}/update-status', [PaymentController::class, 'updateStatus'])->name('payments.update.status');
+    Route::get('/payment/{payments:txn_id}', [PaymentController::class, 'show'])->name('payments.show');
+    Route::patch('/payment/{payments:txn_id}/update-status', [PaymentController::class, 'updateStatus'])->name('payments.update.status');
 
+    /* ======== PAYOUTS  ======== */
+    Route::get('/payouts', [PayoutController::class, 'index'])->name('payouts.index');
+    Route::get('/payouts/pending', [PayoutController::class, 'pending'])->name('payouts.pending');
+    Route::get('/payouts/success', [PayoutController::class, 'success'])->name('payouts.success');
+    Route::get('/payouts/failed', [PayoutController::class, 'failed'])->name('payouts.failed');
+    Route::get('/payout/{payouts:pyt_token}', [PayoutController::class, 'show'])->name('payouts.show');
 });
