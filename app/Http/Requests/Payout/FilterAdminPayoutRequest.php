@@ -2,18 +2,12 @@
 
 namespace App\Http\Requests\Payout;
 
-use App\Services\Payout\BankCodeService;
+use App\Enums\PriceRange;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules\Enum;
 
-class FilterAdminPayoutMethodRequest extends FormRequest
+class FilterAdminPayoutRequest extends FormRequest
 {
-    /**
-     * Instantiate new request instance
-     */
-    public function __construct(protected BankCodeService $bankCodeService)
-    {
-    }
-
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -30,11 +24,11 @@ class FilterAdminPayoutMethodRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'country_id' => 'nullable|exists:countries,id',
+            'search' => ['nullable', 'string'],
+            'payout_method' => ['nullable', 'string'],
             'date_from' => ['nullable', 'date'],
             'date_to' => ['nullable', 'date'],
-            'bank_code' => ['nullable', 'string', 'in:'.$this->bankCodeService->listAllBanksCode()],
-            'user_id' => ['nullable', 'exists:users,id'],
+            'price_range' => ['nullable', new Enum(PriceRange::class)]
         ];
     }
 }

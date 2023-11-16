@@ -6,6 +6,7 @@ use App\Contracts\Repositories\AdminAdRepositoryInterface;
 use App\Contracts\Repositories\AdminBidRepositoryInterface;
 use App\Contracts\Repositories\AdminPaymentRepositoryInterface;
 use App\Contracts\Repositories\AdminPayoutMethodRepositoryInterface;
+use App\Contracts\Repositories\AdminPayoutRepositoryInterface;
 use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Contracts\Repositories\AnalyticRepositoryInterface;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
@@ -26,6 +27,7 @@ use App\Repositories\Bid\User\BidRepository;
 use App\Repositories\Payment\Admin\AdminPaymentRepository;
 use App\Repositories\Payment\User\PaymentRepository;
 use App\Repositories\Payout\Admin\AdminPayoutMethodRepository;
+use App\Repositories\Payout\Admin\AdminPayoutRepository;
 use App\Repositories\Payout\User\PayoutMethodRepository;
 use App\Repositories\Payout\User\PayoutRepository;
 use Illuminate\Support\ServiceProvider;
@@ -102,6 +104,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             AdminPaymentRepositoryInterface::class,
             AdminPaymentRepository::class
+        );
+
+        $this->app->bind(
+            AdminPayoutRepositoryInterface::class,
+            AdminPayoutRepository::class
         );
     }
 }

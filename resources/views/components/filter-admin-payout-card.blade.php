@@ -1,8 +1,8 @@
 <form class="row bid-filter">
     <div class="col-sm-12 col-md-3">
         <div id="data-table_filter" class="dataTables_filter">
-            <label>Search for a username, ids, etc</label>
-            <input type="search" name="search" class="form-control form-control" placeholder="Search username, ids..." aria-controls="data-table" value="{{ request()->search }}">
+            <label>Search for a pyt_tokens, names, etc</label>
+            <input type="search" name="search" class="form-control form-control" placeholder="Search pyt_tokens, names, etc.." aria-controls="data-table" value="{{ request()->search }}">
             <span class="text-danger">{{ $errors->first('search') }}</span>
         </div>
      </div>
@@ -19,17 +19,12 @@
             </div>
         </div>
     </div>
-    <div class="col-sm-12 col-md-2">
+    <div class="col-sm-12 col-md-3">
         <div class="row mb-4">
-            <div class="col-md-12">
-                <label>Gateway</label>
-                <select name="gateway" class="form-control form-select select2" data-bs-placeholder="Select Gateway">
-                    <option value="">All</option>
-                    @foreach ($gateways as $gateway)
-                    <option value="{{ $gateway }}" @selected($gateway->value == request()->gateway)>{{ $gateway->label() }} </option>
-                    @endforeach
-                </select>
-                <span class="text-danger">{{ $errors->first('gateway') }}</span>
+            <div id="data-table_filter" class="dataTables_filter">
+                <label>Search payout methods</label>
+                <input type="search" name="payout_method" class="form-control form-control" placeholder="Search payout method ids..." aria-controls="data-table" value="{{ request()->payout_method }}">
+                <span class="text-danger">{{ $errors->first('payout_method') }}</span>
             </div>
         </div>
     </div>

@@ -14,8 +14,7 @@ class PaymentController extends Controller
      * Instantiate new controller instance
      */
     public function __construct(protected AdminPaymentRepositoryInterface $adminPaymentRepository)
-    {
-    }
+    {}
 
     /**
      * Get all payments
