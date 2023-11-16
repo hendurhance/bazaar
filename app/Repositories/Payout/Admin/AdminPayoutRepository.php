@@ -82,7 +82,7 @@ class AdminPayoutRepository extends BaseCrudRepository implements AdminPayoutRep
      */
     public function getPayout(string $pyt_token): \App\Models\Payout
     {
-        return $this->model->query()->with(['user:id,name,username,avatar', 'payment:id,payee_id,payer_id,amount', 'payoutMethod:id,bank_name,account_name,account_number'])
+        return $this->model->query()->with(['user:id,name,username,avatar', 'payment:id,payee_id,payer_id,amount,txn_id', 'payoutMethod:id,bank_name,account_name,account_number'])
             ->where('pyt_token', $pyt_token)
             ->firstOr(function () {
                 abort(404);

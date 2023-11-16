@@ -111,7 +111,7 @@
                                                         </td>
                                                         <td>
                                                             <div class="d-flex">
-                                                                <a href="{{ route('admin.payments.show', $payout->pyt_token) }}"
+                                                                <a href="{{ route('admin.payouts.show', $payout->pyt_token) }}"
                                                                     class="btn text-dark btn-sm"
                                                                     data-bs-toggle="tooltip"
                                                                     data-bs-original-title="View"><span
