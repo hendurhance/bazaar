@@ -28,7 +28,7 @@
                             <li><a href="{{ route('how-it-works') }}">How It Works</a></li>
                             <li><a href="#">My Account</a></li>
                             <li><a href="{{ route('about') }}">About Company</a></li>
-                            <li><a href="{{ route('blog') }}">Our News Feed</a></li>
+                            <li><a href="{{ route('blog.index') }}">Our News Feed</a></li>
                         </ul>
                     </div>
                 </div>

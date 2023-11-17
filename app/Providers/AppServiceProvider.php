@@ -11,6 +11,7 @@ use App\Observers\AdObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -20,6 +21,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        // Schema default string length.
+        Schema::defaultStringLength(191);
+
         // Register the repository command.
         $this->app->singleton('command.make.repository', function ($app) {
             return new MakeRepositoryCommand($app['files']);

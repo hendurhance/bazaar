@@ -172,78 +172,40 @@
             </div>
         </div>
         <div class="row d-flex justify-content-center g-4">
+            @forelse ( $posts as $post )
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
                 <div class="single-blog-style2 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">
                     <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>Jan 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/recent21.png">
+                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>{{ $post->created_at->format('M d, Y') }}</a>
+                        <img alt="image" src="{{$post->featured_image_url}}">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">David Droga Still Has Faith in Online Advertising Creative
-                            </a></h5>
+                        <h5><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }} </a></h5>
                         <div class="blog-meta">
                             <div class="author">
                                 <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
+                                <a href="{{ route('blog.show', $post->slug) }}" class="author-name">Johan Martin</a>
                             </div>
                             <div class="comment">
                                 <img alt="image" src="assets/images/icons/comment-icon.svg">
                                 <a href="#" class="comment">05 Comments</a>
                             </div>
                         </div>
-                        <p class="para">Explore on the world's best & largest Bidding market place with our Bidding
-                            products.</p>
+                        <p class="para">{{ shorten_chars($post->content, 100, true) }}</p>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style2 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/recent22.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">Take our friend Johnny No-Job, for example. He’s a
-                                specialist in .</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                        <p class="para">Explore on the world's best & largest Bidding market place with our Bidding
-                            products.</p>
-                    </div>
+            @empty
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <div class="text-center mb-4">
+                    <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
                 </div>
+                <x-alert type="warning">
+                    <p class="text-center mb-0"><strong>Sorry!</strong> No blog posts available at this time. Try again later.</p>
+                </x-alert>
             </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style2 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".4s">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/recent23.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">The second-price sealed-bid auction is similar to the
-                                first.</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                        <p class="para">Explore on the world's best & largest Bidding market place with our Bidding
-                            products.</p>
-                    </div>
-                </div>
-            </div>
+            @endforelse
+
         </div>
     </div>
 </div>

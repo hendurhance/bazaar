@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Page\BlogController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Bid\BidController;
@@ -24,11 +25,11 @@ Route::view('/about', 'pages.about.index')->name('about');
 Route::view('/contact', 'pages.contact.index')->name('contact');
 Route::view('/how-it-works', 'pages.how-it-works.index')->name('how-it-works');
 Route::get('/live-auction', [AdController::class, 'index'])->name('live-auction');
-Route::view('/blog', 'pages.blog.index')->name('blog');
-Route::view('blog-details', 'pages.blog.show')->name('blog-details');
-Route::get('auction-details/{ads:slug}', [AdController::class, 'show'])->name('auction-details');
-Route::get('auction-details/{ads:slug}/report', [AdController::class, 'report'])->name('auction-details.report');
-Route::post('auction-details/{ads:slug}/report', [AdController::class, 'handleReport'])->name('auction-details.report.handle');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::get('/auction-details/{ads:slug}', [AdController::class, 'show'])->name('auction-details');
+Route::get('/auction-details/{ads:slug}/report', [AdController::class, 'report'])->name('auction-details.report');
+Route::post('/auction-details/{ads:slug}/report', [AdController::class, 'handleReport'])->name('auction-details.report.handle');
 Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
 Route::post('/add-listing', [AdController::class, 'store'])->name('add-listing.handle');
 Route::post('/bid/{ads:slug}', [BidController::class, 'bid'])->name('bid.handle')->middleware('auth:web');
