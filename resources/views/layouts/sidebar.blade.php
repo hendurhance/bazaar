@@ -128,19 +128,19 @@
            <span class="side-menu__label">Media</span>
           </a>
          </li>
-         <li class="slide">
+         <li @class(['slide', 'is-expanded' => preg_match('/blogs.*/', $active)])>
            <a @class(['side-menu__item', 'has-link', 'active' => preg_match('/blogs.*/', $active)]) data-bs-toggle="slide" href="javascript:void(0)"><i
                class="side-menu__icon fa-regular fa-pen-to-square"></i><span class="side-menu__label">Blogs</span><i
                class="fa-light fa-chevron-right fa-2xs"></i>
            </a>
-           <ul class="slide-menu">
+           <ul @class(['slide-menu', 'open' => preg_match('/blogs.*/', $active)])>
              <li class="panel sidetab-menu">
                <div class="panel-body tabs-menu-body p-0 border-0">
                  <div class="tab-content">
                    <div class="tab-pane active" id="side33">
                      <ul class="sidemenu-list">
-                       <li><a href="chart-chartist.html" @class(['slide-item', 'active' => $active === 'blogs.all'])>All Blogs</a></li>
-                       <li><a href="chart-flot.html" @class(['slide-item', 'active' => $active === 'blogs.create'])> Create Blog</a></li>
+                       <li><a href="{{ route('admin.blogs.index') }}" @class(['slide-item', 'active' => $active === 'blogs.all'])>All Blogs</a></li>
+                       <li><a href="{{ route('admin.blogs.create') }}" @class(['slide-item', 'active' => $active === 'blogs.create'])> Create Blog</a></li>
                      </ul>
                    </div>
                  </div>
