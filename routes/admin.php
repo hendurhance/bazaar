@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Bid\BidController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
 use App\Http\Controllers\Admin\Payout\PayoutController;
 use App\Http\Controllers\Admin\Payout\PayoutMethodController;
+use App\Http\Controllers\Admin\Post\PostController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -73,4 +74,7 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::get('/payouts/success', [PayoutController::class, 'success'])->name('payouts.success');
     Route::get('/payouts/failed', [PayoutController::class, 'failed'])->name('payouts.failed');
     Route::get('/payout/{payouts:pyt_token}', [PayoutController::class, 'show'])->name('payouts.show');
+
+    /* ========  BLOGS  =========== */
+    Route::resource('blogs', PostController::class);
 });
