@@ -1,6 +1,6 @@
 @extends('partials.app')
-@section('title', 'Blog')
-@section('description', 'Read our blog posts to learn more about us and our platform.')
+@section('title', $post->title . ' | Blog')
+@section('description', shorten_chars($post->content, 150, true))
 @section('content')
 
 @include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Blog'])
@@ -11,59 +11,19 @@
             <div class="col-lg-8">
                 <div class="blog-details-single">
                     <div class="blog-img">
-                        <img alt="image" src="assets/images/blog/blog-details.png" class="img-fluid wow fadeInDown"
+                        <img alt="image" src="{{ $post->featured_image_url }}" class="img-fluid wow fadeInDown"
                             data-wow-duration="1.5s" data-wow-delay=".2s"
                             style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
                     </div>
                     <ul class="blog-meta gap-2">
-                        <li><a href="#"><img alt="image" src="assets/images/icons/calendar.svg">Date: 25 Jan 2022</a>
+                        <li><a href="#"><img alt="image" src="/assets/images/icons/calendar.svg">Date: {{ $post->created_at->format('d M Y') }}</a></li>
                         </li>
-                        <li><a href="#"><img alt="image" src="assets/images/icons/tags.svg">Auction</a></li>
-                        <li><a href="#"><img alt="image" src="assets/images/icons/admin.svg">Posted by Admin</a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/icons/tags.svg">Auction</a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/icons/admin.svg">Posted by {{ $post->admin->name }}</a></li>
                     </ul>
-                    <h3 class="blog-title">A brand for a company is like reputation for a person.</h3>
+                    <h3 class="blog-title">{{ $post->title }}</h3>
                     <div class="blog-content">
-                        <p class="para">Gochujang ugh viral, butcher pabst put a bird on it meditation austin craft beer
-                            banh. Distillery ramps af, goch ujang hell of VHS kitsch austin. Vegan air plant trust fund,
-                            poke sartorial ennui next lev el photo booth coloring book etsy green juice meditation
-                            austin craft beer.</p>
-                        <blockquote>
-                            <img alt="image" src="assets/images/icons/quote-fill.svg" class="quote-icon">
-                            <p class="para">“If the delivery provider maintains all the standards then it is safe to
-                                have get products delivered to you. It is hard to maintain but still safer to get your
-                                products ordered If you’ve been following the crypto space”</p>
-                            <h5>-- Leslie Alexander</h5>
-                        </blockquote>
-                        <h4 class="sub-title">How can have anything you ant in life if you ?</h4>
-                        <p class="para">If you’ve been following the crypto space, you’ve likely heard of Non-Fungible
-                            Tokens (Biddings), more popularly referred to as ‘Crypto Collectibles.’ The world of
-                            Biddings is growing rapidly. It seems there is no slowing down of these assets as they
-                            continue to go up in price. This growth comes with the opportunity for people to start new
-                            businesses to create and capture value. The market is open for players in every kind of
-                            field. Are you a collector.</p>
-                        <div class="blog-video-area">
-                            <div class="row g-4">
-                                <div class="col-md-6">
-                                    <img alt="image" src="assets/images/blog/blogd1.png" class="img-fluid">
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="video-wrapper position-relative">
-                                        <div class="video-play">
-                                            <a href="https://www.youtube.com/watch?v=u31qwQUeGuM"
-                                                class="popup-youtube video-icon" savefrom_lm_index="0"
-                                                savefrom_lm="1"><i class="bx bx-play"></i></a><span
-                                                style="padding: 0; margin: 0; margin-left: 5px;"><a
-                                                    href="http://savefrom.net/?url=https%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3Du31qwQUeGuM&amp;utm_source=chameleon&amp;utm_medium=extensions&amp;utm_campaign=link_modifier"
-                                                    target="_blank" title="Get a direct link" savefrom_lm="1"
-                                                    savefrom_lm_is_link="1"
-                                                    style="background-image: url(&quot;data:image/gif;base64,R0lGODlhEAAQAOZ3APf39+Xl5fT09OPj4/Hx8evr6/3+/u7u7uDh4OPi497e3t7e3/z8/P79/X3GbuXl5ubl5eHg4WzFUfb39+Pj4lzGOV7LOPz7+/n6+vn5+ZTLj9/e387Ozt7f3/7+/vv7/ISbePn5+m/JV1nRKXmVbkCnKVrSLDqsCuDh4d/e3uDn3/z7/H6TdVeaV1uSW+bn5v39/eXm5eXm5kyHP/f39pzGmVy7J3yRd9/f3mLEKkXCHJbka2TVM5vaZn6Wdfn6+YG/c/r5+ZO/jeLi41aHTIeageLn4f39/vr6+kzNG2PVM5i+lomdf2CXYKHVmtzo2YXNeDqsBebl5uHh4HDKWN3g3kKqEH6WeZHTXIPKdnSPbv79/pfmbE7PHpe1l4O8dTO5DODg4VDLIlKUUtzo2J7SmEWsLlG4NJbFjkrJHP7+/VK5Nfz8+zmnC3KKa+Hg4OHh4Y63j/3+/eDg4Ojo6P///8DAwP///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACH5BAEAAHcALAAAAAAQABAAAAfWgHd2g4SFhYJzdYqLjIpzgx5bBgYwHg1Hk2oNDXKDFwwfDF5NLmMtcStsn4MhGT8YS04aGmU1QRhIGYMTADQAQlAODlloAMYTgwICRmRfVBISIkBPKsqDBAREZmcVFhYVayUz2IMHB1dWOmImI2lgUVrmgwUFLzdtXTxKSSduMfSD6Aik48MGlx05SAykM0gKhAAPAhTB0oNFABkPHg5KMIBCxzlMQFQZMGBIggSDpsCJgGDOmzkIUCAIM2dOhEEcNijQuQDHgg4KOqRYwMGOIENIB90JBAA7&quot;); background-repeat: no-repeat; width: 16px; height: 16px; display: inline-block; border: none; text-decoration: none; padding: 0px; position: relative;"></a></span>
-                                        </div>
-                                        <img alt="image" src="assets/images/blog/blogd2.png" class="img-fluid">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <p class="para">Gochujang ugh viral, butcher pabst put a bird on it meditation austin craft beer
+                        {!! $post->content !!}
                             banh. Distillery ramps af, goch ujang hell of VHS kitsch austin. Vegan air plant trust fund,
                             poke sartorial ennui next lev el photo booth coloring book etsy green juice meditation
                             austin craft beer.</p>
@@ -93,13 +53,12 @@
                     </div>
                     <div class="blog-author gap-4 flex-md-nowrap flex-wrap">
                         <div class="author-image">
-                            <img alt="image" src="assets/images/blog/blog-author.png" class="img-fluid">
+                            <img alt="image" src="{{ $post->admin->avatar }}" class="img-fluid">
                         </div>
                         <div class="author-detials text-md-start text-center">
-                            <h5>-- Leslie Alexander</h5>
-                            <p class="para">It has survived not only five centuries, but also the leap into electronic
-                                typesetting unchanged. It was popularised in the sheets containing lorem ipsum is simply
-                                free text.</p>
+                            <h5>-- {{ $post->admin->name }}</h5>
+                            <p class="para">Article by {{ $post->admin->name }}. {{ $post->admin->name }} is a
+                                professional blogger and content writer.</p>
                         </div>
                     </div>
                     <div class="blog-comment">
@@ -228,40 +187,17 @@
                             </div>
                             <div class="blog-widget-body">
                                 <ul class="recent-post">
+                                    @foreach ($post->relatedPosts()->get() as $relatedPost)
                                     <li class="single-post">
                                         <div class="post-img">
-                                            <a href="{{ route('blog-details') }}"><img alt="image"
-                                                    src="assets/images/blog/recent-feed1.png"></a>
+                                            <a href="{{ route('blog.show', $relatedPost->slug) }}"><img alt="image" src="{{ $relatedPost->featured_image_url }}"></a>
                                         </div>
                                         <div class="post-content">
-                                            <span>January 31, 2022</span>
-                                            <h6><a href="{{ route('blog-details') }}">Grant Distributions Conti nu to Incr
-                                                    Ease.</a>
-                                            </h6>
+                                            <span>{{ $relatedPost->created_at->format('d M Y') }}</span>
+                                            <h6><a href="{{ route('blog.show', $relatedPost->slug) }}">{{ $relatedPost->title }}</a></h6>
                                         </div>
                                     </li>
-                                    <li class="single-post">
-                                        <div class="post-img">
-                                            <a href="{{ route('blog-details') }}"><img alt="image"
-                                                    src="assets/images/blog/recent-feed2.png"></a>
-                                        </div>
-                                        <div class="post-content">
-                                            <span>February 21, 2022</span>
-                                            <h6><a href="{{ route('blog-details') }}">Seminar for Children to Learn About.</a>
-                                            </h6>
-                                        </div>
-                                    </li>
-                                    <li class="single-post">
-                                        <div class="post-img">
-                                            <a href="{{ route('blog-details') }}"><img alt="image"
-                                                    src="assets/images/blog/recent-feed3.png"></a>
-                                        </div>
-                                        <div class="post-content">
-                                            <span>March 22, 2022</span>
-                                            <h6><a href="{{ route('blog-details') }}">Education and teacher for all African
-                                                    Children.</a></h6>
-                                        </div>
-                                    </li>
+                                    @endforeach
                                 </ul>
                             </div>
                         </div>
@@ -305,9 +241,9 @@
                     <div class="sidebar-banner wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="1s"
                         style="visibility: visible; animation-duration: 1.5s; animation-delay: 1s; animation-name: fadeInUp;">
                         <div class="banner-content">
-                            <span>CARS</span>
+                            <span>Advertisement</span>
                             <h3>Toyota AIGID A Clasis Cars Sale</h3>
-                            <a href="{{ route('auction-details') }}" class="eg-btn btn--primary card--btn">Details</a>
+                            {{-- <a href="{{ route('auction-details') }}" class="eg-btn btn--primary card--btn">Details</a> --}}
                         </div>
                     </div>
                 </div>

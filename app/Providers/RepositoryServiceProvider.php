@@ -16,6 +16,7 @@ use App\Contracts\Repositories\CountryRepositoryInterface;
 use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Contracts\Repositories\PayoutMethodRepositoryInterface;
 use App\Contracts\Repositories\PayoutRepositoryInterface;
+use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Repositories\Ad\Admin\AdminAdRepository;
 use App\Repositories\Auth\AuthenticateRepository;
 use App\Repositories\Category\CategoryRepository;
@@ -30,6 +31,7 @@ use App\Repositories\Payout\Admin\AdminPayoutMethodRepository;
 use App\Repositories\Payout\Admin\AdminPayoutRepository;
 use App\Repositories\Payout\User\PayoutMethodRepository;
 use App\Repositories\Payout\User\PayoutRepository;
+use App\Repositories\Post\PostRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -54,6 +56,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             CountryRepositoryInterface::class,
             CountryRepository::class
+        );
+
+        $this->app->bind(
+            PostRepositoryInterface::class,
+            PostRepository::class
         );
 
         $this->app->bind(
