@@ -30,14 +30,22 @@ interface PostRepositoryInterface
      */
     public function getPost(string $slug): \App\Models\Post;
 
-    // /**
-    //  * Create a post
-    //  * 
-    //  * @param array $data
-    //  * @param \App\Models\Admin $admin
-    //  * @return \App\Models\Post
-    //  */
-    // public function create(array $data, \App\Models\Admin $admin): \App\Models\Post;
+     /**
+     * Get a post for admin
+     * 
+     * @param string $slug
+     * @return \App\Models\Post
+     */
+    public function getPostForAdmin(string $slug): \App\Models\Post;
+
+    /**
+     * Create a post
+     * 
+     * @param array $data
+     * @param \App\Models\Admin $admin
+     * @return void
+     */
+    public function create(array $data, \App\Models\Admin $admin): void;
 
     // /**
     //  * Update a post

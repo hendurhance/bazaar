@@ -20,30 +20,20 @@ class Post extends Model
      * @var array
      */
     protected $fillable = [
+        'admin_id',
         'title',
         'content',
         'featured_image_id',
         'is_published',
-        'tags',
     ];
-    
+
     /**
      * The attributes that should be cast.
      *
      * @var array
      */
     protected $casts = [
-        'tags' => 'array',
         'is_published' => 'boolean',
-    ];
-
-    /**
-     * The attributes that should be appended.
-     *
-     * @var array
-     */
-    protected $appends = [
-        'featured_image_url',
     ];
 
     /**
@@ -87,6 +77,17 @@ class Post extends Model
     }
 
     /**
+     * Get the tags for the post.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+    /**
      * Get related posts.
      * 
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -96,7 +97,9 @@ class Post extends Model
         return $this->hasMany(Post::class, 'admin_id', 'admin_id')
             ->where('id', '!=', $this->id)
             ->published()
-            ->orWhereJsonContains('tags', $this->tags)
+            ->orWhereHas('tags', function ($query) {
+                $query->whereIn('id', $this->tags->pluck('id'));
+            })
             ->orderBy('created_at', 'desc')
             ->limit(3);
     }
@@ -110,5 +113,4 @@ class Post extends Model
     {
         return $query->where('is_published', true);
     }
-
 }

@@ -23,16 +23,16 @@
                                 <div class="tab-content">
                                     <div class="tab-pane active">
                                         <div class="wrap-input100 validate-input input-group" data-bs-validate="Valid email is required: ex@abc.xyz">
-                                            <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                            <span class="input-group-text bg-white text-muted">
                                                 <i class="fa-solid fa-envelope"></i>
-                                            </a>
+                                            </span>
                                             <input class="input100 border-start-0 form-control ms-0" type="email" name="email" placeholder="Email">
                                         </div>
                                         <span class="text-danger">{{ $errors->first('email') }}</span>
                                         <div class="wrap-input100 validate-input input-group" id="Password-toggle">
-                                            <a href="javascript:void(0)" class="input-group-text bg-white text-muted">
+                                            <span class="input-group-text bg-white text-muted">
                                                 <i class="fa-solid fa-eye"></i>
-                                            </a>
+                                            </span>
                                             <input class="input100 border-start-0 form-control ms-0" type="password" name="password" placeholder="Password">
                                         </div>
                                         <span class="text-danger">{{ $errors->first('password') }}</span>

@@ -110,21 +110,12 @@
                                                             </div>
                                                         </td>
                                                         <td>
-                                                            <div class="d-flex">
-                                                                <a href="{{ route('admin.payouts.show', $payout->pyt_token) }}"
-                                                                    class="btn text-dark btn-sm"
-                                                                    data-bs-toggle="tooltip"
-                                                                    data-bs-original-title="View"><span
-                                                                        class="fa-regular fa-eye fs-14"></span>
-                                                                </a>
-                                                                <a href="{{ route('admin.payments.update.status', $payout->pyt_token) }}"
-                                                                    class="btn text-primary btn-sm"
-                                                                    data-bs-target="#select2modal"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-original-title="Edit"><span
-                                                                        class="fa-regular fa-edit fs-14"></span>
-                                                                </a>
-                                                            </div>
+                                                            <a href="{{ route('admin.payouts.show', $payout->pyt_token) }}"
+                                                                class="btn text-dark btn-sm"
+                                                                data-bs-toggle="tooltip"
+                                                                data-bs-original-title="View"><span
+                                                                    class="fa-regular fa-eye fs-14"></span>
+                                                            </a>
                                                         </td>
                                                     </tr>
                                                     @endforeach
