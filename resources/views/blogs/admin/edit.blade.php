@@ -19,7 +19,7 @@
                         @csrf
                         <div class="card-header">
                             <div class="card-title">Edit Blog</div>
-                        </div>
+                    </div>
                         <div class="card-body">
                             <x-input-item-field name="title" type="text" label="Blog Title *" placeholder="Enter Blog Title" value="{{ $post->title }}" />
                             <!-- Row -->

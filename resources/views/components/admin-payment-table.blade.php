@@ -111,7 +111,7 @@
                                                                 data-bs-original-title="View"><span
                                                                     class="fa-regular fa-eye fs-14"></span>
                                                             </a>
-                                                            <a href="{{ route('admin.payments.update.status', $payment->txn_id) }}"
+                                                            <a
                                                                 class="btn text-primary btn-sm"
                                                                 data-bs-target="#select2modal"
                                                                 data-bs-toggle="modal"
