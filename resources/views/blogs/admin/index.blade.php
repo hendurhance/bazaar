@@ -89,9 +89,13 @@
                                                                                             data-bs-original-title="View"><span
                                                                                                 class="fa-regular fa-edit fs-14"></span>
                                                                                         </a>
-                                                                                        <a href="{{ route('admin.blogs.destroy', $post->slug) }}" class="btn text-danger btn-sm"
-                                                                                            data-bs-toggle="tooltip"
-                                                                                            data-bs-original-title="Delete"><span
+                                                                                        <a class="btn text-danger btn-sm"
+                                                                                            data-bs-target="#select2modal"
+                                                                                            data-bs-toggle="modal"
+                                                                                            href="javascript:;"
+                                                                                            data-bs-original-title="Delete"
+                                                                                            onclick="deletePost('{{ $post->slug }}', '{{ $post->title }}')"
+                                                                                            ><span
                                                                                                 class="fa-regular fa-trash-alt fs-14"></span>
                                                                                         </a>
                                                                                     </div>
@@ -129,10 +133,43 @@
     </div>
 </div>
 
+ <!-- Select2 modal -->
+ <div class="modal fade" id="select2modal">
+    <div class="modal-dialog" role="document">
+        <form class="modal-content modal-content-demo" id="delete-form" method="POST">
+            @method('DELETE')
+            @csrf
+            <div class="modal-header">
+                <h6 class="modal-title">Delete Post - <span id="delete-title"></span></h6>
+                <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h6>A post with the title <span id="delete-title"></span> will be deleted. This action cannot be undone.</h6>
+                <p class="mt-3">By clicking on "Delete Post" below, this post will be deleted.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn ripple btn-success" type="submit">Delete Post</button>
+                <button class="btn ripple btn-danger" data-bs-dismiss="modal" type="button">Close</button>
+            </div>
+        </form>
+    </div>
+</div>
+<!-- End Select2 modal -->
 
 @endsection
 @push('scripts')
 <script src="/plugin/select2/select2.full.min.js"></script>
 <script src="/assets/js/select2.js"></script>
-    
+
+<script>
+    function deletePost(slug, title) {
+        document.getElementById('delete-title').innerHTML = title;
+        const url = "{{ route('admin.blogs.destroy', ':slug') }}".replace(':slug', slug);
+        document.getElementById('delete-form').setAttribute('action', url);
+        document.getElementById('delete-form').setAttribute('action', url);
+    }
+</script>
+
 @endpush
