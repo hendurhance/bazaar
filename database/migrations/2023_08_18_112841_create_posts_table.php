@@ -19,7 +19,6 @@ return new class extends Migration
             $table->longText('content')->nullable();
             $table->foreignUuid('featured_image_id')->nullable()->references('id')->on('media')->onDelete('cascade');
             $table->boolean('is_published')->default(false);
-            $table->json('tags')->nullable();
             $table->timestamps();
         });
     }

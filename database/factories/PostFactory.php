@@ -23,11 +23,6 @@ class PostFactory extends Factory
             'content' => $this->faker->paragraphs(5, true),
             'featured_image_id' => $media->id,
             'is_published' => true,
-            'tags' => [
-                $this->faker->word,
-                $this->faker->word,
-                $this->faker->word,
-            ],
         ];
     }
 }

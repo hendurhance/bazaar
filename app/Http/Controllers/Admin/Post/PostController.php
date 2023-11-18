@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Post;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\FilterAdminPostRequest;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,7 @@ class PostController extends Controller
     /**
      * Instantiate new controller instance
      */
-    public function __construct(protected PostRepositoryInterface $postRepository, AuthenticateRepositoryInterface $authenticateRepository)
+    public function __construct(protected PostRepositoryInterface $postRepository, protected AuthenticateRepositoryInterface $authenticateRepository)
     {}
 
     /**
@@ -32,26 +33,34 @@ class PostController extends Controller
 
     /**
      * Show the form for creating a new resource.
+     * @return \Illuminate\View\View
      */
     public function create()
     {
-        //
+        return view('blogs.admin.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * @param \App\Http\Requests\Post\CreatePostRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreatePostRequest $request)
     {
-        //
+        $this->postRepository->create($request->validated(), $this->authenticateRepository->admin());
+        return redirect()->route('admin.blogs.index')->with('success', 'Post created successfully.');
     }
 
     /**
      * Display the specified resource.
+     * @param string $slug
+     * @return \Illuminate\View\View
      */
-    public function show(string $id)
+    public function show(string $slug)
     {
-        //
+        return view('blogs.admin.show', [
+            'post' => $this->postRepository->getPostForAdmin($slug)
+        ]);
     }
 
     /**

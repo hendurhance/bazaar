@@ -10,8 +10,7 @@
 
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
-            @include('layouts.breadcrumb', ['admin' => true, 'pageTitle' => 'Ads Edit', 'hasBack' => true, 'backTitle'
-            => 'Ads Listing', 'backUrl' => route('admin.ads.index')])
+            @include('layouts.breadcrumb', ['admin' => true, 'pageTitle' => 'Ads Edit', 'hasBack' => true, 'backTitle' => 'Ads Listing', 'backUrl' => route('admin.ads.index')])
             <div class="row">
                 <div class="col-lg-12">
                     <form class="card" method="POST" action="{{ route('admin.ads.update', $ad->slug) }}">

@@ -34,9 +34,9 @@
                                 class="col-md-6 d-flex justify-content-md-start justify-content-center align-items-center">
                                 <h6>Post Tag:</h6>
                                 <ul class="tag-list">
-                                    <li><a href="#">Network Setup</a></li>
-                                    <li><a href="#">Cars</a></li>
-                                    <li><a href="#">Technology</a></li>
+                                   @foreach ($post->tags()->get() as $tag)
+                                      <li><a href="{{ route('blog.index', ['tag' => $tag->id]) }}">{{ $tag->name }}</a></li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div
@@ -182,7 +182,7 @@
                         style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInUp;">
                         <div class="blog-category">
                             <div class="sidebar-widget-title">
-                                <h4>Recent Post</h4>
+                                <h4>Related Post</h4>
                                 <span></span>
                             </div>
                             <div class="blog-widget-body">
@@ -202,24 +202,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="blog-widget-item wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".4s"
-                        style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInUp;">
-                        <div class="top-blog">
-                            <div class="sidebar-widget-title">
-                                <h4>Post Categories</h4>
-                                <span></span>
-                            </div>
-                            <div class="blog-widget-body">
-                                <ul class="category-list">
-                                    <li><a href="#"><span>New Technology</span><span>01</span></a></li>
-                                    <li><a href="#"><span>Network Setup</span><span>12</span></a></li>
-                                    <li><a href="#"><span>Audi Car Bidding </span><span>33</span></a></li>
-                                    <li><a href="#"><span>Entertainment</span><span>54</span></a></li>
-                                    <li><a href="#"><span>New Technology</span><span>24</span></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    
+                    <x-post-tag-card />
+
                     <div class="blog-widget-item wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".8s"
                         style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.8s; animation-name: fadeInUp;">
                         <div class="tag-area">

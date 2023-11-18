@@ -38,12 +38,12 @@
         <div class="row mb-4">
             <div class="col-sm-6 col-md-6">
                 <label>Date from:</label>
-                <input type="datetime-local" class="form-control" placeholder="Select date from" name="date_from" value="{{ request()->date_from }}" id="">
+                <input type="date" class="form-control" placeholder="Select date from" name="date_from" value="{{ request()->date_from }}" id="">
                 <span class="text-danger">{{ $errors->first('date_from') }}</span>
             </div>
             <div class="col-sm-6 col-md-6">
                 <label>Date to:</label>
-                <input type="datetime-local" class="form-control" placeholder="Select date to" name="date_to" value="{{ request()->date_to }}" id="">
+                <input type="date" class="form-control" placeholder="Select date to" name="date_to" value="{{ request()->date_to }}" id="">
                 <span class="text-danger">{{ $errors->first('date_to') }}</span>
             </div>
         </div>

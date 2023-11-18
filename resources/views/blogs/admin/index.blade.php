@@ -43,6 +43,9 @@
                                                                                 Author</th>
                                                                             <th
                                                                                 class="bg-transparent border-bottom-0">
+                                                                                Tags</th>
+                                                                            <th
+                                                                                class="bg-transparent border-bottom-0">
                                                                                Published</th>
                                                                             <th class="bg-transparent border-bottom-0"
                                                                                 style="width: 5%;">Action</th>
@@ -61,16 +64,38 @@
                                                                             </td>
                                                                             <td>
                                                                                 <div class="mt-sm-1 d-block">
-                                                                                    <span class="text-white badge bg-{{$post->is_published ? 'success' : 'danger'}}">{{$post->is_published ? 'Published' : 'Not Published'}}</span>
+                                                                                    @forelse ($post->tags as $tag)
+                                                                                        <span class="text-white badge bg-primary">{{ $tag->name }}</span>
+                                                                                    @empty
+                                                                                        <span class="text-white badge bg-warning">No Tags</span>
+                                                                                    @endforelse
                                                                                 </div>
                                                                             </td>
                                                                             <td>
                                                                                 <div class="mt-sm-1 d-block">
-                                                                                    <a href="{{ route('admin.blogs.show', $post->slug) }}" class="btn text-dark btn-sm"
-                                                                                        data-bs-toggle="tooltip"
-                                                                                        data-bs-original-title="View"><span
-                                                                                        class="fa-regular fa-eye fs-14"></span>
-                                                                                    </a>
+                                                                                    <span class="text-white badge bg-{{$post->is_published ? 'success' : 'danger'}}">{{$post->is_published ? 'Published' : 'Not Published'}}</span>
+                                                                                </div>
+                                                                            </td>
+                                                                            <td>
+                                                                                <div class="mt-sm-1 d-flex">
+                                                                                    <div class="btn-group">
+                                                                                        <a href="{{ route('admin.blogs.show', $post->slug) }}" class="btn text-dark btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="View"><span
+                                                                                            class="fa-regular fa-eye fs-14"></span>
+                                                                                        </a>
+                                                                                        <a href="{{ route('admin.blogs.show', $post->slug) }}" class="btn text-dark btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="View"><span
+                                                                                                class="fa-regular fa-edit fs-14"></span>
+                                                                                        </a>
+                                                                                        <a href="{{ route('admin.blogs.destroy', $post->slug) }}" class="btn text-danger btn-sm"
+                                                                                            data-bs-toggle="tooltip"
+                                                                                            data-bs-original-title="Delete"><span
+                                                                                                class="fa-regular fa-trash-alt fs-14"></span>
+                                                                                        </a>
+                                                                                    </div>
+                                                                                    
                                                                                 </div>
                                                                             </td>
                                                                             
