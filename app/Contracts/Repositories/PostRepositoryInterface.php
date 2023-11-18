@@ -30,7 +30,7 @@ interface PostRepositoryInterface
      */
     public function getPost(string $slug): \App\Models\Post;
 
-     /**
+    /**
      * Get a post for admin
      * 
      * @param string $slug
@@ -45,20 +45,21 @@ interface PostRepositoryInterface
      * @param \App\Models\Admin $admin
      * @return void
      */
-    public function create(array $data, \App\Models\Admin $admin): void;
+    public function createPost(array $data, \App\Models\Admin $admin): void;
 
-    // /**
-    //  * Update a post
-    //  * 
-    //  * @param string $slug
-    //  * @param array $data
-    //  */
-    // public function update(string $slug, array $data): void;
+    /**
+     * Update a post
+     * 
+     * @param string $slug
+     * @param array $data
+     * @return void
+     */
+    public function updatePost(string $slug, array $data): void;
 
-    // /**
-    //  * Delete a post
-    //  * 
-    //  * @param string $slug
-    //  */
-    // public function delete(string $slug): void;
+    /**
+     * Delete a post
+     * 
+     * @param string $slug
+     */
+    public function deletePost(string $slug): void;
 }

@@ -16,17 +16,26 @@
                             style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
                     </div>
                     <ul class="blog-meta gap-2">
-                        <li><a href="#"><img alt="image" src="/assets/images/icons/calendar.svg">Date: {{ $post->created_at->format('d M Y') }}</a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/icons/calendar.svg">Date: {{
+                                $post->created_at->format('d M Y') }}</a></li>
                         </li>
                         <li><a href="#"><img alt="image" src="/assets/images/icons/tags.svg">Auction</a></li>
-                        <li><a href="#"><img alt="image" src="/assets/images/icons/admin.svg">Posted by {{ $post->admin->name }}</a></li>
+                        <li><a href="#"><img alt="image" src="/assets/images/icons/admin.svg">Posted by {{
+                                $post->admin->name }}</a></li>
                     </ul>
                     <h3 class="blog-title">{{ $post->title }}</h3>
                     <div class="blog-content">
                         {!! $post->content !!}
-                            banh. Distillery ramps af, goch ujang hell of VHS kitsch austin. Vegan air plant trust fund,
-                            poke sartorial ennui next lev el photo booth coloring book etsy green juice meditation
-                            austin craft beer.</p>
+                    </div>
+                    <div class="blog-video-area">
+                        <div class="row g-4">
+                           {{-- skip the first media --}}
+                            @foreach ($post->media()->get()->skip(1) as $media)
+                            <div class="col-md-6">
+                                <img alt="image" src="{{ $media->url }}" class="img-fluid">
+                            </div>
+                            @endforeach
+                        </div>
                     </div>
                     <div class="blog-tag">
                         <div class="row g-3">
@@ -34,8 +43,9 @@
                                 class="col-md-6 d-flex justify-content-md-start justify-content-center align-items-center">
                                 <h6>Post Tag:</h6>
                                 <ul class="tag-list">
-                                   @foreach ($post->tags()->get() as $tag)
-                                      <li><a href="{{ route('blog.index', ['tag' => $tag->id]) }}">{{ $tag->name }}</a></li>
+                                    @foreach ($post->tags()->get() as $tag)
+                                    <li><a href="{{ route('blog.index', ['tag' => $tag->id]) }}">{{ $tag->name }}</a>
+                                    </li>
                                     @endforeach
                                 </ul>
                             </div>
@@ -190,11 +200,13 @@
                                     @foreach ($post->relatedPosts()->get() as $relatedPost)
                                     <li class="single-post">
                                         <div class="post-img">
-                                            <a href="{{ route('blog.show', $relatedPost->slug) }}"><img alt="image" src="{{ $relatedPost->featured_image_url }}"></a>
+                                            <a href="{{ route('blog.show', $relatedPost->slug) }}"><img alt="image"
+                                                    src="{{ $relatedPost->featured_image_url }}"></a>
                                         </div>
                                         <div class="post-content">
                                             <span>{{ $relatedPost->created_at->format('d M Y') }}</span>
-                                            <h6><a href="{{ route('blog.show', $relatedPost->slug) }}">{{ $relatedPost->title }}</a></h6>
+                                            <h6><a href="{{ route('blog.show', $relatedPost->slug) }}">{{
+                                                    $relatedPost->title }}</a></h6>
                                         </div>
                                     </li>
                                     @endforeach
@@ -202,7 +214,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <x-post-tag-card />
 
                     <div class="blog-widget-item wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".8s"
@@ -228,7 +240,8 @@
                         <div class="banner-content">
                             <span>Advertisement</span>
                             <h3>Toyota AIGID A Clasis Cars Sale</h3>
-                            {{-- <a href="{{ route('auction-details') }}" class="eg-btn btn--primary card--btn">Details</a> --}}
+                            {{-- <a href="{{ route('auction-details') }}"
+                                class="eg-btn btn--primary card--btn">Details</a> --}}
                         </div>
                     </div>
                 </div>

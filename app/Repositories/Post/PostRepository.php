@@ -110,7 +110,7 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
      * @param \App\Models\Admin $admin
      * @return void
      */
-    public function create(array $data, Admin $admin): void
+    public function createPost(array $data, Admin $admin): void
     {
         DB::transaction(function () use ($data, $admin) {
             $post = $this->model->create([
@@ -130,24 +130,38 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
         });
     }
 
-    // /**
-    //  * Update a post
-    //  * 
-    //  * @param string $slug
-    //  * @param array $data
-    //  */
-    // public function update(string $slug, array $data): void
-    // {
+    /**
+     * Update a post
+     * 
+     * @param string $slug
+     * @param array $data
+     */
+    public function updatePost(string $slug, array $data): void
+    {
+        DB::transaction(function () use ($slug, $data) {
+            $post = $this->model->where('slug', $slug)->firstOr(function () {
+                abort(404);
+            });
+            $post->update([
+                'title' => $data['title'],
+                'content' => $data['content'],
+                'is_published' => $data['published'] === 'published' ? true : false,
+            ]);
+            $post->tags()->sync($data['tags'] ?? []);
+        });
+    }
 
-    // }
+    /**
+     * Delete a post
+     * 
+     * @param string $slug
+     */
+    public function deletePost(string $slug): void
+    {
+        $this->model->where('slug', $slug)->firstOr(function () {
+            abort(404);
+        })->delete();
 
-    // /**
-    //  * Delete a post
-    //  * 
-    //  * @param string $slug
-    //  */
-    // public function delete(string $slug): void
-    // {
-
-    // }
+        // TODO: Delete all media related to this post
+    }
 }
