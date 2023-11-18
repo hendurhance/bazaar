@@ -84,7 +84,7 @@
                                                                                             data-bs-original-title="View"><span
                                                                                             class="fa-regular fa-eye fs-14"></span>
                                                                                         </a>
-                                                                                        <a href="{{ route('admin.blogs.show', $post->slug) }}" class="btn text-dark btn-sm"
+                                                                                        <a href="{{ route('admin.blogs.edit', $post->slug) }}" class="btn text-dark btn-sm"
                                                                                             data-bs-toggle="tooltip"
                                                                                             data-bs-original-title="View"><span
                                                                                                 class="fa-regular fa-edit fs-14"></span>

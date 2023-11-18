@@ -17,11 +17,12 @@ class PostFactory extends Factory
      */
     public function definition(): array
     {
-        $media = Media::factory()->create();
         return [
             'title' => $this->faker->sentence,
-            'content' => $this->faker->paragraphs(5, true),
-            'featured_image_id' => $media->id,
+            'content' => collect($this->faker->paragraphs(20))
+                    ->map(fn ($paragraph) => "<p>{$paragraph}</p>")
+                    ->push('<p><br></p>')
+                    ->implode(''),
             'is_published' => true,
         ];
     }

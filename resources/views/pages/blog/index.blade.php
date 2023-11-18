@@ -24,7 +24,7 @@
                                 <a href="{{ route('blog.show', $post->slug) }}" class="author-name">{{ $post->admin->name }}</a>
                             </div>
                             <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
+                                <img alt="image" src="/assets/images/icons/comment-icon.svg">
                                 <a href="#" class="comment">05 Comments</a>
                             </div>
                         </div>

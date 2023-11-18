@@ -25,7 +25,7 @@
                             <x-text-area-field name="content" label="Blog Content" placeholder="Enter Blog Content" value="{{old('content')}}" :admin="true" />
                             <!--Row-->
                             <div class="row">
-                                <label class="col-md-3 form-label mb-4">Image :</label>
+                                <label class="col-md-3 form-label mb-4">Images *:</label>
                                 <div class="col-md-9">
                                     <input class="form-control" name="images[]" id="formFileMultiple" type="file" multiple old="{{old('images')}}">
                                     <span class="text-primary">Note: The first image will be used as the featured image.</span>

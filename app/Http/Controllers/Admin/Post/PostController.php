@@ -7,6 +7,7 @@ use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\FilterAdminPostRequest;
+use App\Http\Requests\Post\UpdatePostRequest;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -47,7 +48,7 @@ class PostController extends Controller
      */
     public function store(CreatePostRequest $request)
     {
-        $this->postRepository->create($request->validated(), $this->authenticateRepository->admin());
+        $this->postRepository->createPost($request->validated(), $this->authenticateRepository->admin());
         return redirect()->route('admin.blogs.index')->with('success', 'Post created successfully.');
     }
 
@@ -65,25 +66,39 @@ class PostController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param string $slug
+     * @return \Illuminate\View\View
      */
-    public function edit(string $id)
+    public function edit(string $slug)
     {
-        //
+        return view('blogs.admin.edit', [
+            'post' => $this->postRepository->getPostForAdmin($slug)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \App\Http\Requests\Post\UpdatePostRequest $request
+     * @param string $slug
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePostRequest $request, string $slug)
     {
-        //
+        $this->postRepository->updatePost($slug, $request->validated());
+        return redirect()->route('admin.blogs.show', $slug)->with('success', 'Post updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param string $slug
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $slug)
     {
-        //
+        $this->postRepository->deletePost($slug);
+        return redirect()->route('admin.blogs.index')->with('success', 'Post deleted successfully.');
     }
 }
