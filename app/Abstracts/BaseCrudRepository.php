@@ -97,13 +97,11 @@ abstract class BaseCrudRepository
      * Delete the record by id.
      * 
      * @param int $id
-     * @return bool
+     * @return void
      */
-    public function delete(int $id)
+    public function delete(int $id): void
     {
-        $record = $this->find($id);
-
-        return $record->delete();
+        $this->model->destroy($id);
     }
 
     /**

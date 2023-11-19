@@ -79,4 +79,5 @@ Route::middleware('auth:admin_web')->group(function () {
     /* ========  BLOGS  =========== */
     Route::resource('blogs', PostController::class);
     Route::post('/blogs/{post:slug}/comment', [CommentController::class, 'store'])->name('blogs.comment.store');
+    Route::resource('comments', CommentController::class)->only(['index', 'update', 'edit', 'destroy']);
 });

@@ -6,6 +6,8 @@ use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Contracts\Repositories\CommentRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreateCommentRequest;
+use App\Http\Requests\Post\FilterAdminCommentRequest;
+use App\Http\Requests\Post\UpdateCommentRequest;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -15,12 +17,17 @@ class CommentController extends Controller
      */
     public function __construct(protected CommentRepositoryInterface $commentRepository, protected AuthenticateRepositoryInterface $authenticateRepository)
     {}
+
     /**
      * Display a listing of the resource.
+     * 
+     * @return \Illuminate\View\View
      */
-    public function index()
+    public function index(FilterAdminCommentRequest $query)
     {
-        //
+        return view('comments.admin.index', [
+            'comments' => $this->commentRepository->getAllCommentsForAdmin(10, $query->validated())
+        ]);
     }
 
     /**
@@ -52,25 +59,39 @@ class CommentController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param int $id
+     * @return \Illuminate\View\View
      */
-    public function edit(string $id)
+    public function edit(int $id)
     {
-        //
+        return view('comments.admin.edit', [
+            'comment' => $this->commentRepository->getComment($id)
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \App\Http\Requests\Post\UpdateCommentRequest $request
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateCommentRequest $request, string $id)
     {
-        //
+        $this->commentRepository->updateComment($request->validated(), $id);
+        return redirect()->route('admin.comments.index')->with('success', 'Comment updated successfully.');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param int $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(int $id)
     {
-        //
+        $this->commentRepository->delete($id);
+        return redirect()->back()->with('success', 'Comment deleted successfully.');
     }
 }
