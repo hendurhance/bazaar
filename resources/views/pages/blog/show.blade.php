@@ -169,9 +169,9 @@
                                 <span></span>
                             </div>
                             <div class="blog-widget-body">
-                                <form>
+                                <form method="GET" action="{{ route('blog.index') }}">
                                     <div class="form-inner">
-                                        <input type="text" placeholder="Search Here">
+                                        <input name="search" type="text" placeholder="Search Here">
                                         <button class="search--btn"><i class="bx bx-search-alt-2"></i></button>
                                     </div>
                                 </form>

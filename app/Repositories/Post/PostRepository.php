@@ -24,13 +24,30 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
      * Get all posts
      * 
      * @param int $limit
+     * @param array $filters
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getAllPosts(int $limit = 10): LengthAwarePaginator
+    public function getAllPosts(int $limit = 10, array $filters = null): LengthAwarePaginator
     {
         return $this->model->query()->with(['admin:id,name,username,avatar', 'featuredImage:id,url', 'tags', 'comments' => function ($query) {
             $query->approved();
         }])
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['search']), function ($query) use ($filters) {
+                    $query->where(function ($query) use ($filters) {
+                        $query->where('title', 'like', '%' . $filters['search'] . '%')
+                            ->orWhereHas('admin', function ($query) use ($filters) {
+                                $query->where('name', 'like', '%' . $filters['search'] . '%')
+                                    ->orWhere('username', 'like', '%' . $filters['search'] . '%');
+                            });
+                    });
+                })
+                    ->when(isset($filters['tag']), function ($query) use ($filters) {
+                        $query->whereHas('tags', function ($query) use ($filters) {
+                            $query->where('id', $filters['tag']);
+                        });
+                    });
+            })
             ->published()
             ->orderBy('created_at', 'desc')
             ->paginate($limit);

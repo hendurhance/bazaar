@@ -8,9 +8,10 @@ interface PostRepositoryInterface
      * Get all posts
      * 
      * @param int $limit
+     * @param array $filters
      * @return \Illuminate\Pagination\LengthAwarePaginator
      */
-    public function getAllPosts(int $limit = 10): \Illuminate\Pagination\LengthAwarePaginator;
+    public function getAllPosts(int $limit = 10, array $filters = null): \Illuminate\Pagination\LengthAwarePaginator;
 
     /**
      * Get all posts for admin
