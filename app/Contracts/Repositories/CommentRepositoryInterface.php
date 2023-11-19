@@ -9,8 +9,8 @@ interface CommentRepositoryInterface
      * 
      * @param array $data
      * @param string $slug
-     * @param \App\Models\User $user
+     * @param \App\Models\User|\App\Models\Admin $user
      * @return void
      */
-    public function storeComment(array $data, string $slug, \App\Models\User $user): void;
+    public function storeComment(array $data, string $slug, \App\Models\User|\App\Models\Admin $user): void;
 }
