@@ -8,7 +8,7 @@ use Illuminate\View\View;
 
 class BlogController extends Controller
 {
-      /**
+    /**
      * Instantiate a new controller instance.
      */
     public function __construct(protected PostRepositoryInterface $postRepository)

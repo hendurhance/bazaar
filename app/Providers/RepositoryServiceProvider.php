@@ -12,6 +12,7 @@ use App\Contracts\Repositories\AnalyticRepositoryInterface;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Contracts\Repositories\BidRepositoryInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
+use App\Contracts\Repositories\CommentRepositoryInterface;
 use App\Contracts\Repositories\CountryRepositoryInterface;
 use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Contracts\Repositories\PayoutMethodRepositoryInterface;
@@ -32,6 +33,7 @@ use App\Repositories\Payout\Admin\AdminPayoutMethodRepository;
 use App\Repositories\Payout\Admin\AdminPayoutRepository;
 use App\Repositories\Payout\User\PayoutMethodRepository;
 use App\Repositories\Payout\User\PayoutRepository;
+use App\Repositories\Post\CommentRepository;
 use App\Repositories\Post\PostRepository;
 use App\Repositories\Post\TagRepository;
 use Illuminate\Support\ServiceProvider;
@@ -68,6 +70,12 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PostRepositoryInterface::class,
             PostRepository::class
+        );
+
+
+        $this->app->bind(
+            CommentRepositoryInterface::class,
+            CommentRepository::class
         );
 
         $this->app->bind(

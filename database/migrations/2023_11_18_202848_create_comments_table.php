@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->nullable()->constrained('users')->onDelete('cascade');
-            $table->foreignUuid('ad_id')->constrained('ads')->onDelete('cascade');
-            $table->text('comment')->nullable();
+            $table->foreignUuid('admin_id')->nullable()->constrained('admins')->onDelete('cascade');
+            $table->foreignId('post_id')->constrained('posts')->onDelete('cascade');
+            $table->foreignId('parent_id')->nullable()->constrained('comments')->onDelete('cascade');
+            $table->text('content');
             $table->smallInteger('status')->default(0);
             $table->timestamps();
         });

@@ -43,8 +43,9 @@ import os
 # go to database/migrations folder, change the name of the file extensions to .stub except for the
 # last 4 files
 
-folder = "database/migrations"
-for i in os.listdir(folder):
-    # if file ends with .php replace with .stub except for the last 4 files
-    if i.endswith(".stub"):
-        os.rename(os.path.join(folder, i), os.path.join(folder, i.replace(".stub", ".php")))
+# folder = "database/migrations"
+# for i in os.listdir(folder):
+#     # if file ends with .php replace with .stub except for the last 4 files
+#     if i.endswith(".stub"):
+#         os.rename(os.path.join(folder, i), os.path.join(folder, i.replace(".stub", ".php")))
+
