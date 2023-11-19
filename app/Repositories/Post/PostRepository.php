@@ -106,7 +106,16 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
      */
     public function getPostForAdmin(string $slug): \App\Models\Post
     {
-        return $this->model->query()->with(['admin:id,name,username,avatar', 'media', 'tags:id,name'])
+        return $this->model->query()->with([
+            'admin:id,name,username,avatar',
+            'media',
+            'tags:id,name',
+            'comments' => function ($query) {
+                $query->approved()->parent()->with(['user:id,name,username,avatar', 'admin:id,name,username,avatar', 'replies' => function ($query) {
+                    $query->approved()->with(['user:id,name,username,avatar', 'admin:id,name,username,avatar']);
+                }])->orderBy('created_at', 'desc');
+            }
+        ])
             ->where('slug', $slug)
             ->firstOr(function () {
                 abort(404);

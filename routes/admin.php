@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\Bid\BidController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
 use App\Http\Controllers\Admin\Payout\PayoutController;
 use App\Http\Controllers\Admin\Payout\PayoutMethodController;
+use App\Http\Controllers\Admin\Post\CommentController;
 use App\Http\Controllers\Admin\Post\PostController;
 use Illuminate\Support\Facades\Route;
 
@@ -77,4 +78,5 @@ Route::middleware('auth:admin_web')->group(function () {
 
     /* ========  BLOGS  =========== */
     Route::resource('blogs', PostController::class);
+    Route::post('/blogs/{post:slug}/comment', [CommentController::class, 'store'])->name('blogs.comment.store');
 });

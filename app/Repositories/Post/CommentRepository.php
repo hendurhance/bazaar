@@ -5,6 +5,7 @@ namespace App\Repositories\Post;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Comment;
 use App\Contracts\Repositories\CommentRepositoryInterface;
+use App\Models\Admin;
 use App\Models\User;
 
 class CommentRepository extends BaseCrudRepository implements CommentRepositoryInterface
@@ -19,10 +20,10 @@ class CommentRepository extends BaseCrudRepository implements CommentRepositoryI
      * 
      * @param array $data
      * @param string $slug
-     * @param \App\Models\User $user
+     * @param \App\Models\User|\App\Models\Admin $user
      * @return void
      */
-    public function storeComment(array $data, string $slug, User $user): void
+    public function storeComment(array $data, string $slug, User|Admin $user): void
     {
         $post = app(PostRepository::class)->findBy('slug', $slug, function () {
             abort(404);
@@ -34,13 +35,15 @@ class CommentRepository extends BaseCrudRepository implements CommentRepositoryI
             });
             
             $post->comments()->create([
-                'user_id' => $user->id,
+                'admin_id' => $user instanceof Admin ? $user->id : null,
+                'user_id' => $user instanceof User ? $user->id : null,
                 'parent_id' => $parentComment->id,
                 'content' => $data['content']
             ]);
         } else {
             $post->comments()->create([
-                'user_id' => $user->id,
+                'admin_id' => $user instanceof Admin ? $user->id : null,
+                'user_id' => $user instanceof User ? $user->id : null,
                 'content' => $data['content']
             ]);
         }
