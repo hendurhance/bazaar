@@ -50,7 +50,11 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
             })
             ->published()
             ->orderBy('created_at', 'desc')
-            ->paginate($limit);
+            ->paginate($limit)
+            ->appends([
+                'search' => $filters['search'] ?? null,
+                'tag' => $filters['tag'] ?? null,
+            ]);
     }
 
     /**
