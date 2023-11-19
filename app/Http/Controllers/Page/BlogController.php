@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Page;
 
 use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Post\FilterPostRequest;
 use Illuminate\View\View;
 
 class BlogController extends Controller
@@ -18,13 +19,13 @@ class BlogController extends Controller
 
     /**
      * Get all posts
-     * 
+     * @param \App\Http\Requests\Post\FilterPostRequest $query
      * @return \Illuminate\View\View
      */
-    public function index(): View
+    public function index(FilterPostRequest $query): View
     {
         return view('pages.blog.index', [
-            'posts' => $this->postRepository->getAllPosts(9)
+            'posts' => $this->postRepository->getAllPosts(9, $query->validated())
         ]);
     }
 

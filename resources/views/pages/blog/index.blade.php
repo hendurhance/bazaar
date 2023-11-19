@@ -7,8 +7,9 @@
 
 <div class="blog-section pt-120 pb-120">
     <div class="container">
+        <x-blog-filter-component/>
         <div class="row d-flex justify-content-center g-4 mb-60">
-            @foreach ($posts as $post)
+            @forelse ($posts as $post)
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
                 <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
@@ -31,7 +32,16 @@
                     </div>
                 </div>
             </div>
-            @endforeach
+            @empty
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <div class="text-center mb-4">
+                    <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
+                </div>
+                <x-alert type="warning">
+                    <p class="text-center mb-0"><strong>Sorry!</strong> No blogs found.</p>
+                </x-alert>
+            </div>
+            @endforelse
         </div>
         {{ $posts->links('pagination.custom') }}
     </div>
