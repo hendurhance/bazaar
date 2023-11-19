@@ -25,7 +25,7 @@
                             </div>
                             <div class="comment">
                                 <img alt="image" src="/assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
+                                <a href="#" class="comment">{{ $post->comments->count() }} Comments</a>
                             </div>
                         </div>
                     </div>

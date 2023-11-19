@@ -77,63 +77,42 @@
                             <span></span>
                         </div>
                         <ul class="comment-list mb-50">
+                            @foreach ($post->comments as $comment)
                             <li>
                                 <div class="comment-box">
                                     <div class="comment-header d-flex justify-content-between align-items-center">
                                         <div class="author d-flex flex-wrap">
-                                            <img alt="image" src="assets/images/blog/comment1.png">
-                                            <h5><a href="#">Leslie Waston</a></h5><span class="commnt-date"> April 6,
-                                                2022 at 3:54 am</span>
+                                            <img alt="image" src="{{ $comment->user->avatar ?? $comment->admin->avatar }}">
+                                            <h5><a href="#"> {{ $comment->user->name ?? $comment->admin->name }}</a></h5><span class="commnt-date"> {{ $comment->created_at->format('M d, Y') }} </span>
                                         </div>
-                                        <a href="#" class="commnt-reply"><i class="bi bi-reply"></i></a>
+                                        <a href="javascript:void(0)" onclick="replyTo('{{$comment->id}}', '{{$comment->user->name ?? $comment->admin->name}}')" class="commnt-reply"><i class="bi bi-reply"></i></a>
                                     </div>
                                     <div class="comment-body">
-                                        <p class="para">Aenean dolor massa, rhoncus ut tortor in, pretium tempus neque.
-                                            Vestibulum venenati leo et dic tum finibus. Nulla vulputate dolor sit amet
-                                            tristique dapibus.Gochujang ugh viral, butcher pabst put a bird on it
-                                            meditation austin.</p>
+                                        <p class="para">{{ $comment->content }}</p>
                                     </div>
                                 </div>
+                                @if($comment->replies()->count() > 0)
                                 <ul class="comment-reply">
+                                    @foreach ($comment->replies as $reply)
                                     <li>
                                         <div class="comment-box">
                                             <div
                                                 class="comment-header d-flex justify-content-between align-items-center">
                                                 <div class="author d-flex flex-wrap">
-                                                    <img alt="image" src="assets/images/blog/comment2.png">
-                                                    <h5><a href="#">Robert Fox</a></h5><span class="commnt-date"> April
-                                                        6, 2022 at 3:54 am</span>
+                                                    <img alt="image" src="{{ $reply->user->avatar ?? $reply->admin->avatar }}">
+                                                    <h5><a href="#"> {{ $reply->user->name ?? $reply->admin->name }}</a></h5><span class="commnt-date"> {{ $reply->created_at->format('M d, Y') }}</span>
                                                 </div>
-                                                <a href="#" class="commnt-reply"><i class="bi bi-reply"></i></a>
                                             </div>
                                             <div class="comment-body">
-                                                <p class="para">Aenean dolor massa, rhoncus ut tortor in, pretium tempus
-                                                    neque. Vestibulum venenati leo et dic tum finibus. Nulla vulputate
-                                                    dolor sit amet tristique dapibus.Gochujang ugh viral, butcher pabst
-                                                    put a bird on it meditation austin.</p>
+                                                <p class="para">{{ $reply->content }}</p>
                                             </div>
                                         </div>
                                     </li>
+                                    @endforeach
                                 </ul>
+                                @endif
                             </li>
-                            <li>
-                                <div class="comment-box">
-                                    <div class="comment-header d-flex justify-content-between align-items-center">
-                                        <div class="author d-flex flex-wrap">
-                                            <img alt="image" src="assets/images/blog/comment3.png">
-                                            <h5><a href="#">William Harvey</a></h5><span class="commnt-date"> April 6,
-                                                2022 at 3:54 am</span>
-                                        </div>
-                                        <a href="#" class="commnt-reply"><i class="bi bi-reply"></i></a>
-                                    </div>
-                                    <div class="comment-body">
-                                        <p class="para">Aenean dolor massa, rhoncus ut tortor in, pretium tempus neque.
-                                            Vestibulum venenati leo et dic tum finibus. Nulla vulputate dolor sit amet
-                                            tristique dapibus.Gochujang ugh viral, butcher pabst put a bird on it
-                                            meditation austin.</p>
-                                    </div>
-                                </div>
-                            </li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="comment-form">
@@ -142,29 +121,40 @@
                             <p class="para">Your email address will not be published.</p>
                             <span></span>
                         </div>
-                        <form action="#">
+                        @auth('web')
+                        <form id="comment-main" action="{{ route('blog.comment.store', $post->slug) }}" method="POST">
+                            @csrf
+                            <div class="row">
+                                <span class="para mb-3 h5 text-primary" id="reply-to-who"></span>
+                            </div>
                             <div class="row">
                                 <div class="col-xl-6 col-lg-12 col-md-6">
                                     <div class="form-inner">
-                                        <input type="text" placeholder="Your Name :">
+                                        <input type="text" placeholder="Your Name :" value="{{ auth()->user()->name }}" readonly disabled>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-12 col-md-6">
                                     <div class="form-inner">
-                                        <input type="email" placeholder="Your Email :">
+                                        <input type="email" placeholder="Your Email :" value="{{ auth()->user()->email }}" readonly disabled>
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-inner">
-                                        <textarea name="message" placeholder="Write Message :" rows="12"></textarea>
+                                        <textarea name="content" placeholder="Write Message :" rows="12"></textarea>
                                     </div>
+                                    <span class="text-danger">{{ $errors->first('content') }}</span>
                                 </div>
                                 <div class="col-12">
-                                    <button type="submit" class="eg-btn btn--primary btn--md form--btn">Submit
-                                        Now</button>
+                                    <button type="submit" class="eg-btn btn--primary btn--md form--btn">Submit Now</button>
                                 </div>
                             </div>
                         </form>
+                        @else
+                        <x-alert type="warning" icon="exclamation-triangle">
+                            <p class="mb-0">You must be logged in to comment. If you have an account, please <a
+                                    class="fw-bold" href="{{ route('user.login') }}">login</a> to comment.</p>
+                        </x-alert>
+                        @endauth
                     </div>
                 </div>
             </div>
@@ -253,3 +243,19 @@
 <x-metric-card />
 
 @endsection
+
+@push('scripts')
+<script>
+    function replyTo(id, name) {
+        let commentBox = document.querySelector('.comment-form');
+        commentBox.scrollIntoView();
+        document.querySelector('#reply-to-who').innerHTML = `Reply to ${name}`;
+        // Create a new hidden input field for the comment id
+        let commentIdInput = document.createElement('input');
+        commentIdInput.setAttribute('type', 'hidden');
+        commentIdInput.setAttribute('name', 'reply_to');
+        commentIdInput.setAttribute('value', id);
+        // Append the input field to the form
+        document.querySelector('#comment-main').appendChild(commentIdInput);
+    }
+</script>

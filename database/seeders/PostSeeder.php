@@ -3,9 +3,11 @@
 namespace Database\Seeders;
 
 use App\Models\Admin;
+use App\Models\Comment;
 use App\Models\Media;
 use App\Models\Post;
 use App\Models\Tag;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,6 +31,12 @@ class PostSeeder extends Seeder
             $post->update(['featured_image_id' => $post->media->first()->id]);
             $post->tags()->attach(
                 Tag::factory()->count(1)->create()
+            );
+            $post->comments()->saveMany(
+                Comment::factory()->count(rand(1, 5))->make([
+                    'user_id' => User::inRandomOrder()->first()->id,
+                ])
+
             );
         });
     }

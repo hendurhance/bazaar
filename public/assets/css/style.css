@@ -9078,7 +9078,7 @@ footer.style-3 .footer-bottom .footer-logo-list li:hover img {
 
 .comment-form .form-inner input:focus,
 .comment-form .form-inner textarea:focus {
-    background: rgba(50, 195, 108, .2)
+    background: rgba(50, 139, 195, .1)
 }
 
 .blog-widget-item {

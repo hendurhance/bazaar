@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Page\BlogController;
+use App\Http\Controllers\Page\CommentController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Bid\BidController;
@@ -27,6 +28,7 @@ Route::view('/how-it-works', 'pages.how-it-works.index')->name('how-it-works');
 Route::get('/live-auction', [AdController::class, 'index'])->name('live-auction');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{post:slug}', [BlogController::class, 'show'])->name('blog.show');
+Route::post('/blog/{post:slug}/comment', [CommentController::class, 'store'])->name('blog.comment.store');
 Route::get('/auction-details/{ads:slug}', [AdController::class, 'show'])->name('auction-details');
 Route::get('/auction-details/{ads:slug}/report', [AdController::class, 'report'])->name('auction-details.report');
 Route::post('/auction-details/{ads:slug}/report', [AdController::class, 'handleReport'])->name('auction-details.report.handle');

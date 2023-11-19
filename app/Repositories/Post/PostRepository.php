@@ -28,7 +28,9 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
      */
     public function getAllPosts(int $limit = 10): LengthAwarePaginator
     {
-        return $this->model->query()->with(['admin:id,name,username,avatar', 'featuredImage:id,url', 'tags'])
+        return $this->model->query()->with(['admin:id,name,username,avatar', 'featuredImage:id,url', 'tags', 'comments' => function ($query) {
+            $query->approved();
+        }])
             ->published()
             ->orderBy('created_at', 'desc')
             ->paginate($limit);
@@ -42,7 +44,18 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
      */
     public function getPost(string $slug): \App\Models\Post
     {
-        return $this->model->query()->with(['admin:id,name,username,avatar', 'featuredImage:id,url', 'media:id,url', 'relatedPosts:id,title,slug,created_at,featured_image_id', 'tags:id,name'])
+        return $this->model->query()->with([
+            'admin:id,name,username,avatar',
+            'featuredImage:id,url',
+            'media:id,url',
+            'relatedPosts:id,title,slug,created_at,featured_image_id',
+            'tags:id,name',
+            'comments' => function ($query) {
+                $query->approved()->parent()->with(['user:id,name,username,avatar', 'admin:id,name,username,avatar', 'replies' => function ($query) {
+                    $query->approved()->with(['user:id,name,username,avatar', 'admin:id,name,username,avatar']);
+                }])->orderBy('created_at', 'desc');
+            }
+        ])
             ->published()
             ->where('slug', $slug)
             ->firstOr(function () {
