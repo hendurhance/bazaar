@@ -141,6 +141,7 @@
                      <ul class="sidemenu-list">
                        <li><a href="{{ route('admin.blogs.index') }}" @class(['slide-item', 'active' => $active === 'blogs.all'])>All Blogs</a></li>
                        <li><a href="{{ route('admin.blogs.create') }}" @class(['slide-item', 'active' => $active === 'blogs.create'])> Create Blog</a></li>
+                       <li><a href="{{ route('admin.comments.index') }}" @class(['slide-item', 'active' => $active === 'blogs.comments'])> All Comments</a></li>
                      </ul>
                    </div>
                  </div>
