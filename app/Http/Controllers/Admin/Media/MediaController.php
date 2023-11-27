@@ -76,9 +76,13 @@ class MediaController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(string $id)
     {
-        //
+        $this->mediaRepository->deleteMedia($id);
+        return redirect()->route('admin.media.index')->with('success', 'Media deleted successfully.');
     }
 }

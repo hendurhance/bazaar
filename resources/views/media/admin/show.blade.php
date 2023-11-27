@@ -68,7 +68,7 @@
                                             <form action="{{route('admin.media.destroy', $media->id)}}" method="POST">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="button" onclick="deleteMedia('{{$media->id}}')" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fa-regular fa-trash"></i></button>
+                                                <button type="submit" onclick="deleteMedia('{{$media->id}}')" class="btn btn-icon  btn-danger-light me-2 bradius"><i class="fa-regular fa-trash"></i></button>
                                             </form>
                                             <a href="" class="btn btn-icon  btn-warning-light bradius"><i class="fa-regular fa-share fs-14"></i></a>
                                         </div>

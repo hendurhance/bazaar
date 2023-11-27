@@ -32,4 +32,13 @@ interface MediaRepositoryInterface
      * @return Media
      */
     public function getMediaForAdmin(string $id): Media;
+
+    /**
+     * Delete media.
+     * 
+     * @param string $id
+     * @return void
+     */
+    public function deleteMedia(string $id): void;
+
 }
