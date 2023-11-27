@@ -14,6 +14,7 @@ use App\Contracts\Repositories\BidRepositoryInterface;
 use App\Contracts\Repositories\CategoryRepositoryInterface;
 use App\Contracts\Repositories\CommentRepositoryInterface;
 use App\Contracts\Repositories\CountryRepositoryInterface;
+use App\Contracts\Repositories\MediaRepositoryInterface;
 use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Contracts\Repositories\PayoutMethodRepositoryInterface;
 use App\Contracts\Repositories\PayoutRepositoryInterface;
@@ -27,6 +28,7 @@ use App\Repositories\Ad\User\AdRepository;
 use App\Repositories\Analytic\AnalyticRepository;
 use App\Repositories\Bid\Admin\AdminBidRepository;
 use App\Repositories\Bid\User\BidRepository;
+use App\Repositories\Media\MediaRepository;
 use App\Repositories\Payment\Admin\AdminPaymentRepository;
 use App\Repositories\Payment\User\PaymentRepository;
 use App\Repositories\Payout\Admin\AdminPayoutMethodRepository;
@@ -70,6 +72,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             PostRepositoryInterface::class,
             PostRepository::class
+        );
+
+        $this->app->bind(
+            MediaRepositoryInterface::class,
+            MediaRepository::class
         );
 
 

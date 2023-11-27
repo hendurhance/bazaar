@@ -39,7 +39,9 @@ class AdSeeder extends Seeder
             $medias = Media::factory()->count(2)->create();
             $ad->media()->saveMany($medias);
             // create report for ad
-            $reports = ReportAd::factory()->count(rand(5,15))->create();
+            $reports = $ad->reports()->makeMany(
+                ReportAd::factory()->count(rand(1, 5))->make()->toArray()
+            );
             $ad->reports()->saveMany($reports);
             // I want diffrent 5-10 users to bid on the ad except the ad owner
             $users = User::where('id', '!=', $ad->user_id)->inRandomOrder()->limit(rand(5, 10))->get();

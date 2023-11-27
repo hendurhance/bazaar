@@ -258,3 +258,23 @@ if (!function_exists('sort_query_parser')) {
         return $query[$sort] ?? $query['created+desc'];
     }
 }
+
+
+/**
+ * Convert bytes to human readable format
+ * @param string $bytes
+ * @param int $precision = 2
+ * @return string
+ */
+if (!function_exists('bytes_to_human')) {
+    function bytes_to_human(string $bytes, int $precision = 2): string
+    {
+        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+
+        $bytes = max($bytes, 0);
+        $unitIndex = floor(log($bytes) / log(1000));
+        $unitName = $units[$unitIndex];
+
+        return @number_format($bytes / pow(1000, $unitIndex), $precision) . ' ' . $unitName;
+    }
+}

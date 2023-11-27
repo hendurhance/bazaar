@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Media;
 use App\Contracts\Repositories\MediaRepositoryInterface;
 use App\Models\User;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class MediaRepository extends BaseCrudRepository implements MediaRepositoryInterface
 {
@@ -29,9 +30,53 @@ class MediaRepository extends BaseCrudRepository implements MediaRepositoryInter
             // 'type' => $data['type'],
             'path' => $data['path'],
             'url' => $data['url'],
+            'size' => $data['size'],
             'extension' => $data['extension'],
             'mime_type' => $data['mime_type'],
             'storage' => $data['storage'],
         ]);
+    }
+
+    /**
+     * Get all media for admin.
+     * 
+     * @param int $limit
+     * @param array $filters
+     * @return \Illuminate\Contracts\Pagination\LengthAwarePaginator
+     */
+    public function getAllMediaForAdmin(int $limit = 10, array $filters = null): LengthAwarePaginator
+    {
+        return $this->model->query()->with(['user:id,name,username,avatar'])
+            ->when($filters, function ($query) use ($filters) {
+                $query->when(isset($filters['search']), function ($query) use ($filters) {
+                    $query->where(function ($query) use ($filters) {
+                        $query->where('name', 'like', '%' . $filters['search'] . '%')
+                            ->orWhereHas('user', function ($query) use ($filters) {
+                                $query->where('name', 'like', '%' . $filters['search'] . '%')
+                                    ->orWhere('username', 'like', '%' . $filters['search'] . '%');
+                            });
+                    });
+                });
+            })
+            ->orderBy('created_at', 'desc')
+            ->paginate($limit)
+            ->appends([
+                'search' => $filters['search'] ?? null,
+            ]);
+    }
+
+    /**
+     * Get media for admin.
+     * 
+     * @param string $id
+     * @return Media
+     */
+    public function getMediaForAdmin(string $id): \App\Models\Media
+    {
+        return $this->model->query()->with(['user:id,name,username,avatar'])
+            ->where('id', $id)
+            ->firstOr(function () {
+                abort(404);
+            });
     }
 }

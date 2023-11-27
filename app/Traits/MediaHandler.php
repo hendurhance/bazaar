@@ -54,6 +54,7 @@ trait MediaHandler
             'url' => $uploadedMedia['url'],
             'extension' => $file->getClientOriginalExtension(),
             'mime_type' => $file->getMimeType(),
+            'size' => $file->getSize(),
             'storage' => $disk
         ]);
         return $media;

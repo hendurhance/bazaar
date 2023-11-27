@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Ad\AdController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Bid\BidController;
+use App\Http\Controllers\Admin\Media\MediaController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
 use App\Http\Controllers\Admin\Payout\PayoutController;
 use App\Http\Controllers\Admin\Payout\PayoutMethodController;
@@ -80,4 +81,9 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::resource('blogs', PostController::class);
     Route::post('/blogs/{post:slug}/comment', [CommentController::class, 'store'])->name('blogs.comment.store');
     Route::resource('comments', CommentController::class)->only(['index', 'update', 'edit', 'destroy']);
+
+    /* ========  MEDIA  =========== */
+    Route::get('/media', [MediaController::class, 'index'])->name('media.index');
+    Route::get('/media/{media:id}', [MediaController::class, 'show'])->name('media.show');
+    Route::delete('/media/{media:id}', [MediaController::class, 'destroy'])->name('media.destroy');
 });
