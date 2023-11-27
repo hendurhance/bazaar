@@ -3400,7 +3400,8 @@ header.style-3 .mobile-menu-form input[type=text] {
 .auction-card1 .author-area .author-emo img {
     width: 22px;
     height: 22px;
-    line-height: 22px
+    line-height: 22px;
+    border-radius: 50%;
 }
 
 .auction-card1 .author-area .author-name {

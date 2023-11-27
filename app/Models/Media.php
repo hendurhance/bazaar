@@ -27,6 +27,7 @@ class Media extends Model
         'type',
         'path',
         'url',
+        'size',
         'extension',
         'mime_type',
         'storage',

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('path')->nullable();
             $table->string('url')->nullable();
             $table->string('extension')->nullable();
+            $table->bigInteger('size')->nullable();
             $table->string('mime_type')->nullable();
             $table->smallInteger('storage')->nullable(); // 1: local, 2: s3 bucket
             $table->boolean('is_featured')->default(false);
