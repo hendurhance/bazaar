@@ -79,4 +79,15 @@ class MediaRepository extends BaseCrudRepository implements MediaRepositoryInter
                 abort(404);
             });
     }
+
+    /**
+     * Delete media.
+     * 
+     * @param string $id
+     * @return void
+     */
+    public function deleteMedia(string $id): void
+    {
+        $this->model->query()->where('id', $id)->delete();
+    }
 }
