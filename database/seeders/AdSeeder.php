@@ -43,7 +43,7 @@ class AdSeeder extends Seeder
                 ReportAd::factory()->count(rand(1, 5))->make()->toArray()
             );
             $ad->reports()->saveMany($reports);
-            // I want diffrent 5-10 users to bid on the ad except the ad owner
+            // I want different 5-10 users to bid on the ad except the ad owner
             $users = User::where('id', '!=', $ad->user_id)->inRandomOrder()->limit(rand(5, 10))->get();
             $users->each(function ($user) use ($ad) {
                 $bid = BidFactory::new([

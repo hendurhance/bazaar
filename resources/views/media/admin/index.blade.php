@@ -62,7 +62,7 @@
                                     </div>
                                     @else
                                     <div class="text-center">
-                                        <img src="/assets/images/empty.svg" alt="img" class="w-25">
+                                        <img src="/assets/images/icons/man.svg" alt="img" class="w-25">
                                         <h4 class="my-3">No Media Found</h4>
                                     </div>
                                     @endif

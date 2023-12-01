@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Page\BlogController;
 use App\Http\Controllers\Page\CommentController;
+use App\Http\Controllers\Page\ContactController;
 use App\Http\Controllers\Page\HomeController;
 use App\Http\Controllers\User\Ad\AdController;
 use App\Http\Controllers\User\Bid\BidController;
@@ -24,6 +25,7 @@ use Illuminate\Support\Facades\Route;
 Route::get(uri: '/', action: HomeController::class)->name('home');
 Route::view('/about', 'pages.about.index')->name('about');
 Route::view('/contact', 'pages.contact.index')->name('contact');
+Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::view('/how-it-works', 'pages.how-it-works.index')->name('how-it-works');
 Route::get('/live-auction', [AdController::class, 'index'])->name('live-auction');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');

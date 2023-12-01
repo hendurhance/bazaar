@@ -12,11 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('supports', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('name');
             $table->string('email');
+            $table->string('phone')->nullable();
             $table->string('subject');
-            $table->text('message')->nullable();
+            $table->longText('message')->nullable();
+            $table->smallInteger('status')->default(0);
+            $table->foreignId('assigned_to')->nullable()->constrained('admins');
+            $table->longText('response')->nullable();
             $table->timestamps();
         });
     }

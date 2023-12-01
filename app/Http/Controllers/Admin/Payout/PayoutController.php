@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Payout;
 use App\Contracts\Repositories\AdminPayoutRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payout\FilterAdminPayoutRequest;
+use Illuminate\Contracts\View\View;
 
 class PayoutController extends Controller
 {
@@ -20,7 +21,7 @@ class PayoutController extends Controller
      * @param FilterAdminPayoutRequest $query
      * @return \Illuminate\View\View
      */
-    public function index(FilterAdminPayoutRequest $query): \Illuminate\View\View
+    public function index(FilterAdminPayoutRequest $query): View
     {
         return view('payouts.admin.index', [
             'payouts' => $this->adminPayoutRepository->getAllPayouts(10, 'all', $query->validated())
@@ -33,7 +34,7 @@ class PayoutController extends Controller
      * @param FilterAdminPayoutRequest $query
      * @return \Illuminate\View\View
      */
-    public function pending(FilterAdminPayoutRequest $query): \Illuminate\View\View
+    public function pending(FilterAdminPayoutRequest $query): View
     {
         return view('payouts.admin.status.pending', [
             'pendingPayouts' => $this->adminPayoutRepository->getAllPayouts(10, 'pending', $query->validated())
@@ -46,7 +47,7 @@ class PayoutController extends Controller
      * @param FilterAdminPayoutRequest $query
      * @return \Illuminate\View\View
      */
-    public function failed(FilterAdminPayoutRequest $query): \Illuminate\View\View
+    public function failed(FilterAdminPayoutRequest $query): View
     {
         return view('payouts.admin.status.failed', [
             'failedPayouts' => $this->adminPayoutRepository->getAllPayouts(10, 'failed', $query->validated())
@@ -59,7 +60,7 @@ class PayoutController extends Controller
      * @param FilterAdminPayoutRequest $query
      * @return \Illuminate\View\View
      */
-    public function success(FilterAdminPayoutRequest $query): \Illuminate\View\View
+    public function success(FilterAdminPayoutRequest $query): View
     {
         return view('payouts.admin.status.successful', [
             'successfulPayouts' => $this->adminPayoutRepository->getAllPayouts(10, 'success', $query->validated())
@@ -72,7 +73,7 @@ class PayoutController extends Controller
      * @param string $pyt_token
      * @return \Illuminate\View\View
      */
-    public function show(string $id): \Illuminate\View\View
+    public function show(string $id): View
     {
         return view('payouts.admin.show', [
             'payout' => $this->adminPayoutRepository->getPayout($id)

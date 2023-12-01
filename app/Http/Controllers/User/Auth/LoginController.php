@@ -40,8 +40,9 @@ class LoginController extends Controller
      * Logout a user.
      * 
      * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function logout(Request $request)
+    public function logout(Request $request): RedirectResponse
     {
         $this->repository->logout($request, self::GUARD);
 
