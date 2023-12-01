@@ -8,7 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreatePostRequest;
 use App\Http\Requests\Post\FilterAdminPostRequest;
 use App\Http\Requests\Post\UpdatePostRequest;
-use Illuminate\Http\Request;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class PostController extends Controller
 {
@@ -24,7 +25,7 @@ class PostController extends Controller
      * @param \App\Http\Requests\Post\FilterAdminPostRequest $query
      * @return \Illuminate\View\View
      */
-    public function index(FilterAdminPostRequest $query)
+    public function index(FilterAdminPostRequest $query): View
     {
         return view('blogs.admin.index', [
             'posts' => $this->postRepository->getAllPostsForAdmin(10, $query->validated())
@@ -36,7 +37,7 @@ class PostController extends Controller
      * Show the form for creating a new resource.
      * @return \Illuminate\View\View
      */
-    public function create()
+    public function create(): \Illuminate\View\View
     {
         return view('blogs.admin.create');
     }
@@ -46,7 +47,7 @@ class PostController extends Controller
      * @param \App\Http\Requests\Post\CreatePostRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreatePostRequest $request)
+    public function store(CreatePostRequest $request): RedirectResponse
     {
         $this->postRepository->createPost($request->validated(), $this->authenticateRepository->admin());
         return redirect()->route('admin.blogs.index')->with('success', 'Post created successfully.');
@@ -57,7 +58,7 @@ class PostController extends Controller
      * @param string $slug
      * @return \Illuminate\View\View
      */
-    public function show(string $slug)
+    public function show(string $slug): View
     {
         return view('blogs.admin.show', [
             'post' => $this->postRepository->getPostForAdmin($slug)
@@ -70,7 +71,7 @@ class PostController extends Controller
      * @param string $slug
      * @return \Illuminate\View\View
      */
-    public function edit(string $slug)
+    public function edit(string $slug): View
     {
         return view('blogs.admin.edit', [
             'post' => $this->postRepository->getPostForAdmin($slug)
@@ -84,7 +85,7 @@ class PostController extends Controller
      * @param string $slug
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdatePostRequest $request, string $slug)
+    public function update(UpdatePostRequest $request, string $slug): RedirectResponse
     {
         $this->postRepository->updatePost($slug, $request->validated());
         return redirect()->route('admin.blogs.show', $slug)->with('success', 'Post updated successfully.');
@@ -96,7 +97,7 @@ class PostController extends Controller
      * @param string $slug
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $slug)
+    public function destroy(string $slug): RedirectResponse
     {
         $this->postRepository->deletePost($slug);
         return redirect()->route('admin.blogs.index')->with('success', 'Post deleted successfully.');

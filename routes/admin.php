@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\Payout\PayoutController;
 use App\Http\Controllers\Admin\Payout\PayoutMethodController;
 use App\Http\Controllers\Admin\Post\CommentController;
 use App\Http\Controllers\Admin\Post\PostController;
+use App\Http\Controllers\Admin\Support\SupportController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -86,4 +87,14 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::get('/media', [MediaController::class, 'index'])->name('media.index');
     Route::get('/media/{media:id}', [MediaController::class, 'show'])->name('media.show');
     Route::delete('/media/{media:id}', [MediaController::class, 'destroy'])->name('media.destroy');
+
+    /* ========  SUPPORT  =========== */
+    Route::get('/supports', [SupportController::class, 'index'])->name('support.index');
+    Route::get('/supports/pending', [SupportController::class, 'pending'])->name('support.pending');
+    Route::get('/supports/resolved', [SupportController::class, 'resolved'])->name('support.resolved');
+    Route::get('/supports/create', [SupportController::class, 'create'])->name('support.create');
+    Route::post('/supports', [SupportController::class, 'store'])->name('support.store');
+    Route::get('/support/{supports:id}', [SupportController::class, 'show'])->name('support.show');
+    Route::delete('/support/{supports:id}', [SupportController::class, 'destroy'])->name('support.destroy');
 });
+    

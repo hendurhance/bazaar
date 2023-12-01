@@ -6,6 +6,8 @@ use App\Contracts\Repositories\AdminPaymentRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Payment\FilterAdminPaymentRequest;
 use App\Http\Requests\Payment\UpdatePaymentAdminStatus;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class PaymentController extends Controller
 {
@@ -22,7 +24,7 @@ class PaymentController extends Controller
      * @param FilterAdminPaymentRequest $query
      * @return \Illuminate\View\View
      */
-    public function index(FilterAdminPaymentRequest $query): \Illuminate\View\View
+    public function index(FilterAdminPaymentRequest $query): View
     {
         return view('payments.admin.index', [
             'payments' => $this->adminPaymentRepository->getAllPayments(10, 'all', $query->validated())
@@ -35,7 +37,7 @@ class PaymentController extends Controller
      * @param FilterAdminPaymentRequest $query
      * @return \Illuminate\View\View
      */
-    public function pending(FilterAdminPaymentRequest $query): \Illuminate\View\View
+    public function pending(FilterAdminPaymentRequest $query): View
     {
         return view('payments.admin.status.pending', [
             'pendingPayments' => $this->adminPaymentRepository->getAllPayments(10, 'pending', $query->validated())
@@ -48,7 +50,7 @@ class PaymentController extends Controller
      * @param FilterAdminPaymentRequest $query
      * @return \Illuminate\View\View
      */
-    public function failed(FilterAdminPaymentRequest $query): \Illuminate\View\View
+    public function failed(FilterAdminPaymentRequest $query): View
     {
         return view('payments.admin.status.failed', [
             'failedPayments' => $this->adminPaymentRepository->getAllPayments(10, 'failed', $query->validated())
@@ -61,7 +63,7 @@ class PaymentController extends Controller
      * @param FilterAdminPaymentRequest $query
      * @return \Illuminate\View\View
      */
-    public function success(FilterAdminPaymentRequest $query): \Illuminate\View\View
+    public function success(FilterAdminPaymentRequest $query): View
     {
         return view('payments.admin.status.successful', [
             'successfulPayments' => $this->adminPaymentRepository->getAllPayments(10, 'success', $query->validated())
@@ -74,7 +76,7 @@ class PaymentController extends Controller
      * @param string $txnId
      * @return \Illuminate\View\View
      */
-    public function show(string $txnId): \Illuminate\View\View
+    public function show(string $txnId): View
     {
         return view('payments.admin.show', [
             'payment' => $this->adminPaymentRepository->getPayment($txnId)
@@ -88,7 +90,7 @@ class PaymentController extends Controller
      * @param UpdatePaymentAdminStatus $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function updateStatus(string $txnId, UpdatePaymentAdminStatus $request): \Illuminate\Http\RedirectResponse
+    public function updateStatus(string $txnId, UpdatePaymentAdminStatus $request): RedirectResponse
     {
         $this->adminPaymentRepository->updatePaymentStatus($txnId, $request->validated()['status']);
 

@@ -13,8 +13,11 @@ class PayoutMethodController extends Controller
     /**
      * Instantiate new controller instance
      */
-    public function __construct(protected PayoutMethodRepositoryInterface $payoutMethodRepository, protected AuthenticateRepositoryInterface $authRepository, protected BankCodeService $bankCodeService)
-    {
+    public function __construct(
+        protected PayoutMethodRepositoryInterface $payoutMethodRepository,
+        protected AuthenticateRepositoryInterface $authRepository,
+        protected BankCodeService $bankCodeService
+    ) {
     }
 
     /**
@@ -36,8 +39,10 @@ class PayoutMethodController extends Controller
      */
     public function create(): \Illuminate\Contracts\View\View
     {
-        return view('payout-methods.user.create', [
-                'banks' => $this->bankCodeService->listBankCodes(['name','code','country']),
+        return view(
+            'payout-methods.user.create',
+            [
+                'banks' => $this->bankCodeService->listBankCodes(['name', 'code', 'country']),
             ]
         );
     }
@@ -63,7 +68,7 @@ class PayoutMethodController extends Controller
     {
         return view('payout-methods.user.edit', [
             'payoutMethod' => $this->payoutMethodRepository->getUserPayoutMethod($this->authRepository->user(), $id),
-            'banks' => $this->bankCodeService->listBankCodes(['name','code','country']),
+            'banks' => $this->bankCodeService->listBankCodes(['name', 'code', 'country']),
         ]);
     }
 

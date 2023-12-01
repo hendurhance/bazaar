@@ -160,9 +160,10 @@
                  <div class="tab-content">
                    <div class="tab-pane active" id="side37">
                      <ul class="sidemenu-list">
-                       <li><a href="icons.html" @class(['slide-item', 'active' => $active === 'support.all'])> All Tickets</a></li>
-                       <li><a href="icons2.html" @class(['slide-item', 'active' => $active === 'support.pending'])> Pending Tickets</a></li>
-                       <li><a href="icons3.html" @class(['slide-item', 'active' => $active === 'support.resolved'])> Resolved Tickets</a></li>
+                       <li><a href="{{ route('admin.support.index') }}" @class(['slide-item', 'active' => $active === 'support.all'])> All Tickets</a></li>
+                       <li><a href="{{ route('admin.support.pending') }}" @class(['slide-item', 'active' => $active === 'support.pending'])> Pending Tickets</a></li>
+                       <li><a href="{{ route('admin.support.resolved') }}" @class(['slide-item', 'active' => $active === 'support.resolved'])> Resolved Tickets</a></li>
+                       <li><a href="{{ route('admin.support.create') }}" @class(['slide-item', 'active' => $active === 'support.create'])> Create Ticket</a></li>
                      </ul>
                    </div>
                  </div>

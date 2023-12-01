@@ -7,6 +7,7 @@ use App\Contracts\Repositories\BidRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Ad\CreateBidRequest;
 use App\Http\Requests\Bid\FilterUserBidRequest;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 
 class BidController extends Controller
@@ -22,7 +23,7 @@ class BidController extends Controller
      * 
      * @return \Illuminate\Contracts\View\View
      */
-    public function index(FilterUserBidRequest $query): \Illuminate\Contracts\View\View
+    public function index(FilterUserBidRequest $query): View
     {
         return view('bids.user.index', [
             'bids' => $this->bidRepository->getUserBids($this->authRepository->user(), 10, $query->validated()),
@@ -49,7 +50,7 @@ class BidController extends Controller
      * @return \Illuminate\Contracts\View\View
      * 
      */
-    public function show(string $bid): \Illuminate\Contracts\View\View
+    public function show(string $bid): View
     {
         return view('bids.user.show', [
             'bid' => $this->bidRepository->getUserBid($bid, $this->authRepository->user()),

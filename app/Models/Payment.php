@@ -112,7 +112,7 @@ class Payment extends Model
     /**
      * Scope a query to only include pending payments.
      */
-    public function scopePending(Builder $query)
+    public function scopePending(Builder $query): Builder
     {
         return $query->where('status', PaymentStatus::PENDING);
     }
@@ -120,7 +120,7 @@ class Payment extends Model
     /**
      * Scope a query to only include failed payments.
      */
-    public function scopeFailed(Builder $query)
+    public function scopeFailed(Builder $query): Builder
     {
         return $query->where('status', PaymentStatus::FAILED);
     }
@@ -128,7 +128,7 @@ class Payment extends Model
     /**
      * Scope a query to only include success payments.
      */
-    public function scopeSuccess(Builder $query)
+    public function scopeSuccess(Builder $query): Builder
     {
         return $query->where('status', PaymentStatus::SUCCESS);
     }

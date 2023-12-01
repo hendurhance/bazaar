@@ -6,7 +6,7 @@ use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Contracts\Repositories\CommentRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreateCommentRequest;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class CommentController extends Controller
 {
@@ -25,7 +25,7 @@ class CommentController extends Controller
      * @param string $slug
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(CreateCommentRequest $request, string $slug): \Illuminate\Http\RedirectResponse
+    public function store(CreateCommentRequest $request, string $slug): RedirectResponse
     {
         $this->commentRepository->storeComment($request->validated(), $slug, $this->authenticateRepository->user());
 

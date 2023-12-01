@@ -6,6 +6,8 @@ use App\Contracts\Repositories\AnalyticRepositoryInterface;
 use App\Contracts\Repositories\AuthenticateRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Profile\UpdateProfileRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 
 class ProfileController extends Controller
 {
@@ -20,7 +22,7 @@ class ProfileController extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function dashboard(): \Illuminate\View\View
+    public function dashboard(): View
     {
         return view('dashboard.user.index', [
             'metrics' => $this->analyticRepository->getUserDashboardMetrics($this->authRepository->user()),
@@ -32,7 +34,7 @@ class ProfileController extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function show(): \Illuminate\View\View
+    public function show(): View
     {
         return view('profile.user.index', [
             'user' => $this->authRepository->user(),
@@ -45,7 +47,7 @@ class ProfileController extends Controller
      * @param UpdateProfileRequest $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateProfileRequest $request): \Illuminate\Http\RedirectResponse
+    public function update(UpdateProfileRequest $request): RedirectResponse
     {
         $this->authRepository->update($this->authRepository->user(), $request->validated());
         return redirect()->route('user.profile')->with('success', 'Your profile has been updated successfully.');

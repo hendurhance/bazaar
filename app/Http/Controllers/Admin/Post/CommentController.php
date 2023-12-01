@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Post\CreateCommentRequest;
 use App\Http\Requests\Post\FilterAdminCommentRequest;
 use App\Http\Requests\Post\UpdateCommentRequest;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -23,7 +25,7 @@ class CommentController extends Controller
      * 
      * @return \Illuminate\View\View
      */
-    public function index(FilterAdminCommentRequest $query)
+    public function index(FilterAdminCommentRequest $query): View
     {
         return view('comments.admin.index', [
             'comments' => $this->commentRepository->getAllCommentsForAdmin(10, $query->validated())
@@ -43,7 +45,7 @@ class CommentController extends Controller
      * @param \App\Http\Requests\Post\CreateCommentRequest $request
      * @param string $slug
      */
-    public function store(CreateCommentRequest $request, string $slug)
+    public function store(CreateCommentRequest $request, string $slug): RedirectResponse
     {
         $this->commentRepository->storeComment($request->validated(), $slug, $this->authenticateRepository->admin());
         return redirect()->route('admin.blogs.show', $slug)->with('success', 'Comment created successfully.');
@@ -63,7 +65,7 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\View\View
      */
-    public function edit(int $id)
+    public function edit(int $id): View
     {
         return view('comments.admin.edit', [
             'comment' => $this->commentRepository->getComment($id)
@@ -77,7 +79,7 @@ class CommentController extends Controller
      * @param string $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(UpdateCommentRequest $request, string $id)
+    public function update(UpdateCommentRequest $request, string $id): RedirectResponse
     {
         $this->commentRepository->updateComment($request->validated(), $id);
         return redirect()->route('admin.comments.index')->with('success', 'Comment updated successfully.');
@@ -89,7 +91,7 @@ class CommentController extends Controller
      * @param int $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(int $id)
+    public function destroy(int $id): RedirectResponse
     {
         $this->commentRepository->delete($id);
         return redirect()->back()->with('success', 'Comment deleted successfully.');

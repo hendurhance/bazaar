@@ -6,7 +6,6 @@ use App\Enums\PaymentStatus;
 use App\Enums\PayoutGateway;
 use App\Enums\PayoutStatus;
 use App\Traits\HasPayoutToken;
-use App\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

@@ -23,7 +23,7 @@ class CategoryController extends Controller
      * @param string $slug
      * @return \Illuminate\Http\JsonResponse
      */
-    public function getSubCategories(string $slug)
+    public function getSubCategories(string $slug): JsonResponse
     {
         return $this->response('categories', $this->categoryRepository->getSubCategories($slug));
     }
