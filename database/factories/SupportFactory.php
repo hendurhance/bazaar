@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Enums\SupportStatusEnum;
+use App\Models\Admin;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -26,7 +27,12 @@ class SupportFactory extends Factory
                 ->map(fn ($paragraph) => "<p>{$paragraph}</p>")
                 ->push('<p><br></p>')
                 ->implode(''),
-            'status' => $this->faker->randomElement(SupportStatusEnum::class)
+            'status' => $this->faker->randomElement(SupportStatusEnum::class),
+            'assigned_to' => $this->faker->randomElement([null, Admin::query()->inRandomOrder()->first()->id]),
+            'response' => collect($this->faker->paragraphs(5))
+                ->map(fn ($paragraph) => "<p>{$paragraph}</p>")
+                ->push('<p><br></p>')
+                ->implode(''),
         ];
     }
 }

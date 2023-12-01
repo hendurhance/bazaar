@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('subject');
             $table->longText('message')->nullable();
             $table->smallInteger('status')->default(0);
-            $table->foreignId('assigned_to')->nullable()->constrained('admins');
+            $table->foreignUuid('assigned_to')->nullable()->constrained('admins');
             $table->longText('response')->nullable();
             $table->timestamps();
         });

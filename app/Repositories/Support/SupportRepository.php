@@ -100,7 +100,8 @@ class SupportRepository extends BaseCrudRepository implements SupportRepositoryI
         $this->model->query()
             ->where('id', $id)
             ->update([
-                'status' => SupportStatusEnum::from($data['status'])
+                'status' => SupportStatusEnum::from($data['status']),
+                'response' => $data['response'],
             ]);
     }
 

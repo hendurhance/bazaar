@@ -7,6 +7,7 @@ use App\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Support extends Model
 {
@@ -36,6 +37,15 @@ class Support extends Model
     protected $casts = [
         'status' => SupportStatusEnum::class
     ];
+
+    /**
+     * Get the admin that is assigned to the support ticket.
+     */
+    public function admin(): BelongsTo
+    {
+        return $this->belongsTo(Admin::class, 'assigned_to');
+    }
+
 
     /**
      * Scope a query to only include pending tickets.
