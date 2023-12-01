@@ -40,20 +40,26 @@
                                                         </div>
                                                     </div>
                                                     <div class="media-title text-dark font-weight-semibold mt-1">{{ $support->name }} <span class="text-muted font-weight-semibold">( {{ $support->email }} )</span></div>
-                                                    <small class="mb-0">to {{config('app.name')}} Support Team</small>
+                                                    <small class="mb-0">to {{config('app.name')}} Support Team ({{$support->admin->email ?? 'No Admin'}})</small>
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="eamil-body mt-5">
                                             {!! $support->message ?? 'No message' !!}</>
-                                            <hr>
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <form action="{{route('admin.support.store')}}" method="POST">
+                                        @if($support->response)
+                                        <div class="fw-bold mt-1">Response from {{config('app.name')}} Support Team</div>
+                                        <div class="eamil-body mt-5">
+                                            {!! $support->response !!}
+                                        </div>
+                                        @else
+                                        <form action="{{route('admin.support.update', $support->id)}}" method="POST">
+                                            @method('PUT')
                                             @csrf
-                                            <x-text-area-field name="reply" label="Reply" placeholder="Enter Reply" :admin="true" />
+                                            <x-text-area-field name="response" label="Reply" placeholder="Enter Reply" :admin="true" />
                                             <div class="row">
                                                 <label class="col-md-3 form-label mb-4">Status * :</label>
                                                 <div class="col-md-9">
@@ -62,7 +68,7 @@
                                                         <option value="{{$status}}" {{ $support->status == $status ? 'selected' : '' }}>{{ucfirst($status->label())}}</option>
                                                         @endforeach
                                                     </select>
-                                                    <span class="text-danger">{{ $errors->first('tags') }}</span>
+                                                    <span class="text-danger">{{ $errors->first('status') }}</span>
                                                 </div>
                                             </div>
                                             <div class="d-sm-flex pt-4">
@@ -72,7 +78,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        
+                                        @endif
                                     </div>
                                 </div>
                             </div>

@@ -6,6 +6,7 @@ use App\Contracts\Repositories\SupportRepositoryInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Support\CreateSupportRequest;
 use App\Http\Requests\Support\FilterAdminSupportRequest;
+use App\Http\Requests\Support\UpdateSupportRequest;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -104,10 +105,15 @@ class SupportController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \App\Http\Requests\Support\UpdateSupportRequest $request
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateSupportRequest $request, string $id): RedirectResponse
     {
-        //
+        $this->supportRepository->updateSupportTicket($id, $request->validated());
+        return redirect()->route('admin.support.show', $id)->with('success', 'Support ticket updated successfully.');
     }
 
     /**

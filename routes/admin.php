@@ -93,6 +93,7 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::get('/supports/pending', [SupportController::class, 'pending'])->name('support.pending');
     Route::get('/supports/resolved', [SupportController::class, 'resolved'])->name('support.resolved');
     Route::get('/supports/create', [SupportController::class, 'create'])->name('support.create');
+    Route::put('/supports/{supports:id}/update', [SupportController::class, 'update'])->name('support.update');
     Route::post('/supports', [SupportController::class, 'store'])->name('support.store');
     Route::get('/support/{supports:id}', [SupportController::class, 'show'])->name('support.show');
     Route::delete('/support/{supports:id}', [SupportController::class, 'destroy'])->name('support.destroy');
