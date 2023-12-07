@@ -44,7 +44,7 @@
                                  <div class="col-12">
                                      <x-input-field name="address" type="text" label="Address" placeholder="Your address" value="{{ $user->address }}"/>
                                  </div>
-                                 <x-countries-selectable has-labels="true"/>
+                                 <x-countries-selectable :admin="false" has-labels="true"/>
                                  <div class="col-xl-6 col-lg-12 col-md-6">
                                     <x-input-field name="zip_code" type="text" label="Zip Code" placeholder="Your zip code" :required="false" value="{{ $user->zip_code }}"/>
                                  </div> 

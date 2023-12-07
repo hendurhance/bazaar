@@ -1,3 +1,31 @@
+@if($admin)
+<div class="form-group">
+    <label class="form-label">Country</label>
+    <div class="row">
+        <div class="col-md-4 mb-2">
+            <select class="form-control select2 form-select" name="country" id="country"
+                <option>Select Country</option>
+                @foreach ($countries as $country)
+                <option value="{{ $country->iso2 }}">{{ $country->emoji }} {{ $country->name }}</option>
+                @endforeach
+            </select>
+            <span class="text-danger fs-6">{{ $errors->first('country') }}</span>
+        </div>
+        <div class="col-md-4 mb-2">
+            <select class="form-control select2 form-select" name="state" id="state">
+                <option>Select State</option>
+            </select>
+            <span class="text-danger fs-6">{{ $errors->first('state') }}</span>
+        </div>
+        <div class="col-md-4 mb-2">
+            <select class="form-control select2 form-select" name="city" id="city">
+                <option>Select City</option>
+            </select>
+            <span class="text-danger fs-6">{{ $errors->first('city') }}</span>
+        </div>
+    </div>
+</div>
+@else
 <div class="{{ $hasLabels ? 'col-xl-6 col-lg-12 col-md-6' : 'col-md-12' }}">
     <div class="form-inner">
         <label>Country *</label>
@@ -34,7 +62,7 @@
     </div>
 </div>
 
-
+@endif
 
 @push('styles')
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@amplifiedhq/countries-atlas/dist/flags/css/flags.min.css">

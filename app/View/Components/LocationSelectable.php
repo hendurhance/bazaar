@@ -3,17 +3,19 @@
 namespace App\View\Components;
 
 use App\Contracts\Repositories\CountryRepositoryInterface;
+use App\Models\Country;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class CountriesSelectable extends Component
+class LocationSelectable extends Component
 {
     /**
      * Create a new component instance.
      */
-    public function __construct(protected CountryRepositoryInterface $countryRepository, public $admin = false, public bool $hasLabels = false, public array $selectedFields = [])
+    public function __construct(protected CountryRepositoryInterface $countryRepository, public Country $selectedCountry)
     {
+        //
     }
 
     /**
@@ -21,8 +23,8 @@ class CountriesSelectable extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.countries-selectable', [
-            'countries' => $this->countryRepository->all([ 'id', 'name', 'iso2', 'emoji']),
+        return view('components.location-selectable', [
+            'countries' => $this->countryRepository->all(),
         ]);
     }
 }

@@ -4,9 +4,11 @@ namespace App\Http\Controllers\Admin\User;
 
 use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\User\CreateAdminUserRequest;
 use App\Http\Requests\User\FilterAdminUserRequest;
+use App\Http\Requests\User\UpdateAdminUserRequest;
 use Illuminate\Contracts\View\View;
-use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
 
 class UserController extends Controller
 {
@@ -33,15 +35,20 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        return view('users.admin.create');
     }
 
     /**
      * Store a newly created resource in storage.
+     * 
+     * @param \App\Http\Requests\User\CreateAdminUserRequest $request
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function store(Request $request)
+    public function store(CreateAdminUserRequest $request)
     {
-        //
+        $this->userRepository->createUser($request->validated());
+
+        return redirect()->route('admin.users.index')->with('success', 'User created successfully');
     }
 
     /**
@@ -59,25 +66,54 @@ class UserController extends Controller
 
     /**
      * Show the form for editing the specified resource.
+     * 
+     * @param string $id
+     * @return \Illuminate\Contracts\View\View
      */
-    public function edit(string $id)
+    public function edit(string $id): View
     {
-        //
+        return view('users.admin.edit', [
+            'user' => $this->userRepository->getUserForAdmin($id),
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
+     * 
+     * @param \App\Http\Requests\User\UpdateAdminUserRequest $request
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAdminUserRequest $request, string $id)
     {
-        //
+        $this->userRepository->updateUser($id, $request->validated());
+
+        return redirect()->route('admin.users.edit', $id)->with('success', 'User updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function destroy(string $id)
+    public function destroy(string $id): RedirectResponse
     {
-        //
+        $this->userRepository->deleteUser($id);
+
+        return redirect()->route('admin.users.index')->with('success', 'User deleted successfully');
+    }
+
+    /**
+     * Request password reset.
+     * 
+     * @param string $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function requestPasswordReset(string $id): RedirectResponse
+    {
+        $this->userRepository->sendPasswordResetLink($id);
+
+        return redirect()->route('admin.users.edit', $id)->with('success', 'Password reset link sent to user');
     }
 }

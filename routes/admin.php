@@ -44,6 +44,7 @@ Route::middleware('auth:admin_web')->group(function () {
 
     /* ========  USER  =========== */
     Route::resource('users', UserController::class);
+    Route::get('/users/{users:id}/request-password-reset', [UserController::class, 'requestPasswordReset'])->name('users.request-password-reset');
 
     /* ========  ADS  =========== */
     Route::get('/ads', [AdController::class, 'index'])->name('ads.index');

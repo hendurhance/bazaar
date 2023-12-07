@@ -10,7 +10,7 @@
 
         <!-- CONTAINER -->
         <div class="main-container container-fluid">
-            @include('layouts.breadcrumb', ['admin' => true, 'pageTitle' => 'User', 'hasBack' => true, 'backTitle' => 'Dashboard', 'backUrl' => route('admin.dashboard')])
+            @include('layouts.breadcrumb', ['admin' => true, 'pageTitle' => 'User', 'hasBack' => true, 'backTitle' => 'All Users', 'backUrl' => route('admin.users.index')])
 
              <div class="row">
                 <div class="col-12 col-sm-12">
@@ -49,9 +49,15 @@
                                         <div class="row">
                                             <div class="px-0 px-sm-4">
                                                 <div class="social social-profile-buttons mt-5 float-end">
-                                                    <div class="mt-3">
+                                                    <div class="mt-3 d-flex">
                                                         <a class="social-icon text-primary" href="mailto:{{ $user->email }}" target="_blank"><i class="fa-regular fa-envelope"></i></a>
                                                         <a class="social-icon text-primary" href="tel:{{ $user->mobile }}" target="_blank"><i class="fa-regular fa-phone"></i></a>
+                                                        <a class="social-icon text-dark" href="{{ route('admin.users.edit', $user->id) }}"><i class="fa-regular fa-edit"></i></a>
+                                                        <form action="{{ route('admin.users.destroy', $user->id)}}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="social-icon text-danger" type="submit"><i class="fa-regular fa-trash"></i></button>
+                                                        </form>
                                                     </div>
                                                 </div>
                                             </div>
