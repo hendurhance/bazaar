@@ -16066,7 +16066,7 @@ ul.inbox-pagination li {
     -webkit-box-pack: end;
     justify-content: flex-end;
     overflow: hidden;
-    background: url(../images/media/35.jpg) no-repeat;
+    background: url(/assets/images/bg/plain-smooth-green-wall-texture.jpg) no-repeat;
     background-size: cover;
 }
 

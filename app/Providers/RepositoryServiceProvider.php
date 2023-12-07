@@ -21,6 +21,7 @@ use App\Contracts\Repositories\PayoutRepositoryInterface;
 use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Contracts\Repositories\SupportRepositoryInterface;
 use App\Contracts\Repositories\TagRepositoryInterface;
+use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Repositories\Ad\Admin\AdminAdRepository;
 use App\Repositories\Auth\AuthenticateRepository;
 use App\Repositories\Category\CategoryRepository;
@@ -40,6 +41,7 @@ use App\Repositories\Post\CommentRepository;
 use App\Repositories\Post\PostRepository;
 use App\Repositories\Post\TagRepository;
 use App\Repositories\Support\SupportRepository;
+use App\Repositories\User\UserRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -79,6 +81,11 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(
             MediaRepositoryInterface::class,
             MediaRepository::class
+        );
+
+        $this->app->bind(
+            UserRepositoryInterface::class,
+            UserRepository::class
         );
 
         $this->app->bind(

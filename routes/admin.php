@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Payout\PayoutMethodController;
 use App\Http\Controllers\Admin\Post\CommentController;
 use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\Admin\Support\SupportController;
+use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -40,6 +41,9 @@ Route::middleware('guest:admin_web')->group(function () {
 
 Route::middleware('auth:admin_web')->group(function () {
     Route::view('/', 'dashboard.admin.index')->name('dashboard');
+
+    /* ========  USER  =========== */
+    Route::resource('users', UserController::class);
 
     /* ========  ADS  =========== */
     Route::get('/ads', [AdController::class, 'index'])->name('ads.index');

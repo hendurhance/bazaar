@@ -51,6 +51,7 @@ class MediaRepository extends BaseCrudRepository implements MediaRepositoryInter
                 $query->when(isset($filters['search']), function ($query) use ($filters) {
                     $query->where(function ($query) use ($filters) {
                         $query->where('name', 'like', '%' . $filters['search'] . '%')
+                            ->orWhere('user_id', $filters['search'])
                             ->orWhereHas('user', function ($query) use ($filters) {
                                 $query->where('name', 'like', '%' . $filters['search'] . '%')
                                     ->orWhere('username', 'like', '%' . $filters['search'] . '%');

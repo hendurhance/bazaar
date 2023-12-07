@@ -36,7 +36,8 @@ class AdminBidRepository extends BaseCrudRepository implements AdminBidRepositor
                         $query->whereBetween('created_at', [$filters['date_from'], $filters['date_to']]);
                     })
                     ->when(isset($filters['bid_id']), function ($query) use ($filters) {
-                        $query->where('id', $filters['bid_id']);
+                        $query->where('id', $filters['bid_id'])
+                            ->orWhere('user_id', $filters['bid_id']);
                     });
             })
             ->orderBy('created_at', 'desc')
