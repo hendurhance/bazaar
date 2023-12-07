@@ -39,6 +39,7 @@ class CommentRepository extends BaseCrudRepository implements CommentRepositoryI
                     ->when(isset($filters['search']) && $filters['search'], function ($query) use ($filters) {
                         $query->where(function ($query) use ($filters) {
                             $query->where('id', $filters['search'])
+                                ->orWhere('user_id', $filters['search'])
                                 ->orWhere('content', 'like', '%' . $filters['search'] . '%')
                                 ->orWhereHas('user', function ($query) use ($filters) {
                                     $query->where('name', 'like', '%' . $filters['search'] . '%');

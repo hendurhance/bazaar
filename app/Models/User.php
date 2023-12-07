@@ -7,6 +7,7 @@ namespace App\Models;
 use App\Enums\Gender;
 use App\Traits\HasAvatar;
 use App\Traits\HasUuids;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -56,6 +57,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_active' => 'boolean',
         'gender' => Gender::class,
     ];
 
@@ -91,6 +93,26 @@ class User extends Authenticatable
     }
 
     /**
+     * Scope a query to only include active users.
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function active(Builder $query): Builder
+    {
+        return $query->where('is_active', true);
+    }
+
+    /**
+     * Scope a query to only include inactive users.
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function inactive(Builder $query): Builder
+    {
+        return $query->where('is_active', false);
+    }
+
+    /**
      * Get the ads for the user.
      */
     public function ads(): HasMany
@@ -104,6 +126,32 @@ class User extends Authenticatable
     public function bids(): HasMany
     {
         return $this->hasMany(Bid::class);
+    }
+
+    /**
+     * Get the payments the user paid
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'payer_id');
+    }
+
+    /**
+     * Get the payments the user received
+     */
+    public function receivedPayments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'payee_id');
+    }
+
+    /**
+     * Get payouts for the user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payouts(): HasMany
+    {
+        return $this->hasMany(Payout::class, 'user_id');
     }
 
     /**
@@ -129,6 +177,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Country::class);
     }
+
+    /**
+     * Get the country the user belongs to.
+     */
+    public function timezone(): BelongsTo
+    {
+        return $this->belongsTo(Timezone::class);
+    }
+
 
     /**
      * Get the state the user belongs to.

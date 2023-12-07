@@ -46,7 +46,9 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
             ->when($filters, function ($query) use ($filters) {
                 $query->when(isset($filters['search']), function ($query) use ($filters) {
                     $query->where('title', 'like', '%' . $filters['search'] . '%')
-                        ->orWhere('description', 'like', '%' . $filters['search'] . '%');
+                        ->orWhere('description', 'like', '%' . $filters['search'] . '%')
+                        ->orWhere('id', $filters['search'])
+                        ->orWhere('user_id', $filters['search']);
                 });
             })
             ->orderBy('created_at', 'desc')

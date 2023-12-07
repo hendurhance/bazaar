@@ -27,7 +27,7 @@
          </a>
          </li>
          <li class="slide">
-            <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+            <a  @class(['side-menu__item', 'has-link', 'active' => preg_match('/users.*/', $active)]) data-bs-toggle="slide" href="{{  route('admin.users.index')}}">
              <i class="side-menu__icon fa-regular fa-users"></i>
              <span class="side-menu__label">Users</span>
           </a>
@@ -122,8 +122,8 @@
          <li class="sub-category">
            <h3>General</h3>
          </li>
-         <li @class(['slide', 'active' => $active === 'media'])>
-          <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('admin.media.index') }}">
+         <li>
+          <a  @class(['side-menu__item', 'has-link', 'active' => preg_match('/media.*/', $active)]) data-bs-toggle="slide" href="{{ route('admin.media.index') }}">
            <i class="side-menu__icon fa-regular  fa-pen-to-square"></i>
            <span class="side-menu__label">Media</span>
           </a>

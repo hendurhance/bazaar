@@ -30,6 +30,8 @@ class SupportRepository extends BaseCrudRepository implements SupportRepositoryI
             'subject' => $data['subject'],
             'message' => $data['message'] ?? null,
         ]);
+
+        // TODO: Send email to admin
     }
 
     /**
@@ -103,6 +105,8 @@ class SupportRepository extends BaseCrudRepository implements SupportRepositoryI
                 'status' => SupportStatusEnum::from($data['status']),
                 'response' => $data['response'],
             ]);
+
+        // TODO: Send email to user
     }
 
     /**

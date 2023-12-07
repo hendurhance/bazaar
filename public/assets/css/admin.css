@@ -21,6 +21,11 @@
     padding: 15px 45px 0px;
 }
 
+.action-user a{
+    display: block;
+    margin-bottom: 5px;
+}
+
 /** ====== MEDIA QUERIES ====== **/
 @media (min-width: 992px) {
     .sidebar-mini.sidenav-toggled i.fa-chevron-right {
