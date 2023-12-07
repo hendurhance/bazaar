@@ -78,7 +78,7 @@
                             <div class="form-section">
                                 <h4>Location</h4>
                             </div>
-                            <x-countries-selectable />
+                            <x-countries-selectable :admin="false"/>
                             <div class="form-section">
                                 <h4>Seller Information</h4>
                             </div>

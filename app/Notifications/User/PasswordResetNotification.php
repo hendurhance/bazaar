@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Support\Facades\Log;
 
 class PasswordResetNotification extends Notification
 {
@@ -64,9 +65,11 @@ class PasswordResetNotification extends Notification
      */
     protected function getActionUrl(): string
     {
-        return match ($this->user) {
-            $this->user instanceof User => route('user.reset-password', [$this->token]),
-            $this->user instanceof Admin => route('admin.reset-password', [$this->token]),
-        };
+        if($this->user instanceof User) {
+            return route('user.reset-password', [$this->token]);
+        }
+        if($this->user instanceof Admin) {
+            return route('admin.reset-password', [$this->token]);
+        }
     }
 }

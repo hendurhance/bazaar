@@ -5,6 +5,9 @@ namespace App\Repositories\User;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\User;
 use App\Contracts\Repositories\UserRepositoryInterface;
+use App\Enums\Gender;
+use App\Repositories\Auth\AuthenticateRepository;
+use App\Repositories\Country\CountryRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class UserRepository extends BaseCrudRepository implements UserRepositoryInterface
@@ -74,5 +77,83 @@ class UserRepository extends BaseCrudRepository implements UserRepositoryInterfa
             ->firstOr(function () {
                 abort(404);
             });
+    }
+
+    /**
+     * Get user for profile
+     * 
+     * @param array $data
+     * @return void
+     */
+    public function createUser($data): void
+    {
+        $country = app(CountryRepository::class)->findByIso2Code($data['country']);
+        $state = app(CountryRepository::class)->findStateByCode($country->id, $data['state']);
+        $user = $this->model->query()->create([
+            'name' => $data['first_name'] . ' ' . $data['last_name'],
+            'email' => $data['email'],
+            'mobile' => $data['mobile'],
+            'username' => $data['username'],
+            'password' => bcrypt($data['password']),
+            'country_id' => $country->id,
+            'state_id' => $state->id,
+            'city_id' => $data['city'],
+            'zip_code' => $data['zip_code'],
+            'gender' => Gender::from($data['gender']),
+            'is_active' => $data['is_active'] ?? false,
+            'address' => $data['address'],
+        ]);
+    }
+
+     /**
+     * Send password reset link
+     * 
+     * @param string $id
+     */
+    public function sendPasswordResetLink(string $id): void
+    {
+        $user = $this->model->query()->where('id', $id)->firstOr(function () {
+            abort(404);
+        });
+
+        app(AuthenticateRepository::class)->sendPasswordResetLink($user->email, \App\Models\User::class);
+    }
+
+    /**
+     * Update user
+     * 
+     * @param string $id
+     * @param array $data
+     * @return void
+     */
+    public function updateUser(string $id, array $data): void
+    {
+        $user = $this->model->query()->where('id', $id)->firstOr(function () {
+            abort(404);
+        });
+
+        $user->update([
+            'name' => $data['first_name'] . ' ' . $data['last_name'] ?? $user->name,
+            'address' => $data['address'] ?? $user->address,
+            'gender' => Gender::from($data['gender']),
+            'zip_code' => $data['zip_code'] ?? $user->zip_code,
+            'country' => $data['country'] ?? $user->country,
+            'is_active' => $data['is_active'] ?? $user->is_active,
+        ]);
+    }
+
+    /**
+     * Delete a user
+     * 
+     * @param string $id
+     * @return void
+     */
+    public function deleteUser(string $id): void
+    {
+        // TODO: Delete all media files attached to the user
+        // $this->model->query()->where('id', $id)->getMedia()->each(function ($media) {
+        //     $media->delete();
+        // });
+        $this->model->query()->where('id', $id)->delete();
     }
 }

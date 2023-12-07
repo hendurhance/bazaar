@@ -15,8 +15,9 @@
              <div class="row">
                 <div class="col-12 col-sm-12">
                     <div class="card">
-                        <div class="card-header">
+                        <div class="card-header d-flex justify-between">
                             <h3 class="card-title mb-0">All User List</h3>
+                            <a href="{{ route('admin.users.create') }}" class="btn btn-primary float-right">Add New User</a>
                         </div>
                         <div class="">
                            <x-filter-admin-user-card />
