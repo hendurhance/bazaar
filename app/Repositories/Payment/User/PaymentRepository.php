@@ -8,13 +8,10 @@ use App\Contracts\Repositories\PaymentRepositoryInterface;
 use App\Enums\PaymentGateway;
 use App\Enums\PaymentStatus;
 use App\Exceptions\PaymentException;
-use App\Models\Ad;
 use App\Models\User;
 use App\Notifications\Payment\BidPaymentNotification;
 use App\Repositories\Bid\User\BidRepository;
 use App\Services\Payment\PaymentGatewayService;
-use App\Services\Payment\PayWithFlutterwave;
-use App\Services\Payment\PayWithPaystack;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryInterface
@@ -46,7 +43,11 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
                 });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($limit);
+            ->paginate($limit)
+            ->appends([
+                'status' => $filters['status'] ?? null,
+                'gateway' => $filters['gateway'] ?? null,
+            ]);
     }
 
     /**
