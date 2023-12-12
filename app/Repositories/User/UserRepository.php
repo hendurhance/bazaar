@@ -151,10 +151,6 @@ class UserRepository extends BaseCrudRepository implements UserRepositoryInterfa
      */
     public function deleteUser(string $id): void
     {
-        // TODO: Delete all media files attached to the user
-        // $this->model->query()->where('id', $id)->getMedia()->each(function ($media) {
-        //     $media->delete();
-        // });
         $this->model->query()->where('id', $id)->delete();
     }
 }

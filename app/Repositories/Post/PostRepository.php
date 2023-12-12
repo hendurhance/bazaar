@@ -202,10 +202,15 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
      */
     public function deletePost(string $slug): void
     {
-        $this->model->where('slug', $slug)->firstOr(function () {
+        $post = $this->model->where('slug', $slug)->firstOr(function () {
             throw new PostException('Post not found.');
-        })->delete();
+        });
 
-        // TODO: Delete all media related to this post
+        // Delete all media related to this post
+        $post->media->each(function ($media) {
+            $this->deleteMediaFile($media);
+        });
+
+        $post->delete();
     }
 }
