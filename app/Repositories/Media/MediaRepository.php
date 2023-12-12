@@ -8,6 +8,7 @@ use App\Contracts\Repositories\MediaRepositoryInterface;
 use App\Exceptions\MediaException;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Log;
 
 class MediaRepository extends BaseCrudRepository implements MediaRepositoryInterface
 {
@@ -90,6 +91,9 @@ class MediaRepository extends BaseCrudRepository implements MediaRepositoryInter
      */
     public function deleteMedia(string $id): void
     {
-        $this->model->query()->where('id', $id)->delete();
+        $media = $this->model->query()->where('id', $id)->firstOr(function () {
+            throw new MediaException('Media not found.');
+        });
+        $media->delete();
     }
 }

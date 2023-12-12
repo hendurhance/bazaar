@@ -94,7 +94,7 @@
                                                                                             data-bs-toggle="modal"
                                                                                             href="javascript:;"
                                                                                             data-bs-original-title="Delete"
-                                                                                            onclick="deletePost('{{ $post->slug }}', '{{ $post->title }}')"
+                                                                                            onclick="deletePost(`{{ $post->slug }}`, `{{ $post->title }}`)"
                                                                                             ><span
                                                                                                 class="fa-regular fa-trash-alt fs-14"></span>
                                                                                         </a>

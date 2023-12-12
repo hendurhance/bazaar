@@ -163,6 +163,11 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
         if($ad->status === AdStatus::PUBLISHED) {
             throw new AdException('Ad not found.');
         }
+
+        $ad->media->each(function ($media) {
+            $this->deleteMediaFile($media);
+        });
+
         $ad->delete();
     }   
 }

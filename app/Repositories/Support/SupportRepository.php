@@ -7,7 +7,10 @@ use App\Models\Support;
 use App\Contracts\Repositories\SupportRepositoryInterface;
 use App\Enums\SupportStatusEnum;
 use App\Exceptions\SupportException;
+use App\Models\Admin;
+use App\Notifications\Support\SupportTicketNotification;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Facades\Notification;
 
 class SupportRepository extends BaseCrudRepository implements SupportRepositoryInterface
 {
@@ -30,9 +33,8 @@ class SupportRepository extends BaseCrudRepository implements SupportRepositoryI
             'phone' => $data['phone'] ?? null,
             'subject' => $data['subject'],
             'message' => $data['message'] ?? null,
+            'assigned_to' => Admin::inRandomOrder()->first()->id,
         ]);
-
-        // TODO: Send email to admin
     }
 
     /**
@@ -100,14 +102,19 @@ class SupportRepository extends BaseCrudRepository implements SupportRepositoryI
      */
     public function updateSupportTicket(string $id, array $data): void
     {
-        $this->model->query()
+        $support = $this->model->query()
             ->where('id', $id)
-            ->update([
-                'status' => SupportStatusEnum::from($data['status']),
-                'response' => $data['response'],
-            ]);
+            ->firstOr(function () {
+                throw new SupportException('Support ticket not found');
+            });
+        $support->update([
+            'status' => SupportStatusEnum::from($data['status']),
+            'response' => $data['response'],
+        ]);
 
-        // TODO: Send email to user
+        // Send email to user
+        Notification::route('mail', $support->email)
+            ->notify(new SupportTicketNotification($support));
     }
 
     /**

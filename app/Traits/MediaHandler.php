@@ -61,20 +61,6 @@ trait MediaHandler
     }
 
     /**
-     * Delete media files.
-     * 
-     * @param Model $model
-     * @param array $files
-     * @return void
-     */
-    public function deleteMedia(Model $model, array $files): void
-    {
-        foreach ($files as $file) {
-            $this->deleteMediaFile($file);
-        }
-    }
-
-    /**
      * Delete media file.
      * 
      * @param Media $media
