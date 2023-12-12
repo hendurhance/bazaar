@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Payout;
 use App\Contracts\Repositories\AdminPayoutRepositoryInterface;
 use App\Enums\PriceRange;
+use App\Exceptions\PayoutException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AdminPayoutRepository extends BaseCrudRepository implements AdminPayoutRepositoryInterface
@@ -85,7 +86,7 @@ class AdminPayoutRepository extends BaseCrudRepository implements AdminPayoutRep
         return $this->model->query()->with(['user:id,name,username,avatar', 'payment:id,payee_id,payer_id,amount,txn_id', 'payoutMethod:id,bank_name,account_name,account_number'])
             ->where('pyt_token', $pyt_token)
             ->firstOr(function () {
-                abort(404);
+                throw new PayoutException('Payout not found.');
             });
     }
 }

@@ -5,6 +5,7 @@ namespace App\Repositories\Payout\Admin;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\PayoutMethod;
 use App\Contracts\Repositories\AdminPayoutMethodRepositoryInterface;
+use App\Exceptions\PayoutException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use PDO;
 
@@ -60,8 +61,7 @@ class AdminPayoutMethodRepository extends BaseCrudRepository implements AdminPay
         return $this->model->query()->with(['user:id,name,email', 'country:id,name,iso2,iso3,emoji', 'payouts:id,user_id,payout_method_id,payment_id,amount,fee'])
             ->where('id', $id)
             ->firstOr(function () {
-                // TODO: throw custom exception
-                abort(404);
+                throw new PayoutException('Payout method not found.');
             });
     }
 }

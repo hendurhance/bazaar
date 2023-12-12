@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Bid;
 use App\Contracts\Repositories\AdminBidRepositoryInterface;
 use App\Enums\PriceRange;
+use App\Exceptions\BidCustomException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AdminBidRepository extends BaseCrudRepository implements AdminBidRepositoryInterface
@@ -63,7 +64,7 @@ class AdminBidRepository extends BaseCrudRepository implements AdminBidRepositor
         return $this->model->with(['ad:id,slug,price,title', 'user:id,name,avatar,username'])
             ->where('id', $id)
             ->firstOr(function () {
-                abort(404);
+                throw new BidCustomException('Bid not found for this ad.');
             });
     }
 }

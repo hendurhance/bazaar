@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Payment;
 use App\Contracts\Repositories\AdminPaymentRepositoryInterface;
 use App\Enums\PriceRange;
+use App\Exceptions\PaymentException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentRepositoryInterface
@@ -82,7 +83,7 @@ class AdminPaymentRepository extends BaseCrudRepository implements AdminPaymentR
         return $this->model->query()->with(['payee:id,name,username,avatar', 'ad:id,title,slug', 'bid:id,ad_id,user_id,amount', 'payer:id,name,username,avatar', 'payout:id,user_id,payout_method_id,payment_id,amount,fee'])
             ->where('txn_id', $txnId)
             ->firstOr(function () {
-                abort(404);
+                throw new PaymentException('Payment not found.');
             });
     }
 

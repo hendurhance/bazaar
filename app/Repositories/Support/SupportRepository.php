@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Support;
 use App\Contracts\Repositories\SupportRepositoryInterface;
 use App\Enums\SupportStatusEnum;
+use App\Exceptions\SupportException;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class SupportRepository extends BaseCrudRepository implements SupportRepositoryInterface
@@ -86,7 +87,7 @@ class SupportRepository extends BaseCrudRepository implements SupportRepositoryI
         return $this->model->query()
             ->where('id', $id)
             ->firstOr(function () {
-                abort(404, 'Support ticket not found');
+                throw new SupportException('Support ticket not found');
             });
     }
 

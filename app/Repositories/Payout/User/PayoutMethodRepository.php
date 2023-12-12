@@ -41,7 +41,7 @@ class PayoutMethodRepository extends BaseCrudRepository implements PayoutMethodR
     {
         return $this->model->query()->where('user_id', $user->id)
         ->where('id', $id)->firstOr(function () {
-            abort(404);
+            throw new PayoutMethodException('Payout method not found');
         });
     }
 

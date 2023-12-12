@@ -8,6 +8,7 @@ use App\Contracts\Repositories\AdRepositoryInterface;
 use App\Enums\AdStatus;
 use App\Enums\PriceRange;
 use App\Enums\StorageDiskType;
+use App\Exceptions\AdException;
 use App\Models\ReportAd;
 use App\Models\User;
 use App\Repositories\Category\CategoryRepository;
@@ -55,7 +56,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             ->whereNot('status', AdStatus::PENDING)
             ->where('slug', $slug)
             ->firstOr(function () {
-                abort(404);
+                throw new AdException('Ad not found.');
             });
     }
 
@@ -122,8 +123,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             ->where('user_id', $user->id)
             ->where('slug', $slug)
             ->firstOr(function () {
-                #TODO: Create a custom exception for this
-                abort(404);
+                throw new AdException('Ad cannot be found, or it does not belong to you.');
             });
     }
 
@@ -138,8 +138,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
     public function updateUserAd(User $user, string $ad, array $data): void
     {
         $ad = $this->model->where('user_id', $user->id)->where('slug', $ad)->firstOr(function () {
-            #TODO: Create a custom exception for this
-            abort(404);
+            throw new AdException('You cannot update this ad, or it does not belong to you.');
         });
 
         $ad->update([
@@ -165,7 +164,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             ->whereNot('status', AdStatus::PENDING)
             ->where('slug', $slug)
             ->firstOr(function () {
-                abort(404);
+                throw new AdException('Ad not be reported because it does not exist.');
             });
     }
 

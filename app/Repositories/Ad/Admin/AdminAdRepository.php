@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Ad;
 use App\Contracts\Repositories\AdminAdRepositoryInterface;
 use App\Enums\AdStatus;
+use App\Exceptions\AdException;
 use App\Models\ReportAd;
 use App\Repositories\Category\CategoryRepository;
 use App\Traits\MediaHandler;
@@ -67,8 +68,7 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
         return $this->model->query()->with(['user:id,name,avatar,username', 'media', 'category:id,name,slug', 'subcategory:parent_id,id,name,slug', 'bids', 'bids.user:id,name,avatar,username', 'country:id,name,iso2', 'state:id,name,code', 'city:id,name', 'relatedAds:id,title,slug,price', 'relatedAds.media',])
             ->where('slug', $adSlug)
             ->firstOr(function () {
-                #TODO: throw custom exception
-                abort(404);
+                throw new AdException('Ad not found.');
             });
     }
 
@@ -82,7 +82,7 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
     public function updateAd(string $slug, array $data): void
     {
         $ad = $this->model->where('slug', $slug)->firstOr(function () {
-            abort(404);
+            throw new AdException('Ad not found.');
         });
         $category = isset($data['category']) ? app(CategoryRepository::class)->findBySlug($data['category']) : null;
         $subcategory = isset($data['subcategory']) ? app(CategoryRepository::class)->findBySlug($data['subcategory']) : null;
@@ -144,7 +144,7 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
                 $query->where('slug', $slug);
             })
             ->firstOr(function () {
-                abort(404);
+                throw new AdException('Ad not found.');
             });
     }
 
@@ -158,10 +158,10 @@ class AdminAdRepository extends BaseCrudRepository implements AdminAdRepositoryI
     public function deleteAd(string $adSlug): void
     {
         $ad = $this->model->where('slug', $adSlug)->firstOr(function () {
-            abort(404);
+            throw new AdException('Ad not found.');
         });
         if($ad->status === AdStatus::PUBLISHED) {
-            abort(404);
+            throw new AdException('Ad not found.');
         }
         $ad->delete();
     }   

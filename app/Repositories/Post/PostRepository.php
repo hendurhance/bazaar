@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Post;
 use App\Contracts\Repositories\PostRepositoryInterface;
 use App\Enums\StorageDiskType;
+use App\Exceptions\PostException;
 use App\Models\Admin;
 use App\Traits\MediaHandler;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -80,7 +81,7 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
             ->published()
             ->where('slug', $slug)
             ->firstOr(function () {
-                abort(404);
+                throw new PostException('Post not found.');
             });
     }
 
@@ -139,7 +140,7 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
         ])
             ->where('slug', $slug)
             ->firstOr(function () {
-                abort(404);
+                throw new PostException('Post not found.');
             });
     }
 
@@ -183,7 +184,7 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
     {
         DB::transaction(function () use ($slug, $data) {
             $post = $this->model->where('slug', $slug)->firstOr(function () {
-                abort(404);
+                throw new PostException('Post not found.');
             });
             $post->update([
                 'title' => $data['title'],
@@ -202,7 +203,7 @@ class PostRepository extends BaseCrudRepository implements PostRepositoryInterfa
     public function deletePost(string $slug): void
     {
         $this->model->where('slug', $slug)->firstOr(function () {
-            abort(404);
+            throw new PostException('Post not found.');
         })->delete();
 
         // TODO: Delete all media related to this post

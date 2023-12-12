@@ -6,12 +6,13 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Bid;
 use App\Contracts\Repositories\BidRepositoryInterface;
 use App\Enums\AdStatus;
+use App\Exceptions\BidCustomException;
 use App\Exceptions\BidException;
 use App\Models\User;
 use App\Notifications\Bid\BidAcceptedNotification;
 use App\Notifications\Bid\BidCreatedNotification;
 use App\Notifications\Bid\BidRejectedNotification;
-use App\Repositories\Ad\AdRepository;
+use App\Repositories\Ad\User\AdRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
 class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
@@ -32,11 +33,11 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
     public function bid(string $ad, User $user, array $data): void
     {
         $ad = app(AdRepository::class)->findBy('slug', $ad, function () {
-            abort(404);
+            throw new BidCustomException('Ad cannot be found or has been deleted.');
         });
 
         if ($ad->user_id === $user->id) {
-            abort(403);
+            throw new BidException('You cannot bid on your own ad.', $ad->slug);
         }
 
         if (!$ad->active()) {
@@ -89,7 +90,7 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
     {
         return $this->model->with(['ad:id,title,slug,price,status,started_at,expired_at,seller_name,seller_email,seller_mobile,seller_address', 'ad.user:id,name,avatar,username', 'payment:id,bid_id,amount,txn_id,status,created_at,gateway'])
             ->where('id', $bid)->where('user_id', $user->id)->firstOr(function () {
-                abort(404);
+               throw new BidCustomException('Bid not found for this ad.');
             });
     }
 
@@ -104,7 +105,7 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
     public function acceptBid(string $adSlug, string $bidId, User $user): void
     {
         $ad = app(AdRepository::class)->findBy('slug', $adSlug, function () {
-            abort(404);
+            throw new BidCustomException('Ad not found.');
         });
 
         if ($ad->hasAcceptedBid()) {

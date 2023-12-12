@@ -28,7 +28,7 @@ class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInt
     {
         return Payment::query()->with(['ad:id,title,slug,price,description,status,started_at,price,expired_at', 'ad.media', 'bid:id,ad_id,user_id,amount', 'payee:id','payer:id,name', 'payout:id,payment_id,payout_method_id,amount,fee,pyt_token,status,created_at,updated_at', 'payout.payoutMethod:id,bank_name,account_name,account_number'])
             ->where('txn_id', $txnId)->where('payee_id', $user->id)->firstOr(function () {
-                abort(404);
+                throw new PayoutException('Payment not found.');
             });
     }
     
@@ -44,7 +44,7 @@ class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInt
     public function request(User $user, string $txnId, array $data): void
     {
         $payment = Payment::query()->where('txn_id', $txnId)->where('payee_id', $user->id)->firstOr(function () {
-            abort(404);
+            throw new PayoutException('Payment not found.');
         });
         if ($payment->payout) {
             throw new PayoutException('Payout request already exists for this payment');
