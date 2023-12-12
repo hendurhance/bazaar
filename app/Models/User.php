@@ -6,6 +6,7 @@ namespace App\Models;
 
 use App\Enums\Gender;
 use App\Traits\HasAvatar;
+use App\Traits\HasNameSplit;
 use App\Traits\HasUuids;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -18,7 +19,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar, HasNameSplit;
 
     /**
      * The attributes that are mass assignable.
@@ -77,24 +78,6 @@ class User extends Authenticatable
             fn ($value) => strtolower($value),
             fn ($value) => strtolower($value)
         );
-    }
-
-    /**
-     * Get the user's first name.
-     * @return string
-     */
-    public function getFirstNameAttribute(): string
-    {
-        return implode(' ', array_slice(explode(' ', $this->name), 0, count(explode(' ', $this->name)) / 2)) ?? '';
-    }
-
-    /**
-     * Get the user's last name.
-     * @return string
-     */
-    public function getLastNameAttribute(): string
-    {
-        return implode(' ', array_slice(explode(' ', $this->name), count(explode(' ', $this->name)) / 2)) ?? '';
     }
 
     /**

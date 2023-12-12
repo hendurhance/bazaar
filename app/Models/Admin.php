@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Traits\HasAvatar;
+use App\Traits\HasNameSplit;
 use App\Traits\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,7 +13,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Admin extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar, HasNameSplit;
 
     /**
      * The attributes that are mass assignable.

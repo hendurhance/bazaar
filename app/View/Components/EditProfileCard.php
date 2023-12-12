@@ -7,9 +7,9 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ProfileAvatarCard extends Component
+class EditProfileCard extends Component
 {
-    /**
+     /**
      * Create a new component instance.
      */
     public function __construct(protected AuthenticateRepositoryInterface $authenticateRepository)
@@ -20,10 +20,8 @@ class ProfileAvatarCard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.profile-avatar-card',
-            [
-                'admin' => $this->authenticateRepository->admin(),
-            ]
-        );
+        return view('components.edit-profile-card', [
+            'admin' => $this->authenticateRepository->admin(),
+        ]);
     }
 }

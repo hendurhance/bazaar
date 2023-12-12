@@ -68,8 +68,16 @@ interface AuthenticateRepositoryInterface
     /**
      * Update a user's profile.
      * 
-     * @param \App\Models\User $user
+     * @param \App\Models\User|\App\Models\Admin  $user
      * @param array<string, mixed> $data
      */
-    public function update(\App\Models\User $user, array $data): void;
+    public function update(\App\Models\User|\App\Models\Admin $user, array $data): void;
+
+    /**
+     * Update a user's password.
+     * 
+     * @param \App\Models\Admin  $admin
+     * @param array<string, mixed> $data
+     */
+    public function updatePassword(\App\Models\Admin $admin, array $data): void;
 }

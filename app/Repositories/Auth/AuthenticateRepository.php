@@ -158,19 +158,41 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
      * @param User $user
      * @param array<string, mixed> $data
      */
-    public function update(User $user, array $data): void
+    public function update(User|Admin $user, array $data): void
     {
-        $user->update([
-            'name' => $data['first_name'] . ' ' . $data['last_name'] ?? $user->name,
-            'mobile' => $data['mobile'] ?? $user->mobile,
-            'gender' => $data['gender'] ?? $user->gender,
-            'address' => $data['address'] ?? $user->address,
-            'country_id' => $countryId = app(CountryRepository::class)->findByIso2Code($data['country'])->id ?? $user->country_id,
-            'state_id' => app(CountryRepository::class)->findStateByCode($countryId, $data['state'])->id ?? $user->state_id,
-            'city_id' => $data['city'] ?? $user->city_id,
-            'zip_code' => $data['zip_code'] ?? $user->zip_code,
-            // 'timezone_id' => $data['timezone'] ?? $user->timezone_id,
-            'password' => $data['password'] ? Hash::make($data['password']) : $user->password,
+        if ($user instanceof User) {
+            $user->update([
+                'name' => $data['first_name'] . ' ' . $data['last_name'] ?? $user->name,
+                'mobile' => $data['mobile'] ?? $user->mobile,
+                'gender' => $data['gender'] ?? $user->gender,
+                'address' => $data['address'] ?? $user->address,
+                'country_id' => $countryId = app(CountryRepository::class)->findByIso2Code($data['country'])->id ?? $user->country_id,
+                'state_id' => app(CountryRepository::class)->findStateByCode($countryId, $data['state'])->id ?? $user->state_id,
+                'city_id' => $data['city'] ?? $user->city_id,
+                'zip_code' => $data['zip_code'] ?? $user->zip_code,
+                // 'timezone_id' => $data['timezone'] ?? $user->timezone_id,
+                'password' => $data['password'] ? Hash::make($data['password']) : $user->password,
+            ]);
+        } else {
+            $user->update([
+                'name' => $data['first_name'] . ' ' . $data['last_name']
+            ]);
+        }
+    }
+
+    /**
+     * Update a user's password.
+     * 
+     * @param \App\Models\Admin  $admin
+     * @param array<string, mixed> $data
+     */
+    public function updatePassword(Admin $admin, array $data): void
+    {
+        if (!Hash::check($data['current_password'], $admin->password)) {
+            throw new AuthenticateException('Current password is incorrect.');
+        }
+        $admin->update([
+            'password' => Hash::make($data['password']),
         ]);
     }
 

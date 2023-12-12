@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Payout\PayoutController;
 use App\Http\Controllers\Admin\Payout\PayoutMethodController;
 use App\Http\Controllers\Admin\Post\CommentController;
 use App\Http\Controllers\Admin\Post\PostController;
+use App\Http\Controllers\Admin\Profile\ProfileController;
 use App\Http\Controllers\Admin\Support\SupportController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -44,6 +45,11 @@ Route::middleware('auth:admin_web')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
 
     Route::get('/', [MetricsController::class, 'index'])->name('dashboard');
+
+    /* ========  PROFILE MANAGEMENT  =========== */
+    Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.change-password.handle');
 
     /* ========  USER  =========== */
     Route::resource('users', UserController::class);
