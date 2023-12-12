@@ -103,7 +103,7 @@
                                         </div>
                                         <div class="me-5 mt-5 mt-md-0">
                                             <div class="media mb-4 d-flex">
-                                                <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                                <div class="media-icon bg-dark bradius text-white me-3 mt-1">
                                                     <span class="mt-3">
                                                         <i class="fa-regular fa-credit-card fs-20"></i>
                                                     </span>
@@ -118,7 +118,7 @@
                                         </div>
                                         <div class="me-5 mt-5 mt-md-0">
                                             <div class="media mb-4 d-flex">
-                                                <div class="media-icon bg-danger bradius text-white me-3 mt-1">
+                                                <div class="media-icon bg-warning bradius text-white me-3 mt-1">
                                                     <span class="mt-3">
                                                         <i class="fa-regular fa-credit-card fs-20"></i>
                                                     </span>
@@ -126,7 +126,7 @@
                                                 <div class="media-body">
                                                     <span class="text-muted">Total Paid</span>
                                                     <div class="fw-semibold fs-25">
-                                                        {{money($user->payments->sum('amount'))}}
+                                                        {{money($user->payments->sum('amount'), true)}}
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,7 +141,7 @@
                                                 <div class="media-body">
                                                     <span class="text-muted">Total Payouts</span>
                                                     <div class="fw-semibold fs-25">
-                                                        {{money($user->payouts->sum('amount'))}}
+                                                        {{money($user->payouts->sum('amount'), true)}}
                                                     </div>
                                                 </div>
                                             </div>

@@ -3,10 +3,6 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
-
-use App\Models\Ad;
-use App\Models\User;
-use Database\Factories\BidFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -25,7 +21,7 @@ class DatabaseSeeder extends Seeder
             TagSeeder::class,
             PostSeeder::class,
             SupportSeeder::class,
-            PayoutMethodSeeder::class,
+            PayoutSeeder::class,
         ]);
     }
 }

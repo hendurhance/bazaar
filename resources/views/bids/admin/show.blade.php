@@ -46,7 +46,7 @@
                                                         <td class="fw-bold">Payment</td>
                                                         <td>
                                                             @if($bid->payment?->exists())
-                                                                <a href="{{ route('admin.bids.show', $bid->payment->txn_id) }}">See linked payment here - {{ $bid->payment->txn_id }}</a>
+                                                                <a href="{{ route('admin.payments.show', $bid->payment->txn_id) }}">See linked payment here - {{ $bid->payment->txn_id }}</a>
                                                             @else
                                                                 <span class="text-danger">No payment linked</span>
                                                             @endif
