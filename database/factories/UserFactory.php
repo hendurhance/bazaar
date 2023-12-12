@@ -38,6 +38,7 @@ class UserFactory extends Factory
             'address' => fake()->address(),
             'zip_code' => fake()->postcode(),
             'timezone_id' => $country->timezones()->inRandomOrder()->first()->id ?? null,
+            'created_at' => $this->faker->dateTimeBetween('-2 weeks', 'now'),
         ];
     }
 

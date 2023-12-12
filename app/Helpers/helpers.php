@@ -278,3 +278,19 @@ if (!function_exists('bytes_to_human')) {
         return @number_format($bytes / pow(1000, $unitIndex), $precision) . ' ' . $unitName;
     }
 }
+
+/**
+ * Get number to human readable format
+ * @param int $number
+ * @return string
+ */
+if (!function_exists('numbers_to_human')) {
+    function numbers_to_human(int $number): string
+    {
+        $units = ['', 'K', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'];
+        for ($i = 0; $number >= 1000; $i++) {
+            $number /= 1000;
+        }
+        return round($number, 1) . $units[$i];
+    }
+}

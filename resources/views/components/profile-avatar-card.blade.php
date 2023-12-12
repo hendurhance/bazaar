@@ -10,11 +10,12 @@
             </div>
         </div>
         <div class="dropdown-divider m-0"></div>
-        <a class="dropdown-item" href="profile.html">
+    <a class="dropdown-item" href="#">
             <i class="dropdown-icon fa-light fa-user"></i> Profile
         </a>
-        <a class="dropdown-item" href="login.html">
-            <i class="dropdown-icon fa-light fa-circle-exclamation"></i> Sign out
-        </a>
+        <form class="dropdown-item" action="{{ route('admin.logout.handle') }}" method="POST">
+            @csrf
+            <button class="no-bg-bdr" type="submit"><i class="dropdown-icon fa-light fa-circle-exclamation"></i> Sign out</button>
+        </form>
     </div>
 </div>
