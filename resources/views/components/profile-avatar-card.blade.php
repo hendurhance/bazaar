@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="dropdown-divider m-0"></div>
-    <a class="dropdown-item" href="#">
+    <a class="dropdown-item" href="{{ route('admin.profile') }}">
             <i class="dropdown-icon fa-light fa-user"></i> Profile
         </a>
         <form class="dropdown-item" action="{{ route('admin.logout.handle') }}" method="POST">
