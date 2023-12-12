@@ -71,8 +71,7 @@ class PayoutRepository extends BaseCrudRepository implements PayoutRepositoryInt
             $user->notify(new PayoutRequestNotification($payout));
         } catch (\Throwable $th) {
             $this->model->getConnection()->rollBack();
-            throw $th;
-            // throw new PayoutException($th->getMessage());
+            throw new PayoutException('Payout request failed. Please try again.');
         }
     }
 

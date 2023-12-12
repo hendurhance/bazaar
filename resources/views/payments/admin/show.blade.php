@@ -35,7 +35,7 @@
                                                                        style="background-image: url({{$payment->payer->avatar}})"></span>
                                                                     <div
                                                                        class="ms-3 mt-0 d-block">
-                                                                       <a href="#"
+                                                                       <a href="{{route('admin.users.show', $payment->payer->id)}}"
                                                                           class="mb-0 fs-14 fw-semibold text-info">
                                                                             {{ $payment->payer->name }}
                                                                        </a>
@@ -51,7 +51,7 @@
                                                                        style="background-image: url({{$payment->payee->avatar}})"></span>
                                                                     <div
                                                                        class="ms-3 mt-0 d-block">
-                                                                       <a href="#"
+                                                                       <a href="{{route('admin.users.show', $payment->payee->id)}}"
                                                                           class="mb-0 fs-14 fw-semibold text-info">
                                                                             {{ $payment->payee->name }}
                                                                        </a>
