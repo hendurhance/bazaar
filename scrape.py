@@ -49,3 +49,13 @@ import os
 #     if i.endswith(".stub"):
 #         os.rename(os.path.join(folder, i), os.path.join(folder, i.replace(".stub", ".php")))
 
+# Write a code that goes to all the css file in the public/assets/css folder and minify them
+folder = "public/assets/css"
+
+for i in os.listdir(folder):
+    if i.endswith(".css"):
+        with open(os.path.join(folder, i), "r") as f:
+            content = f.read()
+        with open(os.path.join(folder, i), "w") as f:
+            f.write(content.replace("\n", "").replace("\t", "").replace("  ", ""))
+        print(f"Minified: {i}")
