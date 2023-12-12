@@ -21,7 +21,7 @@
            <h3>Main</h3>
          </li>
          <li @class(['slide', 'active' => $active === 'dashboard'])>
-           <a class="side-menu__item has-link" data-bs-toggle="slide" href="index.html">
+           <a class="side-menu__item has-link" data-bs-toggle="slide" href="{{ route('admin.dashboard') }}">
             <i class="side-menu__icon fa-regular fa-house"></i>
             <span class="side-menu__label">Dashboard</span>
          </a>

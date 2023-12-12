@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\Ad\AdController;
 use App\Http\Controllers\Admin\Auth\LoginController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Bid\BidController;
+use App\Http\Controllers\Admin\Dashboard\MetricsController;
 use App\Http\Controllers\Admin\Media\MediaController;
 use App\Http\Controllers\Admin\Payment\PaymentController;
 use App\Http\Controllers\Admin\Payout\PayoutController;
@@ -40,7 +41,9 @@ Route::middleware('guest:admin_web')->group(function () {
 
 
 Route::middleware('auth:admin_web')->group(function () {
-    Route::view('/', 'dashboard.admin.index')->name('dashboard');
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
+
+    Route::get('/', [MetricsController::class, 'index'])->name('dashboard');
 
     /* ========  USER  =========== */
     Route::resource('users', UserController::class);

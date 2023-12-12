@@ -26,6 +26,12 @@
     margin-bottom: 5px;
 }
 
+.no-bg-bdr{
+    background: none;
+    border: 0;
+    outline: none;
+}
+
 /** ====== MEDIA QUERIES ====== **/
 @media (min-width: 992px) {
     .sidebar-mini.sidenav-toggled i.fa-chevron-right {

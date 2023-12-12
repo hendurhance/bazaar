@@ -89,7 +89,7 @@ class UserRepository extends BaseCrudRepository implements UserRepositoryInterfa
     {
         $country = app(CountryRepository::class)->findByIso2Code($data['country']);
         $state = app(CountryRepository::class)->findStateByCode($country->id, $data['state']);
-        $user = $this->model->query()->create([
+        $this->model->query()->create([
             'name' => $data['first_name'] . ' ' . $data['last_name'],
             'email' => $data['email'],
             'mobile' => $data['mobile'],
