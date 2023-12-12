@@ -5,9 +5,8 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
-class BidException extends Exception
+class BidCustomException extends Exception
 {
-   
     /**
      * The exception message.
      *

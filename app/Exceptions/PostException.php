@@ -5,7 +5,7 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
-class BidException extends Exception
+class PostException extends Exception
 {
    
     /**
@@ -25,7 +25,7 @@ class BidException extends Exception
     /**
      * Instantiate a new exception instance.
      */
-    public function __construct(string $message = 'Something went wrong while processing your bid.')
+    public function __construct(string $message = 'Something went wrong while processing your post.')
     {
         $this->message = $message;
     }

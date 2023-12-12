@@ -5,6 +5,7 @@ namespace App\Repositories\Media;
 use App\Abstracts\BaseCrudRepository;
 use App\Models\Media;
 use App\Contracts\Repositories\MediaRepositoryInterface;
+use App\Exceptions\MediaException;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 
@@ -77,7 +78,7 @@ class MediaRepository extends BaseCrudRepository implements MediaRepositoryInter
         return $this->model->query()->with(['user:id,name,username,avatar'])
             ->where('id', $id)
             ->firstOr(function () {
-                abort(404);
+                throw new MediaException('Media not found.');
             });
     }
 

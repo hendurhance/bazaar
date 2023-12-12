@@ -76,11 +76,11 @@ class PaymentRepository extends BaseCrudRepository implements PaymentRepositoryI
     public function pay(string $bid, User $user, string $paymentMethod): string
     {
         $bid = app(BidRepository::class)->findBy('id', $bid, function () {
-            abort(404);
+            throw new PaymentException('Bid not found.');
         });
 
         if ($bid->user_id !== $user->id) {
-            abort(403);
+            throw new PaymentException('You cannot pay for this bid.');
         }
 
         // Check if there's a pending payment for this bid and user.

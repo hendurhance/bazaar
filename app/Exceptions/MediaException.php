@@ -5,10 +5,9 @@ namespace App\Exceptions;
 use Exception;
 use Illuminate\Http\RedirectResponse;
 
-class BidException extends Exception
+class MediaException extends Exception
 {
-   
-    /**
+   /**
      * The exception message.
      *
      * @var string
@@ -25,7 +24,7 @@ class BidException extends Exception
     /**
      * Instantiate a new exception instance.
      */
-    public function __construct(string $message = 'Something went wrong while processing your bid.')
+    public function __construct(string $message = 'Uploading message failed.')
     {
         $this->message = $message;
     }
@@ -50,3 +49,4 @@ class BidException extends Exception
         return false;
     }
 }
+

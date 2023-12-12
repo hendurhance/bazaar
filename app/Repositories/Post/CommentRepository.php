@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\Comment;
 use App\Contracts\Repositories\CommentRepositoryInterface;
 use App\Enums\CommentStatus;
+use App\Exceptions\CommentException;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -70,7 +71,7 @@ class CommentRepository extends BaseCrudRepository implements CommentRepositoryI
     public function getComment(int $id): \App\Models\Comment
     {
         return $this->find($id, function () {
-            abort(404);
+            throw new CommentException('Comment not found.');
         });
     }
 
@@ -84,7 +85,7 @@ class CommentRepository extends BaseCrudRepository implements CommentRepositoryI
     public function updateComment(array $data, int $id): void
     {
         $comment = $this->find($id, function () {
-            abort(404);
+            throw new CommentException('Comment not found.');
         });
 
         $comment->update([
@@ -105,12 +106,12 @@ class CommentRepository extends BaseCrudRepository implements CommentRepositoryI
     public function storeComment(array $data, string $slug, User|Admin $user): void
     {
         $post = app(PostRepository::class)->findBy('slug', $slug, function () {
-            abort(404);
+            throw new CommentException('Post not found.');
         });
 
         if (isset($data['reply_to'])) {
             $parentComment = $this->findBy('id', $data['reply_to'], function () {
-                abort(404);
+                throw new CommentException('Comment not found.');
             });
 
             $post->comments()->create([

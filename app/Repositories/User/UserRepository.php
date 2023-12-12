@@ -6,6 +6,7 @@ use App\Abstracts\BaseCrudRepository;
 use App\Models\User;
 use App\Contracts\Repositories\UserRepositoryInterface;
 use App\Enums\Gender;
+use App\Exceptions\UserException;
 use App\Repositories\Auth\AuthenticateRepository;
 use App\Repositories\Country\CountryRepository;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
@@ -75,7 +76,7 @@ class UserRepository extends BaseCrudRepository implements UserRepositoryInterfa
         ->withCount(['ads', 'bids', 'payoutMethods'])
             ->where('id', $id)
             ->firstOr(function () {
-                abort(404);
+                throw new UserException('User not found.');
             });
     }
 
@@ -113,7 +114,7 @@ class UserRepository extends BaseCrudRepository implements UserRepositoryInterfa
     public function sendPasswordResetLink(string $id): void
     {
         $user = $this->model->query()->where('id', $id)->firstOr(function () {
-            abort(404);
+            throw new UserException('User not found.');
         });
 
         app(AuthenticateRepository::class)->sendPasswordResetLink($user->email, \App\Models\User::class);
@@ -129,7 +130,7 @@ class UserRepository extends BaseCrudRepository implements UserRepositoryInterfa
     public function updateUser(string $id, array $data): void
     {
         $user = $this->model->query()->where('id', $id)->firstOr(function () {
-            abort(404);
+            throw new UserException('User not found.');
         });
 
         $user->update([
