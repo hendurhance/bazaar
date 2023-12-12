@@ -63,6 +63,7 @@
 
 @push('scripts')
 <script>
+    
     function getSubCategory(slug){
         fetch(`/api/subcategories/${slug}`)
         .then(response => response.json())
@@ -83,4 +84,3 @@
 
 </script>
 @endpush
-@endif

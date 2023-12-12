@@ -30,7 +30,6 @@ class AppServiceProvider extends ServiceProvider
         $this->app->singleton('command.make.repository', function ($app) {
             return new MakeRepositoryCommand($app['files']);
         });
-
         // Register the interface command.
         $this->app->singleton('command.make.interface', function ($app) {
             return new MakeInterfaceCommand($app['files']);

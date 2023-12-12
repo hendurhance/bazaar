@@ -19,5 +19,6 @@
 <link rel="stylesheet" href="/assets/css/magnific-popup.css">
 <link rel="stylesheet" href="/assets/css/odometer.css">
 <link rel="stylesheet" href="/assets/css/style.css">
-@endif
+<link rel="stylesheet" href="/plugin/notify/css/app.css">
+<link rel="stylesheet" href="/plugin/notify/css/notify.css">
 @stack('styles')

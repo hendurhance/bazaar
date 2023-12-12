@@ -196,7 +196,6 @@ if (!function_exists('get_random_avatar')) {
             'Yara',
             'Zane',
         ];
-
         // Access a random name from the array
         $randomName = $randomNames[array_rand($randomNames)];
         $boringAvatar = new BoringAvatar($randomName);
