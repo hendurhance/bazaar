@@ -35,11 +35,11 @@ class AdSeeder extends Seeder
         $ads = Ad::factory()->count(rand(5, 15))->create(
             [
                 'user_id' => $user_id,
-                'created_at' => now()->subDays(rand(1, 30)),
+                'created_at' => now()->subDays(rand(1, 10)),
             ]
         );
         $ads->each(function ($ad) {
-            $medias = Media::factory()->count(2)->create();
+            $medias = Media::factory()->count(rand(2,3))->create();
             $ad->media()->saveMany($medias);
             // create report for ad
             $reports = $ad->reports()->makeMany(

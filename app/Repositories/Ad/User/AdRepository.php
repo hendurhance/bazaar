@@ -88,7 +88,12 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
                     });
             })
             ->orderBy('created_at', 'desc')
-            ->paginate($limit);
+            ->paginate($limit)
+            ->appends([
+                'category' => $filters['category'] ?? null,
+                'country' => $filters['country'] ?? null,
+                'price_range' =>  isset($filters['amount_from']) ? PriceRange::range($filters['price_range']) : null,
+            ]);
     }
 
     /**

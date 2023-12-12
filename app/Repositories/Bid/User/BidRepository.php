@@ -76,7 +76,8 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
                     $query->orderBy(sort_query_parser($filters['sort'])[0], sort_query_parser($filters['sort'])[1]);
                 }
             })
-            ->paginate($limit);
+            ->paginate($limit)
+            ->appends(['sort' => $filters['sort'] ?? null]);
     }
 
     /**

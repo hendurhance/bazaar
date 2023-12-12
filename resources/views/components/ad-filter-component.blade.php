@@ -23,8 +23,8 @@
                 </div>
                 <div class="col-md-3">
                     <select class="form-inner" name="price_range" @class(['error'=> $errors->has('price_range')])>
-                        @foreach ($priceRanges as $priceRange)
-                            <option value="{{ $priceRange->value }}" @selected($priceRange->value == request()->price_range)>{{ $priceRange->label() }}</option>
+                        @foreach ($priceRanges as $range)
+                        <option value="{{ $range }}" @selected($range->value == request()->price_range)>{{ $range->label() }}</option>
                         @endforeach
                     </select>
                 </div>
