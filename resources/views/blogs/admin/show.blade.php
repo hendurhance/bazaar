@@ -63,7 +63,7 @@
                                         <h5 class="mt-0">{{ $comment->user->name ?? $comment->admin->name }}</h5>
                                         <p class="font-13 text-muted">{{ $comment->content }}</p>
                                         <span class="reply" id="1">
-                                            <a class="like" href="javascript:;"><span class="badge btn-danger-light rounded-pill py-2 px-3"><i class="fa-regular fa-edit mx-1"></i>Edit</span></a>
+                                            <a class="like" href="{{ route('admin.comments.edit', $comment->id) }}"><span class="badge btn-danger-light rounded-pill py-2 px-3"><i class="fa-regular fa-edit mx-1"></i>Edit</span></a>
                                             <a href="javascript:;" onclick="replyTo('{{$comment->id}}', '{{$comment->user->name ?? $comment->admin->name}}')"><span class="badge btn-primary-light rounded-pill py-2 px-3"><i class="fa-regular fa-reply mx-1"></i>Reply</span></a>
                                         </span>
                                     </div>

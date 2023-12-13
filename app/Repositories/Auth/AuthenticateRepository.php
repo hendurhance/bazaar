@@ -161,13 +161,20 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
     public function update(User|Admin $user, array $data): void
     {
         if ($user instanceof User) {
+            $countryId = isset($data['country']) ? app(CountryRepository::class)->findByIso2Code($data['country'])->id : null;
+            $stateId = isset($data['state']) ? app(CountryRepository::class)->findStateByCode($countryId, $data['state'])->id : null;
+            if(isset($data['current_password'])) {
+                if (!Hash::check($data['current_password'], $user->password)) {
+                    throw new AuthenticateException('Current password is incorrect.');
+                }
+            }
             $user->update([
                 'name' => $data['first_name'] . ' ' . $data['last_name'] ?? $user->name,
                 'mobile' => $data['mobile'] ?? $user->mobile,
                 'gender' => $data['gender'] ?? $user->gender,
                 'address' => $data['address'] ?? $user->address,
-                'country_id' => $countryId = app(CountryRepository::class)->findByIso2Code($data['country'])->id ?? $user->country_id,
-                'state_id' => app(CountryRepository::class)->findStateByCode($countryId, $data['state'])->id ?? $user->state_id,
+                'country_id' => $countryId ?? $user->country_id,
+                'state_id' => $stateId ?? $user->state_id,
                 'city_id' => $data['city'] ?? $user->city_id,
                 'zip_code' => $data['zip_code'] ?? $user->zip_code,
                 // 'timezone_id' => $data['timezone'] ?? $user->timezone_id,

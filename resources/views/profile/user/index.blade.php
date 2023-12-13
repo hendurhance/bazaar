@@ -49,7 +49,9 @@
                                     <x-input-field name="zip_code" type="text" label="Zip Code" placeholder="Your zip code" :required="false" value="{{ $user->zip_code }}"/>
                                  </div> 
                                  <div class="col-12">
+                                    <x-input-field name="current_password" type="password" label="Current Password" placeholder="Enter Current password" :required="false"/>
                                     <x-input-field name="password" type="password" label="Change Password" placeholder="Create a password" :required="false"/>
+                                 </div>
                                  <div class="col-12">
                                     <div class="button-group">
                                        <button type="submit" class="eg-btn profile-btn">Update Profile</button>

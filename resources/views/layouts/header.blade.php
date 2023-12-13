@@ -138,7 +138,7 @@
                 </ul>
             </li>
             <li>
-                <a href="{{ route('blog') }}">Blog</a>
+                <a href="{{ route('blog.index') }}">Blog</a>
             </li>
         </ul>
 
@@ -178,3 +178,4 @@
         </div>
     </div>
 </header>
+@endif
