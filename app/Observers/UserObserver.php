@@ -22,7 +22,6 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        Log::info('User created: ' . $user->email);
         $user->notify(new UserVerificationNotification($user));
     }
 

@@ -16,7 +16,7 @@ class RegisterController extends Controller
     public function __construct(protected AuthenticateRepositoryInterface $repository)
     {
         $this->repository = $repository;
-        $this->middleware('guest');
+        $this->middleware('guest')->except('resendVerificationEmail');
     }
 
     /**
@@ -41,5 +41,17 @@ class RegisterController extends Controller
         $this->repository->verify($token);
 
         return redirect()->route('user.login')->with('success', 'Your email has been verified, you can now login.');
+    }
+
+    /**
+     * Resend the email verification notification.
+     * 
+     * @return RedirectResponse
+     */
+    public function resendVerificationEmail(): RedirectResponse
+    {
+        $this->repository->sendEmailVerificationLink($this->repository->user());
+
+        return back()->with('success', 'A new verification link has been sent to your email address.');
     }
 }

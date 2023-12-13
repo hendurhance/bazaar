@@ -8,6 +8,7 @@ use App\Enums\Gender;
 use App\Traits\HasAvatar;
 use App\Traits\HasNameSplit;
 use App\Traits\HasUuids;
+use App\Traits\HasVerifiedEmail;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -19,7 +20,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar, HasNameSplit;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar, HasVerifiedEmail, HasNameSplit;
 
     /**
      * The attributes that are mass assignable.

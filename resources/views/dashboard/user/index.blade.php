@@ -9,6 +9,11 @@
         <div class="row g-4">
             @include('layouts.sidebar', ['active' => 'dashboard', 'admin' => false])
             <div class="col-lg-9">
+                @if(!auth()->user()->hasVerifiedEmail())
+                <div class="card p-4 mb-4">
+                    <span>Oops! It seems your account is not verified. Click <a href="{{route('user.resend-verification-email')}}" class="text-primary">here</a> resend the verification email and unlock the full potential of your account.</span>
+                </div>
+                @endif
                 <div class="tab-pane">
                     <div class="dashboard-area box--shadow">
                             <div class="row g-4">

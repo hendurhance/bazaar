@@ -80,4 +80,11 @@ interface AuthenticateRepositoryInterface
      * @param array<string, mixed> $data
      */
     public function updatePassword(\App\Models\Admin $admin, array $data): void;
+
+    /**
+     * Send email verification link.
+     * 
+     * @param \App\Models\User|
+     */
+    public function sendEmailVerificationLink(\App\Models\User $user): void;
 }

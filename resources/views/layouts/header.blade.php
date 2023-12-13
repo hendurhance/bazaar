@@ -11,10 +11,10 @@
           <img src="/assets/images/bg/header-logo2.png" class="header-brand-img light-logo1" alt="logo">
         </a>
         <!-- LOGO -->
-        <div class="main-header-center ms-3 d-none d-lg-block">
-          <input type="text" class="form-control" id="typehead" placeholder="Search for results...">
-          <button class="btn px-0 pt-2"><i class="fa-regular fa-magnifying-glass" aria-hidden="true"></i></button>
-        </div>
+        <form action="{{route('admin.search')}}" class="main-header-center ms-3 d-none d-lg-block">
+          <input type="text" class="form-control" id="typehead" placeholder="Search for results..." name="q" autocomplete="off" value="{{request()->q}}">
+          <button type="submit" class="btn px-0 pt-2"><i class="fa-regular fa-magnifying-glass" aria-hidden="true"></i></button>
+        </form>
         <div class="d-flex order-lg-2 ms-auto header-right-icons">
           <!-- SEARCH -->
           <button class="navbar-toggler navresponsive-toggler d-lg-none ms-auto" type="button"

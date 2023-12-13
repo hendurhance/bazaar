@@ -6,8 +6,10 @@ use App\Contracts\Repositories\MetricRepositoryInterface;
 use App\Enums\PaymentStatus;
 use App\Models\Ad;
 use App\Models\Bid;
+use App\Models\Media;
 use App\Models\Payment;
 use App\Models\User;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 class MetricRepository implements MetricRepositoryInterface
 {
@@ -26,6 +28,82 @@ class MetricRepository implements MetricRepositoryInterface
             'yearly_analytics' => $this->getYearlyAnalytics(),
             'payment_analytics' => $this->getPaymentAnalytics(),
             'location_analytics' => $this->getLocationAnalytics(),
+        ];
+    }
+
+    /**
+     * Search for a query
+     * 
+     * @param string $query
+     */
+    public function search(string $query, int $perPage = 25): array
+    {
+        $start = microtime(true);
+
+        $combinedResults = collect();
+
+        // User search
+        $userSearch = User::select('id', 'name', 'email', 'avatar', 'username', 'created_at')
+            ->where('name', 'LIKE', "%{$query}%")
+            ->orWhere('email', 'LIKE', "%{$query}%")
+            ->orWhere('id', $query)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        // Media search
+        $mediaSearch = Media::select('id', 'name', 'url', 'created_at')
+            ->where('name', 'LIKE', "%{$query}%")
+            ->orWhere('id', $query)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        // Ad search
+        $adSearch = Ad::select('id', 'slug', 'title', 'created_at', 'description', 'price', 'category_id', 'sub_category_id')
+            ->with('category:id,name', 'subCategory:id,name')
+            ->where('title', 'LIKE', "%{$query}%")
+            ->orWhere('id', $query)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        // Bid search
+        $bidSearch = Bid::select('id', 'ad_id', 'user_id', 'amount', 'created_at')
+            ->with('ad:id,title')
+            ->with('user:id,name')
+            ->whereBetween('amount', [0, $query])
+            ->orWhere('id', $query)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        // Combine results into a common structure
+        $combinedResults = $combinedResults->merge($userSearch)->merge($mediaSearch)->merge($adSearch)->merge($bidSearch);
+
+        // Paginate the combined results
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentPageItems = $combinedResults->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $paginatedResults = new LengthAwarePaginator($currentPageItems, count($combinedResults), $perPage, $currentPage);
+        $paginatedResults->withPath(route('admin.search', ['q' => $query]));
+
+        $modelFlag = [
+            'ad' => false,
+            'user' => false,
+            'media' => false,
+            'bid' => false,
+        ];
+
+        foreach ($paginatedResults as $item) {
+            match (true) {
+                $item instanceof Ad => $modelFlag['ad'] = true,
+                $item instanceof User => $modelFlag['user'] = true,
+                $item instanceof Media => $modelFlag['media'] = true,
+                $item instanceof Bid => $modelFlag['bid'] = true,
+            };
+        }
+
+        return [
+            'results' => $paginatedResults,
+            'total' => $paginatedResults->total(),
+            'seconds' => microtime(true) - $start,
+            'model_flag' => $modelFlag,
         ];
     }
 

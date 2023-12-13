@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\Payout\PayoutMethodController;
 use App\Http\Controllers\Admin\Post\CommentController;
 use App\Http\Controllers\Admin\Post\PostController;
 use App\Http\Controllers\Admin\Profile\ProfileController;
+use App\Http\Controllers\Admin\Search\SearchController;
 use App\Http\Controllers\Admin\Support\SupportController;
 use App\Http\Controllers\Admin\User\UserController;
 use Illuminate\Support\Facades\Route;
@@ -41,10 +42,11 @@ Route::middleware('guest:admin_web')->group(function () {
 });
 
 
-Route::middleware('auth:admin_web')->group(function () {
+Route::middleware(['auth:admin_web', 'ensure.account.active'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
 
     Route::get('/', [MetricsController::class, 'index'])->name('dashboard');
+    Route::get(uri: '/search', action: SearchController::class)->name('search');
 
     /* ========  PROFILE MANAGEMENT  =========== */
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile');
