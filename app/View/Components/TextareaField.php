@@ -12,6 +12,7 @@ class TextareaField extends Component
      * Create a new component instance.
      */
     public function __construct(
+        public bool $admin,
         public string $name,
         public string $label = '',
         public string $placeholder = '',
@@ -27,6 +28,6 @@ class TextareaField extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.textarea-field');
+        return view('components.text-area-field');
     }
 }

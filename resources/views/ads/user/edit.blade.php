@@ -2,12 +2,12 @@
 @section('title', 'Edit Ad Listing - '.$ad->title)
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Edit Ad Listing', 'hasBack' => true, 'backUrl' => route('user.ads'), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Edit Ad Listing', 'hasBack' => true, 'backUrl' => route('user.ads'), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'ads'])
+            @include('layouts.sidebar', ['active' => 'ads', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="form-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s"
@@ -24,7 +24,7 @@
                                 </div>
                             <div class="col-md-12">
                                     <x-textarea-field name="description" label="Ad Description"
-                                        placeholder="Enter Description" value="{{ $ad->description }}" />
+                                        placeholder="Enter Description" value="{{ $ad->description }}" :admin="false" />
                                 </div>
                                 <div class="col-md-12">
                                     <x-input-field name="price" type="number" label="Starting Price"

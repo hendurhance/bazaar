@@ -147,9 +147,11 @@ if (!function_exists('money')) {
 
         $suffixes = ["", "K", "M", "B", "T"];
         $suffixIndex = 0;
-        while ($amount >= 1000) {
-            $suffixIndex++;
-            $amount /= 1000;
+        if ($withSuffix) {
+            while ($amount >= 1000) {
+                $suffixIndex++;
+                $amount /= 1000;
+            }
         }
 
         return match ($withSuffix) {
@@ -194,7 +196,6 @@ if (!function_exists('get_random_avatar')) {
             'Yara',
             'Zane',
         ];
-        
         // Access a random name from the array
         $randomName = $randomNames[array_rand($randomNames)];
         $boringAvatar = new BoringAvatar($randomName);
@@ -254,5 +255,41 @@ if (!function_exists('sort_query_parser')) {
         ];
         $sort = urldecode($sort);
         return $query[$sort] ?? $query['created+desc'];
+    }
+}
+
+
+/**
+ * Convert bytes to human readable format
+ * @param string $bytes
+ * @param int $precision = 2
+ * @return string
+ */
+if (!function_exists('bytes_to_human')) {
+    function bytes_to_human(string $bytes, int $precision = 2): string
+    {
+        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB');
+
+        $bytes = max($bytes, 0);
+        $unitIndex = floor(log($bytes) / log(1000));
+        $unitName = $units[$unitIndex];
+
+        return @number_format($bytes / pow(1000, $unitIndex), $precision) . ' ' . $unitName;
+    }
+}
+
+/**
+ * Get number to human readable format
+ * @param int $number
+ * @return string
+ */
+if (!function_exists('numbers_to_human')) {
+    function numbers_to_human(int $number): string
+    {
+        $units = ['', 'K', 'M', 'B', 'T', 'P', 'E', 'Z', 'Y'];
+        for ($i = 0; $number >= 1000; $i++) {
+            $number /= 1000;
+        }
+        return round($number, 1) . $units[$i];
     }
 }

@@ -3,7 +3,7 @@
 @section('description', 'Contact us for any questions or concerns.')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Contact'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Contact'])
 
 <div class="contact-section pt-120 pb-120">
     <div class="container">
@@ -17,7 +17,7 @@
                     </div>
                     <div class="text">
                         <h4>Location</h4>
-                        <p>168/170, Ave 01,Old York Drive Rich Mirpur, Dhaka</p>
+                        <p>61 Oxford Street, London, UK</p>
                     </div>
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     </div>
                     <div class="text">
                         <h4>Phone</h4>
-                        <a href="tel:+880171-770000">+02 135498 26649</a>
+                        <a href="tel:+880171-770000">+01 5789 5544 666</a>
                         <a href="tel:+8801761111456">+8801761111456</a>
                     </div>
                 </div>
@@ -59,34 +59,40 @@
                         <p class="para">Feel free to ask me any question or let's do to talk about our future
                             collaboration.</p>
                     </div>
-                    <form action="#">
+                    <form action="{{ route('contact.store') }}" method="POST">
+                        @csrf
                         <div class="row">
                             <div class="col-xl-6 col-lg-12 col-md-6">
                                 <div class="form-inner">
-                                    <input type="text" placeholder="Your Name :">
+                                    <input type="text" name="name" placeholder="Your Name :">
                                 </div>
+                                <span class="text-danger">{{ $errors->first('name') }}</span>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6">
                                 <div class="form-inner">
-                                    <input type="email" placeholder="Your Email :">
+                                    <input type="email" name="email" placeholder="Your Email :">
                                 </div>
+                                <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6">
                                 <div class="form-inner">
-                                    <input type="text" placeholder="Your Phone :">
+                                    <input type="text" name="phone" placeholder="Your Phone :">
                                 </div>
+                                <span class="text-danger">{{ $errors->first('phone') }}</span>
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-6">
                                 <div class="form-inner">
-                                    <input type="text" placeholder="Subject :">
+                                    <input type="text" name="subject" placeholder="Subject :">
                                 </div>
+                                <span class="text-danger">{{ $errors->first('subject') }}</span>
                             </div>
                             <div class="col-12">
                                 <textarea name="message" placeholder="Write Message :" rows="12"></textarea>
+                                <span class="text-danger">{{ $errors->first('message') }}</span>
                             </div>
+                            {!! LaraCaptcha::script() !!}
                             <div class="col-12">
-                                <button type="submit" class="eg-btn btn--primary btn--md form--btn">Send
-                                    Message</button>
+                                <button type="submit" class="eg-btn btn--primary btn--md form--btn">Send Message</button>
                             </div>
                         </div>
                     </form>

@@ -5,6 +5,7 @@ namespace App\Observers;
 use App\Models\User;
 use App\Notifications\User\UserVerificationNotification;
 use App\Services\Avatar\UIAvatar;
+use Illuminate\Support\Facades\Log;
 
 class UserObserver
 {
@@ -21,7 +22,8 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        $user->notifyNow(new UserVerificationNotification($user));
+        Log::info('User created: ' . $user->email);
+        $user->notify(new UserVerificationNotification($user));
     }
 
     /**

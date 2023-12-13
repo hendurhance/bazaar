@@ -2,12 +2,12 @@
 @section('title', 'Payments')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Payments', 'hasBack' => true, 'backUrl' => route('user.payments'), 'backTitle' => 'payments', 'routeItem' => $payment->txn_id])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Payments', 'hasBack' => true, 'backUrl' => route('user.payments'), 'backTitle' => 'payments', 'routeItem' => $payment->txn_id])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'payments'])
+            @include('layouts.sidebar', ['active' => 'payments', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="payment-detail-wrapper">

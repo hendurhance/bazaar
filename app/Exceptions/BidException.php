@@ -7,7 +7,8 @@ use Illuminate\Http\RedirectResponse;
 
 class BidException extends Exception
 {
-     /**
+   
+    /**
      * The exception message.
      *
      * @var string
@@ -24,10 +25,9 @@ class BidException extends Exception
     /**
      * Instantiate a new exception instance.
      */
-    public function __construct(string $message = 'Your bid could not be placed.', string $adSlug, protected bool $loggedInPage = false)
+    public function __construct(string $message = 'Something went wrong while processing your bid.')
     {
         $this->message = $message;
-        $this->adSlug = $adSlug;
     }
 
     /**
@@ -37,10 +37,7 @@ class BidException extends Exception
      */
     public function render(): RedirectResponse
     {
-        if ($this->loggedInPage) {
-            return redirect()->route('user.ads.show', $this->adSlug)->with('error', $this->message);
-        }
-        return redirect()->route('auction-details', $this->adSlug)->with('error', $this->message)->withErrors(['amount' => $this->message]);
+        return redirect()->back()->with('error', $this->message);
     }
 
     /**

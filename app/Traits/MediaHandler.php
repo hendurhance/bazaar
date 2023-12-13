@@ -54,23 +54,10 @@ trait MediaHandler
             'url' => $uploadedMedia['url'],
             'extension' => $file->getClientOriginalExtension(),
             'mime_type' => $file->getMimeType(),
+            'size' => $file->getSize(),
             'storage' => $disk
         ]);
         return $media;
-    }
-
-    /**
-     * Delete media files.
-     * 
-     * @param Model $model
-     * @param array $files
-     * @return void
-     */
-    public function deleteMedia(Model $model, array $files): void
-    {
-        foreach ($files as $file) {
-            $this->deleteMediaFile($file);
-        }
     }
 
     /**

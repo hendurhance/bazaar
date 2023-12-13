@@ -6,7 +6,9 @@ namespace App\Models;
 
 use App\Enums\Gender;
 use App\Traits\HasAvatar;
+use App\Traits\HasNameSplit;
 use App\Traits\HasUuids;
+use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -17,7 +19,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar;
+    use HasApiTokens, HasFactory, Notifiable, HasUuids, HasAvatar, HasNameSplit;
 
     /**
      * The attributes that are mass assignable.
@@ -36,6 +38,11 @@ class User extends Authenticatable
         'address',
         'zip_code',
         'avatar',
+        'country_id',
+        'state_id',
+        'city_id',
+        'timezone_id',
+        'is_active',
     ];
 
     /**
@@ -56,6 +63,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'is_active' => 'boolean',
         'gender' => Gender::class,
     ];
 
@@ -73,21 +81,23 @@ class User extends Authenticatable
     }
 
     /**
-     * Get the user's first name.
-     * @return string
+     * Scope a query to only include active users.
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder $query
      */
-    public function getFirstNameAttribute(): string
+    public function active(Builder $query): Builder
     {
-        return implode(' ', array_slice(explode(' ', $this->name), 0, count(explode(' ', $this->name)) / 2)) ?? '';
+        return $query->where('is_active', true);
     }
 
     /**
-     * Get the user's last name.
-     * @return string
+     * Scope a query to only include inactive users.
+     * 
+     * @param \Illuminate\Database\Eloquent\Builder $query
      */
-    public function getLastNameAttribute(): string
+    public function inactive(Builder $query): Builder
     {
-        return implode(' ', array_slice(explode(' ', $this->name), count(explode(' ', $this->name)) / 2)) ?? '';
+        return $query->where('is_active', false);
     }
 
     /**
@@ -104,6 +114,32 @@ class User extends Authenticatable
     public function bids(): HasMany
     {
         return $this->hasMany(Bid::class);
+    }
+
+    /**
+     * Get the payments the user paid
+     */
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'payer_id');
+    }
+
+    /**
+     * Get the payments the user received
+     */
+    public function receivedPayments(): HasMany
+    {
+        return $this->hasMany(Payment::class, 'payee_id');
+    }
+
+    /**
+     * Get payouts for the user.
+     * 
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function payouts(): HasMany
+    {
+        return $this->hasMany(Payout::class, 'user_id');
     }
 
     /**
@@ -129,6 +165,15 @@ class User extends Authenticatable
     {
         return $this->belongsTo(Country::class);
     }
+
+    /**
+     * Get the country the user belongs to.
+     */
+    public function timezone(): BelongsTo
+    {
+        return $this->belongsTo(Timezone::class);
+    }
+
 
     /**
      * Get the state the user belongs to.

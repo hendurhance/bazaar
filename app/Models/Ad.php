@@ -103,6 +103,14 @@ class Ad extends Model
     }
 
     /**
+     * Get the reports for the ad.
+     */
+    public function reports(): HasMany
+    {
+        return $this->hasMany(ReportAd::class);
+    }
+
+    /**
      * Get the bids for the ad.
      */
     public function bids(): HasMany
@@ -116,6 +124,14 @@ class Ad extends Model
     public function highestBid(): HasOne
     {
         return $this->hasOne(Bid::class)->orderBy('amount', 'desc')->limit(1);
+    }
+
+    /**
+     * Get the winning bid for the ad.
+     */
+    public function winningBid(): HasOne
+    {
+        return $this->hasOne(Bid::class)->where('is_accepted', true);
     }
 
 
@@ -170,6 +186,16 @@ class Ad extends Model
     public function expired(): bool
     {
         return $this->expired_at->isPast() && $this->status === AdStatus::PUBLISHED;
+    }
+
+    public function rejected(): bool
+    {
+        return $this->status === AdStatus::REJECTED;
+    }
+
+    public function pending(): bool
+    {
+        return $this->status === AdStatus::PENDING;
     }
 
     /**

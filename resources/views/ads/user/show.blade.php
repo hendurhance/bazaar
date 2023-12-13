@@ -2,12 +2,12 @@
 @section('title', 'View Ad Listing - '.$ad->title)
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'View Ad Listing', 'hasBack' => true, 'backUrl' => route('user.ads'), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'View Ad Listing', 'hasBack' => true, 'backUrl' => route('user.ads'), 'backTitle' => 'Ads Listing', 'routeItem' => $ad->title])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'ads'])
+            @include('layouts.sidebar', ['active' => 'ads', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="ad-listing-wrapper">
@@ -118,7 +118,7 @@
                             <div class="col-lg-2 col-xl-3 col-md-6 col-sm-6 col-6 border-end border-bottom border-top">
                                 <div class="ad-listing-item">
                                     <span>Seller Phone:</span>
-                                    <p><i class="fa fa-phone"></i> {{ $ad->seller_phone }}</p>
+                                    <p><i class="fa fa-phone"></i> {{ $ad->seller_mobile }}</p>
                                 </div>
                             </div>
                             <div class="col-lg-2 col-xl-3 col-md-6 col-sm-6 col-6 border-top border-bottom border-end">

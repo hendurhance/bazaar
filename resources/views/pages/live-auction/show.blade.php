@@ -3,7 +3,7 @@
 @section('description', 'Auction detail page')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Auction Detail'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Auction Detail'])
 
 <div class="auction-details-section pt-120">
     <div class="container">
@@ -59,6 +59,13 @@
                             <address>{{ $ad->seller_address ?? 'Not Available' }}</address>
                         </div>
                     </div>
+                    {{-- div for report ad button --}}
+                    <div class="row d-flex mb-4">
+                        <div class="ad-listing-item col-12">
+                            <span> If you find this ad inappropriate, please report it to us.</span>
+                            <a href="{{ route('auction-details.report', $ad->slug) }}" class="text-danger fw-bold"><i class="bi bi-exclamation-circle-fill"></i> Report Ad</a>
+                        </div>
+                    </div>
                     @if($ad->active())
                     <div class="bid-form mt-0">
                         <div class="form-title">
@@ -88,6 +95,10 @@
                         @elseif($ad->upcoming())
                         <p class="text-dark mb-0">
                             This ad listing is yet to start. You can not place a bid on this auction yet. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
+                        </p>
+                        @else
+                        <p class="text-dark mb-0">
+                            This ad listing has been closed. You can no longer place a bid on this auction. Try checking out other auctions at <strong><a href="{{ route('live-auction') }}">live auctions</a></strong> page.
                         </p>
                         @endif
                     </x-alert>
@@ -183,7 +194,7 @@
     </div>
 </div>
 
-@include('layouts.metrics', ['class' => 'pt-120'])
+<x-metric-card :class="'pt-120'" />
 @push('scripts')
 <script src="/assets/js/countdown.js"></script>
 @endpush

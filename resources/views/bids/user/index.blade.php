@@ -2,12 +2,12 @@
 @section('title', 'My Bids')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'My Bids'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'My Bids'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'bidding'])
+            @include('layouts.sidebar', ['active' => 'bidding', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="table-title-area">

@@ -3,163 +3,47 @@
 @section('description', 'Read our blog posts to learn more about us and our platform.')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Blog'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Blog'])
 
 <div class="blog-section pt-120 pb-120">
     <div class="container">
+        <x-blog-filter-component/>
         <div class="row d-flex justify-content-center g-4 mb-60">
+            @forelse ($posts as $post)
             <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
                 <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s"
                     style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.2s; animation-name: fadeInDown;">
                     <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>Jan 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/blogstyle11.png">
+                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>{{ $post->created_at->format('M d, Y') }}</a>
+                        <img alt="image" src="{{$post->featured_image_url}}">
                     </div>
                     <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">Still Has in Advertising Creative
-                                Digital Reviews</a></h5>
+                        <h5><a href="{{ route('blog.show', $post->slug) }}">{{ $post->title }}</a></h5>
                         <div class="blog-meta">
                             <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
+                                <img alt="image" src="{{ $post->admin->avatar}}">
+                                <a href="{{ route('blog.show', $post->slug) }}" class="author-name">{{ $post->admin->name }}</a>
                             </div>
                             <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
+                                <img alt="image" src="/assets/images/icons/comment-icon.svg">
+                                <a href="#" class="comment">{{ $post->comments->count() }} Comments</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".4s"
-                    style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInDown;">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/blogstyle12.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">Our friend Johnny No-Job He’s a
-                                specialist in influencer.</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                    </div>
+            @empty
+            <div class="d-flex flex-column align-items-center justify-content-center">
+                <div class="text-center mb-4">
+                    <img src="{{ asset('assets/images/icons/man.svg') }}" alt="empty" class="w-25">
                 </div>
+                <x-alert type="warning">
+                    <p class="text-center mb-0"><strong>Sorry!</strong> No blogs found.</p>
+                </x-alert>
             </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".4s"
-                    style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.4s; animation-name: fadeInDown;">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>Jan 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/blogstyle13.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">While these are just estimates, they encouraging guide</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".8s"
-                    style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.8s; animation-name: fadeInDown;">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/blogstyle14.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">What skills do you need marketing consultant?</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay="1s"
-                    style="visibility: visible; animation-duration: 1.5s; animation-delay: 1s; animation-name: fadeInDown;">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>Jan 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/blogstyle15.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">If you feel the same way becoming a.</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-4 col-lg-6 col-md-6 col-sm-10">
-                <div class="single-blog-style1 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".8s"
-                    style="visibility: visible; animation-duration: 1.5s; animation-delay: 0.8s; animation-name: fadeInDown;">
-                    <div class="blog-img">
-                        <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>
-                        <img alt="image" src="assets/images/blog/blogstyle16.png">
-                    </div>
-                    <div class="blog-content">
-                        <h5><a href="{{ route('blog-details') }}">Creative Fashion Riboon Digital with rgb lights.</a></h5>
-                        <div class="blog-meta">
-                            <div class="author">
-                                <img alt="image" src="assets/images/blog/author1.png">
-                                <a href="{{ route('blog-details') }}" class="author-name">Johan Martin</a>
-                            </div>
-                            <div class="comment">
-                                <img alt="image" src="assets/images/icons/comment-icon.svg">
-                                <a href="#" class="comment">05 Comments</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
-        <div class="row">
-            <nav class="pagination-wrap">
-                <ul class="pagination d-flex justify-content-center gap-md-3 gap-2">
-                    <li class="page-item">
-                        <a class="page-link" href="#" tabindex="-1">Prev</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">01</a></li>
-                    <li class="page-item active" aria-current="page">
-                        <a class="page-link" href="#">02</a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">03</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        {{ $posts->links('pagination.custom') }}
     </div>
 </div>
 

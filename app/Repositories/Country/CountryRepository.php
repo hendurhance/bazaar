@@ -8,11 +8,6 @@ use App\Contracts\Repositories\CountryRepositoryInterface;
 use App\Models\State;
 use Illuminate\Database\Eloquent\Collection;
 
-/**
- * @todo TODO:
- * 1. Handle exceptions properly.
- * 2. Add tests.
- */
 class CountryRepository extends BaseCrudRepository  implements CountryRepositoryInterface
 {
     public function __construct(Country $model)

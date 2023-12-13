@@ -35,9 +35,8 @@ class UpdateProfileRequest extends FormRequest
             'state' => ['nullable', 'exists:states,code'],
             'city' => ['nullable', 'integer', 'exists:cities,id'],
             'zip_code' => ['nullable', 'string', 'max:10', 'min:2'],
-            'password' => $this->passwordRules(app()->environment(), false)
-            // remove required from the password field
-
+            'current_password' => $this->passwordRules(app()->environment(), false),
+            'password' => [$this->passwordRules(app()->environment(), false), 'required_with:current_password'],
         ];
     }
 }

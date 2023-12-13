@@ -2,12 +2,12 @@
 @section('title', 'Edit Payout Method')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Edit Payout Method', 'hasBack' => true, 'backUrl' => route('user.payout-methods.index'), 'routeItem' => $payoutMethod->bank_name, 'backTitle' => 'Payout Methods'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Edit Payout Method', 'hasBack' => true, 'backUrl' => route('user.payout-methods.index'), 'routeItem' => $payoutMethod->bank_name, 'backTitle' => 'Payout Methods'])
 
 <div class="dashboard-section pt-120 pb-120">
     <div class="container">
         <div class="row g-4">
-            @include('layouts.sidebar', ['active' => 'payout-method'])
+            @include('layouts.sidebar', ['active' => 'payout-method', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
                     <div class="form-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay=".2s"

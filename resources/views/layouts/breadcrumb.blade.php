@@ -1,3 +1,25 @@
+@if($admin)
+<!-- PAGE-HEADER -->
+<div class="page-header">
+    <h1 class="page-title">{{ $pageTitle }}</h1>
+    <div>
+        @if(isset($hasBack) && $hasBack)
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ $backUrl }}">{{ $backTitle }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ $pageTitle }}</li>
+            @if(isset($routeItem))
+            <li class="breadcrumb-item active" aria-current="page">{{ $routeItem }}</li>
+            @endif
+        </ol>
+        @else
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active" aria-current="page">{{ $pageTitle }}</li>
+        </ol>
+        @endif
+    </div>
+</div>
+<!-- PAGE-HEADER END -->
+@else
 <div class="inner-banner">
     <div class="container">
         <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s"
@@ -18,3 +40,4 @@
         </nav>
     </div>
 </div>
+@endif

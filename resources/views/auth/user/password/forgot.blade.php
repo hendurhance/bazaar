@@ -2,7 +2,7 @@
 @section('title', 'Forgot Password')
 @section('content')
 
-@include('layouts.breadcrumb', ['pageTitle' => 'Forgot Password'])
+@include('layouts.breadcrumb', ['admin' => false, 'pageTitle' => 'Forgot Password'])
 
 <div class="login-section pt-120 pb-120">
     <div class="container">

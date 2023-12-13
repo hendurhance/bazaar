@@ -29,7 +29,7 @@ class PasswordController extends Controller
      */
     public function forgotPassword(ForgotPasswordRequest $request): RedirectResponse
     {
-        $this->repository->sendPasswordResetLink($request->email);
+        $this->repository->sendPasswordResetLink($request->email, \App\Models\User::class);
 
         return redirect()->route('user.login')->with('success', 'A password reset link has been sent to your email.');
     }
@@ -54,7 +54,7 @@ class PasswordController extends Controller
      */
     public function resetPassword(ResetPasswordRequest $request): RedirectResponse
     {
-        $this->repository->resetPassword($request->validated());
+        $this->repository->resetPassword($request->validated(), \App\Models\User::class);
 
         return redirect()->route('user.login')->with('success', 'Your password has been reset.');
     }

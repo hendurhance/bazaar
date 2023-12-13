@@ -26,6 +26,7 @@ class MediaFactory extends Factory
             'url' => $this->faker->imageUrl(),
             'extension' => 'jpg',
             'mime_type' => 'image/jpeg',
+            'size' => $this->faker->numberBetween(1024, 3072),
             'storage' => StorageDiskType::LOCAL,
             'is_featured' => false,
         ];
