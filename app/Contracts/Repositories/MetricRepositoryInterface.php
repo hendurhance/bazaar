@@ -11,4 +11,11 @@ interface MetricRepositoryInterface
      * @return array<string, int>
      */
     public function getMetricsForAdmin(): array;
+
+    /**
+     * Search for a query
+     * 
+     * @param string $query
+     */
+    public function search(string $query): array;
 }
