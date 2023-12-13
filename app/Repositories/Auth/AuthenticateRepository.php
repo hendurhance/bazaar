@@ -7,6 +7,7 @@ use App\Exceptions\AuthenticateException;
 use App\Models\User;
 use App\Models\Admin;
 use App\Notifications\User\PasswordResetNotification;
+use App\Notifications\User\UserVerificationNotification;
 use App\Notifications\User\WelcomeEmailNotification;
 use App\Repositories\Country\CountryRepository;
 use Illuminate\Http\Request;
@@ -72,10 +73,7 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
             throw new AuthenticateException('Invalid verification token.');
         }
 
-        $user->update([
-            'email_verified_at' => now(),
-            'email_verification_token' => null,
-        ]);
+        $user->markEmailAsVerified();
 
         $user->notifyNow(new WelcomeEmailNotification($user));
     }
@@ -105,6 +103,18 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
         );
 
         $user->notifyNow(new PasswordResetNotification($user, $token));
+    }
+
+    /**
+     * Send email verification link.
+     * 
+     * @param \App\Models\User $user
+     */
+    public function sendEmailVerificationLink(\App\Models\User$user): void
+    {
+        $user->email_verification_token = generate_verify_token($user->email);
+        $user->save();
+        $user->notify(new UserVerificationNotification($user));
     }
 
     /**
@@ -163,7 +173,7 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
         if ($user instanceof User) {
             $countryId = isset($data['country']) ? app(CountryRepository::class)->findByIso2Code($data['country'])->id : null;
             $stateId = isset($data['state']) ? app(CountryRepository::class)->findStateByCode($countryId, $data['state'])->id : null;
-            if(isset($data['current_password'])) {
+            if (isset($data['current_password'])) {
                 if (!Hash::check($data['current_password'], $user->password)) {
                     throw new AuthenticateException('Current password is incorrect.');
                 }

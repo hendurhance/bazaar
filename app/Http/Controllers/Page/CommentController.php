@@ -15,7 +15,7 @@ class CommentController extends Controller
      */
     public function __construct(protected CommentRepositoryInterface $commentRepository, protected AuthenticateRepositoryInterface $authenticateRepository)
     {
-        $this->middleware('auth:web')->only('store');
+        $this->middleware(['auth:web', 'ensure.email.verified'])->only('store');
     }
 
     /**

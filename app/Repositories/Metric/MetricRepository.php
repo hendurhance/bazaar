@@ -10,7 +10,6 @@ use App\Models\Media;
 use App\Models\Payment;
 use App\Models\User;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Facades\Log;
 
 class MetricRepository implements MetricRepositoryInterface
 {

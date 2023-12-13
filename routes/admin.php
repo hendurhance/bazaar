@@ -42,7 +42,7 @@ Route::middleware('guest:admin_web')->group(function () {
 });
 
 
-Route::middleware('auth:admin_web')->group(function () {
+Route::middleware(['auth:admin_web', 'ensure.account.active'])->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout.handle');
 
     Route::get('/', [MetricsController::class, 'index'])->name('dashboard');
