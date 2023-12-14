@@ -7,9 +7,11 @@ use App\Console\Commands\MakeInterfaceCommand;
 use App\Console\Commands\MakeRepositoryCommand;
 use App\Models\Ad;
 use App\Models\Media;
+use App\Models\PayoutMethod;
 use App\Models\User;
 use App\Observers\AdObserver;
 use App\Observers\MediaObserver;
+use App\Observers\PayoutMethodObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -53,10 +55,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (!app()->environment('local')) {
+        // if (!app()->environment('local')) {
             User::observe(UserObserver::class);
             Ad::observe(AdObserver::class);
             Media::observe(MediaObserver::class);
-        }
+            PayoutMethod::observe(PayoutMethodObserver::class);
+        // }
     }
 }

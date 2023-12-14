@@ -9,13 +9,15 @@ use App\Contracts\Types\HasLabel;
 enum PayoutStatus: int implements HasAll, HasLabel, HasColor
 {
     case PENDING = 0;
-    case SUCCESS = 1;
-    case FAILED = 2;
+    case PROCESSING = 1;
+    case SUCCESS = 2;
+    case FAILED = 3;
     
     public static function all(): array
     {
         return [
             self::PENDING,
+            self::PROCESSING,
             self::SUCCESS,
             self::FAILED,
         ];
@@ -25,6 +27,7 @@ enum PayoutStatus: int implements HasAll, HasLabel, HasColor
     {
         return match ($this) {
             self::PENDING => 'Pending',
+            self::PROCESSING => 'Processing',
             self::SUCCESS => 'Success',
             self::FAILED => 'Failed',
         };
@@ -34,6 +37,7 @@ enum PayoutStatus: int implements HasAll, HasLabel, HasColor
     {
         return match ($this) {
             self::PENDING => 'primary',
+            self::PROCESSING => 'secondary',
             self::SUCCESS => 'success',
             self::FAILED => 'danger',
         };

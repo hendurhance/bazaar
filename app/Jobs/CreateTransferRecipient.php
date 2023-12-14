@@ -44,15 +44,16 @@ class CreateTransferRecipient implements ShouldQueue
      */
     protected function createRecipient(): void
     {
-        // Create a transfer recipient.
+        // @note: Transfer recipients is only available for paystack.
+        // @link: https://paystack.com/docs/api/transfer-recipient/#create
         $process = (new PaymentGatewayService(PaymentGateway::PAYSTACK))
             ->createRecipient($this->payoutMethod);
-        
+        Log::info('Created transfer recipient: ' . $process['recipient_code']. 'TTT'. $process['recipient_id']);
         // Update the payout method with the recipient code.
         $this->payoutMethod->update([
             'meta' => [
-                'recipient_code' => $process['data']['recipient_code'],
-                'recipient_id' => $process['data']['id'],
+                'recipient_code' => $process['recipient_code'],
+                'recipient_id' => $process['recipient_id'],
             ],
         ]);
     }

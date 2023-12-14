@@ -32,7 +32,8 @@ class TieUserToAds implements ShouldQueue
         try {
             $this->tieUserToAds();
         } catch (\Exception $e) {
-            Log::error($e->getMessage());
+            Log::error('Error tying user to ads: ' . $e->getMessage());
+            Log::error($e->getTraceAsString());
         }
     }
 
@@ -46,9 +47,14 @@ class TieUserToAds implements ShouldQueue
             ->whereNull('user_id')
             ->get();
 
+
         // Tie the user to the ads.
-        $ads->each(function ($ad) {
-            $ad->update(['user_id' => $this->user->id]);
-        });
+        if ($ads->isNotEmpty()) {
+            $ads->each(function ($ad) {
+                $ad->update(['user_id' => $this->user->id]);
+            });
+
+            Log::info('Tied user to ads: ' . $this->user->id);
+        }
     }
 }

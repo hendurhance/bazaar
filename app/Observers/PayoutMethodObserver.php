@@ -20,7 +20,9 @@ class PayoutMethodObserver
      */
     public function updated(PayoutMethod $payoutMethod): void
     {
-        dispatch(new CreateTransferRecipient($payoutMethod));
+        if ($payoutMethod->isDirty(['account_number', 'account_name'])) {
+            dispatch(new CreateTransferRecipient($payoutMethod));
+        }
     }
 
     /**

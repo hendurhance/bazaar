@@ -30,4 +30,12 @@ interface PaymentGatewayServiceInterface
      * @return array
      */
     public function createRecipient(\App\Models\PayoutMethod $paymentMethod): array;
+
+    /**
+     * Transfer funds to a recipient
+     * 
+     * @param \Illuminate\Database\Eloquent\Collection<Payout> $payouts
+     * @return array
+     */
+    public function transfers(\Illuminate\Database\Eloquent\Collection $payouts): array;
 }
