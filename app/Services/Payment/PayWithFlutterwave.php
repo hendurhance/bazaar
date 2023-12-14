@@ -113,4 +113,17 @@ class PayWithFlutterwave implements PaymentGatewayServiceInterface
             'method' => $result['data']['payment_type'] ?? null,
         ];
     }
+
+    /**
+     * Create a transfer recipient
+     * 
+     * @param \App\Models\PayoutMethod $paymentMethod
+     * @return array
+     */
+    public function createRecipient(\App\Models\PayoutMethod $paymentMethod): array
+    {
+        Log::info('Flutterwave payout error: Flutterwave does not support payout recipient creation.');
+        throw new PaymentException('Flutterwave does not support payout recipient creation.');
+        return [];
+    }
 }

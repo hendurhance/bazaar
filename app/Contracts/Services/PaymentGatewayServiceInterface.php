@@ -22,4 +22,12 @@ interface PaymentGatewayServiceInterface
      * @return array
      */
     public function confirm(string $txnId, string $transactionID = null): array;
+
+    /**
+     * Create a transfer recipient
+     * 
+     * @param \App\Models\PayoutMethod $paymentMethod
+     * @return array
+     */
+    public function createRecipient(\App\Models\PayoutMethod $paymentMethod): array;
 }

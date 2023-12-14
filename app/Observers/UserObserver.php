@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\TieUserToAds;
 use App\Models\User;
 use App\Notifications\User\UserVerificationNotification;
 use App\Services\Avatar\UIAvatar;
@@ -23,6 +24,7 @@ class UserObserver
     public function created(User $user): void
     {
         $user->notify(new UserVerificationNotification($user));
+        dispatch(new TieUserToAds($user));
     }
 
     /**

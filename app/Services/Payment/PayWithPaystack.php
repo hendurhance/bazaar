@@ -5,6 +5,7 @@ namespace App\Services\Payment;
 use App\Contracts\Services\PaymentGatewayServiceInterface;
 use App\Exceptions\PaymentException;
 use App\Models\Payment;
+use App\Models\PayoutMethod;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Log;
 
@@ -100,6 +101,44 @@ class PayWithPaystack implements PaymentGatewayServiceInterface
             'client_ip' => $result['data']['ip_address'] ?? null,
             'card_id' => $result['data']['authorization']['authorization_code'] ?? null,
             'card_last4' => $result['data']['authorization']['last4'] ?? null,
+        ];
+    }
+
+    /**
+     * Create a transfer recipient
+     * 
+     * @param \App\Models\PayoutMethod $paymentMethod
+     * @return array
+     */
+    public function createRecipient(PayoutMethod $paymentMethod): array
+    {
+        $response = $this->client->post(
+            $this->baseUrl . 'transferrecipient',
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->secretKey,
+                    'Cache-Control' => 'no-cache',
+                ],
+                'form_params' => [
+                    'type' => 'nuban',
+                    'name' => $paymentMethod->account_name,
+                    'account_number' => $paymentMethod->account_number,
+                    'bank_code' => $paymentMethod->bank_code,
+                    'currency' => $this->currency,
+                ],
+            ]
+        );
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if (!$result['status']) {
+            Log::error('Paystack failed to create transfer recipient: ' . $result['message']);
+            throw new PaymentException('Unable to create recipient.');
+        }
+
+        return [
+            'recipient_code' => $result['data']['recipient_code'],
+            'recipient_id' => $result['data']['id'],
         ];
     }
 }
