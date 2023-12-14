@@ -12,6 +12,7 @@ enum PayoutStatus: int implements HasAll, HasLabel, HasColor
     case PROCESSING = 1;
     case SUCCESS = 2;
     case FAILED = 3;
+    case REVERSED = 4;
     
     public static function all(): array
     {
@@ -20,6 +21,7 @@ enum PayoutStatus: int implements HasAll, HasLabel, HasColor
             self::PROCESSING,
             self::SUCCESS,
             self::FAILED,
+            self::REVERSED,
         ];
     }
 
@@ -30,6 +32,7 @@ enum PayoutStatus: int implements HasAll, HasLabel, HasColor
             self::PROCESSING => 'Processing',
             self::SUCCESS => 'Success',
             self::FAILED => 'Failed',
+            self::REVERSED => 'Reversed',
         };
     }
 
@@ -40,6 +43,7 @@ enum PayoutStatus: int implements HasAll, HasLabel, HasColor
             self::PROCESSING => 'secondary',
             self::SUCCESS => 'success',
             self::FAILED => 'danger',
+            self::REVERSED => 'warning',
         };
     }
 }
