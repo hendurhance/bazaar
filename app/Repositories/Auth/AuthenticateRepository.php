@@ -155,11 +155,11 @@ class AuthenticateRepository implements AuthenticateRepositoryInterface
 
     /**
      * Authenticated admin.
-     * @return Admin
+     * @return ?Admin|null
      */
-    public function admin(): Admin
+    public function admin(): ?Admin
     {
-        return Auth::guard(self::ADMIN_GUARD)->user();
+        return Auth::guard(self::ADMIN_GUARD)->user() ?? null;
     }
 
     /**

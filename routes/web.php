@@ -37,3 +37,4 @@ Route::post('/auction-details/{ads:slug}/report', [AdController::class, 'handleR
 Route::view('/add-listing', 'pages.live-auction.create')->name('add-listing');
 Route::post('/add-listing', [AdController::class, 'store'])->name('add-listing.handle');
 Route::post('/bid/{ads:slug}', [BidController::class, 'bid'])->name('bid.handle')->middleware('auth:web');
+Route::webhooks('paystack-webhook', 'paystack-webhook');

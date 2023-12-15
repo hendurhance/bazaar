@@ -55,11 +55,11 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // if (!app()->environment('local')) {
+        if (!app()->environment('local')) {
             User::observe(UserObserver::class);
             Ad::observe(AdObserver::class);
             Media::observe(MediaObserver::class);
             PayoutMethod::observe(PayoutMethodObserver::class);
-        // }
+        }
     }
 }

@@ -48,11 +48,11 @@
                     <div class="footer-item">
                         <a href="{{ route('home') }}"><img alt="image" src="/assets/images/bg/footer-logo2.png"></a>
                         <ul class="address-list">
-                            <li><a href="#">Add. 168/170, Avenue 01, Mirpur DOHS, Bangladesh.</a></li>
-                            <li><a href="tel:+029169852">Phone: +029169852 / +88017600000</a></li>
-                            <li><a href="/cdn-cgi/l/email-protection#8ce5e2eae3a2e9f4ede1fce0e9ccebe1ede5e0a2efe3e1">Email:
+                            <li><a href="#">61 Oxford Street, London, UK.</a></li>
+                            <li><a href="tel:+1234567890">Phone: +1 234 567 890 /  +1 234 567 890</a></li>
+                            <li><a href="/cdn-cgi/l/email-protection#00000000000000000">Email:
                                     <span class="__cf_email__"
-                                        data-cfemail="6e07000801400b160f031e020b2e09030f0702400d0103">[email&#160;protected]</span></a>
+                                        data-cfemail="00000000000000000000">[email&#160;protected]</span></a>
                             </li>
                         </ul>
                     </div>
