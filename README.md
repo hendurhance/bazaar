@@ -83,6 +83,7 @@ If you want to see a detailed list of features, and screenshots with key highlig
 ## 🚀 Live Demo
 > You can watch a live demo of the application below.
 
+https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5a1197a349e
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
