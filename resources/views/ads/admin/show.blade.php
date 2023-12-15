@@ -130,7 +130,13 @@
                                                         <td class="fw-bold">Wiinning Bid</td>
                                                         <td>
                                                             <p class="text-muted float-start me-3">
-                                                                <span class="text-success fw-semibold">{{money($ad->winningBid()->first()->amount)}}</span>
+                                                                <span class="text-success fw-semibold">
+                                                                    @if ($ad->winningBid()->first())
+                                                                        {{ money($ad->winningBid()->first()->amount) }}
+                                                                    @else
+                                                                        N/A
+                                                                    @endif
+                                                                </span>
                                                             </p>
                                                         </td>
                                                     </tr>

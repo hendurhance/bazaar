@@ -69,7 +69,7 @@
                                                         </tr>
                                                         <tr>
                                                             <td class="fw-bold">Method</td>
-                                                            <td class="text-capitalize"> {{ $payment->method }}</td>
+                                                            <td class="text-capitalize"> {{ $payment->method ?? 'N/A' }}</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="fw-bold">Gateway</td>

@@ -86,7 +86,7 @@ class User extends Authenticatable
      * 
      * @param \Illuminate\Database\Eloquent\Builder $query
      */
-    public function active(Builder $query): Builder
+    public function scopeActive(Builder $query): Builder
     {
         return $query->where('is_active', true);
     }
@@ -96,7 +96,7 @@ class User extends Authenticatable
      * 
      * @param \Illuminate\Database\Eloquent\Builder $query
      */
-    public function inactive(Builder $query): Builder
+    public function scopeInactive(Builder $query): Builder
     {
         return $query->where('is_active', false);
     }

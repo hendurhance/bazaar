@@ -47,7 +47,7 @@ enum PaymentStatus: int implements HasAll, HasLabel, HasColor
             self::SUCCESS => 'success',
             self::FAILED => 'danger',
             self::DECLINED => 'warning',
-            self::DISPUTE => 'muted',
+            self::DISPUTE => 'info',
         };
     }
 }

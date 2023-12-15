@@ -9,12 +9,10 @@
         <a href="https://github.com/hendurhance/bazaar/issues/new?assignees=&labels=&template=bug_report.md&title=">Report Bug</a>
         ·
         <a href="https://github.com/hendurhance/bazaar/issues/new?assignees=&labels=&template=feature_request.md&title=">Request Feature</a>
-        ·
-        <a href="https://github.com/hendurhance/bazaar/blob/main/docs/TECHNICAL_DOCUMENTATION.md">Technical Documentation (System Design, Design Pattern and Architecture)
-        ·
-        <a href="https://github.com/hendurhance/bazaar/blob/main/docs/FEATURES.md">Feature Documentation</a>
     </p>
 </div>
+
+> If you are here for the nitty-gritty details, you can check out the **[technical documentation](/docs/TECHNICAL_DOCUMENTATION.md)** for the system design, architecture, and design patterns used in the application. You can also check out the **[features](/docs/FEATURES.md)** page for a detailed list of features, and screenshots with key highlights, and live demo.
 
 # 📗 Table of Contents
 
@@ -84,7 +82,6 @@ If you want to see a detailed list of features, and screenshots with key highlig
 
 ## 🚀 Live Demo
 > You can watch a live demo of the application below.
-
 
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
@@ -197,7 +194,7 @@ If you want to see a detailed list of features, and screenshots with key highlig
 ### 📦 Usage
 > You can watch a video on how to use the application below.
 
-[![Watch the video](/docs//images/header.png)](#)
+[![Watch the video](/docs/images/video-bg.png)](/docs/videos/bazaar-usage.mp4)
 
 There are a few accounts you can use to test the application after proper installation. You can find the credentials below.
 | Name | Email | Password | Role |
