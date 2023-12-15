@@ -195,7 +195,7 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
 ### 📦 Usage
 > You can watch a video on how to use the application below.
 
-[![Watch the video](/docs/images/video-bg.png)](/docs/videos/bazaar-usage.mp4)
+[![Watch the video](/docs/images/video-bg.png)](https://vimeo.com/894921005?share=copy)
 
 There are a few accounts you can use to test the application after proper installation. You can find the credentials below.
 | Name | Email | Password | Role |
