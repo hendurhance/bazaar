@@ -218,7 +218,7 @@ class AdRepository extends BaseCrudRepository implements AdRepositoryInterface
             'video_url' => $data['video_url'] ?? null,
             'status' => AdStatus::PENDING,
             'started_at' => Carbon::parse($data['start_date'])->format('Y-m-d H:00:00'),
-            'expired_at' => Carbon::parse($data['expired_at'])->format('Y-m-d H:00:00'),
+            'expired_at' => Carbon::parse($data['end_date'])->format('Y-m-d H:00:00'),
             'seller_name' => $user?->name ?? $data['seller_name'],
             'seller_email' => $user?->email ?? $data['seller_email'],
             'seller_mobile' => $user?->mobile ?? $data['seller_mobile'],

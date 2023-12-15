@@ -39,6 +39,11 @@ class PayoutStatusNotification extends Notification
                     ->subject('Payout Status Updated')
                     ->greeting('Hello!, ' . $notifiable->name)
                     ->line('Your payout status has been updated to ' . $this->payout->status->label())
+                    ->line('Amount: ' . $this->payout->amount)
+                    ->line('Gateway: ' . $this->payout->gateway->label())
+                    ->line('Status: ' . $this->payout->status->label())
+                    ->line('Payout Method: ' . $this->payout->payoutMethod->account_name . ' - ' . $this->payout->payoutMethod->account_number . ' - ' . $this->payout->payoutMethod->bank_name)
+                    ->line('Description: ' . $this->payout->description)
                     ->line('View payout details by clicking the button below.')
                     ->action('View Payout', route('user.payouts.show', $this->payout->pyt_token))
                     ->salutation('Thank you for using ' . config('app.name') . '!');

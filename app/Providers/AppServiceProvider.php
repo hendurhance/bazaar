@@ -7,9 +7,11 @@ use App\Console\Commands\MakeInterfaceCommand;
 use App\Console\Commands\MakeRepositoryCommand;
 use App\Models\Ad;
 use App\Models\Media;
+use App\Models\PayoutMethod;
 use App\Models\User;
 use App\Observers\AdObserver;
 use App\Observers\MediaObserver;
+use App\Observers\PayoutMethodObserver;
 use App\Observers\UserObserver;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -57,6 +59,7 @@ class AppServiceProvider extends ServiceProvider
             User::observe(UserObserver::class);
             Ad::observe(AdObserver::class);
             Media::observe(MediaObserver::class);
+            PayoutMethod::observe(PayoutMethodObserver::class);
         }
     }
 }

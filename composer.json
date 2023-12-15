@@ -11,7 +11,8 @@
         "laravel/framework": "^10.10",
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
-        "martian/laracaptcha": "^1.0"
+        "martian/laracaptcha": "^1.0",
+        "spatie/laravel-webhook-client": "^3.2"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.9",

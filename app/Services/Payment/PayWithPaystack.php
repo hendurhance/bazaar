@@ -5,7 +5,10 @@ namespace App\Services\Payment;
 use App\Contracts\Services\PaymentGatewayServiceInterface;
 use App\Exceptions\PaymentException;
 use App\Models\Payment;
+use App\Models\Payout;
+use App\Models\PayoutMethod;
 use GuzzleHttp\Client;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Log;
 
 class PayWithPaystack implements PaymentGatewayServiceInterface
@@ -44,7 +47,7 @@ class PayWithPaystack implements PaymentGatewayServiceInterface
                     'Cache-Control' => 'no-cache',
                 ],
                 'form_params' => [
-                    'amount' => round($payment->amount * 100),
+                    'amount' => $payment->amount * 100,
                     'currency' => $this->currency,
                     'email' => $payment->payer->email,
                     'reference' => $payment->txn_id,
@@ -101,5 +104,83 @@ class PayWithPaystack implements PaymentGatewayServiceInterface
             'card_id' => $result['data']['authorization']['authorization_code'] ?? null,
             'card_last4' => $result['data']['authorization']['last4'] ?? null,
         ];
+    }
+
+    /**
+     * Create a transfer recipient
+     * 
+     * @param \App\Models\PayoutMethod $paymentMethod
+     * @return array
+     */
+    public function createRecipient(PayoutMethod $paymentMethod): array
+    {
+        $response = $this->client->post(
+            $this->baseUrl . 'transferrecipient',
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->secretKey,
+                    'Cache-Control' => 'no-cache',
+                ],
+                'form_params' => [
+                    'type' => 'nuban',
+                    'name' => $paymentMethod->account_name,
+                    'account_number' => $paymentMethod->account_number,
+                    'bank_code' => $paymentMethod->bank_code,
+                    'currency' => $this->currency,
+                ],
+            ]
+        );
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if (!$result['status']) {
+            Log::error('Paystack failed to create transfer recipient: ' . $result['message']);
+            throw new PaymentException('Unable to create recipient.');
+        }
+
+        return [
+            'recipient_code' => $result['data']['recipient_code'],
+            'recipient_id' => $result['data']['id'],
+        ];
+    }
+
+    /**
+     * Transfer funds to a recipient
+     * 
+     * @param Collection<Payout> $payouts
+     * @return array
+     */
+    public function transfers(Collection $payouts): array
+    {
+        $response = $this->client->post(
+            $this->baseUrl . 'transfer/bulk',
+            [
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->secretKey,
+                    'Cache-Control' => 'no-cache',
+                ],
+                'form_params' => [
+                    'currency' => $this->currency,
+                    'source' => 'balance',
+                    'transfers' => collect($payouts)->map(function ($payout) {
+                        return [
+                            'amount' => $payout->amount * 100,
+                            'recipient' => $payout->payoutMethod->meta['recipient_code'],
+                            'reference' => $payout->pyt_token,
+                            'reason' => $payout->description ?? 'Payout from ' . config('app.name'),
+                        ];
+                    })->toArray(),
+                ],
+            ]
+        );
+
+        $result = json_decode($response->getBody()->getContents(), true);
+
+        if (!$result['status']) {
+            Log::error('Paystack failed to transfer funds: ' . $result['message']);
+            throw new PaymentException('Unable to transfer funds.');
+        }
+
+        return $result['data'];
     }
 }

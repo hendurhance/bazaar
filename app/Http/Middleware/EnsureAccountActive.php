@@ -28,7 +28,6 @@ class EnsureAccountActive
             }
             if($this->authRepository->admin()) {
                 if (!$this->authRepository->admin()->is_active) {
-                    Log::info('Admin account deactivated', ['admin' => $this->authRepository->admin()]);
                     $this->authRepository->logout($request, 'admin_web');
                     return redirect()->route('admin.login')->with('error', 'Your account has been deactivated, contact support for more information.');
                 }

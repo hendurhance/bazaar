@@ -48,7 +48,7 @@
                                     </div>
                                     <div class="col-md-11">
                                         <div class="mb-2">
-                                            <a href="{{ route('admin.users.index', $item->id) }}" target="_blank" class="h4 text-dark">{{$item->name}}</a>
+                                            <a href="{{ route('admin.users.show', $item->id) }}" class="h4 text-dark">{{$item->name}}</a>
                                         </div>
                                         <a href="javascript:void(0)" class="text-primary">{{'@'.$item->username}}</a>
                                     </div>

@@ -32,6 +32,7 @@ use HasFactory, HasPayoutToken;
         'description',
         'gateway',
         'paid_at',
+        'meta'
     ];
 
     /**
@@ -45,6 +46,7 @@ use HasFactory, HasPayoutToken;
         'paid_at' => 'datetime',
         'status' => PayoutStatus::class,
         'gateway' => PayoutGateway::class,
+        'meta' => 'array',
     ];
 
     /**

@@ -35,7 +35,7 @@
                                                                        style="background-image: url({{$payout->user->avatar}})"></span>
                                                                     <div
                                                                        class="ms-3 mt-0 d-block">
-                                                                       <a href="#"
+                                                                       <a href="{{ route('admin.users.show', $payout->user->id) }}"
                                                                           class="mb-0 fs-14 fw-semibold text-info">
                                                                             {{ $payout->user->name }}
                                                                        </a>

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->smallInteger('gateway')->nullable();
             $table->smallInteger('status')->default(0); // 'pending', 'success', 'failed'
             $table->dateTimeTz('paid_at')->nullable();
+            $table->json('meta')->nullable();
             $table->timestamps();
         });
     }

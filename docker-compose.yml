@@ -1,0 +1,22 @@
+name: bazaar
+services:
+    app:
+        build:
+            context: ./docker
+        ports:
+          - "${APP_PORT:-8080}:80"
+        volumes:
+            - .:/var/www/html
+
+    mysql:
+        image: mysql:8
+        ports:
+            - "3306:3306"
+        volumes:
+            - mysql_data:/var/lib/mysql
+            - ./docker:/docker-entrypoint-initdb.d
+        environment:
+            MYSQL_ROOT_PASSWORD: P@ssw0rd
+
+volumes:
+    mysql_data:
