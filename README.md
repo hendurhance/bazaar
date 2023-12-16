@@ -14,14 +14,14 @@
 
 > If you are here for the nitty-gritty details, you can check out the **[technical documentation](/docs/TECHNICAL_DOCUMENTATION.md)** for the system design, architecture, and design patterns used in the application. You can also check out the **[features](/docs/FEATURES.md)** page for a detailed list of features, and screenshots with key highlights, and live demo.
 
-# 📗 Table of Contents
+# 📗 Table of Contents <a name = "table-of-contents"></a>
 
-- [📗 Table of Contents](#📗-table-of-contents)
-- [📖 About Bazaar](#📖-about-bazaar)
-  - [🛠 Built With](#🛠-built-with)
+- [📗 Table of Contents](#table-of-contents)
+- [📖 About Bazaar](#about-bazaar)
+  - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
-  - [🚀 Live Demo](#🚀-live-demo)
+  - [🚀 Live Demo](#live-demo)
 - [💻 Getting Started](#💻-getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
@@ -42,10 +42,10 @@
 <img alt="The Open Source Ad Auction Marketplace" src="/docs/images/header.png" width="100%" height="auto" />
 </div>
 
-# 📖 About Bazaar
+# 📖 About Bazaar <a name="about-bazaar"></a>
 > Bazaar is an auction marketplace where users can buy and sell items. Users can create an account, list items for sale, bid on items, and view their own items and bids.
 
-## 🛠 Built With
+## 🛠 Built With <a name="built-with"></a>
 ### Tech Stack
 > Bazaaar is built with on PHP Laravel framework and uses MySQL for the database. The front end is also handled by Laravel's Blade templating engine.
 <table>
@@ -61,7 +61,7 @@
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-### Key Features
+### Key Features <a name="key-features"></a>
 Bazaar is a full-stack web application that allows users to:
 1. **📢 Ad Auction Marketplace** - Users can create an account, list items for sale, and manage their listings. Share your listings with friends and family on social media.
 2. **💰 Bidding** - Users can bid on items and view their bids, get notified when they are outbid, and get notified when they win an auction.
@@ -80,7 +80,7 @@ Bazaar is a full-stack web application that allows users to:
 
 If you want to see a detailed list of features, and screenshots with key highlights, and live demo check out the [features](/docs/FEATURES.md) page.
 
-## 🚀 Live Demo
+## 🚀 Live Demo <a name="live-demo"></a>
 > You can watch a live demo of the application below.
 
 https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5a1197a349e
