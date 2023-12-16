@@ -22,21 +22,21 @@
     - [Tech Stack](#tech-stack)
     - [Key Features](#key-features)
   - [🚀 Live Demo](#live-demo)
-- [💻 Getting Started](#💻-getting-started)
+- [💻 Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
   - [Installation](#installation)
-    - [💻 Local Machine](#💻-local-machine)
-    - [🐳 Docker](#🐳-docker)
-    - [📦 Usage](#📦-usage)
-    - [🧪 Testing](#🧪-testing)
-    - [👨🏽‍💻 Deployment](#👨🏽‍💻-deployment)
-    - [📁 File Structure](#📁-file-structure)
-- [🔭 Future Features](#🔭-future-features)
-- [🤝 Contributing](#🤝-contributing)
-- [👥 Authors](#👥-authors)
-- [❓ FAQ](#❓-faq)
-- [📝 License](#📝-license)
-- [⭐️ Support](#️⭐️-support)
+    - [💻 Local Machine](#local-machine)
+    - [🐳 Docker](#docker)
+    - [📦 Usage](#usage)
+    - [🧪 Testing](#testing)
+    - [👨🏽‍💻 Deployment](#deployment)
+    - [📁 File Structure](#file-structure)
+- [🔭 Future Features](#future-features)
+- [🤝 Contributing](#contributing)
+- [👥 Authors](#authors)
+- [❓ FAQ](#faq)
+- [📝 License](#license)
+- [⭐️ Support](#️support)
   
 <div align="center">
 <img alt="The Open Source Ad Auction Marketplace" src="/docs/images/header.png" width="100%" height="auto" />
@@ -61,7 +61,7 @@
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-### Key Features <a name="key-features"></a>
+### Key Features <a name="key-features"></a>oc
 Bazaar is a full-stack web application that allows users to:
 1. **📢 Ad Auction Marketplace** - Users can create an account, list items for sale, and manage their listings. Share your listings with friends and family on social media.
 2. **💰 Bidding** - Users can bid on items and view their bids, get notified when they are outbid, and get notified when they win an auction.
@@ -88,7 +88,7 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
 # 💻 Getting Started <a name = "getting-started"></a>
-## Prerequisites
+## Prerequisites <a name="prerequisites"></a>
 > You need to have the following installed on your machine to run the application locally.
 - [PHP](https://www.php.net/downloads.php)
 - [Composer](https://getcomposer.org/download/)
@@ -98,8 +98,8 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-## Installation
-### 💻 Local Machine
+## Installation <a name="installation"></a>
+### 💻 Local Machine <a name="local-machine"></a>
 <details>
 <summary>Click to expand installation instructions for local machine</summary>
 
@@ -151,7 +151,7 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
 - **Step 7:** After running the script above, you get a link to the application. You can visit the link to view the application.
 </details>
 
-### 🐳 Docker
+### 🐳 Docker <a name="docker"></a>
 <details>
 <summary>Click to expand installation instructions for docker</summary>
 
@@ -192,7 +192,7 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-### 📦 Usage
+### 📦 Usage <a name="usage"></a>
 > You can watch a video on how to use the application below.
 
 [![Watch the video](/docs/images/video-bg.png)](https://vimeo.com/894921005?share=copy)
@@ -205,10 +205,10 @@ There are a few accounts you can use to test the application after proper instal
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-### 🧪 Testing
+### 🧪 Testing <a name="testing"></a>
 __Coming Soon__
 
-### 👨🏽‍💻 Deployment
+### 👨🏽‍💻 Deployment <a name="deployment"></a>
 You can deploy the application to a server using either the docker method or the local machine method. You can find the instructions for both methods below.
 | Method | Link |
 | --- | --- |
@@ -217,7 +217,7 @@ You can deploy the application to a server using either the docker method or the
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-### 📁 File Structure
+### 📁 File Structure <a name="file-structure"></a>
 > The project adheres to Laravel's MVC architecture, employing design patterns for clean separation of concerns. The Repository Pattern is utilized to isolate business logic from controllers, promoting maintainability and scalability. Additionally, the Observer Pattern is employed to manage events on models.
 
 ```mermaid
@@ -987,7 +987,7 @@ graph TD
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-# 🔭 Future Features
+# 🔭 Future Features <a name="future-features"></a>
 - [ ] Add tests
 - [ ] Add more payment gateways
 - [ ] Add more payout gateways
@@ -1000,7 +1000,7 @@ See the [open issues](https://github.com/hendurhance/bazaar/issues) for a list o
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-# 🤝 Contributing
+# 🤝 Contributing <a name="contributing"></a>
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
@@ -1016,12 +1016,12 @@ Don't forget to give the project a star! Thanks again!
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
 
-# 👥 Authors
+# 👥 Authors <a name="authors"></a>
 - Endurance - [Github](https://github.com/hendurhance) - [Twitter](https://twitter.com/hendurhance) - [LinkedIn](https://www.linkedin.com/in/hendurhance/)
 
 <p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
 
-# ❓ FAQ
+# ❓ FAQ <a name="faq"></a>
 - **What is the purpose of this project?**
     - This project is an open-source classified ads platform that allows users to buy and sell products by bidding on them. It you to easily create your own classified ads platform.
 - **What is the technology stack used?**
@@ -1031,10 +1031,10 @@ Don't forget to give the project a star! Thanks again!
 - **How can I support the project?**
     - You can support the project by starring ⭐ this repository.
 
-# 📝 License
+# 📝 License <a name="license"></a>
 Distributed under the GNU AFFERO GENERAL PUBLIC LICENSE. See [LICENSE](/LICENSE) for more information.
 
-# ⭐️ Support
+# ⭐️ Support <a name="support"></a>
 If you like this project, You can support me with starring ⭐ this repository. You can also [buy me a coffee](https://www.buymeacoffee.com/hendurhance) ☕️ or become a sponsor using the links below ➡️ [github sponsors](https://www.github.com/sponsors/hendurhance). Thanks a bunch for your support!
 
 
