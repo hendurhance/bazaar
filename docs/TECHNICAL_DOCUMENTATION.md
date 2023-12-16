@@ -123,14 +123,14 @@ graph TD
 If it ain't broke, don't fix it. A monolithic architecture is a tried and true approach to building web applications. It's simple, easy to understand, and easy to maintain. It's also easy to scale horizontally by adding more servers to the cluster. The downside is that it's not as flexible as a microservices architecture, but that's not a problem for Bazaar Auction Platform. If it requires more flexibility in the future, we can always split the different components into separate services like database on one server, application on another server, etc (reason for docker).
 
 #### Why PHP?
-PHP is a workhouse, although it might not be trendiest tech in town, but for Bazaar Auction Platform, it was the perfect fit. Why? It's built for the web, meaning its code practically renders HTML (Sever Side Rendering) with ease. Plus, its static typing keeps things squeaky clean – fewer bugs, smoother sailing (reason for PHP 8.2).
+PHP is a workhouse, although it might not be the trendiest tech in town, but for Bazaar Auction Platform, it was the perfect fit. Why? It's built for the web, meaning its code practically renders HTML (Server Side Rendering) with ease. Plus, its static typing keeps things squeaky clean – fewer bugs, smoother sailing (reason for PHP 8.2).
 
 #### Why Laravel?
-Since Laravel has out of the box support for most of the features we needed, it was the perfect fit for Bazaar Auction Platform. Laravel is a PHP framework that provides a robust set of features for web development, including authentication, authorization, database management, and more. The Eloquent ORM makes it easy to work with relational databases, and the Blade templating engine provides a clean, easy-to-use syntax for writing views. It also supports dependency injection and MVC – basically, what we needed for Bazaar Auction Platform.
+Since Laravel has out-of-the-box support for most of the features we needed, it was the perfect fit for Bazaar Auction Platform. Laravel is a PHP framework that provides a robust set of features for web development, including authentication, authorization, database management, and more. The Eloquent ORM makes it easy to work with relational databases, and the Blade templating engine provides a clean, easy-to-use syntax for writing views. It also supports dependency injection and MVC – basically, what we needed for Bazaar Auction Platform.
 
 #### Why MySQL?
 MySQL was chosen as the primary database management system for Bazaar Auction Due to the relational paradigm of database tables for Bazaar Auction Platform it seems like the right fit. The use of indexes and foreign keys will help to ensure that Bazaar Auction Platform is fast and reliable.
-> I did a test with over 500,000 records for the ads table and it was blazing fast. Read more about it [here](#large-database-test).
+> I did a test with up to 1,000,000 records for the `payments` table and it was blazing fast. Read more about it [here](#large-database-test).
 
 #### Why an MVC Architecture?
 Laravel is built on the MVC architecture, so it was the obvious choice for Bazaar Auction Platform. The MVC architecture separates the application into three main components: the model, the view, and the controller. The model is responsible for managing the data, the view is responsible for displaying the data, and the controller is responsible for handling user input and updating the model and view accordingly. This separation of concerns makes it easier to maintain and extend the application.
@@ -139,7 +139,7 @@ Laravel is built on the MVC architecture, so it was the obvious choice for Bazaa
 Docker is a containerization platform that allows us to package our application into a container and run it on any machine with Docker installed. It also allows us to easily scale our application by adding more containers to the cluster. Docker is also great for testing and development because it allows us to easily spin up a containerized version of our application on our local machine.
 
 #### Why Repository Design Pattern? And Why Not Service Layer Included?
-Since we have a lot of database queries, we decided to use the repository design pattern to handle database and business logic. This makes it easier to test and maintain the application. We also decided to scrape the service layer and used the repository pattern to handles all the business logic and database queries, while the service layer handles third-party integrations. The repository pattern created an abstraction layer and made decoupling easier.
+Since we have a lot of database queries, we decided to use the repository design pattern to handle database and business logic. This makes it easier to test and maintain the application. We also decided to scrape the service layer and used the repository pattern to handle all the business logic and database queries, while the service layer handles third-party integrations. The repository pattern created an abstraction layer and made decoupling easier.
 
 ``` mermaid
 graph TD
