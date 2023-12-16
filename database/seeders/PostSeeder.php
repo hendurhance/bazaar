@@ -30,7 +30,7 @@ class PostSeeder extends Seeder
             );
             $post->update(['featured_image_id' => $post->media->first()->id]);
             $post->tags()->attach(
-                Tag::factory()->count(1)->create()
+                Tag::inRandomOrder()->first()->id
             );
             $post->comments()->saveMany(
                 Comment::factory()->count(rand(1, 5))->make([

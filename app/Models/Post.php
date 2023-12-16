@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Models;
-
 use App\Traits\HasMedia;
 use App\Traits\HasSlug;
 use Illuminate\Database\Eloquent\Builder;

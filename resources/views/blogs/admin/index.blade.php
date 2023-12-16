@@ -99,10 +99,10 @@
                                                                                                 class="fa-regular fa-trash-alt fs-14"></span>
                                                                                         </a>
                                                                                     </div>
-                                                                                    
+
                                                                                 </div>
                                                                             </td>
-                                                                            
+
                                                                         </tr>
                                                                         @endforeach
                                                                     </tbody>
@@ -171,5 +171,4 @@
         document.getElementById('delete-form').setAttribute('action', url);
     }
 </script>
-
 @endpush
