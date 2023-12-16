@@ -10,7 +10,7 @@
             @include('layouts.sidebar', ['active' => 'payouts', 'admin' => false])
             <div class="col-lg-9">
                 <div class="tab-pane">
-                    <x-payment-filter-component />
+                    <x-payout-filter-component />
                     @if($payments->count() > 0)
                     <div class="table-wrapper">
                        <table class="eg-table order-table table mb-0">
