@@ -1,6 +1,6 @@
 # Bazaar Technical Documentation
 
-## Table of Contents
+## Table of Contents <a name="table-of-contents"></a>
 - [Introduction](#introduction)
 - [Technologies Used](#technologies-used)
 - [Problem Statement](#problem-statement)
@@ -35,17 +35,17 @@ Bazaar Auction Platform is an online auction system that allows users to list th
     </tr>
 </table>
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Problem Statement
 The problem that we are trying to solve is that there is no auction marketplace for local users to buy and sell items. There are many online marketplaces such as Facebook and Craiglist, but they are not local and are not auction based. We want to create a local auction marketplace where users can buy and sell items.
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Solution
 Our solution is to create a full stack web application that allows users to create an account, list items for sale, bid on items, and view their own items and bids. The application will be built with Laravel framework, MySQL database, and Bootstrap front-end framework.
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## User Stories
 ``` mermaid
@@ -116,7 +116,7 @@ graph TD
     - Payout request is sent to the admin for approval.
     - Admin approves and processes the payout.
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Technical Decisions
 #### Why a Monolithic Architecture?
@@ -150,7 +150,7 @@ graph TD
     E -->|Third-party Integrations| F[Paystack, Flutterwave, Avatar Service etc.]
 ```
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Requests Lifecycle
 
@@ -202,7 +202,7 @@ sequenceDiagram
 ```
 This sequence diagram illustrates the interaction between the User, Controller, Repository, Eloquent (for database CRUD operations), MySQL (the database), Observer (for handling events), Service (for third-party integration), and Template (for rendering the response). The sequence starts with the User making an HTTP request, which is then handled by the Controller. The Controller interacts with the Repository to manage data and business logic. The Repository, in turn, utilizes Eloquent for database CRUD operations, MySQL for the database, Observer for handling events, and Service for third-party integration. Finally, the response data is sent back to the Controller, and the Template renders the response for the User to view.
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## App Folder Structure
 ``` bash
@@ -532,7 +532,7 @@ This sequence diagram illustrates the interaction between the User, Controller, 
     └── PasswordEnvironments.php
 ```
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Database Schema
 The database schema for Bazaar Auction Platform is shown below. It consists of 18 tables, including users, ads, bids, payments, payouts, and more. The schema was designed to be as simple as possible while still providing all the necessary functionality for the application.
@@ -793,7 +793,7 @@ classDiagram
 ```
 The `PaymentGatewayService` class contains the `pay` method, which outlines the overall process of payment processing. Each concrete implementation, exemplified by `PayWithPaystack` and `PayWithFlutterwave`, implements the `specificPay` method, which allows subclasses to tailor their unique approaches to payment processing. The use of the Strategy Pattern is apparent in this design, as the `pay` method encapsulates common steps, providing a consistent structure for payment processing, while the `specificPay` method invites concrete subclasses to define their distinctive payment strategies. This pattern promotes code reusability, a clear separation of concerns, and flexibility in extending or customizing the behavior of payment processing.
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Large Database Test
 I did a test with up to 1,000,000 records for the `payments` table and it was blazing fast. The test was done on a local machine with M2 Macbook Pro base model. The test was done with the following specs:
@@ -814,7 +814,7 @@ $payments = Payment::query()
 In the actual application, the query was more complex, due to the need to filter the results based on query parameters. The size of the database table can be improved, having an index size of up to 100MB which is around 55% of the actual table size. We can look into using a different identifier algorithm like ULID or other preferred option instead of _Ordered UUID_,  which will reduce the size of the index and improve performance. Also caching can also bring improvement to the response time.
 
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## Third-party Integrations
 #### Payment Gateway
@@ -829,7 +829,7 @@ In the actual application, the query was more complex, due to the need to filter
 - [Amazon S3](https://aws.amazon.com/s3/)
 - [Local Storage](https://laravel.com/docs/10.x/filesystem#the-public-disk)
 
-<p align="right">(<a href="#📗-table-of-contents">back to top</a>)</p>
+<p align="right">(<a href="#table-of-contents">back to top</a>)</p>
 
 ## References
 - [Laravel Documentation](https://laravel.com/docs/10.x)

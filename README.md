@@ -16,7 +16,7 @@
 
 # 📗 Table of Contents <a name="table-of-contents"></a>
 
-- [📗 Table of Contents](table-of-contents)
+- [📗 Table of Contents](#table-of-contents)
 - [📖 About Bazaar](#about-bazaar)
   - [🛠 Built With](#built-with)
     - [Tech Stack](#tech-stack)
@@ -59,7 +59,7 @@
     </tr>
 </table>
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 ### Key Features <a name="key-features"></a>oc
 Bazaar is a full-stack web application that allows users to:
@@ -85,7 +85,7 @@ If you want to see a detailed list of features, and screenshots with key highlig
 
 https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5a1197a349e
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 # 💻 Getting Started <a name = "getting-started"></a>
 ## Prerequisites <a name="prerequisites"></a>
@@ -96,7 +96,7 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
 - [Docker](https://www.docker.com/products/docker-desktop)
 - [Git](https://git-scm.com/downloads)
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 ## Installation <a name="installation"></a>
 ### 💻 Local Machine <a name="local-machine"></a>
@@ -190,7 +190,7 @@ https://github.com/hendurhance/bazaar/assets/50846992/3191f5a3-8048-4ded-8f41-f5
     ```
 </details>
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 ### 📦 Usage <a name="usage"></a>
 > You can watch a video on how to use the application below.
@@ -203,7 +203,7 @@ There are a few accounts you can use to test the application after proper instal
 | Bazaar Admin | admin@bazaar.com | password | Admin |
 | Bazaar User | user@bazaar.com | password | User |
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 ### 🧪 Testing <a name="testing"></a>
 __Coming Soon__
@@ -215,7 +215,7 @@ You can deploy the application to a server using either the docker method or the
 |🐳 Docker | [Docker Deployment](#🐳-docker) |
 |💻 Local Machine | [Local Machine Deployment](#💻-local-machine) |
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 ### 📁 File Structure <a name="file-structure"></a>
 > The project adheres to Laravel's MVC architecture, employing design patterns for clean separation of concerns. The Repository Pattern is utilized to isolate business logic from controllers, promoting maintainability and scalability. Additionally, the Observer Pattern is employed to manage events on models.
@@ -985,7 +985,7 @@ graph TD
 ```
 </details>
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 # 🔭 Future Features <a name="future-features"></a>
 - [ ] Add tests
@@ -998,7 +998,7 @@ graph TD
 
 See the [open issues](https://github.com/hendurhance/bazaar/issues) for a list of proposed features (and known issues).
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 # 🤝 Contributing <a name="contributing"></a>
 
@@ -1013,13 +1013,13 @@ Don't forget to give the project a star! Thanks again!
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 
 # 👥 Authors <a name="authors"></a>
 - Endurance - [Github](https://github.com/hendurhance) - [Twitter](https://twitter.com/hendurhance) - [LinkedIn](https://www.linkedin.com/in/hendurhance/)
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
 
 # ❓ FAQ <a name="faq"></a>
 - **What is the purpose of this project?**
@@ -1038,4 +1038,4 @@ Distributed under the GNU AFFERO GENERAL PUBLIC LICENSE. See [LICENSE](/LICENSE)
 If you like this project, You can support me with starring ⭐ this repository. You can also [buy me a coffee](https://www.buymeacoffee.com/hendurhance) ☕️ or become a sponsor using the links below ➡️ [github sponsors](https://www.github.com/sponsors/hendurhance). Thanks a bunch for your support!
 
 
-<p align="right">(<a name="table-of-contents">back to top</a>)</p>
+<p align="right">(<a name="#table-of-contents">back to top</a>)</p>
