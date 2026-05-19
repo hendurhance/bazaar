@@ -12,6 +12,11 @@
     </p>
 </div>
 
+> [!NOTE]
+> This repository is intentionally **frozen**. It was written entirely by hand and exists
+> as a personal artifact from a pre-AI era of my work. It represents a snapshot of my thinking and craft before AI-assisted coding became mainstream. I am not accepting pull requests,
+> issues, or feature requests. If it's useful to you, feel free to fork it and take it wherever you want.
+-----
 > If you are here for the nitty-gritty details, you can check out the **[technical documentation](/docs/TECHNICAL_DOCUMENTATION.md)** for the system design, architecture, and design patterns used in the application. You can also check out the **[features](/docs/FEATURES.md)** page for a detailed list of features, and screenshots with key highlights, and live demo.
 
 # 📗 Table of Contents <a name="table-of-contents"></a>
