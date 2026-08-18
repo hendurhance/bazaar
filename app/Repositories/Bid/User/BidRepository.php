@@ -109,6 +109,10 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
             throw new BidCustomException('Ad not found.');
         });
 
+        if ($ad->user_id !== $user->id) {
+            throw new BidException('You are not authorized to accept bids on this ad.', $ad->slug, true);
+        }
+
         if ($ad->hasAcceptedBid()) {
             throw new BidException('Ad has already been sold.', $ad->slug, true);
         }
@@ -123,8 +127,13 @@ class BidRepository extends BaseCrudRepository implements BidRepositoryInterface
 
         $bid->user->notify(new BidAcceptedNotification($ad, $bid));
         // Send notification to other bidders who lost the bid
-        $this->model->where('ad_id', $ad->id)->where('id', '!=', $bid->id)->orWhere('is_accepted', false)->orWhereNull('is_accepted')->get()->each(function ($bid) use ($ad) {
-            $bid->user->notify(new BidRejectedNotification($ad, $bid));
-        });
+        $this->model->where('ad_id', $ad->id)
+            ->where('id', '!=', $bid->id)
+            ->where(function ($query) {
+                $query->where('is_accepted', false)->orWhereNull('is_accepted');
+            })
+            ->get()->each(function ($bid) use ($ad) {
+                $bid->user->notify(new BidRejectedNotification($ad, $bid));
+            });
     }
 }
